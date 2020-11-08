@@ -1,0 +1,7 @@
+apply plugin: 'liberty'
+
+
+dependencies {
+	implementation "org.eclipse.microprofile:microprofile:3.3"
+}
+
