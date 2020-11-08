@@ -1,0 +1,23 @@
+buildscript {
+	repositories {
+		mavenCentral()
+		maven {
+			name = 'Sonatype Nexus Snapshots'
+			url = 'https://oss.sonatype.org/content/repositories/snapshots/'
+		}
+	}
+	dependencies {
+		classpath "io.openliberty.tools:liberty-gradle-plugin:${libertyPluginVersion}"
+	}
+}
+apply plugin: 'liberty'
+apply plugin: 'war'
+
+war {
+	archiveName("pizzaShop.war")
+}
+
+
+dependencies {
+	implementation "org.eclipse.microprofile:microprofile:${micoprofileVersion}"
+}
