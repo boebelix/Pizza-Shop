@@ -17,7 +17,6 @@ war {
 	archiveName("pizzaShop.war")
 }
 
-
 dependencies {
 	implementation project(path: ':apps:microprofile-commons')
 
