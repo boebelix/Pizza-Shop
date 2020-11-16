@@ -1,0 +1,179 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0 auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+/* Background for all sites */
+
+.overlay {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-image: url("images/Background_Login.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+/* White base for content */
+
+.overlay_content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 20px;
+    border: none;
+    width: 30%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Customized input fields */
+
+.input_login {
+    border: 1px solid black;
+    border-radius: 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+
+/* Customized login button */
+
+.button_login {
+    border: none;
+    border-radius: 3px;
+    padding: 10px 55px;
+    margin-top: 10px;
+    background-color: gray;
+    color: white;
+}
+
+.button_login:hover {
+    background-color: seagreen;
+}
+
+
+/* Button for going back to signup/signin */
+
+.scene_before {
+    background-color: rgba(255, 255, 255, 0);
+    color: grey;
+    border: none;
+}
+
+.scene_before:hover {
+    color: lightcoral;
+}
+
+
+/* Background for clickable divs */
+
+.img_box {
+    border: 1px solid black;
+    height: 33%;
+    width: 33%;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+
+/* Bakcground for Main Page */
+
+.main_page {
+    display: none;
+    background-image: url("images/Background_Login.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+/* Overlay for Overview */
+
+.overlay_overview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+    height: 80%;
+}
+
+
+/* Button for clicking the divs */
+
+.button_div {
+    border: none;
+    color: white;
+    background-color: transparent;
+    font-size: xx-large;
+}
+
+.button_div:hover {
+    color: yellowgreen;
+}
+
+
+/* Simply the title bar for saying hallo to our customer */
+
+.titlebar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+    height: 20%;
+}
+
+
+/* Bigger Block for Selecting div */
+
+.overlay .overlay_content {
+    width: 50%;
+    background-color: rgba(255, 255, 255, 0.521);
+    border-radius: 5px;
+    margin: 5% auto;
+    padding: 20px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Button for selecting the size of a pizza */
+
+.button_select {
+    border: 1px solid grey;
+    padding-left: 5px;
+    margin-top: 10px;
+    background-color: rgba(255, 255, 255, 0.418);
+    color: black;
+    font-size: x-large;
+}
+
+.button_select:hover {
+    background-color: rgba(138, 137, 137, 0.418);
+}
+
+
+/* For Inline Objects which are default block */
+
+.inline {
+    display: inline;
+}

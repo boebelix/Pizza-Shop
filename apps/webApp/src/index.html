@@ -1,0 +1,110 @@
+<html lang="de">
+
+<head>
+    <title>Non Stop Pizza</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+</head>
+<script src="functions.js"></script>
+
+<body>
+
+    <!-- DIV Container for Login-->
+    <div id="overlay_login" class="overlay">
+        <div class="overlay_content">
+            <img src="style/images/logo.png" alt="Our Logo" width="80" height="80"><br>
+            <h1>Sign in</h1>
+            <form action="" method="post">
+                <label for="uname"><b>E-Mail/Nutzername</b></label><br>
+                <input class="input_login" type="text" placeholder="Nutzername eingeben" name="uname" required><br>
+                <label for="psw"><b>Passwort</b></label><br>
+                <input class="input_login" type="password" placeholder="Passwort eingeben" name="psw" required><br>
+                <button type="submit" class="button_login" onclick="hideLogin();showMain();">Login</button><br>
+            </form>
+            <button class="scene_before" onclick="hideLogin();showSignup();">Noch kein Nutzer? Registrieren</button>
+        </div>
+    </div>
+
+    <!-- DIV Container for Signup-->
+    <div id="overlay_signup" class="overlay">
+        <div class="overlay_content">
+            <img src="style/images/logo.png" alt="Our Logo" width="80" height="80"><br>
+            <h1>Registrieren</h1>
+            <form action="" method="post">
+                <label for="email"><b>E-Mail und Nutzername</b></label><br>
+                <input class="input_login" type="text" placeholder="E-Mail" name="email" required>
+                <input class="input_login" type="text" placeholder="Nutzername" name="uname" required><br>
+                <label for="psw"><b>Passwort festlegen</b></label><br>
+                <input class="input_login" type="password" placeholder="Passwort" name="psw" required>
+                <input class="input_login" type="password" placeholder="Wiederholen" name="psww" required><br>
+                <label for="street"><b>Straße und Hausnummer</b></label><br>
+                <input class="input_login" type="text" placeholder="Straße" name="street" required>
+                <input class="input_login" type="text" placeholder="Hausnummer" name="number" required><br>
+                <label for="street"><b>PLZ und Stadt</b></label><br>
+                <input class="input_login" type="text" placeholder="PLZ" name="postalcode" required>
+                <input class="input_login" type="text" placeholder="Ort/Stadt" name="city" required><br>
+                <label for="street"><b>Land</b></label><br>
+                <input class="input_login" type="text" placeholder="Land" name="country" required><br>
+                <button type="submit" class="button_login">Registrieren</button><br>
+            </form>
+            <button class="scene_before" onclick="hideSignup();showLogin();">Zurück zum Login</button>
+        </div>
+    </div>
+
+    <!-- DIV Container for Main Overview-->
+    <div id="main_page" class="main_page">
+        <div class="titlebar">
+            <img src="style/images/logo.png" alt="Our Logo" width="80" height="80">
+            <h1 style="color: white;">Willkommen, Nutzer</h1>
+        </div>
+        <div id="overlay_overview" class="overlay_overview">
+            <div class="img_box" style="background-color: rgba(224, 139, 28, 0.486);">
+                <div>
+                    <button class="button_div">Pizza bestellen</button>
+                </div>
+            </div>
+            <div class="img_box" style="background-color: rgba(100, 84, 62, 0.486);">
+                <div>
+                    <button class="button_div">Bestellübersicht</button>
+                </div>
+            </div>
+            <div class="img_box" style="background-color: rgba(255, 190, 106, 0.486);">
+                <div>
+                    <button class="button_div">Profileinstellungen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DIV Container for Order a Pizza-->
+    <div id="order_container" class="overlay" style="display: block;">
+        <div class="overlay_content">
+            <img src="style/images/logo.png" alt="Our Logo" width="80" height="80">
+            <h1>Stelle Dir deine Pizza zusammen</h1>
+            <div>
+                <button class="button_select">Klein</button>
+                <button class="button_select">Mittel</button>
+                <button class="button_select">Groß</button>
+            </div>
+            <div>
+                <table id="topping_list">
+                </table>
+                <p>
+                    <div class="inline">Grundpreis:</div>
+                    <div id="basic_price" class="inline"></div>
+                </p>
+                <p>
+                    <div class="inline">Extras:</div>
+                    <div id="extra_price" class="inline"></div>
+                </p>
+                <p>
+                    <div class="inline">Gesamtbetrag:</div>
+                    <div id="total_price" class="inline"></div>
+                </p>
+                <button class="button_login">Weiter</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
