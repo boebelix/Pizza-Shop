@@ -37,6 +37,16 @@ public class OrdersDTO {
 
 	}
 
+	public OrdersDTO(int id, Date orderDate, Date orderArrived, String PLZ, String street, String houseNumber, String city) {
+		Id = id;
+		OrderDate = orderDate;
+		OrderArrived = orderArrived;
+		this.PLZ = PLZ;
+		Street = street;
+		HouseNumber = houseNumber;
+		City = city;
+	}
+
 	//setter
 	public void setId(int id) {
 		Id = id;

@@ -1,8 +1,9 @@
 package Model;
 
-import java.io.Serializable;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name ="orders")
@@ -17,6 +18,11 @@ public class PizzaOrderDTO {
 	private int PizzaID;
 
 	public PizzaOrderDTO() {
+	}
+
+	public PizzaOrderDTO(int orderId, int pizzaID) {
+		OrderId = orderId;
+		PizzaID = pizzaID;
 	}
 
 	public int getOrderId() {

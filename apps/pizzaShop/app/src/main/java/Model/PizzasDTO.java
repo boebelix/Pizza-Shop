@@ -16,6 +16,11 @@ public class PizzasDTO {
 	public PizzasDTO() {
 	}
 
+	public PizzasDTO(int ID, int sizeId) {
+		this.ID = ID;
+		this.sizeId = sizeId;
+	}
+
 	public int getID() {
 		return ID;
 	}

@@ -19,6 +19,12 @@ public class PizzaToppingDTO {
 	public PizzaToppingDTO() {
 	}
 
+	public PizzaToppingDTO(int pizzaId, int toppingId, int amount) {
+		PizzaId = pizzaId;
+		ToppingId = toppingId;
+		Amount = amount;
+	}
+
 	public int getPizzaId() {
 		return PizzaId;
 	}

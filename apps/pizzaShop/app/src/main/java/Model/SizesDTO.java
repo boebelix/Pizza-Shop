@@ -19,6 +19,16 @@ public class SizesDTO {
 	@Column(name = "topping_price")
 	private float topping_price;
 
+	public SizesDTO() {
+	}
+
+	public SizesDTO(int id, int radius, float basePrice, float topping_price) {
+		Id = id;
+		Radius = radius;
+		BasePrice = basePrice;
+		this.topping_price = topping_price;
+	}
+
 	public int getId() {
 		return Id;
 	}
