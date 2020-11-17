@@ -32,7 +32,7 @@ public class UserEndpoint {
 	@GET
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getUser(@HeaderParam("Authorization") UUID loginId) throws UnauthorizedException {
+	public Response getCurrentUser(@HeaderParam("Authorization") UUID loginId) throws UnauthorizedException {
 		Integer userId = accessService.getUserIdIfLoggedIn(loginId);
 		if(userId == null)
 			throw new UnauthorizedException("Not logged in!");
@@ -48,7 +48,7 @@ public class UserEndpoint {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createUser(@RequestBody(required = true) User user) {
 		user.setUserId(0);
-		user.setCreateDt(null);
+		user.setCreateAt(null);
 		Validator.validate(user);
 		user = userService.createUser(user);
 		return Response.ok(user).build();

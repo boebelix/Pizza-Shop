@@ -11,5 +11,5 @@ CREATE TABLE users
     number      varchar(255),
     city        varchar(255),
     country     varchar(255),
-    create_dt  timestamp
+    created_at  timestamp DEFAULT CURRENT_TIMESTAMP
 );
