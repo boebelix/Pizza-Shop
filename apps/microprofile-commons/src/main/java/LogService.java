@@ -6,30 +6,39 @@ import java.io.IOException;
 
 public class LogService {
 
-	private File file;
+	private final File file;
+	private FileWriter writer;
+	private static final Jsonb builder = JsonbBuilder.create();
 
-	public LogService(String filePath) throws IOException {
+	public LogService(final String filePath) throws IOException {
 		this.file = new File(filePath);
 		file.createNewFile();
+		writer = new FileWriter(file, true);
 	}
 
-	public boolean log(Object object) {
+	public boolean log(final Object object) {
 
-		try{
-			FileWriter writer = new FileWriter(file,true);
-			Jsonb builder = JsonbBuilder.create();
+		try {
 
 			writer.write(builder.toJson(object));
 			writer.write("\n");
 
 			writer.flush();
-			writer.close();
-		}
-		catch (IOException e){
+		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
 		}
 		return true;
+	}
+
+	public boolean close() {
+		try {
+			writer.close();
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }
