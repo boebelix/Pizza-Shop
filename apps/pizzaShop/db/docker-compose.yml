@@ -1,0 +1,22 @@
+version: '3.0'
+
+services:
+    db:
+        container_name: pizzaShopDB
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        volumes:
+            -   type: volume
+                source: pizzashop-db-data
+                target: /var/lib/mysql
+                volume:
+                    nocopy: true
+        ports:
+        -   3307:3306
+        environment:
+            - MYSQL_DATABASE=pizzashop
+            - MYSQL_ALLOW_EMPTY_PASSWORD=true
+
+volumes:
+    pizzashop-db-data:
