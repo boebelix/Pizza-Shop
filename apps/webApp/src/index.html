@@ -110,8 +110,23 @@
         </div>
     </div>
 
+    <!-- DIV Container for final order-->
+    <div id="final_order_container" class="overlay" style="display: block;">
+        <div class="overlay_content_big">
+            <img src="style/images/logo.png" alt="Our Logo" width="80" height="80">
+            <h1>Bestellübersicht</h1>
+            <p>
+                <div class="inline">Gesamtbetrag:</div>
+                <div id="total_price" class="inline"></div>
+            </p>
+            <button class="button_login">Weitere Pizza hinzufügen</button>
+            <button class="button_login">Kostenpflichtig bestellen</button>
+        </div>
+    </div>
+    </div>
+
     <!-- DIV Container for ordered Pizzas-->
-    <div id="ordered_container" class="overlay" style="display: block;">
+    <div id="ordered_container" class="overlay">
         <div class="overlay_content_big">
             <img src="style/images/logo.png" alt="Our Logo" width="80" height="80">
             <h1>Hier siehst du deine Bestellungen</h1>
@@ -151,6 +166,40 @@
             <br>
             <button class="button_logout">Zurück</button>
         </div>
+    </div>
+
+    <!-- DIV Container for profile change-->
+    <div id="final_order_container" class="overlay" style="display: block;">
+        <div class="overlay_content_big">
+            <img src="style/images/logo.png" alt="Our Logo" width="80" height="80">
+            <h1>Dein Profil</h1>
+            <form action="" method="post">
+                <label for="email"><b>E-Mail ändern</b></label><br>
+                <input class="input_login" type="text" placeholder="E-Mail" name="email" required><br>
+                <input class="input_login" type="text" placeholder="E-Mail wiederholen" name="emailr" required><br>
+                <button type="submit" class="button_login">Übernehmen</button><br>
+            </form>
+            <form action="" method="post">
+                <label for="psw"><b>Passwort festlegen</b></label><br>
+                <input class="input_login" type="password" placeholder="Aktuelles Passwort" name="psw" required><br>
+                <input class="input_login" type="password" placeholder="Passwort" name="psw" required><br>
+                <input class="input_login" type="password" placeholder="Wiederholen" name="psww" required><br>
+                <button type="submit" class="button_login">Übernehmen</button><br>
+            </form>
+            <form action="" method="post">
+                <label for="street"><b>Straße und Hausnummer</b></label><br>
+                <input class="input_login" type="text" placeholder="Straße" name="street" required>
+                <input class="input_login" type="text" placeholder="Hausnummer" name="number" required><br>
+                <label for="street"><b>PLZ und Stadt</b></label><br>
+                <input class="input_login" type="text" placeholder="PLZ" name="postalcode" required>
+                <input class="input_login" type="text" placeholder="Ort/Stadt" name="city" required><br>
+                <label for="street"><b>Land</b></label><br>
+                <input class="input_login" type="text" placeholder="Land" name="country" required><br>
+                <button type="submit" class="button_login">Übernehmen</button><br>
+            </form>
+            <button class="button_logout">Zurück</button>
+        </div>
+    </div>
     </div>
 </body>
 
