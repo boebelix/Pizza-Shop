@@ -227,3 +227,17 @@ body {
     background: rgba(40, 40, 40, 0.2);
     color: black;
 }
+
+#ordered_div {
+    width: 100%;
+}
+
+#ordered_div div {
+    width: 100%;
+    margin: 5px;
+    text-align: center;
+}
+
+#ordered_div td {
+    padding-right: 10px;
+}

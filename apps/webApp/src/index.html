@@ -19,9 +19,9 @@
                 <input class="input_login" type="text" placeholder="Nutzername eingeben" name="uname" required><br>
                 <label for="psw"><b>Passwort</b></label><br>
                 <input class="input_login" type="password" placeholder="Passwort eingeben" name="psw" required><br>
-                <button type="submit" class="button_login" onclick="hideLogin();showMain();">Login</button><br>
+                <button id="login_submit_button" type="submit" class="button_login">Login</button><br>
             </form>
-            <button class="scene_before" onclick="hideLogin();showSignup();">Noch kein Nutzer? Registrieren</button>
+            <button id="login_register_button" class="scene_before">Noch kein Nutzer? Registrieren</button>
         </div>
     </div>
 
@@ -45,9 +45,9 @@
                 <input class="input_login" type="text" placeholder="Ort/Stadt" name="city" required><br>
                 <label for="street"><b>Land</b></label><br>
                 <input class="input_login" type="text" placeholder="Land" name="country" required><br>
-                <button type="submit" class="button_login">Registrieren</button><br>
+                <button id="register_submit_button" type="submit" class="button_login">Registrieren</button><br>
             </form>
-            <button class="scene_before" onclick="hideSignup();showLogin();">Zurück zum Login</button>
+            <button id="register_back_button" class="scene_before">Zurück zum Login</button>
         </div>
     </div>
 
@@ -60,17 +60,17 @@
         <div id="overlay_overview" class="overlay_overview">
             <div class="img_box" style="background-color: rgba(224, 139, 28, 0.486);">
                 <div>
-                    <button class="button_div">Pizza bestellen</button>
+                    <button id="main_order_button" class="button_div">Pizza bestellen</button>
                 </div>
             </div>
             <div class="img_box" style="background-color: rgba(100, 84, 62, 0.486);">
                 <div>
-                    <button class="button_div">Bestellübersicht</button>
+                    <button id="main_overview_button" class="button_div">Bestellübersicht</button>
                 </div>
             </div>
             <div class="img_box" style="background-color: rgba(255, 190, 106, 0.486);">
                 <div>
-                    <button class="button_div">Profileinstellungen</button>
+                    <button id="main_profile_button" class="button_div">Profileinstellungen</button>
                 </div>
             </div>
         </div>
@@ -104,14 +104,14 @@
                     <div class="inline">Gesamtbetrag:</div>
                     <div id="total_price" class="inline"></div>
                 </p>
-                <button class="button_logout">Zurück</button>
-                <button class="button_login">Weiter</button>
+                <button id="order_back_button" class="button_logout">Zurück</button>
+                <button id="order_continue_button" class="button_login">Weiter</button>
             </div>
         </div>
     </div>
 
     <!-- DIV Container for final order-->
-    <div id="final_order_container" class="overlay" style="display: block;">
+    <div id="final_order_container" class="overlay">
         <div class="overlay_content_big">
             <img src="style/images/logo.png" alt="Our Logo" width="80" height="80">
             <h1>Bestellübersicht</h1>
@@ -119,8 +119,9 @@
                 <div class="inline">Gesamtbetrag:</div>
                 <div id="total_price" class="inline"></div>
             </p>
-            <button class="button_login">Weitere Pizza hinzufügen</button>
-            <button class="button_login">Kostenpflichtig bestellen</button>
+            <button id="final_add_button" class="button_login">Weitere Pizza hinzufügen</button>
+            <button id="final_order_button" class="button_login">Kostenpflichtig bestellen</button></br>
+            <button id="final_back_button" class="button_logout">Abbrechen</button>
         </div>
     </div>
     </div>
@@ -131,45 +132,16 @@
             <img src="style/images/logo.png" alt="Our Logo" width="80" height="80">
             <h1>Hier siehst du deine Bestellungen</h1>
 
-            <div class="inline_flex">
-                <!--Div Container, which will have a table with img-boxes inside-->
-                <div class="img_box" style="background-color: rgba(75, 75, 75, 0.486);">
-                    <div>
-                        <!--Example "Bestellung 1"-->
-                        <h3>Bestellung 1</h3>
-                        <p>
-                            <div class="inline">Bestellt am </div>
-                            <div id="order_date" class="inline">17.11.2020</div>
-                        </p>
-                        <p>
-                            <div id="order_value" class="inline">3</div>
-                            <div class="inline">x Pizza</div>
-                        </p>
-                    </div>
-                </div>
-                <div class="img_box" style="background-color: rgba(75, 75, 75, 0.486);">
-                    <div>
-                        <!--Example "Bestellung 2"-->
-                        <h3>Bestellung 2</h3>
-                        <p>
-                            <div class="inline">Bestellt am </div>
-                            <div id="order_date" class="inline">16.11.2020</div>
-                        </p>
-                        <p>
-                            <div id="order_value" class="inline">4</div>
-                            <div class="inline">x Pizza</div>
-                        </p>
-                    </div>
-                </div>
-            </div>
+            <table id="ordered_div">
+            </table>
             <!--Closing table div-->
             <br>
-            <button class="button_logout">Zurück</button>
+            <button id="ordered_back_button" class="button_logout">Zurück</button>
         </div>
     </div>
 
     <!-- DIV Container for profile change-->
-    <div id="final_order_container" class="overlay" style="display: block;">
+    <div id="profile_container" class="overlay">
         <div class="overlay_content_big">
             <img src="style/images/logo.png" alt="Our Logo" width="80" height="80">
             <h1>Dein Profil</h1>
@@ -197,7 +169,7 @@
                 <input class="input_login" type="text" placeholder="Land" name="country" required><br>
                 <button type="submit" class="button_login">Übernehmen</button><br>
             </form>
-            <button class="button_logout">Zurück</button>
+            <button id="profile_back_button" class="button_logout">Zurück</button>
         </div>
     </div>
     </div>
