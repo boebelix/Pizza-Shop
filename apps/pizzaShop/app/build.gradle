@@ -21,4 +21,6 @@ dependencies {
 	implementation project(path: ':apps:microprofile-commons')
 
 	implementation "org.eclipse.microprofile:microprofile:${micoprofileVersion}"
+
+	implementation 'org.hibernate:hibernate-core:5.4.23.Final'
 }
