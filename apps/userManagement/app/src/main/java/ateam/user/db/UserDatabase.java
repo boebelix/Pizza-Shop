@@ -2,6 +2,7 @@ package ateam.user.db;
 
 import ateam.user.model.entity.User;
 import ateam.user.model.exception.UserServiceException;
+import ateam.validator.ValidationException;
 
 import javax.inject.Singleton;
 import java.sql.*;
@@ -13,8 +14,11 @@ public class UserDatabase {
 		try (Connection con = DBConnection.getInstance().getConnection()) {
 			try {
 				con.setAutoCommit(false);
-				if(loadUser(user.getUsername()) != null) {
-					throw new IllegalArgumentException("A user with this username already exists!");
+				if(loadUser(user.getUsername(), con) != null) {
+					throw new ValidationException("A user with this username already exists!");
+				}
+				if(loadUserByMail(user.getEmail(), con) != null) {
+					throw new ValidationException("A user with this email already exists!");
 				}
 				User createdUser = createUser(user, con);
 				con.commit();
@@ -56,9 +60,30 @@ public class UserDatabase {
 			throw new UserServiceException("Error load User", e);
 		}
 	}
+
 	private User loadUser(int userId, Connection connection) throws SQLException {
 		PreparedStatement pStmt = connection.prepareStatement("select * from users where id = ?");
 		pStmt.setInt(1, userId);
+		pStmt.execute();
+		ResultSet rs = pStmt.getResultSet();
+		while (rs.next()) {
+			return parseRs(rs);
+		}
+		return null;
+	}
+
+	public User loadUserByMail(String userName) {
+		try (Connection con = DBConnection.getInstance().getConnection()){
+			return loadUserByMail(userName, con);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new UserServiceException("Error load User", e);
+		}
+	}
+
+	private User loadUserByMail(String userName, Connection connection) throws SQLException {
+		PreparedStatement pStmt = connection.prepareStatement("select * from users where email = ?");
+		pStmt.setString(1, userName);
 		pStmt.execute();
 		ResultSet rs = pStmt.getResultSet();
 		while (rs.next()) {
@@ -75,6 +100,7 @@ public class UserDatabase {
 			throw new UserServiceException("Error load User", e);
 		}
 	}
+
 	private User loadUser(String userName, Connection connection) throws SQLException {
 		PreparedStatement pStmt = connection.prepareStatement("select * from users where username = ?");
 		pStmt.setString(1, userName);
