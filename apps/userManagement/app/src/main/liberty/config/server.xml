@@ -24,7 +24,7 @@
 
 	<dataSource id="DefaultDataSource" jndiName="jdbc/mySQL">
 		<jdbcDriver libraryRef="MySQLLib" />
-		<properties databaseName="userservice" serverName="localhost"
+		<properties databaseName="usermanagement" serverName="localhost"
 					portNumber="3306" user="root" />
 	</dataSource>
 	<library id="MySQLLib">
