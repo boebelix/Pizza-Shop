@@ -22,4 +22,7 @@ dependencies {
 	implementation project(path: ':apps:microprofile-commons')
 
 	implementation "org.eclipse.microprofile:microprofile:${micoprofileVersion}"
+
+	implementation "org.hibernate:hibernate-core:${hibernateVersion}"
+	implementation "mysql:mysql-connector-java:${mysqlConnectorVersion}"
 }

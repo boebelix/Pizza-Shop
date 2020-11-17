@@ -3,9 +3,18 @@ package ateam.user.model.entity;
 import ateam.validator.Validator;
 
 import javax.json.bind.annotation.JsonbTransient;
-import java.time.LocalDateTime;
+import javax.persistence.*;
+import java.util.Date;
 
+@Entity
+@Table(name = "users",
+	uniqueConstraints = {
+		@UniqueConstraint(columnNames = "email"),
+		@UniqueConstraint(columnNames = "username")
+	})
 public class User {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
 
 	@Validator.Required()
@@ -48,7 +57,13 @@ public class User {
 	@Validator.Regex(regex = "^.+$", errorMessage = "Land benötigt!")
 	private String country;
 
-	private LocalDateTime createDt;
+	@Temporal(value = TemporalType.TIMESTAMP)
+	private Date createDt;
+
+	@PrePersist
+	protected void onCreate() {
+		createDt = new Date();
+	}
 
 
 	public int getUserId() {
@@ -140,11 +155,11 @@ public class User {
 		this.country = country;
 	}
 
-	public LocalDateTime getCreateDt() {
+	public Date getCreateDt() {
 		return createDt;
 	}
 
-	public void setCreateDt(LocalDateTime createDt) {
+	public void setCreateDt(Date createDt) {
 		this.createDt = createDt;
 	}
 }

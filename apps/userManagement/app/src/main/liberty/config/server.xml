@@ -20,14 +20,4 @@
 
     <!-- The MP JWT configuration that injects the caller's JWT into a ResourceScoped bean for inspection. -->
     <mpJwt id="jwtUserConsumer" keyName="theKeyId" audiences="targetService" issuer="team-a"/>
-
-	<dataSource id="DefaultDataSource" jndiName="jdbc/mySQL">
-		<jdbcDriver libraryRef="MySQLLib" />
-		<properties databaseName="osm01" serverName="localhost"
-					portNumber="3306" user="root" />
-	</dataSource>
-	<library id="MySQLLib">
-		<file name="${server.config.dir}/mysql-connector-java-8.0.18.jar" />
-	</library>
-
 </server>

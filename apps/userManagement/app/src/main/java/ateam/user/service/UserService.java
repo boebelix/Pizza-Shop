@@ -15,8 +15,7 @@ public class UserService {
 
 	public User createUser(User user) {
 		user.setPassword(Password.hashPassword(user.getPassword(), Password.genSalt()));
-		userDatabase.createUser(user);
-		return user;
+		return userDatabase.createUser(user);
 	}
 
 	public User loadUser(int id) {
