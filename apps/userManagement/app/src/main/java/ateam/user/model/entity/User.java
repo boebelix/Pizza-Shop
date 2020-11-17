@@ -15,49 +15,61 @@ import java.util.Date;
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int userId;
 
 	@Validator.Required()
 	@Validator.Regex(regex = "^.+$", errorMessage = "Nutzername benötigt!")
+	@Column(name = "username")
 	private String username;
 
 	@Validator.Required
 	@Validator.Regex(regex = "^[A-Z]([^0-9\\§\\%\\&\\!\\?])+?[a-z]$", errorMessage = "Vorname muss mit einem Großbuchstaben anfangen und mit einem Kleinbuchstaben enden! Die Zeichen '§', '%', '&', '!' und '?' sind nicht erlaubt!")
+	@Column(name = "first_name")
 	private String firstName;
 
 	@Validator.Required
 	@Validator.Regex(regex = "^[A-Z]([^0-9\\§\\%\\&\\!\\?])+?[a-z]$", errorMessage = "Vorname muss mit einem Großbuchstaben anfangen und mit einem Kleinbuchstaben enden! Die Zeichen '§', '%', '&', '!' und '?' sind nicht erlaubt!")
+	@Column(name = "last_name")
 	private String lastName;
 
 	@Validator.Required()
 	@Validator.Regex(regex = "^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$", errorMessage = "Email benötigt!")
+	@Column(name = "email")
 	private String email;
 
 	@Validator.Required
 	@Validator.Regex(regex = "^.+$", errorMessage = "Passwort benötigt!")
+	@Column(name = "password")
 	private String password;
 
 	@Validator.Required
 	@Validator.Regex(regex = "^[0-9]{5,5}$", errorMessage = "Postleitzahl muss aus 5 Zahlen bestehen!")
+	@Column(name = "postal_code")
 	private String postalCode;
 
 	@Validator.Required
 	@Validator.Regex(regex = "^.+$", errorMessage = "Straße benötigt!")
+	@Column(name = "street")
 	private String street;
 
 	@Validator.Required(errorMessage = "Hausnummer benötigt!")
 	@Validator.Regex(regex = "^[0-9]+$", errorMessage = "HausNUMMER benötigt!")
+	@Column(name = "number")
 	private String number;
 
 	@Validator.Required
 	@Validator.Regex(regex = "^.+$", errorMessage = "Stadt benötigt!")
+	@Column(name = "city")
 	private String city;
 
 	@Validator.Required
 	@Validator.Regex(regex = "^.+$", errorMessage = "Land benötigt!")
+	@Column(name = "country")
 	private String country;
 
 	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "create_dt")
 	private Date createDt;
 
 	@PrePersist

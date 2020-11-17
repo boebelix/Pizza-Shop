@@ -9,9 +9,12 @@ import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Objects;
 
 @Path("/user_intern")
 @RegisterProvider(UserServiceExceptionMapper.class)
@@ -24,7 +27,10 @@ public class UserInternalEndpoint {
 	@GET
 	@Path("{userid}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getUser(@CookieParam("Authorization") String servicePassword, @PathParam("userid") int userId) throws UnauthorizedException {
+	public Response getUser(@CookieParam("Authorization") String servicePassword, @PathParam("userid") int userId) throws UnauthorizedException, NamingException {
+		if(!Objects.equals(InitialContext.doLookup("appServicePassword"), servicePassword)) {
+			throw new UnauthorizedException("ServicePassword wrong!");
+		}
 		User user = userService.loadUser(userId);
 		if(user == null)
 			throw new UserServiceException("User not found!");

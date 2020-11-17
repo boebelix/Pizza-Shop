@@ -2,8 +2,10 @@ package ateam.user.db;
 
 import ateam.user.model.entity.User;
 
+import javax.inject.Singleton;
 import javax.persistence.*;
 
+@Singleton
 public class UserDatabase {
 
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("User");
