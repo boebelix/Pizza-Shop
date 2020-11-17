@@ -77,8 +77,8 @@
     </div>
 
     <!-- DIV Container for Order a Pizza-->
-    <div id="order_container" class="overlay" style="display: block;">
-        <div class="overlay_content">
+    <div id="order_container" class="overlay">
+        <div class="overlay_content_big">
             <img src="style/images/logo.png" alt="Our Logo" width="80" height="80">
             <h1>Stelle Dir deine Pizza zusammen</h1>
             <div>
@@ -88,7 +88,9 @@
             </div>
             <div style="margin: 20px;">
                 <table id="topping_list" class="topping_list">
-                    <tr><td></td></tr>
+                    <tr>
+                        <td></td>
+                    </tr>
                 </table>
                 <p>
                     <div class="inline">Grundpreis:</div>
@@ -104,6 +106,49 @@
                 </p>
                 <button class="button_login">Weiter</button>
             </div>
+        </div>
+    </div>
+
+    <!-- DIV Container for ordered Pizzas-->
+    <div id="ordered_container" class="overlay" style="display: block;">
+        <div class="overlay_content_big">
+            <img src="style/images/logo.png" alt="Our Logo" width="80" height="80">
+            <h1>Hier siehst du deine Bestellungen</h1>
+
+            <div class="inline_flex">
+                <!--Div Container, which will have a table with img-boxes inside-->
+                <div class="img_box" style="background-color: rgba(75, 75, 75, 0.486);">
+                    <div>
+                        <!--Example "Bestellung 1"-->
+                        <h3>Bestellung 1</h3>
+                        <p>
+                            <div class="inline">Bestellt am </div>
+                            <div id="order_date" class="inline">17.11.2020</div>
+                        </p>
+                        <p>
+                            <div id="order_value" class="inline">3</div>
+                            <div class="inline">x Pizza</div>
+                        </p>
+                    </div>
+                </div>
+                <div class="img_box" style="background-color: rgba(75, 75, 75, 0.486);">
+                    <div>
+                        <!--Example "Bestellung 2"-->
+                        <h3>Bestellung 2</h3>
+                        <p>
+                            <div class="inline">Bestellt am </div>
+                            <div id="order_date" class="inline">16.11.2020</div>
+                        </p>
+                        <p>
+                            <div id="order_value" class="inline">4</div>
+                            <div class="inline">x Pizza</div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--Closing table div-->
+            <br>
+            <button class="button_logout">Zurück</button>
         </div>
     </div>
 </body>
