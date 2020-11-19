@@ -13,17 +13,14 @@ import java.util.UUID;
 @Singleton
 public class AccessService {
 
-	private final UserService userService;
-
-	private final PasswordService passwordService;
+	@Inject
+	private UserService userService;
 
 	@Inject
-	public AccessService(final UserService userService, final PasswordService passwordService) {
-		this.userService = userService;
-		this.passwordService = passwordService;
-	}
+	private PasswordService passwordService;
 
-	private Map<UUID, Integer> logins = new HashMap<>();
+	private final Map<UUID, Integer> logins = new HashMap<>();
+
 
 	public Integer getUserIdIfLoggedIn(UUID uuid) {
 		if(uuid == null)

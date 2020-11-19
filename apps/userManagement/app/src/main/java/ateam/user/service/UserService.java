@@ -9,15 +9,11 @@ import javax.inject.Singleton;
 @Singleton
 public class UserService {
 
-	private final UserDatabase userDatabase;
-
-	private final PasswordService passwordService;
+	@Inject
+	private UserDatabase userDatabase;
 
 	@Inject
-	public UserService(final UserDatabase userDatabase, final PasswordService passwordService) {
-		this.userDatabase = userDatabase;
-		this.passwordService = passwordService;
-	}
+	private PasswordService passwordService;
 
 	public User createUser(User user) {
 		user.setPassword(passwordService.hashPassword(user.getPassword()));

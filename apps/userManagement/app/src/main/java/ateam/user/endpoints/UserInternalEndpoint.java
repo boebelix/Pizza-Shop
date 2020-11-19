@@ -21,12 +21,8 @@ import java.util.Objects;
 @Singleton
 public class UserInternalEndpoint {
 
-	private final UserService userService;
-
 	@Inject
-	public UserInternalEndpoint(final UserService userService) {
-		this.userService = userService;
-	}
+	private UserService userService;
 
 	@GET
 	@Path("{userid}")

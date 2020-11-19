@@ -20,15 +20,12 @@ import java.util.UUID;
 @Singleton
 public class AuthEndpoint {
 
-	private final UserService userService;
-
-	private final AccessService accessService;
+	@Inject
+	private UserService userService;
 
 	@Inject
-	public AuthEndpoint(final UserService userService, final AccessService accessService) {
-		this.userService = userService;
-		this.accessService = accessService;
-	}
+	private AccessService accessService;
+
 
 	@POST
 	@Path("/")
