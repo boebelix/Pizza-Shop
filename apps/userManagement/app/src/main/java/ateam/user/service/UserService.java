@@ -1,8 +1,7 @@
 package ateam.user.service;
 
-import ateam.user.Password;
 import ateam.user.db.UserDatabase;
-import ateam.user.model.entity.User;
+import ateam.model.entity.User;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -10,11 +9,18 @@ import javax.inject.Singleton;
 @Singleton
 public class UserService {
 
+	private final UserDatabase userDatabase;
+
+	private final PasswordService passwordService;
+
 	@Inject
-	private UserDatabase userDatabase;
+	public UserService(final UserDatabase userDatabase, final PasswordService passwordService) {
+		this.userDatabase = userDatabase;
+		this.passwordService = passwordService;
+	}
 
 	public User createUser(User user) {
-		user.setPassword(Password.hashPassword(user.getPassword(), Password.genSalt()));
+		user.setPassword(passwordService.hashPassword(user.getPassword(), passwordService.genSalt()));
 		userDatabase.createUser(user);
 		return user;
 	}

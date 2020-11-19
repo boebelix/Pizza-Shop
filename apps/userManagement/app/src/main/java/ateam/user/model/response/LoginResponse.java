@@ -1,6 +1,6 @@
 package ateam.user.model.response;
 
-import ateam.user.model.entity.User;
+import ateam.model.entity.User;
 
 import java.util.UUID;
 

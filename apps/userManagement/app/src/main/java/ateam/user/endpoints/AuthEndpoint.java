@@ -1,8 +1,8 @@
 package ateam.user.endpoints;
 
-import ateam.model.UnauthorizedException;
+import ateam.model.exception.UnauthorizedException;
 import ateam.user.model.request.LoginData;
-import ateam.user.model.entity.User;
+import ateam.model.entity.User;
 import ateam.user.model.response.LoginResponse;
 import ateam.user.service.AccessService;
 import ateam.user.service.UserService;
@@ -19,10 +19,16 @@ import java.util.UUID;
 @Path("/auth")
 @Singleton
 public class AuthEndpoint {
-	@Inject
+
 	private UserService userService;
-	@Inject
+
 	private AccessService accessService;
+
+	@Inject
+	public AuthEndpoint(final UserService userService, final AccessService accessService) {
+		this.userService = userService;
+		this.accessService = accessService;
+	}
 
 	@POST
 	@Path("/")

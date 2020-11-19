@@ -1,6 +1,6 @@
 package ateam.exceptionmapper;
 
-import ateam.model.ExceptionResponse;
+import ateam.model.exception.ExceptionResponse;
 import ateam.validator.ValidationException;
 
 import javax.ws.rs.core.Response;
@@ -15,9 +15,9 @@ public class ValidatorExceptionMapper implements ExceptionMapper<ValidationExcep
 		System.out.println("ValidationException! Returning code 400. Message: " + e.getMessage());
 
 		ExceptionResponse response = new ExceptionResponse();
-		response.setStatus(400);
+		response.setStatus(409);
 		response.setTimestamp(new Date());
 		response.setMessage(e.getMessage());
-		return Response.status(Response.Status.BAD_REQUEST).entity(response).build();
+		return Response.status(Response.Status.CONFLICT).entity(response).build();
 	}
 }

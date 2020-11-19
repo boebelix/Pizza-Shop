@@ -1,17 +1,21 @@
 package ateam.user.db;
 
-import ateam.user.model.entity.User;
+import ateam.model.entity.User;
 import ateam.user.model.exception.UserServiceException;
 import ateam.validator.ValidationException;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.sql.*;
 
 @Singleton
 public class UserDatabase {
 
+	@Inject
+	private DBConnection dbConnection;
+
 	public User createUser(User user) {
-		try (Connection con = DBConnection.getInstance().getConnection()) {
+		try (Connection con = dbConnection.getConnection()) {
 			try {
 				con.setAutoCommit(false);
 				if(loadUser(user.getUsername(), con) != null) {
@@ -53,7 +57,7 @@ public class UserDatabase {
 	}
 
 	public User loadUser(int userId) {
-		try (Connection con = DBConnection.getInstance().getConnection()){
+		try (Connection con = dbConnection.getConnection()){
 			return loadUser(userId, con);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -73,7 +77,7 @@ public class UserDatabase {
 	}
 
 	public User loadUserByMail(String userName) {
-		try (Connection con = DBConnection.getInstance().getConnection()){
+		try (Connection con = dbConnection.getConnection()){
 			return loadUserByMail(userName, con);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -93,7 +97,7 @@ public class UserDatabase {
 	}
 
 	public User loadUser(String userName) {
-		try (Connection con = DBConnection.getInstance().getConnection()){
+		try (Connection con = dbConnection.getConnection()){
 			return loadUser(userName, con);
 		} catch (SQLException e) {
 			e.printStackTrace();

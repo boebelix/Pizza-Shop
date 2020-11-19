@@ -1,4 +1,4 @@
-package ateam.model;
+package ateam.model.exception;
 
 import java.util.Date;
 

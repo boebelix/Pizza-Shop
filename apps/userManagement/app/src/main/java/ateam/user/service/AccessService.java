@@ -1,9 +1,8 @@
 package ateam.user.service;
 
-import ateam.model.UnauthorizedException;
-import ateam.user.Password;
+import ateam.model.exception.UnauthorizedException;
 import ateam.user.model.request.LoginData;
-import ateam.user.model.entity.User;
+import ateam.model.entity.User;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -14,8 +13,15 @@ import java.util.UUID;
 @Singleton
 public class AccessService {
 
+	private final UserService userService;
+
+	private final PasswordService passwordService;
+
 	@Inject
-	private UserService userService;
+	public AccessService(final UserService userService, final PasswordService passwordService) {
+		this.userService = userService;
+		this.passwordService = passwordService;
+	}
 
 	private Map<UUID, Integer> logins = new HashMap<>();
 
@@ -40,7 +46,7 @@ public class AccessService {
 		if(user == null) {
 			throw new UnauthorizedException("User does not exist!");
 		}
-		if(!Password.checkPassword(loginData.getPassword(), user.getPassword())) {
+		if(!passwordService.checkPassword(loginData.getPassword(), user.getPassword())) {
 			throw new UnauthorizedException("Password invalid!");
 		}
 		return this.login(user.getUserId());

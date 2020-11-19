@@ -1,6 +1,6 @@
 package ateam.user.exceptionmapper;
 
-import ateam.model.ExceptionResponse;
+import ateam.model.exception.ExceptionResponse;
 import ateam.user.model.exception.UserServiceException;
 
 import javax.ws.rs.core.Response;

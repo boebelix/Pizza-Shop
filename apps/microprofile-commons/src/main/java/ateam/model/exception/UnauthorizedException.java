@@ -1,4 +1,4 @@
-package ateam.model;
+package ateam.model.exception;
 
 public class UnauthorizedException extends IllegalAccessException {
 

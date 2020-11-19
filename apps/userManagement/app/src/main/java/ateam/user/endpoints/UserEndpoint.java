@@ -2,8 +2,8 @@ package ateam.user.endpoints;
 
 import ateam.exceptionmapper.UnauthorizedExceptionMapper;
 import ateam.exceptionmapper.ValidatorExceptionMapper;
-import ateam.model.UnauthorizedException;
-import ateam.user.model.entity.User;
+import ateam.model.exception.UnauthorizedException;
+import ateam.model.entity.User;
 import ateam.user.service.AccessService;
 import ateam.user.service.UserService;
 import ateam.validator.Validator;
@@ -23,11 +23,15 @@ import java.util.UUID;
 @Singleton
 public class UserEndpoint {
 
-	@Inject
-	private UserService userService;
+	private final UserService userService;
+
+	private final AccessService accessService;
 
 	@Inject
-	private AccessService accessService;
+	public UserEndpoint(final UserService userService, final AccessService accessService) {
+		this.userService = userService;
+		this.accessService = accessService;
+	}
 
 	@GET
 	@Path("/")

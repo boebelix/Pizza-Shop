@@ -1,7 +1,7 @@
 package ateam.exceptionmapper;
 
-import ateam.model.ExceptionResponse;
-import ateam.model.UnauthorizedException;
+import ateam.model.exception.ExceptionResponse;
+import ateam.model.exception.UnauthorizedException;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;

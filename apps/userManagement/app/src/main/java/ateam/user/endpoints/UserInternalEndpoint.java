@@ -1,8 +1,8 @@
 package ateam.user.endpoints;
 
-import ateam.model.UnauthorizedException;
+import ateam.model.exception.UnauthorizedException;
 import ateam.user.exceptionmapper.UserServiceExceptionMapper;
-import ateam.user.model.entity.User;
+import ateam.model.entity.User;
 import ateam.user.model.exception.UserServiceException;
 import ateam.user.service.UserService;
 import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
@@ -21,8 +21,12 @@ import java.util.Objects;
 @Singleton
 public class UserInternalEndpoint {
 
+	private final UserService userService;
+
 	@Inject
-	private UserService userService;
+	public UserInternalEndpoint(final UserService userService) {
+		this.userService = userService;
+	}
 
 	@GET
 	@Path("{userid}")

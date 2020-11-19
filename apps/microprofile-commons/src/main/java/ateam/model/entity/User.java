@@ -1,4 +1,4 @@
-package ateam.user.model.entity;
+package ateam.model.entity;
 
 import ateam.validator.Validator;
 
@@ -9,8 +9,8 @@ public class User {
 
 	private int userId;
 
-	@Validator.Required()
-	@Validator.Regex(regex = "^.+$", errorMessage = "Nutzername benötigt!")
+	@Validator.Required
+	@Validator.Min(1)
 	private String username;
 
 	@Validator.Required
@@ -21,20 +21,20 @@ public class User {
 	@Validator.Regex(regex = "^[A-Z]([^0-9\\§\\%\\&\\!\\?])+?[a-z]$", errorMessage = "Vorname muss mit einem Großbuchstaben anfangen und mit einem Kleinbuchstaben enden! Die Zeichen '§', '%', '&', '!' und '?' sind nicht erlaubt!")
 	private String lastName;
 
-	@Validator.Required()
+	@Validator.Required
 	@Validator.Regex(regex = "^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$", errorMessage = "Email benötigt!")
 	private String email;
 
 	@Validator.Required
-	@Validator.Regex(regex = "^.+$", errorMessage = "Passwort benötigt!")
+	@Validator.Min(1)
 	private String password;
 
 	@Validator.Required
-	@Validator.Regex(regex = "^[0-9]{5,5}$", errorMessage = "Postleitzahl muss aus 5 Zahlen bestehen!")
+	@Validator.Regex(regex = "^[0-9]{5}$", errorMessage = "Postleitzahl muss aus 5 Zahlen bestehen!")
 	private String postalCode;
 
 	@Validator.Required
-	@Validator.Regex(regex = "^.+$", errorMessage = "Straße benötigt!")
+	@Validator.Min(1)
 	private String street;
 
 	@Validator.Required(errorMessage = "Hausnummer benötigt!")
@@ -42,11 +42,11 @@ public class User {
 	private String number;
 
 	@Validator.Required
-	@Validator.Regex(regex = "^.+$", errorMessage = "Stadt benötigt!")
+	@Validator.Min(1)
 	private String city;
 
 	@Validator.Required
-	@Validator.Regex(regex = "^.+$", errorMessage = "Land benötigt!")
+	@Validator.Min(1)
 	private String country;
 
 	private Date createAt;
