@@ -14,9 +14,9 @@ public class UnauthorizedExceptionMapper implements ExceptionMapper<Unauthorized
 	public Response toResponse(UnauthorizedException e) {
 		System.out.println("UnauthorizedException! Returning code 401. Message: " + e.getMessage());
 		ExceptionResponse response = new ExceptionResponse();
-		response.setStatus(401);
+		response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
 		response.setTimestamp(new Date());
 		response.setMessage(e.getMessage());
-		return Response.status(401).entity(response).build();
+		return Response.status(Response.Status.UNAUTHORIZED).entity(response).build();
 	}
 }

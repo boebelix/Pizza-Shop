@@ -20,9 +20,9 @@ import java.util.UUID;
 @Singleton
 public class AuthEndpoint {
 
-	private UserService userService;
+	private final UserService userService;
 
-	private AccessService accessService;
+	private final AccessService accessService;
 
 	@Inject
 	public AuthEndpoint(final UserService userService, final AccessService accessService) {

@@ -20,7 +20,7 @@ public class UserService {
 	}
 
 	public User createUser(User user) {
-		user.setPassword(passwordService.hashPassword(user.getPassword(), passwordService.genSalt()));
+		user.setPassword(passwordService.hashPassword(user.getPassword()));
 		userDatabase.createUser(user);
 		return user;
 	}

@@ -13,9 +13,9 @@ public class UserServiceExceptionMapper  implements ExceptionMapper<UserServiceE
 		System.out.println("UserServiceException! Returning code 500. Message: " + e.getMessage());
 		e.printStackTrace();
 		ExceptionResponse response = new ExceptionResponse();
-		response.setStatus(500);
+		response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 		response.setTimestamp(new Date());
 		response.setMessage(e.getMessage());
-		return Response.status(500).entity(response).build();
+		return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(response).build();
 	}
 }

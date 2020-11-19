@@ -18,6 +18,7 @@ public class DBConnection {
 			this.dataSource = (DataSource) ctxt.lookup("jdbc/mySQL");
 		} catch (NamingException e) {
 			e.printStackTrace();
+			System.exit(1);
 		}
 	}
 

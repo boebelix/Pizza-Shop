@@ -18,11 +18,19 @@ public class PasswordService {
 	private static final int iterations = 4096;
 	private static final int saltLength = 32;
 
-	public byte[] genSalt() {
-		return new SecureRandom().generateSeed(saltLength);
+
+	public String hashPassword(String password) {
+		return hashPassword(password, genSalt());
 	}
 
-	public String hashPassword(String password, byte[] salt) {
+	public boolean checkPassword(String password, String storedPassword) {
+		String[] saltAndPassword = storedPassword.split("\\$");
+		byte[] salt = Base64.getDecoder().decode(saltAndPassword[0]);
+		String hashedPassword = hashPassword(password, salt);
+		return Objects.equals(hashedPassword, storedPassword);
+	}
+
+	private String hashPassword(String password, byte[] salt) {
 		try {
 			SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
 			SecretKey key = skf.generateSecret(new PBEKeySpec(password.toCharArray(), salt, iterations, 128));
@@ -34,11 +42,8 @@ public class PasswordService {
 		}
 	}
 
-	public boolean checkPassword(String password, String storedPassword) {
-		String[] saltAndPassword = storedPassword.split("\\$");
-		byte[] salt = Base64.getDecoder().decode(saltAndPassword[0]);
-		String hashedPassword = hashPassword(password, salt);
-		return Objects.equals(hashedPassword, storedPassword);
+	private byte[] genSalt() {
+		return new SecureRandom().generateSeed(saltLength);
 	}
 
 }
