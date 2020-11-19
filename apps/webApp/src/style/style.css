@@ -111,7 +111,7 @@ body {
 
 /* Bakcground for Main Page */
 
-.main_page {
+.menu_state {
     display: none;
     background-image: url("images/Background_Login.jpg");
     background-position: center;
@@ -220,6 +220,25 @@ body {
     padding: 40px;
 }
 
+.white_title {
+    color: white;
+}
+
+.box_1 {
+    background-color: rgba(224, 139, 28, 0.486);
+}
+
+.box_2 {
+    background-color: rgba(100, 84, 62, 0.486);
+}
+
+.box_3 {
+    background-color: rgba(255, 190, 106, 0.486);
+}
+
+.margin20px {
+    margin: 20px;
+}
 
 /* TODO: FIX */
 
