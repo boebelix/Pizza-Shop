@@ -1,6 +1,7 @@
 package ateam.user.db;
 
 import ateam.model.entity.User;
+import ateam.model.exception.ConflictException;
 import ateam.user.model.exception.UserServiceException;
 import ateam.validator.ValidationException;
 
@@ -19,10 +20,10 @@ public class UserDatabase {
 			try {
 				con.setAutoCommit(false);
 				if(loadUser(user.getUsername(), con) != null) {
-					throw new ValidationException("A user with this username already exists!");
+					throw new ConflictException("A user with this username already exists!");
 				}
 				if(loadUserByMail(user.getEmail(), con) != null) {
-					throw new ValidationException("A user with this email already exists!");
+					throw new ConflictException("A user with this email already exists!");
 				}
 				User createdUser = createUser(user, con);
 				con.commit();

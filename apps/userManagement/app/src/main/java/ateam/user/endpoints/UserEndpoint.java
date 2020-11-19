@@ -1,5 +1,6 @@
 package ateam.user.endpoints;
 
+import ateam.exceptionmapper.ConflictExceptionMapper;
 import ateam.exceptionmapper.UnauthorizedExceptionMapper;
 import ateam.exceptionmapper.ValidatorExceptionMapper;
 import ateam.model.exception.UnauthorizedException;
@@ -20,6 +21,7 @@ import java.util.UUID;
 @Path("/user")
 @RegisterProvider(ValidatorExceptionMapper.class)
 @RegisterProvider(UnauthorizedExceptionMapper.class)
+@RegisterProvider(ConflictExceptionMapper.class)
 @Singleton
 public class UserEndpoint {
 
