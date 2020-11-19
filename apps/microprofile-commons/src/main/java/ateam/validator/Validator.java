@@ -54,14 +54,14 @@ public class Validator {
 				}
 				if(field.isAnnotationPresent(Min.class) && field.get(object) != null) {
 					long min = field.getAnnotation(Min.class).value();
-					if(!checkIsSmallerThen(field.get(object), min)) {
+					if(checkIsSmallerThen(field.get(object), min)) {
 						throw new ValidationException(field.getAnnotation(Min.class).errorMessage()
 							.replace("%fieldname%", field.getName()).replace("%value%", String.valueOf(min)));
 					}
 				}
 				if(field.isAnnotationPresent(Max.class) && field.get(object) != null) {
 					long max = field.getAnnotation(Max.class).value();
-					if(!checkIsSmallerThen(max, field.get(object))) {
+					if(checkIsSmallerThen(max, field.get(object))) {
 						throw new ValidationException(field.getAnnotation(Max.class).errorMessage()
 							.replace("%fieldname%", field.getName()).replace("%value%", String.valueOf(max)));
 					}
