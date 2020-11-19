@@ -15,7 +15,7 @@ const createIngredientButtons = (ingredientList) => {
     let tableContent = "<tr>";
     let index = 1;
     for(ingredient of ingredientList) {
-        let ingredientCheckbox = "<input type=\"checkbox\" id=\"ingredient_" + ingredient + "\" name=\"ingredient_" + ingredient + "\" class=\"ingredientCheckbox\"/>";
+        let ingredientCheckbox = `<input type="checkbox" id="ingredient_${ingredient} name="ingredient_${ingredient} class="ingredientCheckbox"/>`;
         ingredientCheckbox += "<label for=\"ingredient_" + ingredient + "\">" + ingredient + "</label>";
         tableContent += "<td>" + ingredientCheckbox + "</td>";
         if(index % 3 == 0) {
