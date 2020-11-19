@@ -11,14 +11,14 @@ public class Validator {
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.FIELD)
 	public @interface Required {
-		public String errorMessage() default "%fieldname% required (not null)!";
+		String errorMessage() default "%fieldname% required (not null)!";
 	}
 
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.FIELD)
 	public @interface Regex {
-		public String regex();
-		public String errorMessage();
+		String regex();
+		String errorMessage();
 	}
 
 	/**
@@ -27,15 +27,15 @@ public class Validator {
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.FIELD)
 	public @interface Min {
-		public long value();
-		public String errorMessage() default "%fieldname% should have a length of at least %value%!";
+		long value();
+		String errorMessage() default "%fieldname% should have a length of at least %value%!";
 	}
 
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.FIELD)
 	public @interface Max {
-		public long value();
-		public String errorMessage() default "%fieldname% should have a length of max %value%!";
+		long value();
+		String errorMessage() default "%fieldname% should have a length of max %value%!";
 	}
 
 	public static void validate(Object object) {
