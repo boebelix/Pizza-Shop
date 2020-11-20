@@ -16,6 +16,7 @@ task createDockerfile(type: Dockerfile) {
 task buildImage(type: DockerBuildImage) {
 	dependsOn createDockerfile
 	inputDir = project.projectDir
+	dockerFile = createDockerfile.destFile
 	images.add('ateam/userdb:latest')
 }
 
