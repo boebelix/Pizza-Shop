@@ -1,3 +1,5 @@
+package ateam.util;
+
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 import java.io.File;
@@ -7,7 +9,7 @@ import java.io.IOException;
 public class LogService {
 
 	private final File file;
-	private FileWriter writer;
+	private final FileWriter writer;
 	private static final Jsonb builder = JsonbBuilder.create();
 
 	public LogService(final String filePath) throws IOException {
