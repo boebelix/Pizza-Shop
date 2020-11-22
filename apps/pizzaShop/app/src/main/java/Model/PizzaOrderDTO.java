@@ -1,20 +1,15 @@
 package Model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name ="orders")
+//@Entity
+//@Table(name ="orders")
 public class PizzaOrderDTO {
 
-	@Id
-	@Column(name = "order_id")
+	//@Id
+	//@Column(name = "order_id")
 	private int OrderId;
 
-	@Id
-	@Column(name = "pizza_id")
+	//@Id
+	//@Column(name = "pizza_id")
 	private int PizzaID;
 
 	public PizzaOrderDTO() {

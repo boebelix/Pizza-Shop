@@ -3,7 +3,7 @@ package Model;
 
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name ="orders")
@@ -26,7 +26,7 @@ public class OrdersDTO {
 	@Column(name = "street")
 	private String Street;
 
-	@Column(name = "number")
+	@Column(name = "houseNumber")
 	private String HouseNumber;
 
 	@Column(name = "city")

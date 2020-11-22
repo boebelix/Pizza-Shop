@@ -1,28 +1,43 @@
 package Model;
-import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.metamodel.Metamodel;
-import java.util.Map;
+import java.sql.*;
 
 public class PizzaOrderDB {
-	private EntityManager em;
+	Connection connection;
 
-	public PizzaOrderDB() {
-		EntityManagerFactory emf = Persistence
-			.createEntityManagerFactory("Bestellungsdatenbank");
-		em = emf.createEntityManager();
+	public PizzaOrderDB(Connection con) {
+		connection=con;
 	}
 
 	public void createEntry(PizzaOrderDTO DTO)
 	{
-		em.getTransaction().begin();
-		em.persist(DTO);
-		em.getTransaction().commit();
+
+		try (PreparedStatement statement=connection.prepareStatement("insert into pizzaOrder (pizzaID, orderId) VALUES (?,??,?,?)")){
+			statement.setInt(1,DTO.getOrderId());
+			statement.setInt(2,DTO.getPizzaID());
+			statement.executeUpdate();
+		}catch(SQLException e)
+		{
+			System.out.println("Unable to execute Satement:"+e.getCause());
+		}
 	}
 
-	public PizzaOrderDTO getOrderById(int Id)
+	public PizzaOrderDTO getOrderByPizzaId(int Id)
 	{
-		return em.find(PizzaOrderDTO.class, Id);
+		try {
+			Statement stmt = connection.createStatement();
+
+			String Querry = "select * from pizzaOrder where pizzaID equals "+Id;
+
+			ResultSet rs = stmt.executeQuery(Querry);
+
+			return new PizzaOrderDTO(rs.getInt(1),
+				rs.getInt(2));
+		}
+		catch(SQLException e)
+		{
+			System.out.println("Unable to execute Satement:"+e.getCause());
+			return null;
+		}
+
 	}
 }

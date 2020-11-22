@@ -1,29 +1,49 @@
 package Model;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import java.sql.*;
 
 public class SizesDB {
 
-	private EntityManager em;
+	private Connection connection;
 
-	public SizesDB() {
-		EntityManagerFactory emf = Persistence
-			.createEntityManagerFactory("Bestellungsdatenbank");
-		em = emf.createEntityManager();
+	public SizesDB(Connection con) {
+		connection=con;
 	}
 
 	public void createOrderEntry(SizesDTO DTO)
 	{
-		em.getTransaction().begin();
-		em.persist(DTO);
-		em.getTransaction().commit();
+		try (PreparedStatement statement=connection.prepareStatement("insert into sizes (id, radius, base_price, topping_price) VALUES (?,?,?,?)")){
+			statement.setInt(1,DTO.getId());
+			statement.setInt(2,DTO.getRadius());
+			statement.setFloat(3,DTO.getBasePrice());
+			statement.setFloat(4,DTO.getTopping_price());
+			statement.executeUpdate();
+		}catch(SQLException e)
+		{
+			System.out.println("Unable to execute Satement:"+e.getCause());
+		}
+
 	}
 
-	public SizesDTO getOrderById(int Id)
+	public SizesDTO getSizesById(int Id)
 	{
-		return em.find(SizesDTO.class, Id);
+		try {
+			Statement stmt = connection.createStatement();
+
+			String Querry = "select * from sizes where id equals "+Id;
+
+			ResultSet rs = stmt.executeQuery(Querry);
+
+			return new SizesDTO(rs.getInt(1),
+				rs.getInt(2),
+				rs.getFloat(3),
+				rs.getFloat(4));
+		}
+		catch(SQLException e)
+		{
+			System.out.println("Unable to execute Satement:"+e.getCause());
+			return null;
+		}
 	}
 
 }
