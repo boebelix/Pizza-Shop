@@ -1,17 +1,14 @@
 package Model;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name ="pizza_topping")
 
 public class ToppingsDTO {
 
-	@Id
-	@Column(name = "id")
+
 	private int id;
 
-	@Column(name = "name")
+	@Validator.Required
+	@Validator.Regex(regex = "^[A-Z]([^0-9\\§\\%\\&\\!\\?])+?[a-z]$", errorMessage = "ToppingName muss mit einem Großbuchstaben anfangen und mit einem Kleinbuchstaben enden! Die Zeichen '§', '%', '&', '!' und '?' sind nicht erlaubt!")
 	private String Name;
 
 	public ToppingsDTO() {
@@ -22,7 +19,6 @@ public class ToppingsDTO {
 		Name = name;
 	}
 	public ToppingsDTO( String name) {
-		this.id = id;
 		Name = name;
 	}
 

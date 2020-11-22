@@ -2,34 +2,35 @@
 package Model;
 
 
-import javax.persistence.*;
 import java.sql.Date;
 
-@Entity
-@Table(name ="orders")
+
 public class OrdersDTO {
 
-	@Id
-	@GeneratedValue
-	@Column(name = "id")
+
 	private int Id;
 
-	@Column(name = "order_date")
+	@Validator.Required
 	private Date OrderDate;
 
-	@Column(name = "order_arrived")
+	@Validator.Required
 	private Date OrderArrived;
 
-	@Column(name = "postal_code")
+	@Validator.Required
+	@Validator.Min(5)
+	@Validator.Max(5)
+	@Validator.Regex(regex = "^[0-9]{5}$", errorMessage = "Die PLZ besteht aus 5 zahlen")
 	private String PLZ;
 
-	@Column(name = "street")
+	@Validator.Required
+	@Validator.Regex(regex = "^[A-Z]([^0-9\\§\\%\\&\\!\\?])+?[a-z]$", errorMessage = "Straße muss mit einem Großbuchstaben anfangen und mit einem Kleinbuchstaben enden! Zahlen, so wie die Zeichen '§', '%', '&', '!' und '?' sind nicht erlaubt!")
 	private String Street;
 
-	@Column(name = "houseNumber")
+	@Validator.Required
 	private String HouseNumber;
 
-	@Column(name = "city")
+	@Validator.Required
+	@Validator.Regex(regex = "^[A-Z]([^\\0-9\\§\\%\\&\\!\\?])+?[a-z]$", errorMessage = "Stadt muss mit einem Großbuchstaben anfangen und mit einem Kleinbuchstaben enden! Zahlen, so wie die Zeichen '§', '%', '&', '!' und '?' sind nicht erlaubt!")
 	private String City;
 
 	public OrdersDTO()

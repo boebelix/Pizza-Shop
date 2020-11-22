@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<server description="pizzaOrder">
+<server description="pizzaShop">
 
 	<featureManager>
 		<feature>microProfile-3.3</feature>
@@ -25,12 +25,12 @@
 	<dataSource id="DefaultDataSource" jndiName="jdbc/mySQL">
 		<jdbcDriver libraryRef="MySQLLib" />
 		<properties databaseName="pizzaOrder" serverName="localhost"
-					portNumber="3306" user="root" />
+					portNumber="3307" user="root" />
 	</dataSource>
 	<library id="MySQLLib">
 		<file name="${server.config.dir}/mysql-connector-java-8.0.18.jar" />
 	</library>
 
-	<jndiEntry id="appServicePassword" jndiName="appServicePassword" value="ferEG42gs4tgdsGFDS" />
+	<jndiEntry id="appOrderPassword" jndiName="appOrderPassword" value="ferEG42gs4tgdsGFDS" />
 
 </server>

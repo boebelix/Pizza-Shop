@@ -17,8 +17,18 @@
     <!-- This is the keystore that will be used by SSL and by JWT. -->
     <keyStore id="defaultKeyStore" location="public.jks" type="JKS" password="atbash" />
 
-
     <!-- The MP JWT configuration that injects the caller's JWT into a ResourceScoped bean for inspection. -->
     <mpJwt id="jwtShopConsumer" keyName="theKeyId" audiences="targetService" issuer="team-a"/>
+
+	<dataSource id="DefaultDataSource" jndiName="jdbc/mySQL">
+		<jdbcDriver libraryRef="MySQLLib" />
+		<properties databaseName="bestelldatenbank" serverName="localhost"
+					portNumber="3307" user="root" />
+	</dataSource>
+	<library id="MySQLLib">
+		<file name="${server.config.dir}/mysql-connector-java-8.0.18.jar" />
+	</library>
+
+	<jndiEntry id="appOrderPassword" jndiName="appOrderPassword" value="ferEG42gs4tgdsGFDS" />
 
 </server>

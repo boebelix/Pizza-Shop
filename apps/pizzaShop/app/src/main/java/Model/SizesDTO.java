@@ -1,22 +1,17 @@
 package Model;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name ="sizes")
 public class SizesDTO {
 
-	@Id
-	@Column(name = "id")
 	private int Id;
 
-	@Column(name = "radius")
+	@Validator.Required
 	private int Radius;
 
-	@Column(name = "base_price")
+	@Validator.Required
 	private float BasePrice;
 
-	@Column(name = "topping_price")
+	@Validator.Required
 	private float topping_price;
 
 	public SizesDTO() {

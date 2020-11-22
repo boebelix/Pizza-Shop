@@ -1,16 +1,11 @@
 package Model;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name ="pizzas")
 public class PizzasDTO {
 
-	@Id
-	@Column(name = "id")
 	private int ID;
 
-	@Column(name = "size_id")
+	@Validator.Required
 	private int sizeId;
 
 	public PizzasDTO() {

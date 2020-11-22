@@ -6,10 +6,12 @@ public class PizzaOrderDTO {
 
 	//@Id
 	//@Column(name = "order_id")
+	@Validator.Required
 	private int OrderId;
 
 	//@Id
 	//@Column(name = "pizza_id")
+	@Validator.Required
 	private int PizzaID;
 
 	public PizzaOrderDTO() {
