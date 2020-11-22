@@ -12,11 +12,10 @@ public class SizesDB {
 
 	public void createOrderEntry(SizesDTO DTO)
 	{
-		try (PreparedStatement statement=connection.prepareStatement("insert into sizes (id, radius, base_price, topping_price) VALUES (?,?,?,?)")){
-			statement.setInt(1,DTO.getId());
-			statement.setInt(2,DTO.getRadius());
-			statement.setFloat(3,DTO.getBasePrice());
-			statement.setFloat(4,DTO.getTopping_price());
+		try (PreparedStatement statement=connection.prepareStatement("insert into sizes ( radius, base_price, topping_price) VALUES (?,?,?)")){
+			statement.setInt(1,DTO.getRadius());
+			statement.setFloat(2,DTO.getBasePrice());
+			statement.setFloat(3,DTO.getTopping_price());
 			statement.executeUpdate();
 		}catch(SQLException e)
 		{

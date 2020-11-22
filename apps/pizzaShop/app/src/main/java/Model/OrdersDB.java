@@ -12,21 +12,24 @@ public class OrdersDB {
 		connection=con;
 	}
 
-	public void insertNewOrder(OrdersDTO ordersDTO)
+	public int insertNewOrder(OrdersDTO ordersDTO)
 	{
-		try (PreparedStatement statement=connection.prepareStatement("insert into orders (id, orderDate, OrderArrived, postalCode, street, houseNumber, city) VALUES (?,?,?,?,?,?,?)")){
-			statement.setInt(1,ordersDTO.getId());
-			statement.setDate(2,ordersDTO.getOrderDate());
-			statement.setDate(3,ordersDTO.getOrderArrived());
-			statement.setString(4,ordersDTO.getPLZ());
-			statement.setString(5,ordersDTO.getStreet());
-			statement.setString(6,ordersDTO.getHouseNumber());
-			statement.setString(7,ordersDTO.getCity());
+		try (PreparedStatement statement=connection.prepareStatement("insert into orders (id, orderDate, OrderArrived, postalCode, street, houseNumber, city) VALUES (?,?,?,?,?,?)")){
+			statement.setDate(1,ordersDTO.getOrderDate());
+			statement.setDate(2,ordersDTO.getOrderArrived());
+			statement.setString(3,ordersDTO.getPLZ());
+			statement.setString(4,ordersDTO.getStreet());
+			statement.setString(5,ordersDTO.getHouseNumber());
+			statement.setString(6,ordersDTO.getCity());
 			statement.executeUpdate();
+
+			//returns OrderID
+			return statement.getGeneratedKeys().getInt(1);
 		}catch(Exception e)
 		{
 			System.out.println("Unable to execute Satement:"+e.getCause());
 		}
+		return -1;
 	}
 
 	public OrdersDTO getOrderById(int Id)
@@ -35,7 +38,7 @@ public class OrdersDB {
 		try {
 			Statement stmt = connection.createStatement();
 
-			String Querry = "select * from Lieferant where id equals "+Id;
+			String Querry = "select * from orders where id equals "+Id;
 
 			ResultSet rs = stmt.executeQuery(Querry);
 
@@ -54,4 +57,5 @@ public class OrdersDB {
 		}
 
 	}
+
 }

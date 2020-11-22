@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<server description="pizzaShop">
+<server description="pizzashop">
 
     <featureManager>
         <feature>microProfile-3.3</feature>
@@ -9,7 +9,7 @@
                   httpPort="9080"
                   httpsPort="9443"/>
 
-    <webApplication location="pizzaShop.war" contextRoot="/">
+    <webApplication location="pizzashop.war" contextRoot="/">
         <classloader apiTypeVisibility="+third-party" />
     </webApplication>
     <mpMetrics authentication="false"/>
@@ -19,6 +19,6 @@
 
 
     <!-- The MP JWT configuration that injects the caller's JWT into a ResourceScoped bean for inspection. -->
-    <mpJwt id="jwtUserConsumer" keyName="theKeyId" audiences="targetService" issuer="team-a"/>
+    <mpJwt id="jwtShopConsumer" keyName="theKeyId" audiences="targetService" issuer="team-a"/>
 
 </server>

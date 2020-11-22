@@ -11,8 +11,7 @@ public class ToppingsDB {
 
 	public void createOrderEntry(ToppingsDTO DTO)
 	{
-		try (PreparedStatement statement=connection.prepareStatement("insert into sizes (id, name) VALUES (?,?)")){
-			statement.setInt(1,DTO.getId());
+		try (PreparedStatement statement=connection.prepareStatement("insert into toppings ( name) VALUES (?)")){
 			statement.setString(2,DTO.getName());
 			statement.executeUpdate();
 		}catch(SQLException e)

@@ -21,6 +21,10 @@ public class ToppingsDTO {
 		this.id = id;
 		Name = name;
 	}
+	public ToppingsDTO( String name) {
+		this.id = id;
+		Name = name;
+	}
 
 	public int getId() {
 		return id;

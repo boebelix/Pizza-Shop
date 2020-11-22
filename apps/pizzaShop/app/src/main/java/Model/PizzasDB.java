@@ -15,16 +15,18 @@ public class PizzasDB {
 		connection=con;
 	}
 
-	public void createOrderEntry(PizzasDTO DTO)
+	public int createPizzaEntry(PizzasDTO DTO)
 	{
+		try (PreparedStatement statement=connection.prepareStatement("insert into pizzas ( size_id) VALUES (?)")){
+			statement.setInt(1,DTO.getSizeId());
+			statement.executeUpdate();
+			return statement.getGeneratedKeys().getInt(1);
 
-		try (PreparedStatement statement=connection.prepareStatement("insert into pizzas (id, size_id) VALUES (?,?)")){
-			statement.setInt(1,DTO.getID());
-			statement.setInt(2,DTO.getSizeId());
 		}catch(SQLException e)
 		{
 			System.out.println("Unable to execute Satement:"+e.getCause());
 		}
+		return -1;
 	}
 
 	public PizzasDTO getPizzaById(int Id)
