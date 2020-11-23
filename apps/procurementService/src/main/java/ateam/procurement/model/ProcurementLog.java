@@ -30,6 +30,18 @@ public class ProcurementLog {
 		return time;
 	}
 
+	public boolean checkValid() {
+		for (ProcurementLogItem item : items) {
+			if (item.checkValid() == false) {
+				return false;
+			}
+		}
+		if (time == null) {
+			return false;
+		}
+		return true;
+	}
+
 	@Override
 	public String toString() {
 		return "ProcurementLog{" +

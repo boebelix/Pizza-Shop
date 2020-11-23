@@ -2,7 +2,7 @@ package ateam.procurement.model;
 
 public class ProcurementLogItem {
 	private String name;
-	private int amount;
+	private int amount = -1;
 	private String unit;
 
 	public ProcurementLogItem() {
@@ -30,6 +30,14 @@ public class ProcurementLogItem {
 
 	public String getUnit() {
 		return unit;
+	}
+
+	public boolean checkValid() {
+		if (name == null || amount == -1 || unit == null) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	@Override
