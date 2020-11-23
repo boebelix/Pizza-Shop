@@ -13,6 +13,9 @@ buildscript {
 apply plugin: 'liberty'
 apply plugin: 'war'
 
+war {
+	archiveName("procurementService.war")
+}
 
 dependencies {
 	implementation project(path: ':apps:microprofile-commons')
