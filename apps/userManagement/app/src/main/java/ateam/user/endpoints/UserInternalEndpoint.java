@@ -1,9 +1,9 @@
 package ateam.user.endpoints;
 
 import ateam.model.exception.UnauthorizedException;
-import ateam.user.exceptionmapper.UserServiceExceptionMapper;
+import ateam.exceptionmapper.UserServiceExceptionMapper;
 import ateam.model.entity.User;
-import ateam.user.model.exception.UserServiceException;
+import ateam.model.exception.UserServiceException;
 import ateam.user.service.UserService;
 import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 
@@ -27,7 +27,7 @@ public class UserInternalEndpoint {
 	@GET
 	@Path("{userid}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getUser(@CookieParam("Authorization") String servicePassword, @PathParam("userid") int userId) throws UnauthorizedException, NamingException {
+	public Response getUser(@HeaderParam("Authorization") String servicePassword, @PathParam("userid") int userId) throws UnauthorizedException, NamingException {
 		if(!Objects.equals(InitialContext.doLookup("appServicePassword"), servicePassword)) {
 			throw new UnauthorizedException("ServicePassword wrong!");
 		}

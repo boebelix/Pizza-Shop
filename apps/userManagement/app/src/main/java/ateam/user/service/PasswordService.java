@@ -1,6 +1,6 @@
 package ateam.user.service;
 
-import ateam.user.model.exception.UserServiceException;
+import ateam.model.exception.UserServiceException;
 
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;

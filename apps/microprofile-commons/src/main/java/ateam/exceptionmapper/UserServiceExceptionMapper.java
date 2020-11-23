@@ -1,7 +1,7 @@
-package ateam.user.exceptionmapper;
+package ateam.exceptionmapper;
 
 import ateam.model.exception.ExceptionResponse;
-import ateam.user.model.exception.UserServiceException;
+import ateam.model.exception.UserServiceException;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
