@@ -26,12 +26,3 @@ task createContainer(type: DockerCreateContainer) {
 	containerName = 'aTeamPizzaShopDB'
 	hostConfig.portBindings = ['3307:3306']
 }
-
-task startContainer(type: DockerStartContainer) {
-	dependsOn createContainer
-	targetContainerId createContainer.getContainerId()
-}
-
-task stopContainer(type: DockerStopContainer) {
-	targetContainerId createContainer.getContainerId()
-}
