@@ -1,7 +1,12 @@
+import org.gradle.internal.os.OperatingSystem
 
 task updateFlutterPackages(type: Exec) {
 	workingDir project.projectDir
-	commandLine 'cmd', '/c', 'flutter', 'pub', 'get'
+	if (OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'flutter', 'pub', 'get'
+	} else {
+		commandLine 'flutter', 'pub', 'get'
+	}
 }
 
 build.dependsOn(updateFlutterPackages)
