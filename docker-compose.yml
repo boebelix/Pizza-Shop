@@ -7,7 +7,7 @@ services:
             context: ./apps/userManagement/db
             dockerfile: Dockerfile
         volumes:
-            -   type: volume
+            -   type: "volume"
                 source: usermanagement-db-data
                 target: /var/lib/mysql
                 volume:
@@ -23,7 +23,7 @@ services:
             context: ./apps/pizzaShop/db
             dockerfile: Dockerfile
         volumes:
-            -   type: volume
+            -   type: "volume"
                 source: pizzashop-db-data
                 target: /var/lib/mysql
                 volume:

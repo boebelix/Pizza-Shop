@@ -42,6 +42,7 @@ body {
 
 .input_login {
     border: 1px solid black;
+    background-color: white;
     border-radius: 3px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -259,4 +260,13 @@ body {
 
 #ordered_div td {
     padding-right: 10px;
+}
+
+.error_message{
+    color: red;
+    display: none
+}
+
+.btn_error{
+    background: rgb(241, 145, 145);
 }

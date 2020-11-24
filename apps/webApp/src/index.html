@@ -14,6 +14,7 @@
 <script src="js/controller/profile.js"></script>
 <script src="js/controller/signup.js"></script>
 <script src="js/functions.js"></script>
+<script src="js/controller/validator.js"></script>
 
 <body>
 
@@ -38,10 +39,15 @@
         <div class="overlay_content">
             <img src="style/images/logo.png" alt="Our Logo" width="80" height="80"><br>
             <h1>Registrieren</h1>
-            <form action="" method="post">
+            <p id="error_email" class="error_message">E-Mail-Format ungültig</p>
+            <p id="error_username" class="error_message">Nutzername bereits vergeben</p>
+            <p id="error_password" class="error_message">Passwörter stimmen nicht über ein</p>
                 <label for="email_signup"><b>E-Mail und Nutzername</b></label><br>
                 <input class="input_login" type="text" placeholder="E-Mail" id="email_signup" name="email_signup" required>
                 <input class="input_login" type="text" placeholder="Nutzername" id="username_signup" name="username_signup" required><br>
+                <label for="name_signup"><b>Nach- und Vorname</b></label><br>
+                <input class="input_login" type="text" placeholder="Nachname" id="name_signup" name="name_signup" required>
+                <input class="input_login" type="text" placeholder="Vorname" id="prename_signup" name="prename_signup" required><br>
                 <label for="password_signup"><b>Passwort festlegen</b></label><br>
                 <input class="input_login" type="password" placeholder="Passwort" id="password_signup" name="password_signup" required>
                 <input class="input_login" type="password" placeholder="Wiederholen" id="password_signup_repeat" name="password_signup_repeat" required><br>
@@ -50,11 +56,10 @@
                 <input class="input_login" type="text" placeholder="Hausnummer" id="number_signup" name="number_signup" required><br>
                 <label for="postalcode_signup"><b>PLZ und Stadt</b></label><br>
                 <input class="input_login" type="text" placeholder="PLZ" id="postalcode_signup" name="postalcode_signup" required>
-                <input class="input_login" type="text" placeholder="Ort/Stadt" id="city_signup" name="cicity_signupty" required><br>
+                <input class="input_login" type="text" placeholder="Ort/Stadt" id="city_signup" name="city_signup" required><br>
                 <label for="country_signup"><b>Land</b></label><br>
                 <input class="input_login" type="text" placeholder="Land" id="country_signup" name="country_signup" required><br>
-                <button id="register_submit_button" type="submit" class="button_login">Registrieren</button><br>
-            </form>
+            <button id="register_submit_button" type="button" class="button_login">Registrieren</button><br>
             <button id="register_back_button" class="scene_before">Zurück zum Login</button>
         </div>
     </div>
