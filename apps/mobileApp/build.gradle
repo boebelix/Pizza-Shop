@@ -1,0 +1,7 @@
+
+task updateFlutterPackages(type: Exec) {
+	workingDir project.projectDir
+	commandLine 'cmd', '/c', 'flutter', 'pub', 'get'
+}
+
+build.dependsOn(updateFlutterPackages)
