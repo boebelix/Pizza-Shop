@@ -1,4 +1,4 @@
-package ateam.user.model.request;
+package ateam.model.request;
 
 import ateam.validator.Validator;
 

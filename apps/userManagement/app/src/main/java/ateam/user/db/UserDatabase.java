@@ -2,8 +2,7 @@ package ateam.user.db;
 
 import ateam.model.entity.User;
 import ateam.model.exception.ConflictException;
-import ateam.user.model.exception.UserServiceException;
-import ateam.validator.ValidationException;
+import ateam.model.exception.UserServiceException;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

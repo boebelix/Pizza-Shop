@@ -1,7 +1,7 @@
 package ateam.user.service;
 
 import ateam.model.exception.UnauthorizedException;
-import ateam.user.model.request.LoginData;
+import ateam.model.request.LoginData;
 import ateam.model.entity.User;
 
 import javax.inject.Inject;
