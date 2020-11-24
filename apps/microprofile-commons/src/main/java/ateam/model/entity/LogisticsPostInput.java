@@ -1,4 +1,4 @@
-package ateam.logistics.model;
+package ateam.model.entity;
 
 public class LogisticsPostInput {
 	private int orderId = -1;

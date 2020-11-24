@@ -1,5 +1,10 @@
 package ateam.logistics.model;
 
+import ateam.model.entity.User;
+
+import java.sql.Timestamp;
+import java.util.Date;
+
 public class LogisticsLog {
 	private int orderId = -1;
 	private String firstName;
@@ -9,8 +14,21 @@ public class LogisticsLog {
 	private String city;
 	private int postalCode = -1;
 	private String country;
+	private String time;
 
 	public LogisticsLog() {
+	}
+
+	public LogisticsLog(User user) {
+		this.firstName = user.getFirstName();
+		this.lastName = user.getLastName();
+		this.street = user.getStreet();
+		this.nr = Integer.parseInt(user.getNumber());
+		this.city = user.getCity();
+		this.postalCode = Integer.parseInt(user.getPostalCode());
+		this.country = user.getCountry();
+		Timestamp timestamp = new Timestamp(new Date().getTime());
+		time = "" + timestamp;
 	}
 
 	public int getOrderId() {
