@@ -1,5 +1,6 @@
 package ateam.user.endpoints;
 
+import ateam.exceptionmapper.UnknownUserExceptionMapper;
 import ateam.model.exception.UnauthorizedException;
 import ateam.exceptionmapper.UserServiceExceptionMapper;
 import ateam.model.entity.User;
@@ -32,8 +33,9 @@ public class UserInternalEndpoint {
 			throw new UnauthorizedException("ServicePassword wrong!");
 		}
 		User user = userService.loadUser(userId);
-		if(user == null)
-			throw new UserServiceException("User not found!");
+		if(user == null) {
+			return Response.status(Response.Status.NOT_FOUND.getStatusCode()).build();
+		}
 
 		return Response.ok().entity(user).build();
 	}
