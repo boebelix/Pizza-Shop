@@ -12,7 +12,7 @@ services:
             - DB_HOST=db-user
             - DB_PORT=3306
             - DB_USER=root
-            - DB_PW=db-user
+            - DB_PW=
             - SERVICE_PASSWORD=ferwfrwe435gsd
     db-user:
         container_name: userManagementDB
