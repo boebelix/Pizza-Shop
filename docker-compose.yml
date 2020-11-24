@@ -1,6 +1,19 @@
 version: '3.0'
 
 services:
+    service-user:
+        container_name: aTeamUserManagement
+        image: ateam/userManagement:latest
+        ports:
+            - 9080:9080
+            - 9443:9443
+        entrypoint:
+            - DB_NAME=usermanagement
+            - DB_HOST=db-user
+            - DB_PORT=3306
+            - DB_USER=root
+            - DB_PW=db-user
+            - SERVICE_PASSWORD=ferwfrwe435gsd
     db-user:
         container_name: userManagementDB
         build:
