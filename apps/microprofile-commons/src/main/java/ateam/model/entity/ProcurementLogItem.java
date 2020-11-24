@@ -1,4 +1,4 @@
-package ateam.procurement.model;
+package ateam.model.entity;
 
 public class ProcurementLogItem {
 	private String name;

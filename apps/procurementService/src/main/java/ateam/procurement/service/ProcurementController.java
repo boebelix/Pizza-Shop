@@ -1,6 +1,6 @@
 package ateam.procurement.service;
 
-import ateam.procurement.model.ProcurementLog;
+import ateam.model.entity.ProcurementLog;
 import ateam.util.LogService;
 
 import javax.inject.Singleton;
