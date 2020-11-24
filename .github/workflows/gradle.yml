@@ -25,6 +25,8 @@ jobs:
         java-version: 1.8
     - name: Setup local properties file
       run: chmod u+x setupActions.sh && ./setupActions.sh
+    - name: Set FLUTTER_ROOT
+      run: export FLUTTER_ROOT=$FLUTTER_HOME
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
