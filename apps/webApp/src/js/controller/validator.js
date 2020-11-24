@@ -1,12 +1,10 @@
 const emailValidator = (value) => {
-    if(value.includes("@") & value.length>=7){
-        document.getElementById("error_email").style.display="none";
+    if(value.length == 0){
+        document.getElementById("email").classList.add("btn_error");
+        return false;
+    }else{
         document.getElementById("email_signup").classList.remove("btn_error");
         return true;
-    }else{
-        document.getElementById("email_signup").classList.add("btn_error");
-        document.getElementById("error_email").style.display="block";
-        return false;
     }
 }
 

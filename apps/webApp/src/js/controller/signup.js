@@ -32,11 +32,23 @@ const submitData = async () => {
     "postalCode" : document.getElementById("postalcode_signup").value,
     "city" : document.getElementById("city_signup").value,
     "country" : document.getElementById("country_signup").value};
-    postData('http://localhost:9080/user', data);
+    let error= await postData('http://localhost:9080/user', data);
+    
+    if(error.status==200){
+      console.log(error.message);
+      document.getElementById("error_server").style.display="none";
+      document.getElementById("error_server").innerHTML="";
+      //Login here
+    }else{
+      console.log(error.message);
+      document.getElementById("error_server").innerHTML=decode_utf(error.message);
+      document.getElementById("error_server").style.display="block";
+    }
     }
 }
 
 const postData = async (url, data) => {
+  let error;
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -44,7 +56,23 @@ const postData = async (url, data) => {
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: JSON.stringify(data) // body data type must match "Content-Type" header
-    }).finally(err => console.log(err));
+    });
+    if(response.status === 200){
+      error = {"message" : "Successfully registered", "status": 200};
+    }else{
+    return await response.json();
+    }
+    return error;
   }
 
+ const decode_utf = (message) => {
+      let first_replace = message.replace(/ÃŸ/g, 'ß');
+      let decoded_message;
+    try{
+      decoded_message=decodeURIComponent(escape(first_replace));
+    }catch(e){
+      decoded_message=first_replace;
+    }
+    return decoded_message;
+  }
 
