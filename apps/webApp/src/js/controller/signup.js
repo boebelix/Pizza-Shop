@@ -28,27 +28,23 @@ const submitData = async () => {
     "username" : document.getElementById("username_signup").value,
     "password" : document.getElementById("password_signup").value,
     "street" : document.getElementById("street_signup").value,
-    "nr" : document.getElementById("number_signup").value,
+    "number" : document.getElementById("number_signup").value,
     "postalCode" : document.getElementById("postalcode_signup").value,
     "city" : document.getElementById("city_signup").value,
     "country" : document.getElementById("country_signup").value};
+    postData('http://localhost:9080/user', data);
     }
-    let err = postData(data);
-    console.log(err);
 }
 
-const postData = async (url = '', data) => {
-    let errorcode;
+const postData = async (url, data) => {
     const response = await fetch(url, {
       method: 'POST',
-      
       headers: {
         'Content-Type': 'application/json'
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: JSON.stringify(data) // body data type must match "Content-Type" header
-    }).catch(err => {errorcode=err});
-    return errrorcode;
+    }).finally(err => console.log(err));
   }
 
 

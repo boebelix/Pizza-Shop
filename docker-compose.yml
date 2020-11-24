@@ -3,9 +3,7 @@ version: '3.0'
 services:
     db-user:
         container_name: userManagementDB
-        build:
-            context: ./apps/userManagement/db
-            dockerfile: Dockerfile
+        image: ateam/userdb:latest
         volumes:
             -   type: "volume"
                 source: usermanagement-db-data
