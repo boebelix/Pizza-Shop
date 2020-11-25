@@ -1,5 +1,8 @@
 package ateam.user.endpoints;
 
+import ateam.exceptionmapper.UnauthorizedExceptionMapper;
+import ateam.exceptionmapper.UserServiceExceptionMapper;
+import ateam.exceptionmapper.ValidatorExceptionMapper;
 import ateam.model.entity.User;
 import ateam.model.exception.UnauthorizedException;
 import ateam.model.request.LoginData;
@@ -8,6 +11,7 @@ import ateam.user.service.AccessService;
 import ateam.user.service.UserService;
 import ateam.validator.Validator;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
+import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -17,6 +21,9 @@ import javax.ws.rs.core.Response;
 import java.util.UUID;
 
 @Path("/auth")
+@RegisterProvider(ValidatorExceptionMapper.class)
+@RegisterProvider(UnauthorizedExceptionMapper.class)
+@RegisterProvider(UserServiceExceptionMapper.class)
 @Singleton
 public class AuthEndpoint {
 
