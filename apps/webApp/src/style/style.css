@@ -73,7 +73,8 @@ body {
     border: none;
     border-radius: 3px;
     padding: 10px 55px;
-    margin-top: 10px;
+	margin: 10px;
+	width: 15em;
     background-color: gray;
     color: white;
 }
@@ -269,4 +270,13 @@ body {
 
 .btn_error{
     background: rgb(241, 145, 145);
+}
+
+#error_login {
+	display: block;
+	color: red;
+}
+
+#logout_button {
+	margin-left:20px;
 }
