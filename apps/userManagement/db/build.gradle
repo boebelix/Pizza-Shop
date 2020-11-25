@@ -1,0 +1,28 @@
+plugins {
+	id 'com.bmuschko.docker-remote-api' version '6.6.1'
+}
+
+
+import com.bmuschko.gradle.docker.tasks.container.*
+import com.bmuschko.gradle.docker.tasks.image.*
+
+task createDockerfile(type: Dockerfile) {
+	from 'mysql:8.0'
+	environmentVariable 'MYSQL_DATABASE', 'usermanagement'
+	environmentVariable 'MYSQL_ALLOW_EMPTY_PASSWORD', 'true'
+	copyFile './InitScripts/*', '/docker-entrypoint-initdb.d/'
+}
+
+task buildImage(type: DockerBuildImage) {
+	dependsOn createDockerfile
+	inputDir = project.projectDir
+	dockerFile = createDockerfile.destFile
+	images.add('ateam/userdb:latest')
+}
+
+task createContainer(type: DockerCreateContainer) {
+	dependsOn buildImage
+	targetImageId buildImage.getImageId()
+	containerName = 'aTeamUserDB'
+	hostConfig.portBindings = ['3306:3306']
+}
