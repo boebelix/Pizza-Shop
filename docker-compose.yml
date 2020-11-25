@@ -3,11 +3,13 @@ version: '3.0'
 services:
     service-user:
         container_name: aTeamUserManagement
-        image: ateam/userManagement:latest
+        image: ateam/usermanagement:latest
         ports:
             - 9080:9080
             - 9443:9443
-        entrypoint:
+        depends_on:
+            -   db-user
+        environment:
             - DB_NAME=usermanagement
             - DB_HOST=db-user
             - DB_PORT=3306
@@ -15,7 +17,7 @@ services:
             - DB_PW=
             - SERVICE_PASSWORD=ferwfrwe435gsd
     db-user:
-        container_name: userManagementDB
+        container_name: aTeamUserManagementDB
         image: ateam/userdb:latest
         volumes:
             -   type: volume
@@ -29,7 +31,7 @@ services:
             - MYSQL_DATABASE=usermanagement
             - MYSQL_ALLOW_EMPTY_PASSWORD=true
     db-pizza:
-        container_name: pizzaShopDB
+        container_name: aTeamPizzaShopDB
         image: ateam/pizzashopdb:latest
         volumes:
             -   type: volume
