@@ -1,4 +1,4 @@
-package ateam.user.model.response;
+package ateam.model.response;
 
 import ateam.model.entity.User;
 
