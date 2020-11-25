@@ -5,23 +5,23 @@ const initSignup = () => {
 
 const submitData = async () => {
     let accepted = false;
-    let email = emailValidator(document.getElementById("email_signup").value);
-    let name = nameValidator(document.getElementById("name_signup").value);
-    let prename = prenameValidator(document.getElementById("prename_signup").value);
-    let username = usernameValidator(document.getElementById("username_signup").value);
-    let password = passwordValidator(document.getElementById("password_signup").value,document.getElementById("password_signup_repeat").value);
-    let street = streetValidator(document.getElementById("street_signup").value);
-    let number = numberValidator(document.getElementById("number_signup").value);
-    let postalcode = postalcodeValidator(document.getElementById("postalcode_signup").value);
-    let city = cityValidator(document.getElementById("city_signup").value);
-    let country = countryValidator(document.getElementById("country_signup").value);
+    let email = lengthValidator("email_signup");
+    let name = lengthValidator("name_signup");
+    let prename = lengthValidator("prename_signup");
+    let username = lengthValidator("username_signup");
+    let password = passwordValidator("password_signup","password_signup_repeat");
+    let street = lengthValidator("street_signup");
+    let number = lengthValidator("number_signup");
+    let postalcode = lengthValidator("postalcode_signup");
+    let city = lengthValidator("city_signup");
+    let country = lengthValidator("country_signup");
 
     if (email && name &&prename && username && password && street
         && number && postalcode && city && country){
             accepted = true;
         }
 
-    if(accepted != false){
+    if(accepted){
     let data={"email" : document.getElementById("email_signup").value,
     "lastName" : document.getElementById("name_signup").value,
     "firstName" : document.getElementById("prename_signup").value,
