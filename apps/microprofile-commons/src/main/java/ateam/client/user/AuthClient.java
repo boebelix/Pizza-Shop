@@ -1,6 +1,6 @@
 package ateam.client.user;
 
-import ateam.client.mapper.UnauthorizedExceptionResponseMapper;
+import ateam.exceptionmapper.UnauthorizedExceptionMapper;
 import ateam.exceptionmapper.UserServiceExceptionMapper;
 import ateam.exceptionmapper.ValidatorExceptionMapper;
 import ateam.model.exception.UnauthorizedException;
@@ -18,7 +18,7 @@ import java.util.UUID;
 
 @Path("/auth")
 @Consumes("application/json")
-@RegisterProvider(UnauthorizedExceptionResponseMapper.class)
+@RegisterProvider(UnauthorizedExceptionMapper.class)
 @RegisterProvider(ValidatorExceptionMapper.class)
 @RegisterProvider(UserServiceExceptionMapper.class)
 public interface AuthClient {

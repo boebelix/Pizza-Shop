@@ -1,7 +1,7 @@
 package ateam.client.user;
 
-import ateam.client.mapper.UnauthorizedExceptionResponseMapper;
-import ateam.client.mapper.UnknownEntityExceptionMapper;
+import ateam.client.mapper.UnknownEntityExceptionResponseMapper;
+import ateam.exceptionmapper.UnauthorizedExceptionMapper;
 import ateam.exceptionmapper.UserServiceExceptionMapper;
 import ateam.model.entity.User;
 import ateam.model.exception.UnauthorizedException;
@@ -13,9 +13,9 @@ import javax.ws.rs.*;
 
 @Path("/user_intern")
 @Consumes("application/json")
-@RegisterProvider(UnauthorizedExceptionResponseMapper.class)
+@RegisterProvider(UnauthorizedExceptionMapper.class)
 @RegisterProvider(UserServiceExceptionMapper.class)
-@RegisterProvider(UnknownEntityExceptionMapper.class)
+@RegisterProvider(UnknownEntityExceptionResponseMapper.class)
 public interface UserInternalClient {
 
 	@GET()
