@@ -1,10 +1,8 @@
 package ateam.user.endpoints;
 
-import ateam.exceptionmapper.UnknownUserExceptionMapper;
-import ateam.model.exception.UnauthorizedException;
 import ateam.exceptionmapper.UserServiceExceptionMapper;
 import ateam.model.entity.User;
-import ateam.model.exception.UserServiceException;
+import ateam.model.exception.UnauthorizedException;
 import ateam.user.service.UserService;
 import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 

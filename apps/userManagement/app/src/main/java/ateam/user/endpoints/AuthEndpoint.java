@@ -1,8 +1,8 @@
 package ateam.user.endpoints;
 
+import ateam.model.entity.User;
 import ateam.model.exception.UnauthorizedException;
 import ateam.model.request.LoginData;
-import ateam.model.entity.User;
 import ateam.model.response.LoginResponse;
 import ateam.user.service.AccessService;
 import ateam.user.service.UserService;
