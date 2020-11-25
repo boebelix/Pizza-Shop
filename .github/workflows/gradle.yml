@@ -30,7 +30,8 @@ jobs:
         runs-on: ubuntu-latest
 
         env:
-            workingDir: ./apps/mobileApp/android
+            flutterWorkingDir: ./apps/mobileApp
+            gradleWorkingDir: ./apps/mobileApp/android
 
         steps:
         -   uses: actions/checkout@v2
@@ -41,13 +42,16 @@ jobs:
             uses: actions/setup-java@v1
             with:
                 java-version: 1.8
+        -   name: Run 'flutter pub get'
+            run: flutter pub get
+            working-directory: ${{ env.flutterWorkingDir }}
         -   name: Setup local properties file
             run: chmod u+x setupActions.sh && ./setupActions.sh
-            working-directory: ${{ env.workingDir }}
+            working-directory: ${{ env.gradleWorkingDir }}
         -   name: Grant execute permission for gradlew
             run: chmod +x gradlew
-            working-directory: ${{ env.workingDir }}
+            working-directory: ${{ env.gradleWorkingDir }}
         -   name: Build with Gradle
             run: ./gradlew clean build
-            working-directory: ${{ env.workingDir }}
+            working-directory: ${{ env.gradleWorkingDir }}
 
