@@ -9,9 +9,6 @@
 
 rootProject.name = 'Hettel-Teamprojekt-TeamA'
 
-include(':apps:mobileApp')
-include(':apps:mobileApp:android')
-include(':apps:mobileApp:android:app')
 include(':apps:logisticsService')
 include(':apps:pizzaProduction')
 include(':apps:pizzaShop:app')
