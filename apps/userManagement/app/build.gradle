@@ -59,7 +59,7 @@ task buildImage(type: DockerBuildImage) {
 	dependsOn createDockerfile
 	inputDir = project.projectDir
 	dockerFile = createDockerfile.destFile
-	images.add('ateam/userManagement:latest')
+	images.add('ateam/usermanagement:latest')
 }
 
 task createContainer(type: DockerCreateContainer) {
