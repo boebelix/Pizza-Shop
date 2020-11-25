@@ -1,9 +1,9 @@
 package ateam.client.user;
 
-import ateam.exceptionmapper.ConflictExceptionMapper;
-import ateam.exceptionmapper.UnauthorizedExceptionMapper;
-import ateam.exceptionmapper.UserServiceExceptionMapper;
-import ateam.exceptionmapper.ValidatorExceptionMapper;
+import ateam.client.mapper.ConflictExceptionResponseMapper;
+import ateam.client.mapper.UnauthorizedExceptionResponseMapper;
+import ateam.client.mapper.UserServiceExceptionResponseMapper;
+import ateam.client.mapper.ValidatorExceptionResponseMapper;
 import ateam.model.entity.User;
 import ateam.model.exception.ConflictException;
 import ateam.model.exception.UnauthorizedException;
@@ -21,10 +21,10 @@ import java.util.UUID;
 @Path("/user")
 @Consumes("application/json")
 @RegisterRestClient
-@RegisterProvider(UnauthorizedExceptionMapper.class)
-@RegisterProvider(ConflictExceptionMapper.class)
-@RegisterProvider(ValidatorExceptionMapper.class)
-@RegisterProvider(UserServiceExceptionMapper.class)
+@RegisterProvider(UnauthorizedExceptionResponseMapper.class)
+@RegisterProvider(ConflictExceptionResponseMapper.class)
+@RegisterProvider(ValidatorExceptionResponseMapper.class)
+@RegisterProvider(UserServiceExceptionResponseMapper.class)
 public interface UserClient {
 
 	@POST
