@@ -1,6 +1,5 @@
 package ateam.client.user;
 
-import ateam.client.mapper.ConflictExceptionResponseMapper;
 import ateam.client.mapper.UnauthorizedExceptionResponseMapper;
 import ateam.exceptionmapper.UserServiceExceptionMapper;
 import ateam.exceptionmapper.ValidatorExceptionMapper;

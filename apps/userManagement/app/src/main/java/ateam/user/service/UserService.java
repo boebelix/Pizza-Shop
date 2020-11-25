@@ -1,7 +1,7 @@
 package ateam.user.service;
 
-import ateam.user.db.UserDatabase;
 import ateam.model.entity.User;
+import ateam.user.db.UserDatabase;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
