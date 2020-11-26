@@ -12,10 +12,7 @@ import ateam.validator.ValidationException;
 import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import java.util.UUID;
 
 @Path("/user")
@@ -31,6 +28,6 @@ public interface UserClient {
 	User createUser(User user) throws ConflictException, ValidationException, UserServiceException;
 
 	@GET
-	User getCurrentUser(UUID loginId) throws UnauthorizedException, UserServiceException;
+	User getCurrentUser(@HeaderParam("Authorization") UUID loginId) throws UnauthorizedException, UserServiceException;
 
 }
