@@ -1,13 +1,13 @@
-package ateam.user.exceptionmapper;
+package ateam.exceptionmapper;
 
 import ateam.model.exception.ExceptionResponse;
-import ateam.user.model.exception.UserServiceException;
+import ateam.model.exception.UserServiceException;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import java.util.Date;
 
-public class UserServiceExceptionMapper  implements ExceptionMapper<UserServiceException> {
+public class UserServiceExceptionMapper implements ExceptionMapper<UserServiceException> {
 	@Override
 	public Response toResponse(UserServiceException e) {
 		System.out.println("UserServiceException! Returning code 500. Message: " + e.getMessage());

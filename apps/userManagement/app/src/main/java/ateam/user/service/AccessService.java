@@ -1,8 +1,8 @@
 package ateam.user.service;
 
+import ateam.model.entity.User;
 import ateam.model.exception.UnauthorizedException;
 import ateam.model.request.LoginData;
-import ateam.model.entity.User;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
