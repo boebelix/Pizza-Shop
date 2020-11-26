@@ -2,12 +2,20 @@
 
 ## Building
 
+### Building Flutter
 ### Preparing your system
-Before you can build this project, you have to copy & paste the `local.properties.example` File, change it's name to
-`local.properties` and change the paths inside so that they fit your system. The `local.properties` file must never be
-checked in to version control.
+Before you can build this project, you have to copy & paste the `local.properties.example` File (in ./apps/mobileApp/android), change it's name to
+`local.properties` and change the following paths inside it so that they fit your system.
+```properties
+sdk.dir=<<path to android sdk>>
+flutter.sdk=<<path to flutter sdk (without /bin at the end)>>
+```
 
-Afterwards, you also have to make sure the environment variable `FLUTTER_ROOT` points to your flutter sdk.
+The `local.properties` file must never be checked in to version control. The example-File must always stay in the repository.
+
+#### Building APKs
+To build the APKs, navigate into `./apps/mobileApp/android` and run `./gradlew clean build` (on Linux) or `gradlew.bat clean build` (on Windows)
+
 
 ### Building everything
 #### Windows
