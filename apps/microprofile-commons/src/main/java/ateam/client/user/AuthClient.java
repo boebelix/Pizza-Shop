@@ -10,10 +10,7 @@ import ateam.model.response.LoginResponse;
 import ateam.validator.ValidationException;
 import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import java.util.UUID;
 
 @Path("/auth")
@@ -27,6 +24,6 @@ public interface AuthClient {
 	LoginResponse loginUser(LoginData loginData) throws ValidationException, UnauthorizedException, UserServiceException;
 
 	@DELETE
-	void logoutUser(UUID loginId);
+	void logoutUser(@HeaderParam("Authorization") UUID loginId);
 
 }
