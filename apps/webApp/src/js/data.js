@@ -4,7 +4,13 @@ const RESPONSE_INTERNAL_SERVER_ERROR = 500;
 
 const setUserData = (JSON) => {
 	USER_JSON = JSON;
+	console.log(USER_JSON);
 	document.getElementById("username_menu").innerHTML = USER_JSON.firstName;
+	document.getElementById("street_profile").value = USER_JSON.street;
+	document.getElementById("number_profile").value = USER_JSON.number;
+	document.getElementById("city_profile").value = USER_JSON.city;
+	document.getElementById("postalcode_profile").value = USER_JSON.postalCode;
+	document.getElementById("country_profile").value = USER_JSON.country;
 	setState("menu_state");
 }
 
