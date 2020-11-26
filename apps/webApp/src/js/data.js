@@ -4,7 +4,6 @@ const RESPONSE_INTERNAL_SERVER_ERROR = 500;
 
 const setUserData = (JSON) => {
 	USER_JSON = JSON;
-	console.log(USER_JSON);
 	document.getElementById("username_menu").innerHTML = USER_JSON.firstName;
 	document.getElementById("street_profile").value = USER_JSON.street;
 	document.getElementById("number_profile").value = USER_JSON.number;
