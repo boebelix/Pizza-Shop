@@ -41,6 +41,10 @@ const submitData = async () => {
 			document.getElementById("error_server").style.display = "none";
 			document.getElementById("error_server").innerHTML = "";
 			//Login here
+			setState("login_state");
+			document.getElementById("username_login").value = data.username;
+			document.getElementById("password_login").value = data.password;
+			document.getElementById("login_submit_button").click();
 		} else {
 			console.log(error.message);
 			document.getElementById("error_server").innerHTML = decode_utf(error.message);
@@ -55,9 +59,8 @@ const postData = async (url, data) => {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
-			// 'Content-Type': 'application/x-www-form-urlencoded',
 		},
-		body: JSON.stringify(data) // body data type must match "Content-Type" header
+		body: JSON.stringify(data)
 	});
 	if (response.status === RESPONSE_OK) {
 		error = { "message": "Successfully registered", "status": RESPONSE_OK };
