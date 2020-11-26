@@ -23,6 +23,6 @@ task buildImage(type: DockerBuildImage) {
 task createContainer(type: DockerCreateContainer) {
 	dependsOn buildImage
 	targetImageId buildImage.getImageId()
-	containerName = 'aTeamUserDB'
+	containerName = 'aTeamUserManagementDB'
 	hostConfig.portBindings = ['3306:3306']
 }
