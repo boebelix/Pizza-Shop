@@ -1,0 +1,12 @@
+apply plugin: 'java'
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+	implementation "org.eclipse.microprofile:microprofile:${micoprofileVersion}"
+	implementation "javax.json.bind:javax.json.bind-api:1.0"
+	implementation "org.eclipse:yasson:1.0.8"
+}

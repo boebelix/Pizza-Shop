@@ -1,11 +1,28 @@
 plugins {
-	id 'java'
+	id 'com.bmuschko.docker-remote-api' version '6.6.1'
 }
 
-repositories {
-	mavenCentral()
+
+import com.bmuschko.gradle.docker.tasks.container.*
+import com.bmuschko.gradle.docker.tasks.image.*
+
+task createDockerfile(type: Dockerfile) {
+	from 'mysql:8.0'
+	environmentVariable 'MYSQL_DATABASE', 'usermanagement'
+	environmentVariable 'MYSQL_ALLOW_EMPTY_PASSWORD', 'true'
+	copyFile './InitScripts/*', '/docker-entrypoint-initdb.d/'
 }
 
-test {
-	useJUnitPlatform()
+task buildImage(type: DockerBuildImage) {
+	dependsOn createDockerfile
+	inputDir = project.projectDir
+	dockerFile = createDockerfile.destFile
+	images.add('ateam/pizzashopdb:latest')
+}
+
+task createContainer(type: DockerCreateContainer) {
+	dependsOn buildImage
+	targetImageId buildImage.getImageId()
+	containerName = 'aTeamPizzaShopDB'
+	hostConfig.portBindings = ['3307:3306']
 }

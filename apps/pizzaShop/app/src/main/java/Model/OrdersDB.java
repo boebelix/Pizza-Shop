@@ -1,5 +1,7 @@
 package Model;
 
+import ateam.model.entity.Orders;
+
 import javax.persistence.EntityManager;
 import java.sql.*;
 
@@ -12,15 +14,15 @@ public class OrdersDB {
 		connection=con;
 	}
 
-	public int insertNewOrder(OrdersDTO ordersDTO)
+	public int insertNewOrder(Orders orders)
 	{
 		try (PreparedStatement statement=connection.prepareStatement("insert into orders (id, orderDate, OrderArrived, postalCode, street, houseNumber, city) VALUES (?,?,?,?,?,?)")){
-			statement.setDate(1,ordersDTO.getOrderDate());
-			statement.setDate(2,ordersDTO.getOrderArrived());
-			statement.setString(3,ordersDTO.getPLZ());
-			statement.setString(4,ordersDTO.getStreet());
-			statement.setString(5,ordersDTO.getHouseNumber());
-			statement.setString(6,ordersDTO.getCity());
+			statement.setDate(1, orders.getOrderDate());
+			statement.setDate(2, orders.getOrderArrived());
+			statement.setString(3, orders.getPLZ());
+			statement.setString(4, orders.getStreet());
+			statement.setString(5, orders.getHouseNumber());
+			statement.setString(6, orders.getCity());
 			statement.executeUpdate();
 
 			//returns OrderID
@@ -32,7 +34,7 @@ public class OrdersDB {
 		return -1;
 	}
 
-	public OrdersDTO getOrderById(int Id)
+	public Orders getOrderById(int Id)
 	{
 
 		try {
@@ -42,7 +44,7 @@ public class OrdersDB {
 
 			ResultSet rs = stmt.executeQuery(Querry);
 
-			return new OrdersDTO(rs.getInt(1),
+			return new Orders(rs.getInt(1),
 				rs.getDate(2),
 				rs.getDate(3),
 				rs.getString(4),

@@ -1,0 +1,51 @@
+version: '3.0'
+
+services:
+    service-user:
+        container_name: aTeamUserManagement
+        image: ateam/usermanagement:latest
+        ports:
+            - 9080:9080
+            - 9443:9443
+        depends_on:
+            -   db-user
+        environment:
+            - DB_NAME=usermanagement
+            - DB_HOST=db-user
+            - DB_PORT=3306
+            - DB_USER=root
+            - DB_PW=
+            - SERVICE_PASSWORD=ferwfrwe435gsd
+    db-user:
+        container_name: aTeamUserManagementDB
+        image: ateam/userdb:latest
+        volumes:
+            -   type: volume
+                source: usermanagement-db-data
+                target: /var/lib/mysql
+                volume:
+                    nocopy: true
+        ports:
+            -   3306:3306
+        environment:
+            - MYSQL_DATABASE=usermanagement
+            - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    db-pizza:
+        container_name: aTeamPizzaShopDB
+        image: ateam/pizzashopdb:latest
+        volumes:
+            -   type: volume
+                source: pizzashop-db-data
+                target: /var/lib/mysql
+                volume:
+                    nocopy: true
+        ports:
+            -   3307:3306
+        environment:
+            - MYSQL_DATABASE=pizzashop
+            - MYSQL_ALLOW_EMPTY_PASSWORD=true
+
+
+volumes:
+    usermanagement-db-data:
+    pizzashop-db-data:

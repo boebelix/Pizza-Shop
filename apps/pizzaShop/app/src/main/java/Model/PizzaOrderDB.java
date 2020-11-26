@@ -1,4 +1,6 @@
 package Model;
+import ateam.model.entity.PizzaOrder;
+
 import java.sql.*;
 
 public class PizzaOrderDB {
@@ -8,7 +10,7 @@ public class PizzaOrderDB {
 		connection=con;
 	}
 
-	public void createEntry(PizzaOrderDTO DTO)
+	public void createEntry(PizzaOrder DTO)
 	{
 
 		try (PreparedStatement statement=connection.prepareStatement("insert into pizza_order (pizzaID, orderId) VALUES (?,??,?,?)")){
@@ -21,7 +23,7 @@ public class PizzaOrderDB {
 		}
 	}
 
-	public PizzaOrderDTO getOrderByPizzaId(int Id)
+	public PizzaOrder getOrderByPizzaId(int Id)
 	{
 		try {
 			Statement stmt = connection.createStatement();
@@ -30,7 +32,7 @@ public class PizzaOrderDB {
 
 			ResultSet rs = stmt.executeQuery(Querry);
 
-			return new PizzaOrderDTO(rs.getInt(1),
+			return new PizzaOrder(rs.getInt(1),
 				rs.getInt(2));
 		}
 		catch(SQLException e)

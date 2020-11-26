@@ -1,5 +1,9 @@
 package Model;
 
+import ateam.model.entity.Orders;
+import ateam.model.entity.PizzaOrder;
+import ateam.model.entity.Pizzas;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -39,15 +43,15 @@ public class DBManager {
 		int sizeID,
 		int amount, int toppingsID)
 	{
-		OrdersDTO ordersDTO=new OrdersDTO(orderDate,orderArrived,PLZ,street,houseNumber,city);
-		int orderID=orders.insertNewOrder(ordersDTO);
+		Orders orders =new Orders(orderDate,orderArrived,PLZ,street,houseNumber,city);
+		int orderID= this.orders.insertNewOrder(orders);
 
-		int pizzaID=pizzas.createPizzaEntry(new PizzasDTO(sizeID));
+		int pizzaID=pizzas.createPizzaEntry(new Pizzas(sizeID));
 
-		PizzaOrderDTO pizzaOrderDTO=new PizzaOrderDTO(orderID,pizzaID);
+		PizzaOrder pizzaOrderDTO=new PizzaOrder(orderID,pizzaID);
 		pizzaOrder.createEntry(pizzaOrderDTO);
 
-		pizzaTopping.createPizzaToppingsEntry(new PizzaToppingDTO(pizzaID,orderID,amount));
+		pizzaTopping.createPizzaToppingsEntry(new PizzaOrder.PizzaTopping(pizzaID,orderID,amount));
 
 
 		return orderID;
@@ -57,11 +61,11 @@ public class DBManager {
 											   int sizeID,
 											   int amount, int toppingsID)
 	{
-		int pizzaID=pizzas.createPizzaEntry(new PizzasDTO(sizeID));
+		int pizzaID=pizzas.createPizzaEntry(new Pizzas(sizeID));
 
-		PizzaOrderDTO pizzaOrderDTO=new PizzaOrderDTO(orderID,pizzaID);
+		PizzaOrder pizzaOrderDTO=new PizzaOrder(orderID,pizzaID);
 		pizzaOrder.createEntry(pizzaOrderDTO);
 
-		pizzaTopping.createPizzaToppingsEntry(new PizzaToppingDTO(pizzaID,orderID,amount));
+		pizzaTopping.createPizzaToppingsEntry(new PizzaOrder.PizzaTopping(pizzaID,orderID,amount));
 	}
 }

@@ -1,22 +1,15 @@
 plugins {
-	id 'java'
+	id 'idea'
 }
 
 repositories {
     mavenCentral()
 }
 
-allprojects {
-    apply plugin: 'base'
-    apply plugin: 'java'
-    apply plugin: 'idea'
+allprojects { subProject ->
+	apply plugin: 'base'
 
-    repositories {
-        mavenCentral()
-    }
-
-    java {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
+	repositories {
+		mavenCentral()
+	}
 }

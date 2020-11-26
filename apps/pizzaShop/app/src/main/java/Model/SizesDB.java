@@ -1,5 +1,7 @@
 package Model;
 
+import ateam.model.entity.Sizes;
+
 import java.sql.*;
 
 public class SizesDB {
@@ -10,7 +12,7 @@ public class SizesDB {
 		connection=con;
 	}
 
-	public void createOrderEntry(SizesDTO DTO)
+	public void createOrderEntry(Sizes DTO)
 	{
 		try (PreparedStatement statement=connection.prepareStatement("insert into sizes ( radius, base_price, topping_price) VALUES (?,?,?)")){
 			statement.setInt(1,DTO.getRadius());
@@ -24,7 +26,7 @@ public class SizesDB {
 
 	}
 
-	public SizesDTO getSizesById(int Id)
+	public Sizes getSizesById(int Id)
 	{
 		try {
 			Statement stmt = connection.createStatement();
@@ -33,7 +35,7 @@ public class SizesDB {
 
 			ResultSet rs = stmt.executeQuery(Querry);
 
-			return new SizesDTO(rs.getInt(1),
+			return new Sizes(rs.getInt(1),
 				rs.getInt(2),
 				rs.getFloat(3),
 				rs.getFloat(4));

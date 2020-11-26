@@ -3,6 +3,7 @@
 
     <featureManager>
         <feature>microProfile-3.3</feature>
+		<feature>jdbc-4.2</feature>
     </featureManager>
 
     <httpEndpoint id="defaultHttpEndpoint"
@@ -20,5 +21,16 @@
 
     <!-- The MP JWT configuration that injects the caller's JWT into a ResourceScoped bean for inspection. -->
     <mpJwt id="jwtUserConsumer" keyName="theKeyId" audiences="targetService" issuer="team-a"/>
+
+	<dataSource id="DefaultDataSource" jndiName="jdbc/mySQL">
+		<jdbcDriver libraryRef="MySQLLib" />
+		<properties databaseName="usermanagement" serverName="localhost"
+					portNumber="3306" user="root" />
+	</dataSource>
+	<library id="MySQLLib">
+		<file name="${server.config.dir}/mysql-connector-java-8.0.18.jar" />
+	</library>
+
+	<jndiEntry id="appServicePassword" jndiName="appServicePassword" value="ferEG42gs4tgdsGFDS" />
 
 </server>

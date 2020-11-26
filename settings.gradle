@@ -9,7 +9,7 @@
 
 rootProject.name = 'Hettel-Teamprojekt-TeamA'
 
-include(':apps:flutter')
+include(':apps:mobileApp')
 include(':apps:logisticsService')
 include(':apps:pizzaProduction')
 include(':apps:pizzaShop:app')
@@ -19,3 +19,4 @@ include(':apps:userManagement:app')
 include(':apps:userManagement:db')
 include(':apps:webApp')
 include(':apps:microprofile-commons')
+
