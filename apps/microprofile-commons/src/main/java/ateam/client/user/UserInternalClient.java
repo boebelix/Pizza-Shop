@@ -8,11 +8,13 @@ import ateam.model.exception.UnauthorizedException;
 import ateam.model.exception.UnknownEntityException;
 import ateam.model.exception.UserServiceException;
 import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
+import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import javax.ws.rs.*;
 
 @Path("/user_intern")
 @Consumes("application/json")
+@RegisterRestClient()
 @RegisterProvider(UnauthorizedExceptionResponseMapper.class)
 @RegisterProvider(UserServiceExceptionResponseMapper.class)
 @RegisterProvider(UnknownEntityExceptionResponseMapper.class)
