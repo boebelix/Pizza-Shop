@@ -18,6 +18,7 @@ public class Toppings {
 		this.id = id;
 		Name = name;
 	}
+
 	public Toppings(String name) {
 		Name = name;
 	}

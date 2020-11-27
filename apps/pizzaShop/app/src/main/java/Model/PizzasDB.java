@@ -16,14 +16,14 @@ public class PizzasDB {
 		/*EntityManagerFactory emf = Persistence
 			.createEntityManagerFactory("Bestellungsdatenbank");
 		em = emf.createEntityManager();*/
-		connection=con;
+		connection = con;
 	}
 
 	public int createPizzaEntry(Pizzas DTO) throws SQLException {
 
-		PreparedStatement statement=connection.prepareStatement("insert into pizzas ( order_id,size_id) VALUES (?,?)");
-		statement.setInt(1,DTO.getOrderId());
-		statement.setInt(2,DTO.getSizeId());
+		PreparedStatement statement = connection.prepareStatement("insert into pizzas ( order_id,size_id) VALUES (?,?)");
+		statement.setInt(1, DTO.getOrderId());
+		statement.setInt(2, DTO.getSizeId());
 		statement.executeUpdate();
 
 		return statement.getGeneratedKeys().getInt(1);
@@ -32,14 +32,13 @@ public class PizzasDB {
 	public List<Pizzas> getPizzaByOrderId(int orderId) throws SQLException {
 		Statement stmt = connection.createStatement();
 
-		String Querry = "select * from pizzas where order_id equals "+orderId;
+		String Querry = "select * from pizzas where order_id equals " + orderId;
 
 		ResultSet rs = stmt.executeQuery(Querry);
 
-		List<Pizzas> pizzen=new LinkedList<>();
+		List<Pizzas> pizzen = new LinkedList<>();
 
-		while(rs.next())
-		{
+		while (rs.next()) {
 			pizzen.add(new Pizzas(rs.getInt("id"),
 				rs.getInt("size_id"),
 				rs.getInt("order_id")));
@@ -52,7 +51,7 @@ public class PizzasDB {
 
 		Statement stmt = connection.createStatement();
 
-		String Querry = "select * from pizzas where size_id equals "+Id;
+		String Querry = "select * from pizzas where size_id equals " + Id;
 
 		ResultSet rs = stmt.executeQuery(Querry);
 

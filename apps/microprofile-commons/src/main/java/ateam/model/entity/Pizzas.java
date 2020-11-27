@@ -7,26 +7,27 @@ import java.util.List;
 
 public class Pizzas {
 
-	private int iD;
-
-	@Validator.Required
-	private int sizeId;
-
 	@Validator.Required
 	List<Toppings> toppings;
-
+	private int iD;
+	@Validator.Required
+	private int sizeId;
 	@Validator.Required
 	private int orderId;
 
 	public Pizzas() {
-		toppings=new LinkedList<Toppings>();
+		toppings = new LinkedList<Toppings>();
 	}
 
-	public Pizzas(int iD, int sizeId,int orderId) {
+	public Pizzas(int iD, int sizeId, int orderId) {
 		this.iD = iD;
 		this.sizeId = sizeId;
-		this.orderId=orderId;
-		toppings=new LinkedList<Toppings>();
+		this.orderId = orderId;
+		toppings = new LinkedList<Toppings>();
+	}
+
+	public Pizzas(int sizeId) {
+		this.sizeId = sizeId;
 	}
 
 	public int getOrderId() {
@@ -35,10 +36,6 @@ public class Pizzas {
 
 	public void setOrderId(int orderId) {
 		this.orderId = orderId;
-	}
-
-	public Pizzas(int sizeId) {
-		this.sizeId = sizeId;
 	}
 
 	public int getID() {
@@ -53,6 +50,10 @@ public class Pizzas {
 		return sizeId;
 	}
 
+	public void setSizeId(int sizeId) {
+		this.sizeId = sizeId;
+	}
+
 	public List<Toppings> getToppings() {
 		return toppings;
 	}
@@ -61,12 +62,7 @@ public class Pizzas {
 		this.toppings = toppings;
 	}
 
-	public void setSizeId(int sizeId) {
-		this.sizeId = sizeId;
-	}
-
-	public void addTopping(Toppings topping)
-	{
+	public void addTopping(Toppings topping) {
 		toppings.add(topping);
 	}
 }

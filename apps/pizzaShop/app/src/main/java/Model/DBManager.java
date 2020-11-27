@@ -23,31 +23,29 @@ public class DBManager {
 	ToppingsDB toppings;
 
 	public DBManager() {
-		DBConnector connector=new DBConnector();
+		DBConnector connector = new DBConnector();
 		try {
 			connection = connector.getConnection();
-		}catch(SQLException e)
-		{
+		} catch (SQLException e) {
 			System.out.println("Unable to connect to database");
 		}
-		pizzaTopping=new PizzaToppingDB(connection);
+		pizzaTopping = new PizzaToppingDB(connection);
 
-		orders=new OrdersDB(connection);
+		orders = new OrdersDB(connection);
 
-		pizzas=new PizzasDB(connection);
+		pizzas = new PizzasDB(connection);
 
-		sizes=new SizesDB(connection);
+		sizes = new SizesDB(connection);
 
-		toppings=new ToppingsDB(connection);
+		toppings = new ToppingsDB(connection);
 	}
 
 
 	/*
-	*Nimmt Order Objekt und fügt was noch nicht vorhanden ist in Datenbank ein
-	*/
+	 *Nimmt Order Objekt und fügt was noch nicht vorhanden ist in Datenbank ein
+	 */
 
-	public void placeOrder(Orders order)
-	{
+	public void placeOrder(Orders order) {
 		try {
 			int orderID = this.orders.insertNewOrder(order);
 
@@ -58,19 +56,19 @@ public class DBManager {
 				for (Toppings t : pizza.getToppings())
 					pizzaTopping.createPizzaToppingEntry(new PizzaTopping(pizzaID, t.getId(), 1));//1 ist ein Dummy Value, ich sah in der API nicht, dass die Menge übertragen wird
 			}
-		}catch (SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new UserServiceException("Couldn't add Pizza to ExistingOrder", e);
 		}
 	}
 
-	public Orders createOrderObjectFromDB(int OrderId){
+	public Orders createOrderObjectFromDB(int OrderId) {
 
 		try {
 			Orders order = orders.getOrderById(OrderId);
 
 
-			for (Pizzas pizza:pizzas.getPizzaByOrderId(order.getId())) {
+			for (Pizzas pizza : pizzas.getPizzaByOrderId(order.getId())) {
 
 				List<PizzaTopping> pizzaToppings = pizzaTopping.getPizzaToppingByPizzaId(pizza.getID());
 
@@ -82,7 +80,7 @@ public class DBManager {
 			}
 
 			return order;
-		}catch (SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new UserServiceException("Couldn't fetch Order from Database", e);
 		}
