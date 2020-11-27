@@ -16,7 +16,7 @@ public class OrdersDB {
 
 	public int insertNewOrder(Orders orders)
 	{
-		try (PreparedStatement statement=connection.prepareStatement("insert into orders (id, order_date, order_sent, postal_code, street, number, city) VALUES (?,?,?,?,?,?)")){
+		try (PreparedStatement statement=connection.prepareStatement("insert into orders (id, order_date, order_sent, postal_code, street, hnumber, city) VALUES (?,?,?,?,?,?)")){
 			statement.setDate(1, orders.getOrderDate());
 			statement.setDate(2, orders.getOrderArrived());
 			statement.setString(3, orders.getPLZ());

@@ -19,13 +19,13 @@ public class PizzasDB {
 
 	public int createPizzaEntry(Pizzas DTO)
 	{
-		try (PreparedStatement statement=connection.prepareStatement("select pizzaID from pizzas where  size_id=?")){
+		try (PreparedStatement statement=connection.prepareStatement("select id from pizzas where  size_id=?")){
 			statement.setInt(1,DTO.getSizeId());
 
 			ResultSet r=statement.executeQuery();
 
-			while(r.next())
-				return r.getInt(1);
+			if(r.next())
+				return r.getInt("id");
 
 		}catch(SQLException e)
 		{
@@ -50,7 +50,7 @@ public class PizzasDB {
 		try {
 			Statement stmt = connection.createStatement();
 
-			String Querry = "select * from pizzas where pizzaID equals "+Id;
+			String Querry = "select * from pizzas where id equals "+Id;
 
 			ResultSet rs = stmt.executeQuery(Querry);
 

@@ -62,9 +62,9 @@ public class DBManager {
 		int pizzaID=pizzas.createPizzaEntry(new Pizzas(sizeID));
 
 		PizzaOrder pizzaOrderDTO=new PizzaOrder(orderID,pizzaID);
-		pizzaOrder.createEntry(pizzaOrderDTO);
+		int pizzaOrderId=pizzaOrder.createEntry(pizzaOrderDTO);
 
-		pizzaTopping.createPizzaToppingsEntry(new PizzaOrderTopping(pizzaID,orderID,amount));
+		pizzaTopping.createPizzaToppingsEntry(new PizzaOrderTopping(pizzaOrderId,orderID,amount));
 	}
 	public void placeOrder(Orders order)
 	{
@@ -75,9 +75,10 @@ public class DBManager {
 			int pizzaID = pizzas.createPizzaEntry(pizza);
 
 			PizzaOrder pizzaOrderDTO=new PizzaOrder(orderID,pizzaID);
-			pizzaOrder.createEntry(pizzaOrderDTO);
+			int pizzaOrderId=pizzaOrder.createEntry(pizzaOrderDTO);
 
-			pizzaTopping.createPizzaToppingsEntry(new PizzaOrderTopping(pizzaID,orderID,1));
+			for(Toppings t:pizza.getToppings())
+				pizzaTopping.createPizzaToppingsEntry(new PizzaOrderTopping(pizzaOrderId,t.getId(),1));//1 ist ein Dummy Value, ich sah in der API nicht, dass die Menge übertragen wird
 		}
 
 	}

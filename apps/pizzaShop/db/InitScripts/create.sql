@@ -5,7 +5,7 @@ CREATE TABLE `orders`
     `order_sent`  datetime,
     `postal_code` varchar(16),
     `street`      varchar(255),
-    `number`      varchar(255),
+    `hnumber`      varchar(255),
     `city`        varchar(255),
     `country`     varchar(255)
 );

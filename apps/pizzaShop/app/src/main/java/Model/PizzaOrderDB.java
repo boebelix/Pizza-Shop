@@ -13,18 +13,24 @@ public class PizzaOrderDB {
 		connection=con;
 	}
 
-	public void createEntry(PizzaOrder DTO)
+	public int createEntry(PizzaOrder DTO)
 	{
 
-		try (PreparedStatement statement=connection.prepareStatement("insert into pizza_order (order_id, pizza_id) VALUES (?,?,?,?)")){
+		try (PreparedStatement statement=connection.prepareStatement("insert into pizza_order (order_id, pizza_id) VALUES (?,?,)")){
 			statement.setInt(1,DTO.getOrderId());
 			statement.setInt(2,DTO.getPizzaID());
 			ResultSet rs=statement.executeQuery();
-			rs.next();
+
+			statement.executeUpdate();
+
+			//returns OrderID
+			return statement.getGeneratedKeys().getInt(1);
+
 		}catch(SQLException e)
 		{
 			System.out.println("Unable to execute Satement:"+e.getCause());
 		}
+		return 0;
 	}
 
 	public List<Integer> getPizzasByOrderId(int Id)
