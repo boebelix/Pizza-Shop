@@ -31,7 +31,7 @@ public class SizesDB {
 		try {
 			Statement stmt = connection.createStatement();
 
-			String Querry = "select * from sizes where id equals "+Id;
+			String Querry = "select * from sizes where id = "+Id;
 
 			ResultSet rs = stmt.executeQuery(Querry);
 

@@ -1,9 +1,10 @@
 package Model;
 
-import ateam.model.entity.PizzaOrder;
-import ateam.model.entity.Pizzas;
+import ateam.model.entity.PizzaTopping;
 
 import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class PizzaToppingDB {
 
@@ -13,9 +14,22 @@ public class PizzaToppingDB {
 		connection=con;
 	}
 
-	public void createPizzaToppingsEntry(PizzaOrder.PizzaTopping DTO)
+	public void createPizzaToppingsEntry(PizzaTopping DTO)
 	{
-		try (PreparedStatement statement=connection.prepareStatement("insert into pizza_toppimg (pizza_id, topping_id, amount) VALUES (?,?,?)")){
+		try (PreparedStatement statement=connection.prepareStatement("select pizza_id,topping_id from pizza_topping where pizza_id=? and topping_id=?")){
+			statement.setInt(1,DTO.getPizzaId());
+			statement.setInt(2,DTO.getToppingId());
+
+			ResultSet r =statement.executeQuery();
+
+			if(r.next())
+				return;
+
+		}catch(SQLException e)
+		{
+			System.out.println("Unable to execute Satement:"+e.getCause());
+		}
+		try (PreparedStatement statement=connection.prepareStatement("insert into pizza_topping (pizza_id, topping_id, amount) VALUES (?,?,?)")){
 			statement.setInt(1,DTO.getPizzaId());
 			statement.setInt(2,DTO.getToppingId());
 			statement.setInt(2,DTO.getAmount());
@@ -26,7 +40,7 @@ public class PizzaToppingDB {
 		}
 	}
 
-	public PizzaOrder.PizzaTopping getPizzaToppingByPizzaId(int Id)
+	public List<PizzaTopping> getPizzaToppingByPizzaId(int Id)
 	{
 		try {
 			Statement stmt = connection.createStatement();
@@ -34,10 +48,17 @@ public class PizzaToppingDB {
 			String Querry = "select * from pizza_topping where pizza_id equals "+Id;
 
 			ResultSet rs = stmt.executeQuery(Querry);
+			List<PizzaTopping> ToppingList=new LinkedList<PizzaTopping>();
 
-			return new PizzaOrder.PizzaTopping(rs.getInt(1),
-				rs.getInt(2),
-				rs.getInt(3));
+			while(rs.next())
+			{
+				ToppingList.add(new PizzaTopping(rs.getInt(1),
+					rs.getInt(2),
+					rs.getInt(3)));
+			}
+
+			return ToppingList;
+
 		}
 		catch(SQLException e)
 		{
@@ -46,18 +67,23 @@ public class PizzaToppingDB {
 		}
 
 	}
-	public Pizzas getPizzaToppingByToppingId(int Id)
+	public List<Integer> getToppingByPizzaId(int Id)
 	{
 
 		try {
 			Statement stmt = connection.createStatement();
 
-			String Querry = "select * from pizzas where size_id equals "+Id;
+			String Querry = "select pizza_id from pizza_topping where size_id equals "+Id;
 
 			ResultSet rs = stmt.executeQuery(Querry);
+			List<Integer> ToppingList=new LinkedList<Integer>();
 
-			return new Pizzas(rs.getInt(1),
-				rs.getInt(2));
+			while(rs.next())
+			{
+				ToppingList.add(rs.getInt(1));
+			}
+
+			return ToppingList;
 		}
 		catch(SQLException e)
 		{

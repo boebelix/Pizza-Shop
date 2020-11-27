@@ -19,6 +19,19 @@ public class PizzasDB {
 
 	public int createPizzaEntry(Pizzas DTO)
 	{
+		try (PreparedStatement statement=connection.prepareStatement("select pizzaID from pizzas where  size_id=?")){
+			statement.setInt(1,DTO.getSizeId());
+
+			ResultSet r=statement.executeQuery();
+
+			while(r.next())
+				return r.getInt(1);
+
+		}catch(SQLException e)
+		{
+			System.out.println("Unable to execute Satement:"+e.getCause());
+		}
+
 		try (PreparedStatement statement=connection.prepareStatement("insert into pizzas ( size_id) VALUES (?)")){
 			statement.setInt(1,DTO.getSizeId());
 			statement.executeUpdate();

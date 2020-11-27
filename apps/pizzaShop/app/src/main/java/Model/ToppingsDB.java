@@ -22,7 +22,7 @@ public class ToppingsDB {
 		}
 	}
 
-	public Toppings getOrderById(int Id)
+	public Toppings getToppingById(int Id)
 	{
 		try {
 			Statement stmt = connection.createStatement();

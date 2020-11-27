@@ -5,6 +5,8 @@ package ateam.model.entity;
 import ateam.validator.Validator;
 
 import java.sql.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Orders {
 
@@ -34,9 +36,20 @@ public class Orders {
 	@Validator.Regex(regex = "^[A-Z]([^\\0-9\\§\\%\\&\\!\\?])+?[a-z]$", errorMessage = "Stadt muss mit einem Großbuchstaben anfangen und mit einem Kleinbuchstaben enden! Zahlen, so wie die Zeichen '§', '%', '&', '!' und '?' sind nicht erlaubt!")
 	private String City;
 
+	@Validator.Required
+	List<Pizzas> pizzas;
+
+	public List<Pizzas> getPizzas() {
+		return pizzas;
+	}
+
+	public void setPizzas(List<Pizzas> pizzas) {
+		this.pizzas = pizzas;
+	}
+
 	public Orders()
 	{
-
+		pizzas =new LinkedList<Pizzas>();
 	}
 
 	public Orders(int id, Date orderDate, Date orderArrived, String PLZ, String street, String houseNumber, String city) {
@@ -116,5 +129,13 @@ public class Orders {
 	public Date getOrderArrived() {
 		return OrderArrived;
 	}
+
+	//additional
+
+	public void addPizza(Pizzas pizza)
+	{
+		pizzas.add(pizza);
+	}
+
 }
 

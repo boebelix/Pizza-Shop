@@ -23,7 +23,7 @@
 	<dataSource id="DefaultDataSource" jndiName="jdbc/mySQL">
 		<jdbcDriver libraryRef="MySQLLib" />
 		<properties databaseName="bestelldatenbank" serverName="localhost"
-					portNumber="3307" user="root" />
+					portNumber="3306" user="root" />
 	</dataSource>
 	<library id="MySQLLib">
 		<file name="${server.config.dir}/mysql-connector-java-8.0.18.jar" />

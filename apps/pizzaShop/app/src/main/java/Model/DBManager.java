@@ -1,12 +1,10 @@
 package Model;
 
-import ateam.model.entity.Orders;
-import ateam.model.entity.PizzaOrder;
-import ateam.model.entity.Pizzas;
+import ateam.model.entity.*;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class DBManager {
 	Connection connection;
@@ -51,7 +49,7 @@ public class DBManager {
 		PizzaOrder pizzaOrderDTO=new PizzaOrder(orderID,pizzaID);
 		pizzaOrder.createEntry(pizzaOrderDTO);
 
-		pizzaTopping.createPizzaToppingsEntry(new PizzaOrder.PizzaTopping(pizzaID,orderID,amount));
+		pizzaTopping.createPizzaToppingsEntry(new PizzaTopping(pizzaID,orderID,amount));
 
 
 		return orderID;
@@ -66,6 +64,43 @@ public class DBManager {
 		PizzaOrder pizzaOrderDTO=new PizzaOrder(orderID,pizzaID);
 		pizzaOrder.createEntry(pizzaOrderDTO);
 
-		pizzaTopping.createPizzaToppingsEntry(new PizzaOrder.PizzaTopping(pizzaID,orderID,amount));
+		pizzaTopping.createPizzaToppingsEntry(new PizzaTopping(pizzaID,orderID,amount));
+	}
+	public void placeOrder(Orders order)
+	{
+		int orderID= this.orders.insertNewOrder(order);
+
+		for(Pizzas pizza :order.getPizzas()) {
+
+			int pizzaID = pizzas.createPizzaEntry(pizza);
+
+			PizzaOrder pizzaOrderDTO=new PizzaOrder(orderID,pizzaID);
+			pizzaOrder.createEntry(pizzaOrderDTO);
+
+			pizzaTopping.createPizzaToppingsEntry(new PizzaTopping(pizzaID,orderID,1));
+		}
+
+	}
+
+	public Orders createOrderObjectFromDB(int OrderId){
+
+		Orders order=orders.getOrderById(OrderId);
+
+		for(int id:pizzaOrder.getPizzasByOrderId(OrderId))
+		{
+			Pizzas pizza = pizzas.getPizzaById(id);
+
+			List<Toppings> toppingsList = new LinkedList<Toppings>();
+
+			for (int toppingId : pizzaTopping.getToppingByPizzaId(id))
+			{
+				pizza.addTopping(toppings.getToppingById(toppingId));
+			}
+
+			order.addPizza(pizza);
+		}
+
+		return order;
+
 	}
 }

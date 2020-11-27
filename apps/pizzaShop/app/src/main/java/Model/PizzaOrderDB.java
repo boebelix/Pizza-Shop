@@ -1,7 +1,10 @@
 package Model;
+
 import ateam.model.entity.PizzaOrder;
 
 import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class PizzaOrderDB {
 	Connection connection;
@@ -16,24 +19,31 @@ public class PizzaOrderDB {
 		try (PreparedStatement statement=connection.prepareStatement("insert into pizza_order (pizzaID, orderId) VALUES (?,??,?,?)")){
 			statement.setInt(1,DTO.getOrderId());
 			statement.setInt(2,DTO.getPizzaID());
-			statement.executeUpdate();
+			ResultSet rs=statement.executeQuery();
+			rs.next();
 		}catch(SQLException e)
 		{
 			System.out.println("Unable to execute Satement:"+e.getCause());
 		}
 	}
 
-	public PizzaOrder getOrderByPizzaId(int Id)
+	public List<Integer> getPizzasByOrderId(int Id)
 	{
 		try {
 			Statement stmt = connection.createStatement();
 
-			String Querry = "select * from pizzaOrder where pizzaID equals "+Id;
+			String Querry = "select pizzaID from pizzaOrder where orderID equals "+Id;
 
 			ResultSet rs = stmt.executeQuery(Querry);
 
-			return new PizzaOrder(rs.getInt(1),
-				rs.getInt(2));
+			List<Integer> pizzaOrderList=new LinkedList<Integer>();
+
+			while(rs.next())
+			{
+				pizzaOrderList.add(rs.getInt(1));
+			}
+
+			return pizzaOrderList;
 		}
 		catch(SQLException e)
 		{
