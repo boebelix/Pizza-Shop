@@ -44,43 +44,27 @@ public class PizzasDB {
 		return -1;
 	}
 
-	public Pizzas getPizzaById(int Id)
-	{
+	public Pizzas getPizzaById(int Id) throws SQLException {
+		Statement stmt = connection.createStatement();
 
-		try {
-			Statement stmt = connection.createStatement();
+		String Querry = "select * from pizzas where id equals "+Id;
 
-			String Querry = "select * from pizzas where id equals "+Id;
+		ResultSet rs = stmt.executeQuery(Querry);
 
-			ResultSet rs = stmt.executeQuery(Querry);
+		return new Pizzas(rs.getInt(1),
+			rs.getInt(2));
 
-			return new Pizzas(rs.getInt(1),
-				rs.getInt(2));
-		}
-		catch(SQLException e)
-		{
-			System.out.println("Unable to execute Satement:"+e.getCause());
-			return null;
-		}
 	}
 
-	public Pizzas getPizzaBySizeId(int Id)
-	{
+	public Pizzas getPizzaBySizeId(int Id) throws SQLException {
 
-		try {
-			Statement stmt = connection.createStatement();
+		Statement stmt = connection.createStatement();
 
-			String Querry = "select * from pizzas where size_id equals "+Id;
+		String Querry = "select * from pizzas where size_id equals "+Id;
 
-			ResultSet rs = stmt.executeQuery(Querry);
+		ResultSet rs = stmt.executeQuery(Querry);
 
-			return new Pizzas(rs.getInt(1),
+		return new Pizzas(rs.getInt(1),
 				rs.getInt(2));
-		}
-		catch(SQLException e)
-		{
-			System.out.println("Unable to execute Satement:"+e.getCause());
-			return null;
-		}
 	}
 }

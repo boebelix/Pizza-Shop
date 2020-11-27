@@ -12,23 +12,16 @@ public class SizesDB {
 		connection=con;
 	}
 
-	public void createOrderEntry(Sizes DTO)
-	{
-		try (PreparedStatement statement=connection.prepareStatement("insert into sizes ( radius, base_price, topping_price) VALUES (?,?,?)")){
-			statement.setInt(1,DTO.getRadius());
-			statement.setFloat(2,DTO.getBasePrice());
-			statement.setFloat(3,DTO.getTopping_price());
-			statement.executeUpdate();
-		}catch(SQLException e)
-		{
-			System.out.println("Unable to execute Satement:"+e.getCause());
-		}
-
+	public void createSizeEntry(Sizes DTO) throws SQLException {
+		PreparedStatement statement=connection.prepareStatement("insert into sizes ( radius, base_price, topping_price) VALUES (?,?,?)");
+		statement.setInt(1,DTO.getRadius());
+		statement.setFloat(2,DTO.getBasePrice());
+		statement.setFloat(3,DTO.getTopping_price());
+		statement.executeUpdate();
 	}
 
-	public Sizes getSizesById(int Id)
-	{
-		try {
+	public Sizes getSizesById(int Id) throws SQLException {
+
 			Statement stmt = connection.createStatement();
 
 			String Querry = "select * from sizes where id = "+Id;
@@ -39,12 +32,7 @@ public class SizesDB {
 				rs.getInt(2),
 				rs.getFloat(3),
 				rs.getFloat(4));
-		}
-		catch(SQLException e)
-		{
-			System.out.println("Unable to execute Satement:"+e.getCause());
-			return null;
-		}
+
 	}
 
 }
