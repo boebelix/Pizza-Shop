@@ -4,14 +4,18 @@ import ateam.model.entity.*;
 import ateam.model.exception.ShopException;
 import ateam.model.exception.UserServiceException;
 
+import javax.inject.Singleton;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+@Singleton
 public class DBManager {
+
 	Connection connection;
+
 	PizzaOrderDB pizzaOrder;
 	OrdersDB orders;
 	PizzasDB pizzas;
