@@ -1,12 +1,14 @@
 package Model;
 
-import ateam.model.entity.*;
+import ateam.model.entity.Orders;
+import ateam.model.entity.PizzaTopping;
+import ateam.model.entity.Pizzas;
+import ateam.model.entity.Toppings;
 import ateam.model.exception.UserServiceException;
 
 import javax.inject.Singleton;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.LinkedList;
 import java.util.List;
 
 @Singleton
@@ -14,10 +16,9 @@ public class DBManager {
 
 	Connection connection;
 
-	PizzaOrderDB pizzaOrder;
+	PizzaToppingDB pizzaTopping;
 	OrdersDB orders;
 	PizzasDB pizzas;
-	PizzaToppingOrderDB pizzaToppingOrder;
 	SizesDB sizes;
 	ToppingsDB toppings;
 
@@ -29,13 +30,11 @@ public class DBManager {
 		{
 			System.out.println("Unable to connect to database");
 		}
-		pizzaOrder=new PizzaOrderDB(connection);
+		pizzaTopping=new PizzaToppingDB(connection);
 
 		orders=new OrdersDB(connection);
 
 		pizzas=new PizzasDB(connection);
-
-		pizzaToppingOrder=new PizzaToppingOrderDB(connection);
 
 		sizes=new SizesDB(connection);
 
@@ -56,11 +55,8 @@ public class DBManager {
 
 				int pizzaID = pizzas.createPizzaEntry(pizza);
 
-				PizzaOrder pizzaOrderDTO = new PizzaOrder(orderID, pizzaID);
-				int pizzaOrderId = pizzaOrder.createEntry(pizzaOrderDTO);
-
 				for (Toppings t : pizza.getToppings())
-					pizzaToppingOrder.createPizzaToppingOrderEntry(new PizzaOrderTopping(pizzaOrderId, t.getId(), 1));//1 ist ein Dummy Value, ich sah in der API nicht, dass die Menge übertragen wird
+					pizzaTopping.createPizzaToppingEntry(new PizzaTopping(pizzaID, t.getId(), 1));//1 ist ein Dummy Value, ich sah in der API nicht, dass die Menge übertragen wird
 			}
 		}catch (SQLException e){
 			e.printStackTrace();
@@ -73,14 +69,12 @@ public class DBManager {
 		try {
 			Orders order = orders.getOrderById(OrderId);
 
-			for (int id : pizzaOrder.getPizzasByOrderId(OrderId)) {
-				Pizzas pizza = pizzas.getPizzaById(id);
 
-				List<Toppings> toppingsList = new LinkedList<Toppings>();
+			for (Pizzas pizza:pizzas.getPizzaByOrderId(order.getId())) {
 
-				List<PizzaOrderTopping> connectionList = pizzaToppingOrder.getPizzaToppingByPizzaOrderId(OrderId);
+				List<PizzaTopping> pizzaToppings = pizzaTopping.getPizzaToppingByPizzaId(pizza.getID());
 
-				for (PizzaOrderTopping toppingId : connectionList) {
+				for (PizzaTopping toppingId : pizzaToppings) {
 					pizza.addTopping(toppings.getToppingById(toppingId.getToppingId()));
 				}
 

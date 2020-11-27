@@ -5,7 +5,7 @@ import ateam.model.entity.Toppings;
 import java.sql.*;
 
 public class ToppingsDB {
-	private Connection connection;
+	private final Connection connection;
 
 	public ToppingsDB(Connection con) {
 		connection=con;

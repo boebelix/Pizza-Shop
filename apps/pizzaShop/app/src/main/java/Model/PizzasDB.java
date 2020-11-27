@@ -3,6 +3,8 @@ package Model;
 import ateam.model.entity.Pizzas;
 
 import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class PizzasDB {
@@ -17,43 +19,33 @@ public class PizzasDB {
 		connection=con;
 	}
 
-	public int createPizzaEntry(Pizzas DTO)
-	{
-		try (PreparedStatement statement=connection.prepareStatement("select id from pizzas where  size_id=?")){
-			statement.setInt(1,DTO.getSizeId());
+	public int createPizzaEntry(Pizzas DTO) throws SQLException {
 
-			ResultSet r=statement.executeQuery();
+		PreparedStatement statement=connection.prepareStatement("insert into pizzas ( order_id,size_id) VALUES (?,?)");
+		statement.setInt(1,DTO.getOrderId());
+		statement.setInt(2,DTO.getSizeId());
+		statement.executeUpdate();
 
-			if(r.next())
-				return r.getInt("id");
-
-		}catch(SQLException e)
-		{
-			System.out.println("Unable to execute Satement:"+e.getCause());
-		}
-
-		try (PreparedStatement statement=connection.prepareStatement("insert into pizzas ( size_id) VALUES (?)")){
-			statement.setInt(1,DTO.getSizeId());
-			statement.executeUpdate();
-			return statement.getGeneratedKeys().getInt(1);
-
-		}catch(SQLException e)
-		{
-			System.out.println("Unable to execute Satement:"+e.getCause());
-		}
-		return -1;
+		return statement.getGeneratedKeys().getInt(1);
 	}
 
-	public Pizzas getPizzaById(int Id) throws SQLException {
+	public List<Pizzas> getPizzaByOrderId(int orderId) throws SQLException {
 		Statement stmt = connection.createStatement();
 
-		String Querry = "select * from pizzas where id equals "+Id;
+		String Querry = "select * from pizzas where order_id equals "+orderId;
 
 		ResultSet rs = stmt.executeQuery(Querry);
 
-		return new Pizzas(rs.getInt(1),
-			rs.getInt(2));
+		List<Pizzas> pizzen=new LinkedList<>();
 
+		while(rs.next())
+		{
+			pizzen.add(new Pizzas(rs.getInt("id"),
+				rs.getInt("size_id"),
+				rs.getInt("order_id")));
+		}
+
+		return pizzen;
 	}
 
 	public Pizzas getPizzaBySizeId(int Id) throws SQLException {
@@ -64,7 +56,8 @@ public class PizzasDB {
 
 		ResultSet rs = stmt.executeQuery(Querry);
 
-		return new Pizzas(rs.getInt(1),
-				rs.getInt(2));
+		return new Pizzas(rs.getInt("id"),
+			rs.getInt("size_id"),
+			rs.getInt("order_id"));
 	}
 }

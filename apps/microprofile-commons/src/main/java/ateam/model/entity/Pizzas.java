@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Pizzas {
 
-	private int ID;
+	private int iD;
 
 	@Validator.Required
 	private int sizeId;
@@ -15,14 +15,26 @@ public class Pizzas {
 	@Validator.Required
 	List<Toppings> toppings;
 
+	@Validator.Required
+	private int orderId;
+
 	public Pizzas() {
 		toppings=new LinkedList<Toppings>();
 	}
 
-	public Pizzas(int ID, int sizeId) {
-		this.ID = ID;
+	public Pizzas(int iD, int sizeId,int orderId) {
+		this.iD = iD;
 		this.sizeId = sizeId;
+		this.orderId=orderId;
 		toppings=new LinkedList<Toppings>();
+	}
+
+	public int getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
 	}
 
 	public Pizzas(int sizeId) {
@@ -30,11 +42,11 @@ public class Pizzas {
 	}
 
 	public int getID() {
-		return ID;
+		return iD;
 	}
 
-	public void setID(int ID) {
-		this.ID = ID;
+	public void setID(int iD) {
+		this.iD = iD;
 	}
 
 	public int getSizeId() {

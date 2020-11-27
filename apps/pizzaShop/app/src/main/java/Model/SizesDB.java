@@ -6,7 +6,7 @@ import java.sql.*;
 
 public class SizesDB {
 
-	private Connection connection;
+	private final Connection connection;
 
 	public SizesDB(Connection con) {
 		connection=con;
