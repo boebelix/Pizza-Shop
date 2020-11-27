@@ -1,12 +1,10 @@
 package Model;
 
 import ateam.model.entity.*;
-import ateam.model.exception.ShopException;
 import ateam.model.exception.UserServiceException;
 
 import javax.inject.Singleton;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
@@ -44,48 +42,6 @@ public class DBManager {
 		toppings=new ToppingsDB(connection);
 	}
 
-	public int createNewOrder(
-		Date orderDate, Date orderArrived, String PLZ, String street, String houseNumber, String city,
-		int sizeID,
-		int amount, int toppingsID)
-	{
-		try {
-			Orders orders = new Orders(orderDate, orderArrived, PLZ, street, houseNumber, city);
-			int orderID = this.orders.insertNewOrder(orders);
-
-			int pizzaID = pizzas.createPizzaEntry(new Pizzas(sizeID));
-
-			PizzaOrder pizzaOrderDTO = new PizzaOrder(orderID, pizzaID);
-			int pizzaOrderId=pizzaOrder.createEntry(pizzaOrderDTO);
-
-			pizzaToppingOrder.createPizzaToppingOrderEntry(new PizzaOrderTopping(pizzaOrderId,toppingsID,amount));
-
-
-			return orderID;
-		}catch(SQLException e)
-		{
-			e.printStackTrace();
-			throw new ShopException("Error in ShopDatabase, couldn't create Order", e);
-		}
-	}
-
-	public void createNewPizzaForExistingOrder(int orderID,
-											   int sizeID,
-											   int amount, int toppingsID)
-	{
-		try {
-			int pizzaID = pizzas.createPizzaEntry(new Pizzas(sizeID));
-
-			PizzaOrder pizzaOrderDTO = new PizzaOrder(orderID, pizzaID);
-			int pizzaOrderId = pizzaOrder.createEntry(pizzaOrderDTO);
-
-			pizzaToppingOrder.createPizzaToppingOrderEntry(new PizzaOrderTopping(pizzaOrderId, toppingsID, amount));
-		}
-		catch (SQLException e){
-		e.printStackTrace();
-		throw new UserServiceException("Couldn't add Pizza to ExistingOrder", e);
-		}
-	}
 
 	/*
 	*Nimmt Order Objekt und fügt was noch nicht vorhanden ist in Datenbank ein
