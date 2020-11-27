@@ -30,16 +30,17 @@ CREATE TABLE `pizzas`
     `size_id` int
 );
 
-CREATE TABLE `pizza_topping`
+CREATE TABLE `pizza_order_topping`
 (
-    `pizza_id`   int,
-    `topping_id` int,
-    `amount`     int,
-    PRIMARY KEY (`pizza_id`, `topping_id`)
+    `pizza_order_id`    int
+    `topping_id`        int,
+    `amount`            int,
+    PRIMARY KEY (`pizza_order_id`, `topping_id`)
 );
 
 CREATE TABLE `pizza_order`
 (
+    `id`       int PRIMARY KEY AUTO_INCREMENT,
     `order_id` int,
     `pizza_id` int,
     PRIMARY KEY (`order_id`, `pizza_id`)
@@ -48,8 +49,8 @@ CREATE TABLE `pizza_order`
 ALTER TABLE `pizzas`
     ADD FOREIGN KEY (`size_id`) REFERENCES `sizes` (`id`);
 
-ALTER TABLE `pizza_topping`
-    ADD FOREIGN KEY (`pizza_id`) REFERENCES `pizzas` (`id`);
+ALTER TABLE `pizza_order_topping`
+    ADD FOREIGN KEY (`pizza_order_id`) REFERENCES `pizzas` (`id`);
 
 ALTER TABLE `pizza_topping`
     ADD FOREIGN KEY (`topping_id`) REFERENCES `toppings` (`id`);
