@@ -16,7 +16,7 @@ public class PizzaOrderDB {
 	public void createEntry(PizzaOrder DTO)
 	{
 
-		try (PreparedStatement statement=connection.prepareStatement("insert into pizza_order (pizzaID, orderId) VALUES (?,??,?,?)")){
+		try (PreparedStatement statement=connection.prepareStatement("insert into pizza_order (order_id, pizza_id) VALUES (?,?,?,?)")){
 			statement.setInt(1,DTO.getOrderId());
 			statement.setInt(2,DTO.getPizzaID());
 			ResultSet rs=statement.executeQuery();

@@ -2,10 +2,7 @@ package ateam.model.entity;
 
 import ateam.validator.Validator.Required;
 
-public class PizzaTopping {
-
-	@Required
-	private int PizzaId;
+public class PizzaOrderTopping {
 
 	@Required
 	private int ToppingId;
@@ -13,21 +10,24 @@ public class PizzaTopping {
 	@Required
 	private int Amount;
 
-	public PizzaTopping() {
+	@Required
+	private int PizzaOrderId;
+
+	public PizzaOrderTopping() {
 	}
 
-	public PizzaTopping(int pizzaId, int toppingId, int amount) {
-		PizzaId = pizzaId;
+	public PizzaOrderTopping(int PizzaOrderId, int toppingId, int amount) {
+		this.PizzaOrderId = PizzaOrderId;
 		ToppingId = toppingId;
 		Amount = amount;
 	}
 
-	public int getPizzaId() {
-		return PizzaId;
+	public int getPizzaOrderId() {
+		return PizzaOrderId;
 	}
 
-	public void setPizzaId(int pizzaId) {
-		PizzaId = pizzaId;
+	public void setPizzaId(int pizzaOrderId) {
+		PizzaOrderId = pizzaOrderId;
 	}
 
 	public int getToppingId() {

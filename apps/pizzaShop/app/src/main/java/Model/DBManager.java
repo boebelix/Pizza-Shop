@@ -11,7 +11,7 @@ public class DBManager {
 	PizzaOrderDB pizzaOrder;
 	OrdersDB orders;
 	PizzasDB pizzas;
-	PizzaToppingDB pizzaTopping;
+	PizzaToppingOrderDB pizzaTopping;
 	SizesDB sizes;
 	ToppingsDB toppings;
 
@@ -29,7 +29,7 @@ public class DBManager {
 
 		pizzas=new PizzasDB(connection);
 
-		pizzaTopping=new PizzaToppingDB(connection);
+		pizzaTopping=new PizzaToppingOrderDB(connection);
 
 		sizes=new SizesDB(connection);
 
@@ -49,7 +49,7 @@ public class DBManager {
 		PizzaOrder pizzaOrderDTO=new PizzaOrder(orderID,pizzaID);
 		pizzaOrder.createEntry(pizzaOrderDTO);
 
-		pizzaTopping.createPizzaToppingsEntry(new PizzaTopping(pizzaID,orderID,amount));
+		pizzaTopping.createPizzaToppingsEntry(new PizzaOrderTopping(pizzaID,orderID,amount));
 
 
 		return orderID;
@@ -64,7 +64,7 @@ public class DBManager {
 		PizzaOrder pizzaOrderDTO=new PizzaOrder(orderID,pizzaID);
 		pizzaOrder.createEntry(pizzaOrderDTO);
 
-		pizzaTopping.createPizzaToppingsEntry(new PizzaTopping(pizzaID,orderID,amount));
+		pizzaTopping.createPizzaToppingsEntry(new PizzaOrderTopping(pizzaID,orderID,amount));
 	}
 	public void placeOrder(Orders order)
 	{
@@ -77,7 +77,7 @@ public class DBManager {
 			PizzaOrder pizzaOrderDTO=new PizzaOrder(orderID,pizzaID);
 			pizzaOrder.createEntry(pizzaOrderDTO);
 
-			pizzaTopping.createPizzaToppingsEntry(new PizzaTopping(pizzaID,orderID,1));
+			pizzaTopping.createPizzaToppingsEntry(new PizzaOrderTopping(pizzaID,orderID,1));
 		}
 
 	}
@@ -92,9 +92,11 @@ public class DBManager {
 
 			List<Toppings> toppingsList = new LinkedList<Toppings>();
 
-			for (int toppingId : pizzaTopping.getToppingByPizzaId(id))
+			List<PizzaOrderTopping> connectionList= pizzaTopping.getPizzaToppingByPizzaOrderId(OrderId);
+
+			for (PizzaOrderTopping toppingId : connectionList)
 			{
-				pizza.addTopping(toppings.getToppingById(toppingId));
+				pizza.addTopping(toppings.getToppingById(toppingId.getToppingId()));
 			}
 
 			order.addPizza(pizza);
