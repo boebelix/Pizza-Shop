@@ -22,11 +22,17 @@ public class User {
 	private String lastName;
 
 	@Validator.Required(errorMessage = "Email benötigt!")
-	@Validator.Regex(regex = "^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$", errorMessage = "Gültige Email benötigt!")
+	@Validator.Regex(regex = "^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.," +
+		";:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])" +
+		"|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$", errorMessage = "Gültige Email benötigt!")
 	private String email;
 
 	@Validator.Required(errorMessage = "Passwort benötigt!")
-	@Validator.Min(value = 1, errorMessage = "Das Feld \"Passwort\" darf nicht leer sein!")
+	@Validator.Regex(regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])" +
+		"(?=.*[*.!@$%^&(){}\\[\\]:;<>,.?\\/~_+\\-=|\\\\]).{5,}$",
+		errorMessage = "Das Passwort muss aus mindestens einen Kleinbuchstaben, " +
+			"einen Großbuchstaben, einer Zahl und einem Sonderzeichen bestehen, " +
+			"sowie mindestens 5 Zeichen lang sein!")
 	private String password;
 
 	@Validator.Required(errorMessage = "Postleitzahl benötigt!")
