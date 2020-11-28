@@ -10,9 +10,15 @@ buildscript {
 		classpath "io.openliberty.tools:liberty-gradle-plugin:${libertyPluginVersion}"
 	}
 }
+apply plugin: 'java'
 apply plugin: 'liberty'
 apply plugin: 'war'
 
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
+}
 
 dependencies {
 	implementation project(path: ':apps:microprofile-commons')

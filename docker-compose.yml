@@ -1,11 +1,26 @@
 version: '3.0'
 
 services:
+    service-user:
+        container_name: aTeamUserManagement
+        image: ateam/usermanagement:latest
+        ports:
+            - 9080:9080
+            - 9443:9443
+        depends_on:
+            -   db-user
+        environment:
+            - DB_NAME=usermanagement
+            - DB_HOST=db-user
+            - DB_PORT=3306
+            - DB_USER=root
+            - DB_PW=
+            - SERVICE_PASSWORD=ferwfrwe435gsd
     db-user:
-        container_name: userManagementDB
+        container_name: aTeamUserManagementDB
         image: ateam/userdb:latest
         volumes:
-            -   type: "volume"
+            -   type: volume
                 source: usermanagement-db-data
                 target: /var/lib/mysql
                 volume:
@@ -16,12 +31,10 @@ services:
             - MYSQL_DATABASE=usermanagement
             - MYSQL_ALLOW_EMPTY_PASSWORD=true
     db-pizza:
-        container_name: pizzaShopDB
-        build:
-            context: ./apps/pizzaShop/db
-            dockerfile: Dockerfile
+        container_name: aTeamPizzaShopDB
+        image: ateam/pizzashopdb:latest
         volumes:
-            -   type: "volume"
+            -   type: volume
                 source: pizzashop-db-data
                 target: /var/lib/mysql
                 volume:
