@@ -5,6 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Field;
+import java.util.Collection;
 import java.util.HashSet;
 
 public class Validator {
@@ -87,21 +88,20 @@ public class Validator {
 	}
 
 	private static boolean checkIsSmallerThen(Object left, Object right) {
+		return getObjectLength(left) < getObjectLength(right);
+	}
+
+	private static long getObjectLength(Object object) {
 		final String isNumericRegex = "^\\d+$";
-		String leftString = String.valueOf(left);
-		String rightString = String.valueOf(right);
-		Long leftValue;
-		if(leftString.matches(isNumericRegex)) {
-			leftValue = Long.parseLong(leftString);
+		String stringValue = String.valueOf(object);
+		long numericValue;
+		if(object instanceof Collection) {
+			numericValue = ((Collection) object).size();
+		} else if(stringValue.matches(isNumericRegex)) {
+			numericValue = Long.parseLong(stringValue);
 		} else {
-			leftValue = (long) (leftString.length());
+			numericValue = stringValue.length();
 		}
-		Long rightValue;
-		if(rightString.matches(isNumericRegex)) {
-			rightValue = Long.parseLong(rightString);
-		} else {
-			rightValue = (long) (rightString.length());
-		}
-		return leftValue < rightValue;
+		return numericValue;
 	}
 }
