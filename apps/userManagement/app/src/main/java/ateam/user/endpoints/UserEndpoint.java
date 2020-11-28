@@ -37,10 +37,10 @@ public class UserEndpoint {
 	public Response getCurrentUser(@HeaderParam("Authorization") UUID loginId) throws UnauthorizedException {
 		Integer userId = accessService.getUserIdIfLoggedIn(loginId);
 		if(userId == null)
-			throw new UnauthorizedException("Not logged in!");
+			throw new UnauthorizedException("Nicht eingeloggt!");
 		User user = userService.loadUser(userId);
 		if(user == null)
-			throw new UnauthorizedException("Not logged in!");
+			throw new UnauthorizedException("Nicht eingeloggt!");
 		return Response.ok(user).build();
 
 	}

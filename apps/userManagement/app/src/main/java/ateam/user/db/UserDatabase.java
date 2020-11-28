@@ -19,10 +19,10 @@ public class UserDatabase {
 			try {
 				con.setAutoCommit(false);
 				if(loadUser(user.getUsername(), con) != null) {
-					throw new ConflictException("A user with this username already exists!");
+					throw new ConflictException("Es existiert bereits ein Nutzer mit diesem Nutzernamen!");
 				}
 				if(loadUserByMail(user.getEmail(), con) != null) {
-					throw new ConflictException("A user with this email already exists!");
+					throw new ConflictException("Es existiert bereits ein Nutzer mit dieser Email!");
 				}
 				User createdUser = createUser(user, con);
 				con.commit();

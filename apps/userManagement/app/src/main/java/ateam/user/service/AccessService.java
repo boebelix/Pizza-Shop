@@ -41,10 +41,10 @@ public class AccessService {
 	public UUID login(LoginData loginData) throws UnauthorizedException {
 		User user = userService.loadUser(loginData.getUsername());
 		if(user == null) {
-			throw new UnauthorizedException("User does not exist!");
+			throw new UnauthorizedException("Nutzer existiert nicht!");
 		}
 		if(!passwordService.checkPassword(loginData.getPassword(), user.getPassword())) {
-			throw new UnauthorizedException("Password invalid!");
+			throw new UnauthorizedException("Passwort falsch!");
 		}
 		return this.login(user.getUserId());
 	}
