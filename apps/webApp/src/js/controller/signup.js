@@ -4,7 +4,7 @@ const initSignup = () => {
     document.getElementById("password_signup").addEventListener("keyup", () => isPasswordValid());
     let canvas = document.querySelector("#pwdCanvas");
     let ctx = canvas.getContext("2d");
-    ctx.fillStyle = "#fff";
+    ctx.fillStyle = "#FFF";
     ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 }
 
@@ -15,44 +15,42 @@ const isPasswordValid = () => {
     let hasMinLen = passwd.length >= MIN_SIGNS;
     let hasUpperAndLowercase = passwd.toUpperCase() != passwd && passwd.toLowerCase() != passwd;
     let usesNumAndSpecial = /\d/.test(passwd) && format.test(passwd);
-    let hasMoreThanSeven = passwd.length > SAFE_SIGNS;
+	let hasMoreThanSeven = passwd.length > SAFE_SIGNS;
 
-    if(!hasMinLen) {
-        document.querySelector("#passwdMsg").innerHTML = "nicht sicher";
+	let barColorLeft = "#FFF";
+	let barColorRight = "#FFF";
+	let factor = 0;
+
+	if(passwd.length === 0) {
+		factor = 5 * CANVAS_FACTOR;
+	} else if(!hasMinLen) {
+		document.querySelector("#passwdMsg").innerHTML = "nicht sicher";
+		barColorLeft = "#F00";
+		factor = 1 * CANVAS_FACTOR;
     } else if(hasUpperAndLowercase && usesNumAndSpecial && hasMoreThanSeven){
-        document.querySelector("#passwdMsg").innerHTML = "sehr sicher";
+		document.querySelector("#passwdMsg").innerHTML = "sehr sicher";
+		barColorLeft = "#4D4";
+		factor = 5 * CANVAS_FACTOR;
     } else if(hasUpperAndLowercase && usesNumAndSpecial) {
-        document.querySelector("#passwdMsg").innerHTML = "sicher";
+		document.querySelector("#passwdMsg").innerHTML = "sicher";
+		barColorLeft = "#3B3";
+		factor = 4 * CANVAS_FACTOR;
     } else if(hasUpperAndLowercase) {
-        document.querySelector("#passwdMsg").innerHTML = "mittel sicher";
+		document.querySelector("#passwdMsg").innerHTML = "mittel sicher";
+		barColorLeft = "#DB0";
+		factor = 3 * CANVAS_FACTOR;
     } else {
-        document.querySelector("#passwdMsg").innerHTML = "akzeptabel";
-    }
-
-    let size = 0;
-    if (hasMinLen) {
-        size += 4;
-        if (hasUpperAndLowercase) {
-            size += 4;
-            if (usesNumAndSpecial) {
-                size += 4;
-                if(hasMoreThanSeven)
-                    size += 4;
-            }
-        }
+		document.querySelector("#passwdMsg").innerHTML = "akzeptabel";
+		barColorLeft = "#D50";
+		factor = 2 * CANVAS_FACTOR;
     }
 
     let c = document.querySelector("#pwdCanvas");
     let ctx = c.getContext("2d");
 
-    ctx.fillStyle = "#c92e6f";
-    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-
-    let barSize = size * 30;
-
-    let grd = ctx.createLinearGradient(0, 0, barSize, 0);
-    grd.addColorStop(0, "#2ec95a");
-    grd.addColorStop(1, "#c92e6f");
+    let grd = ctx.createLinearGradient(0, 0, CANVAS_WIDTH * factor, 0);
+    grd.addColorStop(0, barColorLeft);
+    grd.addColorStop(1, barColorRight);
 
     ctx.fillStyle = grd;
     ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);

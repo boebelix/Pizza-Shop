@@ -5,6 +5,7 @@ const MIN_SIGNS = 5;
 const SAFE_SIGNS = 7;
 const CANVAS_HEIGHT = 10;
 const CANVAS_WIDTH = 240;
+const CANVAS_FACTOR = 0.4;
 
 const setUserData = (JSON) => {
 	USER_JSON = JSON;
