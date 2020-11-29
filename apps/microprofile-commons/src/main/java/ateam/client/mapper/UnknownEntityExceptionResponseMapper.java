@@ -8,7 +8,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
 @Provider
-public class UnknownEntityExceptionMapper implements ResponseExceptionMapper<UnknownEntityException> {
+public class UnknownEntityExceptionResponseMapper implements ResponseExceptionMapper<UnknownEntityException> {
 
 	@Override
 	public boolean handles(int statusCode, MultivaluedMap<String, Object> headers) {

@@ -1,17 +1,15 @@
 buildscript {
-    ext.kotlin_version = '1.3.50'
     repositories {
         google()
         jcenter()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.android.tools.build:gradle:3.5.0'
     }
 }
 
-subprojects {
+allprojects {
     repositories {
         google()
         jcenter()
@@ -20,6 +18,12 @@ subprojects {
 
 rootProject.buildDir = '../build'
 subprojects {
-    project.buildDir = "${project(':apps:mobileApp').buildDir}/${project.name}"
-    project.evaluationDependsOn(':apps:mobileApp:android:app')
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }

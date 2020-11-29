@@ -1,25 +1,15 @@
 plugins {
-	id 'java'
+	id 'idea'
 }
-
 
 repositories {
     mavenCentral()
 }
 
 allprojects { subProject ->
-	if (!subProject.path.startsWith(':apps:mobileApp:android')) {
-		apply plugin: 'base'
-		apply plugin: 'idea'
-		apply plugin: 'java'
+	apply plugin: 'base'
 
-		repositories {
-			mavenCentral()
-		}
-
-		java {
-			sourceCompatibility = JavaVersion.VERSION_1_8
-			targetCompatibility = JavaVersion.VERSION_1_8
-		}
+	repositories {
+		mavenCentral()
 	}
 }
