@@ -30,7 +30,7 @@ const initStates = () => {
 const loadUserFromCookies = async() => {
     const UUID = getCookie("uuid");
     const output = await loadUser(UUID);
-    if (output.status == 200) {
+    if (output.status == RESPONSE_OK) {
         setUserData(output);
     }
 }
@@ -55,8 +55,8 @@ const loadUser = async(uuid) => {
         }
     });
     const status = output.status;
-    if (status == 500) {
-        return { "message": "Serverfehler", "status": 500 };
+    if (status == RESPONSE_INTERNAL_SERVER_ERROR) {
+        return { "message": "Serverfehler", "status": RESPONSE_INTERNAL_SERVER_ERROR };
     }
     let json = await output.json();
     json.status = status;
