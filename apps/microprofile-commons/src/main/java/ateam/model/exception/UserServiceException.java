@@ -1,4 +1,4 @@
-package ateam.user.model.exception;
+package ateam.model.exception;
 
 public class UserServiceException extends RuntimeException {
 
