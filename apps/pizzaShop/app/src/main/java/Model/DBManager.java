@@ -9,7 +9,6 @@ import ateam.model.exception.ShopException;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -17,34 +16,25 @@ import java.util.List;
 public class DBManager {
 
 	@Inject
-	DBConnector connector;
+	private DBConnector connector;
 
-	private Connection connection;
-
+	@Inject
 	private PizzaToppingDB pizzaTopping;
+
+	@Inject
 	private OrdersDB orders;
+
+	@Inject
 	private PizzasDB pizzas;
+
+	@Inject
 	private SizesDB sizes;
+
+	@Inject
 	private ToppingsDB toppings;
 
 	public DBManager() {
-
-		try {
-			connection = connector.getConnection();
-		} catch (SQLException e) {
-			System.out.println("Unable to connect to database");
-		}
-		pizzaTopping = new PizzaToppingDB(connection);
-
-		orders = new OrdersDB(connection);
-
-		pizzas = new PizzasDB(connection);
-
-		sizes = new SizesDB(connection);
-
-		toppings = new ToppingsDB(connection);
 	}
-
 
 	/*
 	 *Nimmt Order Objekt und fügt was noch nicht vorhanden ist in Datenbank ein

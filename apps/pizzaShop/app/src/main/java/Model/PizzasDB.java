@@ -1,58 +1,68 @@
 package Model;
 
+import ateam.DBConnection.DBConnector;
 import ateam.model.entity.Pizzas;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
-
+@Singleton
 public class PizzasDB {
 
-	Connection connection;
+	@Inject
+	private DBConnector connector;
 
-	public PizzasDB(Connection con) {
-		connection = con;
+	public PizzasDB() {
+
 	}
 
 	public int createPizzaEntry(Pizzas DTO) throws SQLException {
+		try(Connection connection=connector.getConnection()) {
+			PreparedStatement statement = connection.prepareStatement("insert into pizzas ( order_id,size_id) VALUES (?,?)");
+			statement.setInt(1, DTO.getOrderId());
+			statement.setInt(2, DTO.getSizeId());
+			statement.executeUpdate();
 
-		PreparedStatement statement = connection.prepareStatement("insert into pizzas ( order_id,size_id) VALUES (?,?)");
-		statement.setInt(1, DTO.getOrderId());
-		statement.setInt(2, DTO.getSizeId());
-		statement.executeUpdate();
-
-		return statement.getGeneratedKeys().getInt(1);
+			return statement.getGeneratedKeys().getInt(1);
+		}
 	}
 
 	public List<Pizzas> getPizzaByOrderId(int orderId) throws SQLException {
-		Statement stmt = connection.createStatement();
 
-		String Querry = "select * from pizzas where order_id equals " + orderId;
+		try(Connection connection=connector.getConnection()) {
+			Statement stmt = connection.createStatement();
 
-		ResultSet rs = stmt.executeQuery(Querry);
+			String Querry = "select * from pizzas where order_id equals " + orderId;
 
-		List<Pizzas> pizzen = new LinkedList<>();
+			ResultSet rs = stmt.executeQuery(Querry);
 
-		while (rs.next()) {
-			pizzen.add(new Pizzas(rs.getInt("id"),
-				rs.getInt("size_id"),
-				rs.getInt("order_id")));
+			List<Pizzas> pizzen = new LinkedList<>();
+
+			while (rs.next()) {
+				pizzen.add(new Pizzas(rs.getInt("id"),
+					rs.getInt("size_id"),
+					rs.getInt("order_id")));
+			}
+
+			return pizzen;
 		}
-
-		return pizzen;
 	}
 
 	public Pizzas getPizzaBySizeId(int Id) throws SQLException {
 
-		Statement stmt = connection.createStatement();
+		try(Connection connection=connector.getConnection()) {
+			Statement stmt = connection.createStatement();
 
-		String Querry = "select * from pizzas where size_id equals " + Id;
+			String Querry = "select * from pizzas where size_id equals " + Id;
 
-		ResultSet rs = stmt.executeQuery(Querry);
+			ResultSet rs = stmt.executeQuery(Querry);
 
-		return new Pizzas(rs.getInt("id"),
-			rs.getInt("size_id"),
-			rs.getInt("order_id"));
+			return new Pizzas(rs.getInt("id"),
+				rs.getInt("size_id"),
+				rs.getInt("order_id"));
+		}
 	}
 }
