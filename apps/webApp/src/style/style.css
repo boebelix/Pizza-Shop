@@ -144,7 +144,7 @@ body {
 }
 
 .button_div:hover {
-    color: yellowgreen;
+    color: rgb(49, 30, 0);
 }
 
 
@@ -235,7 +235,7 @@ body {
 }
 
 .box_3 {
-    background-color: rgba(255, 233, 106, 0.75);
+    background-color: rgba(219, 200, 90, 0.75);
 }
 
 .margin20px {
@@ -282,10 +282,25 @@ body {
     margin-left: 20px;
 }
 
-.fullscreen-bg__video {
+.foreground {
+	position: relative;
+	z-index:300000;
+  }
+
+#bgvid {
+	object-fit: cover;
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+#darkOverlay {
+    content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
     height: 100%;
+    width: 100%;
+	background: rgba(0,0,0,0.5);
+	z-index: 150;
 }
