@@ -8,6 +8,7 @@ import ateam.model.entity.LogisticsPostInput;
 import ateam.model.entity.User;
 import ateam.model.exception.UnauthorizedException;
 import ateam.util.LogService;
+import ateam.validator.ValidationException;
 import ateam.validator.Validator;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
@@ -33,7 +34,7 @@ public class LogisticsService {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createLogisticsLog(LogisticsPostInput input) throws IOException, URISyntaxException, UnauthorizedException, NamingException {
+	public Response createLogisticsLog(LogisticsPostInput input) throws IOException, URISyntaxException, UnauthorizedException, NamingException, ValidationException {
 		Validator.validate(input);
 		URI userURI = new URI(InitialContext.doLookup("UserInternURI"));
 		UserInternalClient userInternalClient = RestClientBuilder.newBuilder()
