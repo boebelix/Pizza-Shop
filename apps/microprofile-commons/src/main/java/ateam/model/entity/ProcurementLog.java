@@ -1,12 +1,15 @@
 package ateam.model.entity;
 
 
+import ateam.validator.Validator;
+
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
 public class ProcurementLog {
 	private String time;
+	@Validator.Valid
 	private List<ProcurementLogItem> items;
 
 	public ProcurementLog() {
