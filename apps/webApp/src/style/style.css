@@ -227,15 +227,15 @@ body {
 }
 
 .box_1 {
-    background-color: rgba(233, 167, 81, 0.75);
+    background-color: rgba(219, 200, 90, 0.85);
 }
 
 .box_2 {
-    background-color: rgba(189, 105, 49, 0.75);
+    background-color: rgba(189, 105, 49, 0.85);
 }
 
 .box_3 {
-    background-color: rgba(219, 200, 90, 0.75);
+    background-color:rgba(233, 167, 81, 0.85) ;
 }
 
 .margin20px {
