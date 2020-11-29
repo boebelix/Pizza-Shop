@@ -1,11 +1,13 @@
 package Model;
 
+import ateam.DBConnection.DBConnector;
 import ateam.model.entity.Orders;
 import ateam.model.entity.PizzaTopping;
 import ateam.model.entity.Pizzas;
 import ateam.model.entity.Toppings;
 import ateam.model.exception.ShopException;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -13,6 +15,9 @@ import java.util.List;
 
 @Singleton
 public class DBManager {
+
+	@Inject
+	DBConnector connector;
 
 	private Connection connection;
 
@@ -23,7 +28,7 @@ public class DBManager {
 	private ToppingsDB toppings;
 
 	public DBManager() {
-		DBConnector connector = new DBConnector();
+
 		try {
 			connection = connector.getConnection();
 		} catch (SQLException e) {
