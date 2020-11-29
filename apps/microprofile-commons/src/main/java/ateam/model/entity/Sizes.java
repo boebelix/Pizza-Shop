@@ -13,7 +13,7 @@ public class Sizes {
 	private float BasePrice;
 
 	@Validator.Required
-	private float topping_price;
+	private float toppingPrice;
 
 	public Sizes() {
 	}
@@ -22,13 +22,13 @@ public class Sizes {
 		Id = id;
 		Radius = radius;
 		BasePrice = basePrice;
-		this.topping_price = topping_price;
+		this.toppingPrice = topping_price;
 	}
 
 	public Sizes(int radius, float basePrice, float topping_price) {
 		Radius = radius;
 		BasePrice = basePrice;
-		this.topping_price = topping_price;
+		this.toppingPrice = topping_price;
 	}
 
 	public int getId() {
@@ -56,10 +56,10 @@ public class Sizes {
 	}
 
 	public float getTopping_price() {
-		return topping_price;
+		return toppingPrice;
 	}
 
 	public void setTopping_price(float topping_price) {
-		this.topping_price = topping_price;
+		this.toppingPrice = topping_price;
 	}
 }

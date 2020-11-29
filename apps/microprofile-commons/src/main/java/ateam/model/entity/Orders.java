@@ -12,46 +12,52 @@ public class Orders {
 
 	@Validator.Required
 	List<Pizzas> pizzas;
-	private int Id;
+
+	private int id;
 	@Validator.Required
-	private Date OrderDate;
+	private Date orderDate;
+
 	@Validator.Required
-	private Date OrderArrived;
+	private Date orderArrived;
+
 	@Validator.Required
 	@Validator.Min(5)
 	@Validator.Max(5)
 	@Validator.Regex(regex = "^[0-9]{5}$", errorMessage = "Die PLZ besteht aus 5 zahlen")
-	private String PLZ;
+	private String postCode;
+
 	@Validator.Required
 	@Validator.Regex(regex = "^[A-Z]([^0-9\\§\\%\\&\\!\\?])+?[a-z]$", errorMessage = "Straße muss mit einem Großbuchstaben anfangen und mit einem Kleinbuchstaben enden! Zahlen, so wie die Zeichen '§', '%', '&', '!' und '?' sind nicht erlaubt!")
-	private String Street;
+	private String street;
+
 	@Validator.Required
-	private String HouseNumber;
+	private String houseNumber;
+
 	@Validator.Required
 	@Validator.Regex(regex = "^[A-Z]([^\\0-9\\§\\%\\&\\!\\?])+?[a-z]$", errorMessage = "Stadt muss mit einem Großbuchstaben anfangen und mit einem Kleinbuchstaben enden! Zahlen, so wie die Zeichen '§', '%', '&', '!' und '?' sind nicht erlaubt!")
-	private String City;
+	private String city;
 
 	public Orders() {
 		pizzas = new LinkedList<Pizzas>();
 	}
 
 	public Orders(int id, Date orderDate, Date orderArrived, String PLZ, String street, String houseNumber, String city) {
-		Id = id;
-		OrderDate = orderDate;
-		OrderArrived = orderArrived;
-		this.PLZ = PLZ;
-		Street = street;
-		HouseNumber = houseNumber;
-		City = city;
+		this.id = id;
+		this.orderDate = orderDate;
+		this.orderArrived = orderArrived;
+		this.postCode = PLZ;
+		this.street = street;
+		this.houseNumber = houseNumber;
+		this.city = city;
 	}
 
 	public Orders(Date orderDate, Date orderArrived, String PLZ, String street, String houseNumber, String city) {
-		OrderDate = orderDate;
-		OrderArrived = orderArrived;
-		this.PLZ = PLZ;
-		Street = street;
-		HouseNumber = houseNumber;
-		City = city;
+		this.orderDate = orderDate;
+		this.orderArrived = orderArrived;
+		this.postCode = PLZ;
+		this.street = street;
+		this.houseNumber = houseNumber;
+		this.city = city;
 	}
 
 	public List<Pizzas> getPizzas() {
@@ -63,62 +69,62 @@ public class Orders {
 	}
 
 	public String getPLZ() {
-		return PLZ;
+		return postCode;
 	}
 
-	public void setPLZ(String PLZ) {
-		this.PLZ = PLZ;
+	public void setPLZ(String postCode) {
+		this.postCode = postCode;
 	}
 
 	public String getStreet() {
-		return Street;
+		return street;
 	}
 
 	public void setStreet(String street) {
-		Street = street;
+		this.street = street;
 	}
 
 	public String getHouseNumber() {
-		return HouseNumber;
+		return houseNumber;
 	}
 
 	public void setHouseNumber(String houseNumber) {
-		HouseNumber = houseNumber;
+		this.houseNumber = houseNumber;
 	}
 
 	public String getCity() {
-		return City;
+		return city;
 	}
 
 	//getter
 
 	public void setCity(String city) {
-		City = city;
+		this.city = city;
 	}
 
 	public int getId() {
-		return Id;
+		return id;
 	}
 
 	//setter
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public Date getOrderDate() {
-		return OrderDate;
+		return orderDate;
 	}
 
 	public void setOrderDate(Date orderDate) {
-		OrderDate = orderDate;
+		this.orderDate = orderDate;
 	}
 
 	public Date getOrderArrived() {
-		return OrderArrived;
+		return orderArrived;
 	}
 
 	public void setOrderArrived(Date orderArrived) {
-		OrderArrived = orderArrived;
+		this.orderArrived = orderArrived;
 	}
 
 	//additional

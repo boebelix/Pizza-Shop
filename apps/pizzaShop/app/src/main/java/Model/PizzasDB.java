@@ -8,14 +8,10 @@ import java.util.List;
 
 
 public class PizzasDB {
-	//private EntityManager em;
 
 	Connection connection;
 
 	public PizzasDB(Connection con) {
-		/*EntityManagerFactory emf = Persistence
-			.createEntityManagerFactory("Bestellungsdatenbank");
-		em = emf.createEntityManager();*/
 		connection = con;
 	}
 

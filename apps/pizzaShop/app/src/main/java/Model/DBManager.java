@@ -14,13 +14,13 @@ import java.util.List;
 @Singleton
 public class DBManager {
 
-	Connection connection;
+	private Connection connection;
 
-	PizzaToppingDB pizzaTopping;
-	OrdersDB orders;
-	PizzasDB pizzas;
-	SizesDB sizes;
-	ToppingsDB toppings;
+	private PizzaToppingDB pizzaTopping;
+	private OrdersDB orders;
+	private PizzasDB pizzas;
+	private SizesDB sizes;
+	private ToppingsDB toppings;
 
 	public DBManager() {
 		DBConnector connector = new DBConnector();
