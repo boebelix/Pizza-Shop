@@ -4,13 +4,13 @@ import ateam.validator.Validator;
 
 public class Sizes {
 
-	private int Id;
+	private int id;
 
 	@Validator.Required
-	private int Radius;
+	private int radius;
 
 	@Validator.Required
-	private float BasePrice;
+	private float basePrice;
 
 	@Validator.Required
 	private float toppingPrice;
@@ -19,40 +19,40 @@ public class Sizes {
 	}
 
 	public Sizes(int id, int radius, float basePrice, float topping_price) {
-		Id = id;
-		Radius = radius;
-		BasePrice = basePrice;
+		this.id = id;
+		this.radius = radius;
+		this.basePrice = basePrice;
 		this.toppingPrice = topping_price;
 	}
 
 	public Sizes(int radius, float basePrice, float topping_price) {
-		Radius = radius;
-		BasePrice = basePrice;
+		this.radius = radius;
+		this.basePrice = basePrice;
 		this.toppingPrice = topping_price;
 	}
 
 	public int getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public int getRadius() {
-		return Radius;
+		return radius;
 	}
 
 	public void setRadius(int radius) {
-		Radius = radius;
+		this.radius = radius;
 	}
 
 	public float getBasePrice() {
-		return BasePrice;
+		return basePrice;
 	}
 
 	public void setBasePrice(float basePrice) {
-		BasePrice = basePrice;
+		this.basePrice = basePrice;
 	}
 
 	public float getTopping_price() {

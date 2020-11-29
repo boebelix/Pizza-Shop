@@ -9,18 +9,18 @@ public class Toppings {
 
 	@Validator.Required
 	@Validator.Regex(regex = "^[A-Z]([^0-9\\§\\%\\&\\!\\?])+?[a-z]$", errorMessage = "ToppingName muss mit einem Großbuchstaben anfangen und mit einem Kleinbuchstaben enden! Die Zeichen '§', '%', '&', '!' und '?' sind nicht erlaubt!")
-	private String Name;
+	private String name;
 
 	public Toppings() {
 	}
 
 	public Toppings(int id, String name) {
 		this.id = id;
-		Name = name;
+		this.name = name;
 	}
 
 	public Toppings(String name) {
-		Name = name;
+		this.name = name;
 	}
 
 	public int getId() {
@@ -32,10 +32,10 @@ public class Toppings {
 	}
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 }

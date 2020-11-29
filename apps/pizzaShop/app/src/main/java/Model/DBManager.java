@@ -4,7 +4,7 @@ import ateam.model.entity.Orders;
 import ateam.model.entity.PizzaTopping;
 import ateam.model.entity.Pizzas;
 import ateam.model.entity.Toppings;
-import ateam.model.exception.UserServiceException;
+import ateam.model.exception.ShopException;
 
 import javax.inject.Singleton;
 import java.sql.Connection;
@@ -58,7 +58,7 @@ public class DBManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new UserServiceException("Couldn't add Pizza to ExistingOrder", e);
+			throw new ShopException("Couldn't add Pizza to ExistingOrder", e);
 		}
 	}
 
@@ -82,7 +82,7 @@ public class DBManager {
 			return order;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new UserServiceException("Couldn't fetch Order from Database", e);
+			throw new ShopException("Couldn't fetch Order from Database", e);
 		}
 
 	}

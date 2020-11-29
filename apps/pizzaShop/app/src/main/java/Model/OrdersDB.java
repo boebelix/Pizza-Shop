@@ -2,12 +2,10 @@ package Model;
 
 import ateam.model.entity.Orders;
 
-import javax.persistence.EntityManager;
 import java.sql.*;
 
 public class OrdersDB {
 	Connection connection;
-	private EntityManager em;
 
 	public OrdersDB(Connection con) {
 		connection = con;
