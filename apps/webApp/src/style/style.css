@@ -73,8 +73,8 @@ body {
     border: none;
     border-radius: 3px;
     padding: 10px 55px;
-	margin: 10px;
-	width: 15em;
+    margin: 10px;
+    width: 15em;
     background-color: gray;
     color: white;
 }
@@ -242,6 +242,7 @@ body {
     margin: 20px;
 }
 
+
 /* TODO: FIX */
 
 .ingredientCheckbox {
@@ -263,20 +264,20 @@ body {
     padding-right: 10px;
 }
 
-.error_message{
+.error_message {
     color: red;
     display: none
 }
 
-.btn_error{
+.btn_error {
     background: rgb(241, 145, 145);
 }
 
 #error_login {
-	display: block;
-	color: red;
+    display: block;
+    color: red;
 }
 
 #logout_button {
-	margin-left:20px;
+    margin-left: 20px;
 }
