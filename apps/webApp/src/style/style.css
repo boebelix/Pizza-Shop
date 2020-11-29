@@ -164,7 +164,7 @@ body {
 
 .overlay_content_big {
     width: 50%;
-    background-color: rgba(255, 255, 255, 0.521);
+    background-color: rgba(255, 255, 255, 0.712);
     border-radius: 5px;
     margin: 5% auto;
     padding: 20px;
@@ -227,15 +227,15 @@ body {
 }
 
 .box_1 {
-    background-color: rgba(224, 139, 28, 0.486);
+    background-color: rgba(233, 167, 81, 0.75);
 }
 
 .box_2 {
-    background-color: rgba(100, 84, 62, 0.486);
+    background-color: rgba(189, 105, 49, 0.75);
 }
 
 .box_3 {
-    background-color: rgba(255, 190, 106, 0.486);
+    background-color: rgba(255, 233, 106, 0.75);
 }
 
 .margin20px {
