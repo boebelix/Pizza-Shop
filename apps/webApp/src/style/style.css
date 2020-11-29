@@ -281,3 +281,7 @@ body {
 #logout_button {
     margin-left: 20px;
 }
+
+#passwdMsg{
+    font-style: italic;
+}

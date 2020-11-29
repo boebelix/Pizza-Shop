@@ -1,6 +1,61 @@
 const initSignup = () => {
     document.getElementById("register_submit_button").addEventListener("click", () => submitData());
     document.getElementById("register_back_button").addEventListener("click", () => setState("login_state"));
+    document.getElementById("password_signup").addEventListener("keyup", () => isPasswordValid());
+    let canvas = document.querySelector("#pwdCanvas");
+    let ctx = canvas.getContext("2d");
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+}
+
+const isPasswordValid = () => {
+    const passwd = document.getElementById("password_signup").value;
+    let format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
+    let hasMinLen = passwd.length >= MIN_SIGNS;
+    let hasUpperAndLowercase = passwd.toUpperCase() != passwd && passwd.toLowerCase() != passwd;
+    let usesNumAndSpecial = /\d/.test(passwd) && format.test(passwd);
+    let hasMoreThanSeven = passwd.length > SAFE_SIGNS;
+
+    if(!hasMinLen) {
+        document.querySelector("#passwdMsg").innerHTML = "nicht sicher";
+    } else if(hasUpperAndLowercase && usesNumAndSpecial && hasMoreThanSeven){
+        document.querySelector("#passwdMsg").innerHTML = "sehr sicher";
+    } else if(hasUpperAndLowercase && usesNumAndSpecial) {
+        document.querySelector("#passwdMsg").innerHTML = "sicher";
+    } else if(hasUpperAndLowercase) {
+        document.querySelector("#passwdMsg").innerHTML = "mittel sicher";
+    } else {
+        document.querySelector("#passwdMsg").innerHTML = "akzeptabel";
+    }
+
+    let size = 0;
+    if (hasMinLen) {
+        size += 4;
+        if (hasUpperAndLowercase) {
+            size += 4;
+            if (usesNumAndSpecial) {
+                size += 4;
+                if(hasMoreThanSeven)
+                    size += 4;
+            }
+        }
+    }
+
+    let c = document.querySelector("#pwdCanvas");
+    let ctx = c.getContext("2d");
+
+    ctx.fillStyle = "#c92e6f";
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+    let barSize = size * 30;
+
+    let grd = ctx.createLinearGradient(0, 0, barSize, 0);
+    grd.addColorStop(0, "#2ec95a");
+    grd.addColorStop(1, "#c92e6f");
+
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 }
 
 const submitData = async() => {
