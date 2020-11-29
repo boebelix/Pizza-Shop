@@ -42,6 +42,7 @@ body {
 
 .input_login {
     border: 1px solid black;
+    background-color: white;
     border-radius: 3px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -72,7 +73,8 @@ body {
     border: none;
     border-radius: 3px;
     padding: 10px 55px;
-    margin-top: 10px;
+    margin: 10px;
+    width: 15em;
     background-color: gray;
     color: white;
 }
@@ -162,7 +164,7 @@ body {
 
 .overlay_content_big {
     width: 50%;
-    background-color: rgba(255, 255, 255, 0.521);
+    background-color: rgba(255, 255, 255, 0.712);
     border-radius: 5px;
     margin: 5% auto;
     padding: 20px;
@@ -225,20 +227,21 @@ body {
 }
 
 .box_1 {
-    background-color: rgba(224, 139, 28, 0.486);
+    background-color: rgba(233, 167, 81, 0.75);
 }
 
 .box_2 {
-    background-color: rgba(100, 84, 62, 0.486);
+    background-color: rgba(189, 105, 49, 0.75);
 }
 
 .box_3 {
-    background-color: rgba(255, 190, 106, 0.486);
+    background-color: rgba(255, 233, 106, 0.75);
 }
 
 .margin20px {
     margin: 20px;
 }
+
 
 /* TODO: FIX */
 
@@ -259,4 +262,22 @@ body {
 
 #ordered_div td {
     padding-right: 10px;
+}
+
+.error_message {
+    color: red;
+    display: none
+}
+
+.btn_error {
+    background: rgb(241, 145, 145);
+}
+
+#error_login {
+    display: block;
+    color: red;
+}
+
+#logout_button {
+    margin-left: 20px;
 }
