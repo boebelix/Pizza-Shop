@@ -1,19 +1,46 @@
 package ateam.logistics.model;
 
 import ateam.model.entity.User;
+import ateam.validator.Validator;
 
 import java.sql.Timestamp;
 import java.util.Date;
 
 public class LogisticsLog {
-	private int orderId = -1;
+	@Validator.Required
+	@Validator.Min(1)
+	private String orderId;
+
+	@Validator.Required
+	@Validator.Min(1)
 	private String firstName;
+
+	@Validator.Required
+	@Validator.Min(1)
 	private String lastName;
+
+	@Validator.Required
+	@Validator.Min(1)
 	private String street;
-	private int nr = -1;
+
+	@Validator.Required
+	@Validator.Min(1)
+	private String nr;
+
+	@Validator.Required
+	@Validator.Min(1)
 	private String city;
-	private int postalCode = -1;
+
+	@Validator.Required
+	@Validator.Min(1)
+	private String postalCode;
+
+	@Validator.Required
+	@Validator.Min(1)
 	private String country;
+
+	@Validator.Required
+	@Validator.Min(1)
 	private String time;
 
 	public LogisticsLog() {
@@ -23,19 +50,18 @@ public class LogisticsLog {
 		this.firstName = user.getFirstName();
 		this.lastName = user.getLastName();
 		this.street = user.getStreet();
-		this.nr = Integer.parseInt(user.getNumber());
+		this.nr = user.getNumber();
 		this.city = user.getCity();
-		this.postalCode = Integer.parseInt(user.getPostalCode());
+		this.postalCode =user.getPostalCode();
 		this.country = user.getCountry();
-		Timestamp timestamp = new Timestamp(new Date().getTime());
-		time = "" + timestamp;
+		time =  new Timestamp(new Date().getTime()).toString();
 	}
 
-	public int getOrderId() {
+	public String getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(int orderId) {
+	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
 
@@ -63,11 +89,11 @@ public class LogisticsLog {
 		this.street = street;
 	}
 
-	public int getNr() {
+	public String getNr() {
 		return nr;
 	}
 
-	public void setNr(int nr) {
+	public void setNr(String nr) {
 		this.nr = nr;
 	}
 
@@ -79,11 +105,11 @@ public class LogisticsLog {
 		this.city = city;
 	}
 
-	public int getPostalCode() {
+	public String getPostalCode() {
 		return postalCode;
 	}
 
-	public void setPostalCode(int postalCode) {
+	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
 
@@ -93,14 +119,6 @@ public class LogisticsLog {
 
 	public void setCountry(String country) {
 		this.country = country;
-	}
-
-	public boolean checkValid() {
-		if (orderId == -1 || firstName == null || lastName == null || street == null || nr == -1 || city == null || postalCode == -1 || country == null) {
-			return false;
-		} else {
-			return true;
-		}
 	}
 
 	@Override

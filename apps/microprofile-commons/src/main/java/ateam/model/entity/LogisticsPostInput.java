@@ -1,34 +1,33 @@
 package ateam.model.entity;
 
+import ateam.validator.Validator;
+
 public class LogisticsPostInput {
-	private int orderId = -1;
-	private int userId = -1;
+	@Validator.Required
+	@Validator.Min(1)
+	private String orderId;
+
+	@Validator.Required
+	@Validator.Min(1)
+	private String userId;
 
 	public LogisticsPostInput() {
 	}
 
-	public int getOrderId() {
+	public String getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(int orderId) {
+	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
-	}
-
-	public boolean checkValid() {
-		if (orderId == -1 || userId == -1) {
-			return false;
-		} else {
-			return true;
-		}
 	}
 
 	@Override
