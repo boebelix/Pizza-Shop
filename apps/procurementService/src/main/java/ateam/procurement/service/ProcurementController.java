@@ -1,9 +1,15 @@
 package ateam.procurement.service;
 
+import ateam.exceptionmapper.ValidatorExceptionMapper;
 import ateam.model.entity.ProcurementLog;
 import ateam.util.LogService;
+import ateam.validator.ValidationException;
+import ateam.validator.Validator;
+import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 
 import javax.inject.Singleton;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -12,22 +18,21 @@ import javax.ws.rs.core.Response;
 import java.io.IOException;
 
 @Path("/procurement")
+@RegisterProvider(ValidatorExceptionMapper.class)
 @Singleton
 public class ProcurementController {
 	@POST
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createProcurementLog(ProcurementLog log) throws IOException {
+	public Response createProcurementLog(ProcurementLog log) throws IOException, ValidationException, NamingException {
+		Validator.validate(log);
 		System.out.println(log.toString());
-		LogService logService = new LogService("procurement.log");
+		LogService logService = new LogService(InitialContext.doLookup("procurementLogPath"));
 		boolean writeSuccessful = logService.log(log);
-		boolean valid = log.checkValid();
-		if (writeSuccessful == true && valid == true) {
-			return Response.status(201).build();
-		} else if (writeSuccessful == false) {
-			return Response.status(500, "Log not succesful").build();
+		if (writeSuccessful) {
+			return Response.status(Response.Status.CREATED.getStatusCode()).build();
 		} else {
-			return Response.status(400).build();
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), "Log not succesful").build();
 		}
 	}
 }

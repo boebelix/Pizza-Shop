@@ -10,8 +10,7 @@ public class ProcurementLog {
 	private List<ProcurementLogItem> items;
 
 	public ProcurementLog() {
-		Timestamp timestamp = new Timestamp(new Date().getTime());
-		time = "" + timestamp;
+		time = new Timestamp(new Date().getTime()).toString();
 	}
 
 	public void setItems(List<ProcurementLogItem> items) {
@@ -28,18 +27,6 @@ public class ProcurementLog {
 
 	public String getTime() {
 		return time;
-	}
-
-	public boolean checkValid() {
-		for (ProcurementLogItem item : items) {
-			if (item.checkValid() == false) {
-				return false;
-			}
-		}
-		if (time == null) {
-			return false;
-		}
-		return true;
 	}
 
 	@Override

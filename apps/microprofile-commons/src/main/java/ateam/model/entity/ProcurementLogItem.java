@@ -1,8 +1,16 @@
 package ateam.model.entity;
 
+import ateam.validator.Validator;
+
 public class ProcurementLogItem {
+	@Validator.Required
+	@Validator.Min(1)
 	private String name;
-	private int amount = -1;
+	@Validator.Required
+	@Validator.Min(1)
+	private String amount;
+	@Validator.Required
+	@Validator.Min(1)
 	private String unit;
 
 	public ProcurementLogItem() {
@@ -12,7 +20,7 @@ public class ProcurementLogItem {
 		this.name = name;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(String amount) {
 		this.amount = amount;
 	}
 
@@ -24,7 +32,7 @@ public class ProcurementLogItem {
 		return name;
 	}
 
-	public int getAmount() {
+	public String getAmount() {
 		return amount;
 	}
 
@@ -32,13 +40,6 @@ public class ProcurementLogItem {
 		return unit;
 	}
 
-	public boolean checkValid() {
-		if (name == null || amount == -1 || unit == null) {
-			return false;
-		} else {
-			return true;
-		}
-	}
 
 	@Override
 	public String toString() {
