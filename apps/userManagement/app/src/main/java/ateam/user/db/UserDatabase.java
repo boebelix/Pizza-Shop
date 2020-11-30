@@ -96,19 +96,19 @@ public class UserDatabase {
 				"last_name = ?, email = ?, password = ?, postal_code = ?, street = ?, number = ?, city = ?, country = ? " +
 				"where id = ?",
 			Statement.RETURN_GENERATED_KEYS);
-		pstmt.setString(1, user.getUsername());
-		pstmt.setString(2, user.getFirstName());
-		pstmt.setString(3, user.getLastName());
-		pstmt.setString(4, user.getEmail());
-		pstmt.setString(5, user.getPassword());
-		pstmt.setString(6, user.getPostalCode());
-		pstmt.setString(7, user.getStreet());
-		pstmt.setString(8, user.getNumber());
-		pstmt.setString(9, user.getCity());
-		pstmt.setString(10, user.getCountry());
-		pstmt.setInt(11, user.getUserId());
+		pstmt.setString(1, oldUser.getUsername());
+		pstmt.setString(2, oldUser.getFirstName());
+		pstmt.setString(3, oldUser.getLastName());
+		pstmt.setString(4, oldUser.getEmail());
+		pstmt.setString(5, oldUser.getPassword());
+		pstmt.setString(6, oldUser.getPostalCode());
+		pstmt.setString(7, oldUser.getStreet());
+		pstmt.setString(8, oldUser.getNumber());
+		pstmt.setString(9, oldUser.getCity());
+		pstmt.setString(10, oldUser.getCountry());
+		pstmt.setInt(11, oldUser.getUserId());
 		pstmt.execute();
-		return loadUser(user.getUserId(), connection);
+		return loadUser(oldUser.getUserId(), connection);
 	}
 
 	public User loadUser(int userId) {

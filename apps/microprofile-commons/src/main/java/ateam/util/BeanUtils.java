@@ -18,9 +18,8 @@ public class BeanUtils {
 			try {
 				sourceField = source.getClass().getDeclaredField(targetField.getName());
 			} catch (NoSuchFieldException e) {
-				continue;
-			} finally {
 				targetField.setAccessible(false);
+				continue;
 			}
 
 			if(targetField.getType().isAssignableFrom(sourceField.getType())) {
@@ -32,12 +31,10 @@ public class BeanUtils {
 				} catch (IllegalAccessException e) {
 					continue;
 				} finally {
+					targetField.setAccessible(false);
 					sourceField.setAccessible(false);
 				}
-				sourceField.setAccessible(false);
 			}
-			targetField.setAccessible(false);
-
 		}
 	}
 

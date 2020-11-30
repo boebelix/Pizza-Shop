@@ -18,7 +18,6 @@ import javax.inject.Singleton;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Objects;
 import java.util.UUID;
 
 @Path("/user")
@@ -70,11 +69,11 @@ public class UserEndpoint {
 							   @RequestBody(required = true) User user,
 							   @PathParam("userId") int userId) throws UnauthorizedException {
 		Integer loggedInUserId = accessService.getUserIdIfLoggedIn(loginId);
-		if(loggedInUserId == null || Objects.equals(userId, loggedInUserId)) {
+		if(loggedInUserId == null || userId != loggedInUserId) {
 			throw new UnauthorizedException("Du darfst nicht die Nutzerdaten eines anderen Benutzer bearbeiten!");
 		}
 		user.setUserId(userId);
-		Validator.validate(user);
+		Validator.validate(user, Validator.Required.class);
 		user = userService.updateUser(user);
 		return Response.ok(user).build();
 	}
