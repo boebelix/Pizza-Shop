@@ -13,7 +13,7 @@ public class Validator {
 
 	/**
 	 * Add this annotation to all Attributes that contain objects should get their
-	 * inner structure validated, if the object gets validated.
+	 * inner structure validated.
 	 */
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.FIELD)
