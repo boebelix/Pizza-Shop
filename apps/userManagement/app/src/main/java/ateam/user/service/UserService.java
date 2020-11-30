@@ -17,8 +17,7 @@ public class UserService {
 
 	public User createUser(User user) {
 		user.setPassword(passwordService.hashPassword(user.getPassword()));
-		userDatabase.createUser(user);
-		return user;
+		return userDatabase.createUser(user);
 	}
 
 	public User loadUser(int id) {
