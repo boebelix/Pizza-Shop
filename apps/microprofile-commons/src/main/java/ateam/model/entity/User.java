@@ -27,6 +27,7 @@ public class User {
 		"|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$", errorMessage = "Gültige Email benötigt!")
 	private String email;
 
+	@Validator.Required(errorMessage = "Passwort benötigt!")
 	@Validator.Regex(regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])" +
 		"(?=.*[*.!@$%^&(){}\\[\\]:;<>,.?\\/~_+\\-=|\\\\]).{5,}$",
 		errorMessage = "Das Passwort muss aus mindestens einen Kleinbuchstaben, " +

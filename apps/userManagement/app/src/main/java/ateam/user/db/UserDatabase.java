@@ -82,12 +82,12 @@ public class UserDatabase {
 			throw new UnknownEntityException("Nutzer existiert nicht!");
 		}
 		if(!oldUser.getUsername().equals(user.getUsername())) {
-			if(loadUser(user.getUsername()) != null) {
+			if(loadUser(user.getUsername(), connection) != null) {
 				throw new ConflictException("Es existiert bereits ein Nutzer mit diesem Nutzernamen!");
 			}
 		}
 		if(!oldUser.getEmail().equals(user.getEmail())) {
-			if(loadUserByMail(user.getEmail()) != null) {
+			if(loadUserByMail(user.getEmail(), connection) != null) {
 				throw new ConflictException("Es existiert bereits ein Nutzer mit dieser Email!");
 			}
 		}
@@ -108,7 +108,7 @@ public class UserDatabase {
 		pstmt.setString(10, user.getCountry());
 		pstmt.setInt(11, user.getUserId());
 		pstmt.execute();
-		return loadUser(user.getUserId());
+		return loadUser(user.getUserId(), connection);
 	}
 
 	public User loadUser(int userId) {

@@ -70,7 +70,7 @@ public class UserEndpoint {
 							   @RequestBody(required = true) User user,
 							   @PathParam("userId") int userId) throws UnauthorizedException {
 		Integer loggedInUserId = accessService.getUserIdIfLoggedIn(loginId);
-		if(Objects.equals(userId, loggedInUserId)) {
+		if(loggedInUserId == null || Objects.equals(userId, loggedInUserId)) {
 			throw new UnauthorizedException("Du darfst nicht die Nutzerdaten eines anderen Benutzer bearbeiten!");
 		}
 		user.setUserId(userId);
