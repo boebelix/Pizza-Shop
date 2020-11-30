@@ -29,4 +29,8 @@ public class UserService {
 		return userDatabase.loadUser(username);
 	}
 
+   /* public User updateUser(User user) {
+		user.setPassword(passwordService.hashPassword(user.getPassword()));
+		userDatabase.updateUser(user);
+    }*/
 }

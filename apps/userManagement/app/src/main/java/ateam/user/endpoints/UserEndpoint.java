@@ -56,4 +56,14 @@ public class UserEndpoint {
 		return Response.ok(user).build();
 	}
 
+	@PUT
+	@Path("/{userId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response updateUser(@RequestBody(required = true) User user, @PathParam("userId") int userId) {
+		user.setUserId(userId);
+		Validator.validate(user);
+		user = userService.updateUser(user);
+		return Response.ok(user).build();
+	}
+
 }
