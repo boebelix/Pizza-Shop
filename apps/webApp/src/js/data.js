@@ -6,6 +6,7 @@ const SAFE_SIGNS = 7;
 const CANVAS_HEIGHT = 10;
 const CANVAS_WIDTH = 240;
 const CANVAS_FACTOR = 0.4;
+const REGEX_SIGNS = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
 const setUserData = (JSON) => {
 	USER_JSON = JSON;

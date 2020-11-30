@@ -10,13 +10,10 @@ const initSignup = () => {
 
 const isPasswordValid = () => {
     const passwd = document.getElementById("password_signup").value;
-    let format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-
     let hasMinLen = passwd.length >= MIN_SIGNS;
     let hasUpperAndLowercase = passwd.toUpperCase() != passwd && passwd.toLowerCase() != passwd;
-    let usesNumAndSpecial = /\d/.test(passwd) && format.test(passwd);
+    let usesNumAndSpecial = /\d/.test(passwd) && REGEX_SIGNS.test(passwd);
 	let hasMoreThanSeven = passwd.length > SAFE_SIGNS;
-
 	let barColorLeft = "#FFF";
 	let barColorRight = "#FFF";
 	let factor = 0;
