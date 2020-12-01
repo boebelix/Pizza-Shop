@@ -13,7 +13,7 @@ public class Validator {
 
 	/**
 	 * Add this annotation to all Attributes that contain objects should get their
-	 * inner structure validated, if the object gets validated.
+	 * inner structure validated.
 	 */
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.FIELD)
@@ -89,14 +89,14 @@ public class Validator {
 					}
 					if(!ignoreAnnotations.contains(Min.class) && field.isAnnotationPresent(Min.class)) {
 						long min = field.getAnnotation(Min.class).value();
-						if(checkIsSmallerThen(fieldValue, min)) {
+						if(getObjectLength(fieldValue) < getObjectLength(min)) {
 							throw new ValidationException(field.getAnnotation(Min.class).errorMessage()
 								.replace("%fieldname%", field.getName()).replace("%value%", String.valueOf(min)));
 						}
 					}
 					if(!ignoreAnnotations.contains(Max.class) && field.isAnnotationPresent(Max.class)) {
 						long max = field.getAnnotation(Max.class).value();
-						if(checkIsSmallerThen(max, fieldValue)) {
+						if(getObjectLength(max) < getObjectLength(fieldValue)) {
 							throw new ValidationException(field.getAnnotation(Max.class).errorMessage()
 								.replace("%fieldname%", field.getName()).replace("%value%", String.valueOf(max)));
 						}
@@ -112,10 +112,6 @@ public class Validator {
 			}
 
 		}
-	}
-
-	private static boolean checkIsSmallerThen(Object left, Object right) {
-		return getObjectLength(left) < getObjectLength(right);
 	}
 
 	private static long getObjectLength(Object object) {
