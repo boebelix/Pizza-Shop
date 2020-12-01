@@ -24,7 +24,7 @@ public class Validator {
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.FIELD)
 	public @interface Required {
-		String errorMessage() default "%fieldname% required (not null)!";
+		String errorMessage() default "%fieldname% benötigt!";
 	}
 
 	@Retention(RetentionPolicy.RUNTIME)
@@ -38,14 +38,14 @@ public class Validator {
 	@Target(ElementType.FIELD)
 	public @interface Min {
 		long value();
-		String errorMessage() default "%fieldname% should have a length of at least %value%!";
+		String errorMessage() default "%fieldname% benötigt eine größe von mindestens %value%!";
 	}
 
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.FIELD)
 	public @interface Max {
 		long value();
-		String errorMessage() default "%fieldname% should have a length of max %value%!";
+		String errorMessage() default "%fieldname% benötigt eine größe von mindestens %value%!";
 	}
 
 	public static void validate(Object object, Class<?>... ignoreAnnotations) {
@@ -89,14 +89,14 @@ public class Validator {
 					}
 					if(!ignoreAnnotations.contains(Min.class) && field.isAnnotationPresent(Min.class)) {
 						long min = field.getAnnotation(Min.class).value();
-						if(checkIsSmallerThen(fieldValue, min)) {
+						if(getObjectLength(fieldValue) < getObjectLength(min)) {
 							throw new ValidationException(field.getAnnotation(Min.class).errorMessage()
 								.replace("%fieldname%", field.getName()).replace("%value%", String.valueOf(min)));
 						}
 					}
 					if(!ignoreAnnotations.contains(Max.class) && field.isAnnotationPresent(Max.class)) {
 						long max = field.getAnnotation(Max.class).value();
-						if(checkIsSmallerThen(max, fieldValue)) {
+						if(getObjectLength(max) < getObjectLength(fieldValue)) {
 							throw new ValidationException(field.getAnnotation(Max.class).errorMessage()
 								.replace("%fieldname%", field.getName()).replace("%value%", String.valueOf(max)));
 						}
@@ -112,10 +112,6 @@ public class Validator {
 			}
 
 		}
-	}
-
-	private static boolean checkIsSmallerThen(Object left, Object right) {
-		return getObjectLength(left) < getObjectLength(right);
 	}
 
 	private static long getObjectLength(Object object) {

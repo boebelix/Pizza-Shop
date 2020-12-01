@@ -1,283 +1,310 @@
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    margin: 0 auto;
-    max-width: 100%;
-    max-height: 100%;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	margin: 0 auto;
+	max-width: 100%;
+	max-height: 100%;
 }
 
 
 /* Background for all sites */
 
 .overlay {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-image: url("images/Background_Login.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-image: url("images/Background_Login.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 
 /* White base for content */
 
 .overlay_content {
-    background-color: white;
-    margin: 5% auto;
-    padding: 20px;
-    border: none;
-    width: 30%;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
+	background-color: white;
+	margin: 5% auto;
+	padding: 20px;
+	border: none;
+	width: 30%;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
 }
 
 
 /* Customized input fields */
 
 .input_login {
-    border: 1px solid black;
-    background-color: white;
-    border-radius: 3px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-top: 5px;
-    margin-bottom: 15px;
+	border: 1px solid black;
+	background-color: white;
+	border-radius: 3px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-top: 5px;
+	margin-bottom: 15px;
 }
 
 
 /* Customized login button */
 
 .button_login {
-    border: none;
-    border-radius: 3px;
-    padding: 10px 55px;
-    margin-top: 10px;
-    background-color: gray;
-    color: white;
+	border: none;
+	border-radius: 3px;
+	padding: 10px 55px;
+	margin-top: 10px;
+	background-color: gray;
+	color: white;
 }
 
 .button_login:hover {
-    background-color: seagreen;
+	background-color: seagreen;
 }
 
 
 /* Customized logout button */
 
 .button_logout {
-    border: none;
-    border-radius: 3px;
-    padding: 10px 55px;
-    margin: 10px;
-    width: 15em;
-    background-color: gray;
-    color: white;
+	border: none;
+	border-radius: 3px;
+	padding: 10px 55px;
+	margin: 10px;
+	width: 15em;
+	background-color: gray;
+	color: white;
 }
 
 .button_logout:hover {
-    background-color: rgb(206, 33, 33);
+	background-color: rgb(206, 33, 33);
 }
 
 
 /* Button for going back to signup/signin */
 
 .scene_before {
-    background-color: rgba(255, 255, 255, 0);
-    color: grey;
-    border: none;
+	background-color: rgba(255, 255, 255, 0);
+	color: grey;
+	border: none;
 }
 
 .scene_before:hover {
-    color: lightcoral;
+	color: lightcoral;
 }
 
 
 /* Background for clickable divs */
 
 .img_box {
-    border: 1px solid black;
-    height: 33%;
-    width: 33%;
-    margin: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
+	border: 1px solid black;
+	height: 33%;
+	width: 33%;
+	margin: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
 }
 
 
 /* Bakcground for Main Page */
 
 .menu_state {
-    display: none;
-    background-image: url("images/Background_Login.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+	display: none;
+	background-image: url("images/Background_Login.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 
 /* Overlay for Overview */
 
 .overlay_overview {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    width: 100%;
-    height: 80%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	width: 100%;
+	height: 80%;
 }
 
 
 /* Button for clicking the divs */
 
 .button_div {
-    border: none;
-    color: white;
-    background-color: transparent;
-    font-size: xx-large;
+	border: none;
+	color: white;
+	background-color: transparent;
+	font-size: xx-large;
 }
 
 .button_div:hover {
-    color: yellowgreen;
+	color: rgb(49, 30, 0);
 }
 
 
 /* Simply the title bar for saying hallo to our customer */
 
 .titlebar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    width: 100%;
-    height: 20%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	width: 100%;
+	height: 20%;
 }
 
 
 /* Bigger Block for Selecting div */
 
 .overlay_content_big {
-    width: 50%;
-    background-color: rgba(255, 255, 255, 0.712);
-    border-radius: 5px;
-    margin: 5% auto;
-    padding: 20px;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
+	width: 50%;
+	background-color: rgba(255, 255, 255, 0.712);
+	border-radius: 5px;
+	margin: 5% auto;
+	padding: 20px;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
 }
 
 
 /* Button for selecting the size of a pizza */
 
 .button_size {
-    border: 1px solid grey;
-    padding-left: 5px;
-    margin-top: 10px;
-    background-color: rgba(255, 255, 255, 0.418);
-    color: black;
-    font-size: x-large;
+	border: 1px solid grey;
+	padding-left: 5px;
+	margin-top: 10px;
+	background-color: rgba(255, 255, 255, 0.418);
+	color: black;
+	font-size: x-large;
 }
 
 .button_size_selected {
-    border: 1px solid grey;
-    padding-left: 5px;
-    margin-top: 10px;
-    background-color: rgba(214, 146, 67, 0.418);
-    color: black;
-    font-size: x-large;
+	border: 1px solid grey;
+	padding-left: 5px;
+	margin-top: 10px;
+	background-color: rgba(214, 146, 67, 0.418);
+	color: black;
+	font-size: x-large;
 }
 
 .button_size:hover {
-    background-color: rgba(138, 137, 137, 0.418);
+	background-color: rgba(138, 137, 137, 0.418);
 }
 
 
 /* For Inline Objects which are default block */
 
 .inline {
-    display: inline;
+	display: inline;
 }
 
 .inline_flex {
-    display: inline-flex;
-    align-items: center;
-    align-content: center;
+	display: inline-flex;
+	align-items: center;
+	align-content: center;
 }
 
 .topping_list {
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    display: inline;
+	align-items: center;
+	text-align: center;
+	justify-content: center;
+	display: inline;
 }
 
 .topping_list td {
-    padding: 40px;
+	padding: 40px;
 }
 
 .white_title {
-    color: white;
+	color: white;
 }
 
 .box_1 {
-    background-color: rgba(233, 167, 81, 0.75);
+	background-color: rgba(219, 200, 90, 0.85);
 }
 
 .box_2 {
-    background-color: rgba(189, 105, 49, 0.75);
+	background-color: rgba(189, 105, 49, 0.85);
 }
 
 .box_3 {
-    background-color: rgba(255, 233, 106, 0.75);
+	background-color: rgba(233, 167, 81, 0.85);
 }
 
 .margin20px {
-    margin: 20px;
+	margin: 20px;
 }
 
 
 /* TODO: FIX */
 
 .ingredientCheckbox {
-    background: rgba(40, 40, 40, 0.2);
-    color: black;
+	background: rgba(40, 40, 40, 0.2);
+	color: black;
 }
 
 #ordered_div {
-    width: 100%;
+	width: 100%;
 }
 
 #ordered_div div {
-    width: 100%;
-    margin: 5px;
-    text-align: center;
+	width: 100%;
+	margin: 5px;
+	text-align: center;
 }
 
 #ordered_div td {
-    padding-right: 10px;
+	padding-right: 10px;
 }
 
 .error_message {
-    color: red;
-    display: none
+	color: red;
+	display: none
 }
 
 .btn_error {
-    background: rgb(241, 145, 145);
+	background: rgb(241, 145, 145);
 }
 
 #error_login {
-    display: block;
-    color: red;
+	display: block;
+	color: red;
 }
 
 #logout_button {
-    margin-left: 20px;
+	margin-left: 20px;
+}
+
+#passwdMsg {
+	font-style: italic;
+}
+
+.foreground {
+	position: relative;
+	z-index: 300000;
+}
+
+#bgvid {
+	object-fit: cover;
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+#darkOverlay {
+	content: '';
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 150;
 }
