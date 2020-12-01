@@ -38,7 +38,7 @@ const response = async (data) => {
 	});
 	const status = output.status;
 	if (status == RESPONSE_INTERNAL_SERVER_ERROR) {
-		return { "message": "Serverfehler", "status": RESPONSE_INTERNAL_SERVER_ERROR };
+		return {"message": "Serverfehler", "status": RESPONSE_INTERNAL_SERVER_ERROR};
 	}
 	let json = await output.json();
 	json.status = status;
