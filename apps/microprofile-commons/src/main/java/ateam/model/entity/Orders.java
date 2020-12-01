@@ -10,6 +10,7 @@ import java.util.List;
 public class Orders {
 
 	@Validator.Required
+	@Validator.Valid
 	List<Pizzas> pizzas;
 
 	private int id;

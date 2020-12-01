@@ -8,6 +8,7 @@ import java.util.List;
 public class Pizzas {
 
 	@Validator.Required
+	@Validator.Valid
 	List<Toppings> toppings;
 
 	private int iD;
