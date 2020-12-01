@@ -1,9 +1,6 @@
 package ateam.user.endpoints;
 
-import ateam.exceptionmapper.ConflictExceptionMapper;
-import ateam.exceptionmapper.UnauthorizedExceptionMapper;
-import ateam.exceptionmapper.UnknownEntityExceptionMapper;
-import ateam.exceptionmapper.ValidatorExceptionMapper;
+import ateam.exceptionmapper.*;
 import ateam.model.entity.User;
 import ateam.model.exception.UnauthorizedException;
 import ateam.user.service.AccessService;
@@ -22,6 +19,7 @@ import java.util.UUID;
 
 @Path("/user")
 @RegisterProvider(ValidatorExceptionMapper.class)
+@RegisterProvider(UserServiceExceptionMapper.class)
 @RegisterProvider(UnauthorizedExceptionMapper.class)
 @RegisterProvider(ConflictExceptionMapper.class)
 @RegisterProvider(UnknownEntityExceptionMapper.class)
