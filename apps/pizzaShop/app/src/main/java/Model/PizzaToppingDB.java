@@ -31,20 +31,19 @@ public class PizzaToppingDB {
 	public List<PizzaTopping> getPizzaToppingByPizzaId(int pizzaId) throws SQLException {
 
 		try(Connection connection=connector.getConnection()) {
-			Statement stmt = connection.createStatement();
+			PreparedStatement stmt = connection.prepareStatement("select * from pizza_topping where pizza_id equals ?");
+			stmt.setInt(1,pizzaId);
 
-			String Querry = "select * from pizza_topping where pizza_id equals " + pizzaId;
-
-			ResultSet rs = stmt.executeQuery(Querry);
-			List<PizzaTopping> ToppingList = new LinkedList<PizzaTopping>();
+			ResultSet rs = stmt.executeQuery();
+			List<PizzaTopping> toppingList = new LinkedList<PizzaTopping>();
 
 			while (rs.next()) {
-				ToppingList.add(new PizzaTopping(rs.getInt("pizza_order_id"),
+				toppingList.add(new PizzaTopping(rs.getInt("pizza_order_id"),
 					rs.getInt("topping_id"),
 					rs.getInt("amount")));
 			}
 
-			return ToppingList;
+			return toppingList;
 		}
 	}
 

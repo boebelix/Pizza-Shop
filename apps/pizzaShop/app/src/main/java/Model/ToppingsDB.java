@@ -17,22 +17,21 @@ public class ToppingsDB {
 
 	}
 
-	public void createToppingsEntry(Toppings DTO) throws SQLException {
+	public void createToppingsEntry(Toppings dto) throws SQLException {
 		try(Connection connection=connector.getConnection()) {
 			PreparedStatement statement = connection.prepareStatement("insert into toppings ( name) VALUES (?)");
-			statement.setString(2, DTO.getName());
+			statement.setString(1, dto.getName());
 			statement.executeUpdate();
 		}
 	}
 
-	public Toppings getToppingById(int Id) throws SQLException {
+	public Toppings getToppingById(int id) throws SQLException {
 
 		try(Connection connection=connector.getConnection()) {
-			Statement stmt = connection.createStatement();
+			PreparedStatement stmt = connection.prepareStatement("select * from toppings where id equals ?");
+			stmt.setInt(1,id);
 
-			String Querry = "select * from toppings where id equals " + Id;
-
-			ResultSet rs = stmt.executeQuery(Querry);
+			ResultSet rs = stmt.executeQuery();
 
 			return new Toppings(rs.getInt(1),
 				rs.getString(2));

@@ -4,7 +4,6 @@ import ateam.validator.Validator;
 
 public class Toppings {
 
-
 	private int id;
 
 	@Validator.Required

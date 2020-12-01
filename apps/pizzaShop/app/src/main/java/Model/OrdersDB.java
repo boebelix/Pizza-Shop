@@ -13,10 +13,6 @@ public class OrdersDB {
 	@Inject
 	private DBConnector connector;
 
-	public OrdersDB() {
-
-	}
-
 	public int insertNewOrder(Orders orders) throws SQLException {
 
 		try(Connection connection=connector.getConnection()) {
@@ -29,19 +25,16 @@ public class OrdersDB {
 			statement.setString(6, orders.getCity());
 			statement.executeUpdate();
 
-			//returns OrderID
 			return statement.getGeneratedKeys().getInt(1);
 		}
 	}
 
-	public Orders getOrderById(int Id) throws SQLException {
+	public Orders getOrderById(int id) throws SQLException {
 
 		try(Connection connection=connector.getConnection()) {
-			Statement stmt = connection.createStatement();
+			PreparedStatement stmt = connection.prepareStatement("select * from orders where id equals ?");
 
-			String Querry = "select * from orders where id equals " + Id;
-
-			ResultSet rs = stmt.executeQuery(Querry);
+			ResultSet rs = stmt.executeQuery();
 
 			return new Orders(rs.getInt(1),
 				rs.getDate(2),

@@ -9,7 +9,7 @@
                   httpPort="9080"
                   httpsPort="9443"/>
 
-    <webApplication location="pizzashop.war" contextRoot="/">
+    <webApplication location="pizzaShop.war" contextRoot="/">
         <classloader apiTypeVisibility="+third-party" />
     </webApplication>
     <mpMetrics authentication="false"/>

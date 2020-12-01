@@ -13,28 +13,23 @@ public class SizesDB {
 	@Inject
 	private DBConnector connector;
 
-	public SizesDB() {
-
-	}
-
-	public void createSizeEntry(Sizes DTO) throws SQLException {
+	public void createSizeEntry(Sizes dto) throws SQLException {
 		try(Connection connection=connector.getConnection()) {
 			PreparedStatement statement = connection.prepareStatement("insert into sizes ( radius, base_price, topping_price) VALUES (?,?,?)");
-			statement.setInt(1, DTO.getRadius());
-			statement.setFloat(2, DTO.getBasePrice());
-			statement.setFloat(3, DTO.getTopping_price());
+			statement.setInt(1, dto.getRadius());
+			statement.setFloat(2, dto.getBasePrice());
+			statement.setFloat(3, dto.getTopping_price());
 			statement.executeUpdate();
 		}
 	}
 
-	public Sizes getSizesById(int Id) throws SQLException {
+	public Sizes getSizesById(int id) throws SQLException {
 
 		try(Connection connection=connector.getConnection()) {
-			Statement stmt = connection.createStatement();
+			PreparedStatement stmt = connection.prepareStatement("select * from sizes where id = ?");
+			stmt.setInt(1,id);
 
-			String Querry = "select * from sizes where id = " + Id;
-
-			ResultSet rs = stmt.executeQuery(Querry);
+			ResultSet rs = stmt.executeQuery();
 
 			return new Sizes(rs.getInt(1),
 				rs.getInt(2),

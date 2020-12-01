@@ -39,7 +39,6 @@ public class DBManager {
 	/*
 	 *Nimmt Order Objekt und fügt was noch nicht vorhanden ist in Datenbank ein
 	 */
-
 	public void placeOrder(Orders order) {
 		try {
 			int orderID = this.orders.insertNewOrder(order);
@@ -57,10 +56,10 @@ public class DBManager {
 		}
 	}
 
-	public Orders createOrderObjectFromDB(int OrderId) {
+	public Orders createOrderObjectFromDB(int orderId) {
 
 		try {
-			Orders order = orders.getOrderById(OrderId);
+			Orders order = orders.getOrderById(orderId);
 
 
 			for (Pizzas pizza : pizzas.getPizzaByOrderId(order.getId())) {

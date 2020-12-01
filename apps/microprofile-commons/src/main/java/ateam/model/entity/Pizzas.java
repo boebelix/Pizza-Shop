@@ -9,9 +9,12 @@ public class Pizzas {
 
 	@Validator.Required
 	List<Toppings> toppings;
+
 	private int iD;
+
 	@Validator.Required
 	private int sizeId;
+
 	@Validator.Required
 	private int orderId;
 

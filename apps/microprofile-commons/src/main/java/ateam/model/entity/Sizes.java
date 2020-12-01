@@ -59,7 +59,7 @@ public class Sizes {
 		return toppingPrice;
 	}
 
-	public void setTopping_price(float topping_price) {
-		this.toppingPrice = topping_price;
+	public void setTopping_price(float toppingPrice) {
+		this.toppingPrice = toppingPrice;
 	}
 }

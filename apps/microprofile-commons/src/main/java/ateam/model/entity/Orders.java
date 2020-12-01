@@ -9,11 +9,11 @@ import java.util.List;
 
 public class Orders {
 
-
 	@Validator.Required
 	List<Pizzas> pizzas;
 
 	private int id;
+
 	@Validator.Required
 	private Date orderDate;
 
@@ -21,8 +21,6 @@ public class Orders {
 	private Date orderArrived;
 
 	@Validator.Required
-	@Validator.Min(5)
-	@Validator.Max(5)
 	@Validator.Regex(regex = "^[0-9]{5}$", errorMessage = "Die PLZ besteht aus 5 zahlen")
 	private String postCode;
 

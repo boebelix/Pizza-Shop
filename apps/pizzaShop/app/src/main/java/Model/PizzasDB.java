@@ -15,15 +15,11 @@ public class PizzasDB {
 	@Inject
 	private DBConnector connector;
 
-	public PizzasDB() {
-
-	}
-
-	public int createPizzaEntry(Pizzas DTO) throws SQLException {
+	public int createPizzaEntry(Pizzas dto) throws SQLException {
 		try(Connection connection=connector.getConnection()) {
 			PreparedStatement statement = connection.prepareStatement("insert into pizzas ( order_id,size_id) VALUES (?,?)");
-			statement.setInt(1, DTO.getOrderId());
-			statement.setInt(2, DTO.getSizeId());
+			statement.setInt(1, dto.getOrderId());
+			statement.setInt(2, dto.getSizeId());
 			statement.executeUpdate();
 
 			return statement.getGeneratedKeys().getInt(1);
@@ -33,11 +29,10 @@ public class PizzasDB {
 	public List<Pizzas> getPizzaByOrderId(int orderId) throws SQLException {
 
 		try(Connection connection=connector.getConnection()) {
-			Statement stmt = connection.createStatement();
+			PreparedStatement stmt = connection.prepareStatement("select * from pizzas where order_id equals ?");
+			stmt.setInt(1,orderId);
 
-			String Querry = "select * from pizzas where order_id equals " + orderId;
-
-			ResultSet rs = stmt.executeQuery(Querry);
+			ResultSet rs = stmt.executeQuery();
 
 			List<Pizzas> pizzen = new LinkedList<>();
 
@@ -51,14 +46,14 @@ public class PizzasDB {
 		}
 	}
 
-	public Pizzas getPizzaBySizeId(int Id) throws SQLException {
+	public Pizzas getPizzaBySizeId(int id) throws SQLException {
 
 		try(Connection connection=connector.getConnection()) {
-			Statement stmt = connection.createStatement();
 
-			String Querry = "select * from pizzas where size_id equals " + Id;
+			PreparedStatement stmt = connection.prepareStatement("select * from pizzas where order_id equals ?");
+			stmt.setInt(1,id);
 
-			ResultSet rs = stmt.executeQuery(Querry);
+			ResultSet rs = stmt.executeQuery();
 
 			return new Pizzas(rs.getInt("id"),
 				rs.getInt("size_id"),
