@@ -1,8 +1,11 @@
 package ateam.user.endpoints;
 
+import ateam.exceptionmapper.UnauthorizedExceptionMapper;
+import ateam.exceptionmapper.UnknownEntityExceptionMapper;
 import ateam.exceptionmapper.UserServiceExceptionMapper;
 import ateam.model.entity.User;
 import ateam.model.exception.UnauthorizedException;
+import ateam.model.exception.UnknownEntityException;
 import ateam.user.service.UserService;
 import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 
@@ -17,6 +20,8 @@ import java.util.Objects;
 
 @Path("/user_intern")
 @RegisterProvider(UserServiceExceptionMapper.class)
+@RegisterProvider(UnknownEntityExceptionMapper.class)
+@RegisterProvider(UnauthorizedExceptionMapper.class)
 @Singleton
 public class UserInternalEndpoint {
 
@@ -32,7 +37,7 @@ public class UserInternalEndpoint {
 		}
 		User user = userService.loadUser(userId);
 		if(user == null) {
-			return Response.status(Response.Status.NOT_FOUND.getStatusCode()).build();
+			throw new UnknownEntityException("User existiert nicht!");
 		}
 
 		return Response.ok().entity(user).build();
