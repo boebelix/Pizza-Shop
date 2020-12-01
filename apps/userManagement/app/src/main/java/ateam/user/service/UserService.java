@@ -28,10 +28,10 @@ public class UserService {
 		return userDatabase.loadUser(username);
 	}
 
-    public User updateUser(User user) {
-		if(user.getPassword() != null) {
+	public User updateUser(User user) {
+		if (user.getPassword() != null) {
 			user.setPassword(passwordService.hashPassword(user.getPassword()));
 		}
 		return userDatabase.updateUser(user);
-    }
+	}
 }
