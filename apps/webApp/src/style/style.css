@@ -308,3 +308,11 @@ body {
 	background: rgba(0, 0, 0, 0.5);
 	z-index: 150;
 }
+
+.submitted_message{
+	color: green;
+}
+
+.error{
+	color: red;
+}

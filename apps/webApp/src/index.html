@@ -182,26 +182,24 @@
 	<div class="overlay_content_big">
 		<img src="style/images/logo.png" alt="Our Logo" width="80" height="80">
 		<h1>Dein Profil</h1>
+		<p id="error_profile_change" class="error"></p>
+		<p id="submitted_profile_change" class="submitted_message"></p>
 		<form id="form_email_profile" action="" method="post">
 			<label for="email_profile"><b>E-Mail ändern</b></label><br>
 			<input class="input_login" type="text" placeholder="E-Mail" id="email_profile" name="email_profile"
 				   required><br>
 			<input class="input_login" type="text" placeholder="E-Mail wiederholen" id="email_profile_repeat"
 				   name="email_profile_repeat" required><br>
-			<button type="submit" class="button_login">Übernehmen</button>
+			<button class="button_login" type="button">Übernehmen</button>
 			<br>
 		</form>
-		<form id="form_password_profile" action="" method="post">
-			<label for="password_current_profile"><b>Passwort festlegen</b></label><br>
-			<input class="input_login" type="password" placeholder="Aktuelles Passwort"
-				   id="password_current_profile" name="password_current_profile" required><br>
+			<label for="password_new_profile"><b>Passwort festlegen</b></label><br>
 			<input class="input_login" type="password" placeholder="Passwort" id="password_new_profile"
 				   name="password_new_profile" required><br>
 			<input class="input_login" type="password" placeholder="Wiederholen" id="password_new_profile_repeat"
 				   name="password_new_profile_repeat" required><br>
-			<button type="submit" class="button_login">Übernehmen</button>
+			<button type="submit" class="button_login" id="passwd_change">Übernehmen</button>
 			<br>
-		</form>
 		<form id="form_address_profile" action="" method="post">
 			<label for="street_profile"><b>Straße und Hausnummer</b></label><br>
 			<input class="input_login" type="text" placeholder="Straße" id="street_profile" name="street_profile"
