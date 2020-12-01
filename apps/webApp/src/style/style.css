@@ -282,6 +282,10 @@ body {
 	margin-left: 20px;
 }
 
+#passwdMsg {
+	font-style: italic;
+}
+
 .foreground {
 	position: relative;
 	z-index: 300000;

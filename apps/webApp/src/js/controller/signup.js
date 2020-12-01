@@ -1,6 +1,56 @@
 const initSignup = () => {
 	document.getElementById("register_submit_button").addEventListener("click", () => submitData());
 	document.getElementById("register_back_button").addEventListener("click", () => setState("login_state"));
+	document.getElementById("password_signup").addEventListener("keyup", () => isPasswordValid());
+	let canvas = document.querySelector("#pwdCanvas");
+	let ctx = canvas.getContext("2d");
+	ctx.fillStyle = "#FFF";
+	ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+}
+
+const isPasswordValid = () => {
+	const passwd = document.getElementById("password_signup").value;
+	let hasMinLen = passwd.length >= MIN_SIGNS;
+	let hasUpperAndLowercase = passwd.toUpperCase() != passwd && passwd.toLowerCase() != passwd;
+	let usesNumAndSpecial = /\d/.test(passwd) && REGEX_SIGNS.test(passwd);
+	let hasMoreThanSeven = passwd.length > SAFE_SIGNS;
+	let barColorLeft = "#FFF";
+	let barColorRight = "#FFF";
+	let factor = 0;
+
+	if (passwd.length === 0) {
+		factor = 5 * CANVAS_FACTOR;
+	} else if (!hasMinLen) {
+		document.querySelector("#passwdMsg").innerHTML = "nicht sicher";
+		barColorLeft = "#F00";
+		factor = 1 * CANVAS_FACTOR;
+	} else if (hasUpperAndLowercase && usesNumAndSpecial && hasMoreThanSeven) {
+		document.querySelector("#passwdMsg").innerHTML = "sehr sicher";
+		barColorLeft = "#4D4";
+		factor = 5 * CANVAS_FACTOR;
+	} else if (hasUpperAndLowercase && usesNumAndSpecial) {
+		document.querySelector("#passwdMsg").innerHTML = "sicher";
+		barColorLeft = "#3B3";
+		factor = 4 * CANVAS_FACTOR;
+	} else if (hasUpperAndLowercase) {
+		document.querySelector("#passwdMsg").innerHTML = "mittel sicher";
+		barColorLeft = "#DB0";
+		factor = 3 * CANVAS_FACTOR;
+	} else {
+		document.querySelector("#passwdMsg").innerHTML = "akzeptabel";
+		barColorLeft = "#D50";
+		factor = 2 * CANVAS_FACTOR;
+	}
+
+	let c = document.querySelector("#pwdCanvas");
+	let ctx = c.getContext("2d");
+
+	let grd = ctx.createLinearGradient(0, 0, CANVAS_WIDTH * factor, 0);
+	grd.addColorStop(0, barColorLeft);
+	grd.addColorStop(1, barColorRight);
+
+	ctx.fillStyle = grd;
+	ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 }
 
 const submitData = async () => {
