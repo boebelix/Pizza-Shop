@@ -13,33 +13,33 @@ const isPasswordValid = () => {
     let hasMinLen = passwd.length >= MIN_SIGNS;
     let hasUpperAndLowercase = passwd.toUpperCase() != passwd && passwd.toLowerCase() != passwd;
     let usesNumAndSpecial = /\d/.test(passwd) && REGEX_SIGNS.test(passwd);
-	let hasMoreThanSeven = passwd.length > SAFE_SIGNS;
-	let barColorLeft = "#FFF";
-	let barColorRight = "#FFF";
-	let factor = 0;
+    let hasMoreThanSeven = passwd.length > SAFE_SIGNS;
+    let barColorLeft = "#FFF";
+    let barColorRight = "#FFF";
+    let factor = 0;
 
-	if(passwd.length === 0) {
-		factor = 5 * CANVAS_FACTOR;
-	} else if(!hasMinLen) {
-		document.querySelector("#passwdMsg").innerHTML = "nicht sicher";
-		barColorLeft = "#F00";
-		factor = 1 * CANVAS_FACTOR;
+    if(passwd.length === 0) {
+	factor = 5 * CANVAS_FACTOR;
+    } else if(!hasMinLen) {
+	document.querySelector("#passwdMsg").innerHTML = "nicht sicher";
+	barColorLeft = "#F00";
+	factor = 1 * CANVAS_FACTOR;
     } else if(hasUpperAndLowercase && usesNumAndSpecial && hasMoreThanSeven){
-		document.querySelector("#passwdMsg").innerHTML = "sehr sicher";
-		barColorLeft = "#4D4";
-		factor = 5 * CANVAS_FACTOR;
+	document.querySelector("#passwdMsg").innerHTML = "sehr sicher";
+	barColorLeft = "#4D4";
+	factor = 5 * CANVAS_FACTOR;
     } else if(hasUpperAndLowercase && usesNumAndSpecial) {
-		document.querySelector("#passwdMsg").innerHTML = "sicher";
-		barColorLeft = "#3B3";
-		factor = 4 * CANVAS_FACTOR;
+	document.querySelector("#passwdMsg").innerHTML = "sicher";
+	barColorLeft = "#3B3";
+	factor = 4 * CANVAS_FACTOR;
     } else if(hasUpperAndLowercase) {
-		document.querySelector("#passwdMsg").innerHTML = "mittel sicher";
-		barColorLeft = "#DB0";
-		factor = 3 * CANVAS_FACTOR;
+	document.querySelector("#passwdMsg").innerHTML = "mittel sicher";
+	barColorLeft = "#DB0";
+	factor = 3 * CANVAS_FACTOR;
     } else {
-		document.querySelector("#passwdMsg").innerHTML = "akzeptabel";
-		barColorLeft = "#D50";
-		factor = 2 * CANVAS_FACTOR;
+	document.querySelector("#passwdMsg").innerHTML = "akzeptabel";
+	barColorLeft = "#D50";
+	factor = 2 * CANVAS_FACTOR;
     }
 
     let c = document.querySelector("#pwdCanvas");
