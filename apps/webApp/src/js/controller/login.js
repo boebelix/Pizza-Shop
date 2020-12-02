@@ -23,7 +23,6 @@ const login = async () => {
 		password.innerHTML = "";
 		setCookie("uuid", output.token, 1);
 		setUserData(output.user);
-		console.log(USER_JSON);
 	} else {
 		document.getElementById("error_login").innerHTML = decodeUtf(output.message);
 	}
