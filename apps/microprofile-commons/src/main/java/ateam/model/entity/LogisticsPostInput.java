@@ -4,29 +4,27 @@ import ateam.validator.Validator;
 
 public class LogisticsPostInput {
 	@Validator.Required
-	@Validator.Min(1)
-	private String orderId;
+	private int orderId;
 
 	@Validator.Required
-	@Validator.Min(1)
-	private String userId;
+	private int userId;
 
 	public LogisticsPostInput() {
 	}
 
-	public String getOrderId() {
+	public int getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(String orderId) {
+	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
 
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 

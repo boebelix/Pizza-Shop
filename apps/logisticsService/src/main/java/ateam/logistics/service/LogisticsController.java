@@ -30,7 +30,7 @@ import java.net.URISyntaxException;
 @Singleton
 @RegisterProvider(ValidatorExceptionMapper.class)
 @RegisterProvider(UnauthorizedExceptionMapper.class)
-public class LogisticsService {
+public class LogisticsController {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -40,7 +40,7 @@ public class LogisticsService {
 		UserInternalClient userInternalClient = RestClientBuilder.newBuilder()
 			.baseUri(userURI)
 			.build(UserInternalClient.class);
-		User user = userInternalClient.getUser(Integer.parseInt(input.getUserId()), InitialContext.doLookup("appServicePassword"));
+		User user = userInternalClient.getUser(input.getUserId(), InitialContext.doLookup("appServicePassword"));
 
 		LogisticsLog log = new LogisticsLog(user);
 		LogService logService = new LogService(InitialContext.doLookup("LogisticsLogPath"));
