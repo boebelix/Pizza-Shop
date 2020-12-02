@@ -9,7 +9,9 @@ import java.util.List;
 
 public class ProcurementLog {
 	private String time;
+
 	@Validator.Valid
+	@Validator.Required
 	private List<ProcurementLogItem> items;
 
 	public ProcurementLog() {

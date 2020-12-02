@@ -6,9 +6,11 @@ public class ProcurementLogItem {
 	@Validator.Required
 	@Validator.Min(1)
 	private String name;
+
 	@Validator.Required
 	@Validator.Min(1)
-	private String amount;
+	private int amount;
+
 	@Validator.Required
 	@Validator.Min(1)
 	private String unit;
@@ -20,7 +22,7 @@ public class ProcurementLogItem {
 		this.name = name;
 	}
 
-	public void setAmount(String amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 
@@ -32,7 +34,7 @@ public class ProcurementLogItem {
 		return name;
 	}
 
-	public String getAmount() {
+	public int getAmount() {
 		return amount;
 	}
 
