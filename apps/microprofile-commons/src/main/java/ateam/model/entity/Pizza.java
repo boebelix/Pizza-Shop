@@ -5,11 +5,11 @@ import ateam.validator.Validator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Pizzas {
+public class Pizza {
 
 	@Validator.Required
 	@Validator.Valid
-	List<Toppings> toppings;
+	List<Topping> toppings;
 
 	private int iD;
 
@@ -19,18 +19,18 @@ public class Pizzas {
 	@Validator.Required
 	private int orderId;
 
-	public Pizzas() {
-		toppings = new LinkedList<Toppings>();
+	public Pizza() {
+		toppings = new LinkedList<Topping>();
 	}
 
-	public Pizzas(int iD, int sizeId, int orderId) {
+	public Pizza(int iD, int sizeId, int orderId) {
 		this.iD = iD;
 		this.sizeId = sizeId;
 		this.orderId = orderId;
-		toppings = new LinkedList<Toppings>();
+		toppings = new LinkedList<Topping>();
 	}
 
-	public Pizzas(int sizeId) {
+	public Pizza(int sizeId) {
 		this.sizeId = sizeId;
 	}
 
@@ -58,15 +58,15 @@ public class Pizzas {
 		this.sizeId = sizeId;
 	}
 
-	public List<Toppings> getToppings() {
+	public List<Topping> getToppings() {
 		return toppings;
 	}
 
-	public void setToppings(List<Toppings> toppings) {
+	public void setToppings(List<Topping> toppings) {
 		this.toppings = toppings;
 	}
 
-	public void addTopping(Toppings topping) {
+	public void addTopping(Topping topping) {
 		toppings.add(topping);
 	}
 }

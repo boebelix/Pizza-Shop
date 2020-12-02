@@ -1,10 +1,10 @@
-package Model;
+package ateam.shop.db;
 
 import ateam.DBConnection.DBConnector;
-import ateam.model.entity.Orders;
+import ateam.model.entity.Order;
 import ateam.model.entity.PizzaTopping;
-import ateam.model.entity.Pizzas;
-import ateam.model.entity.Toppings;
+import ateam.model.entity.Pizza;
+import ateam.model.entity.Topping;
 import ateam.model.exception.ShopException;
 
 import javax.inject.Inject;
@@ -33,36 +33,33 @@ public class DBManager {
 	@Inject
 	private ToppingsDB toppings;
 
-	public DBManager() {
-	}
-
 	/*
 	 *Nimmt Order Objekt und fügt was noch nicht vorhanden ist in Datenbank ein
 	 */
-	public void placeOrder(Orders order) {
+	public void placeOrder(Order order) {
 		try {
 			int orderID = this.orders.insertNewOrder(order);
 
-			for (Pizzas pizza : order.getPizzas()) {
+			for (Pizza pizza : order.getPizzas()) {
 
 				int pizzaID = pizzas.createPizzaEntry(pizza);
 
-				for (Toppings t : pizza.getToppings())
+				for (Topping t : pizza.getToppings())
 					pizzaTopping.createPizzaToppingEntry(new PizzaTopping(pizzaID, t.getId(), 1));//1 ist ein Dummy Value, ich sah in der API nicht, dass die Menge übertragen wird
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new ShopException("Couldn't add Pizza to ExistingOrder", e);
+			throw new ShopException("Couldn't add Pizza to existing Order", e);
 		}
 	}
 
-	public Orders createOrderObjectFromDB(int orderId) {
+	public Order createOrderObjectFromDB(int orderId) {
 
 		try {
-			Orders order = orders.getOrderById(orderId);
+			Order order = orders.getOrderById(orderId);
 
 
-			for (Pizzas pizza : pizzas.getPizzaByOrderId(order.getId())) {
+			for (Pizza pizza : pizzas.getPizzaByOrderId(order.getId())) {
 
 				List<PizzaTopping> pizzaToppings = pizzaTopping.getPizzaToppingByPizzaId(pizza.getID());
 

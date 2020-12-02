@@ -2,7 +2,7 @@ package ateam.model.entity;
 
 import ateam.validator.Validator;
 
-public class Toppings {
+public class Topping {
 
 	private int id;
 
@@ -10,15 +10,12 @@ public class Toppings {
 	@Validator.Regex(regex = "^[A-Z]([^0-9\\§\\%\\&\\!\\?])+?[a-z]$", errorMessage = "ToppingName muss mit einem Großbuchstaben anfangen und mit einem Kleinbuchstaben enden! Die Zeichen '§', '%', '&', '!' und '?' sind nicht erlaubt!")
 	private String name;
 
-	public Toppings() {
-	}
-
-	public Toppings(int id, String name) {
+	public Topping(int id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 
-	public Toppings(String name) {
+	public Topping(String name) {
 		this.name = name;
 	}
 

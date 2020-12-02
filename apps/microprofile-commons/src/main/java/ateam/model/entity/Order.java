@@ -7,11 +7,11 @@ import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Orders {
+public class Order {
 
 	@Validator.Required
 	@Validator.Valid
-	List<Pizzas> pizzas;
+	List<Pizza> pizzas;
 
 	private int id;
 
@@ -36,11 +36,11 @@ public class Orders {
 	@Validator.Regex(regex = "^[A-Z]([^\\0-9\\§\\%\\&\\!\\?])+?[a-z]$", errorMessage = "Stadt muss mit einem Großbuchstaben anfangen und mit einem Kleinbuchstaben enden! Zahlen, so wie die Zeichen '§', '%', '&', '!' und '?' sind nicht erlaubt!")
 	private String city;
 
-	public Orders() {
-		pizzas = new LinkedList<Pizzas>();
+	public Order() {
+		pizzas = new LinkedList<Pizza>();
 	}
 
-	public Orders(int id, Date orderDate, Date orderArrived, String PLZ, String street, String houseNumber, String city) {
+	public Order(int id, Date orderDate, Date orderArrived, String PLZ, String street, String houseNumber, String city) {
 		this.id = id;
 		this.orderDate = orderDate;
 		this.orderArrived = orderArrived;
@@ -50,7 +50,7 @@ public class Orders {
 		this.city = city;
 	}
 
-	public Orders(Date orderDate, Date orderArrived, String PLZ, String street, String houseNumber, String city) {
+	public Order(Date orderDate, Date orderArrived, String PLZ, String street, String houseNumber, String city) {
 		this.orderDate = orderDate;
 		this.orderArrived = orderArrived;
 		this.postCode = PLZ;
@@ -59,11 +59,11 @@ public class Orders {
 		this.city = city;
 	}
 
-	public List<Pizzas> getPizzas() {
+	public List<Pizza> getPizzas() {
 		return pizzas;
 	}
 
-	public void setPizzas(List<Pizzas> pizzas) {
+	public void setPizzas(List<Pizza> pizzas) {
 		this.pizzas = pizzas;
 	}
 
@@ -128,7 +128,7 @@ public class Orders {
 
 	//additional
 
-	public void addPizza(Pizzas pizza) {
+	public void addPizza(Pizza pizza) {
 		pizzas.add(pizza);
 	}
 

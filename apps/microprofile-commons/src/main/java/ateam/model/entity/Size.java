@@ -2,7 +2,7 @@ package ateam.model.entity;
 
 import ateam.validator.Validator;
 
-public class Sizes {
+public class Size {
 
 	private int id;
 
@@ -15,17 +15,14 @@ public class Sizes {
 	@Validator.Required
 	private float toppingPrice;
 
-	public Sizes() {
-	}
-
-	public Sizes(int id, int radius, float basePrice, float topping_price) {
+	public Size(int id, int radius, float basePrice, float topping_price) {
 		this.id = id;
 		this.radius = radius;
 		this.basePrice = basePrice;
 		this.toppingPrice = topping_price;
 	}
 
-	public Sizes(int radius, float basePrice, float topping_price) {
+	public Size(int radius, float basePrice, float topping_price) {
 		this.radius = radius;
 		this.basePrice = basePrice;
 		this.toppingPrice = topping_price;

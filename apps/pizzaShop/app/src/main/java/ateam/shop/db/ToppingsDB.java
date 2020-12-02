@@ -1,7 +1,7 @@
-package Model;
+package ateam.shop.db;
 
 import ateam.DBConnection.DBConnector;
-import ateam.model.entity.Toppings;
+import ateam.model.entity.Topping;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -13,11 +13,7 @@ public class ToppingsDB {
 	@Inject
 	private DBConnector connector;
 
-	public ToppingsDB() {
-
-	}
-
-	public void createToppingsEntry(Toppings dto) throws SQLException {
+	public void createToppingsEntry(Topping dto) throws SQLException {
 		try(Connection connection=connector.getConnection()) {
 			PreparedStatement statement = connection.prepareStatement("insert into toppings ( name) VALUES (?)");
 			statement.setString(1, dto.getName());
@@ -25,7 +21,7 @@ public class ToppingsDB {
 		}
 	}
 
-	public Toppings getToppingById(int id) throws SQLException {
+	public Topping getToppingById(int id) throws SQLException {
 
 		try(Connection connection=connector.getConnection()) {
 			PreparedStatement stmt = connection.prepareStatement("select * from toppings where id equals ?");
@@ -33,7 +29,7 @@ public class ToppingsDB {
 
 			ResultSet rs = stmt.executeQuery();
 
-			return new Toppings(rs.getInt(1),
+			return new Topping(rs.getInt(1),
 				rs.getString(2));
 		}
 	}

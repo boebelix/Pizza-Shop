@@ -1,4 +1,4 @@
-package Model;
+package ateam.shop.db;
 
 import ateam.DBConnection.DBConnector;
 import ateam.model.entity.PizzaTopping;
@@ -14,9 +14,6 @@ public class PizzaToppingDB {
 
 	@Inject
 	private DBConnector connector;
-
-	public PizzaToppingDB() {
-	}
 
 	public void createPizzaToppingEntry(PizzaTopping dto) throws SQLException {
 		try(Connection connection=connector.getConnection()) {

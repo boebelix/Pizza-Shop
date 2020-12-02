@@ -1,7 +1,7 @@
-package Model;
+package ateam.shop.db;
 
 import ateam.DBConnection.DBConnector;
-import ateam.model.entity.Pizzas;
+import ateam.model.entity.Pizza;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -15,7 +15,7 @@ public class PizzasDB {
 	@Inject
 	private DBConnector connector;
 
-	public int createPizzaEntry(Pizzas dto) throws SQLException {
+	public int createPizzaEntry(Pizza dto) throws SQLException {
 		try(Connection connection=connector.getConnection()) {
 			PreparedStatement statement = connection.prepareStatement("insert into pizzas ( order_id,size_id) VALUES (?,?)");
 			statement.setInt(1, dto.getOrderId());
@@ -26,7 +26,7 @@ public class PizzasDB {
 		}
 	}
 
-	public List<Pizzas> getPizzaByOrderId(int orderId) throws SQLException {
+	public List<Pizza> getPizzaByOrderId(int orderId) throws SQLException {
 
 		try(Connection connection=connector.getConnection()) {
 			PreparedStatement stmt = connection.prepareStatement("select * from pizzas where order_id equals ?");
@@ -34,10 +34,10 @@ public class PizzasDB {
 
 			ResultSet rs = stmt.executeQuery();
 
-			List<Pizzas> pizzen = new LinkedList<>();
+			List<Pizza> pizzen = new LinkedList<>();
 
 			while (rs.next()) {
-				pizzen.add(new Pizzas(rs.getInt("id"),
+				pizzen.add(new Pizza(rs.getInt("id"),
 					rs.getInt("size_id"),
 					rs.getInt("order_id")));
 			}
@@ -46,7 +46,7 @@ public class PizzasDB {
 		}
 	}
 
-	public Pizzas getPizzaBySizeId(int id) throws SQLException {
+	public Pizza getPizzaBySizeId(int id) throws SQLException {
 
 		try(Connection connection=connector.getConnection()) {
 
@@ -55,7 +55,7 @@ public class PizzasDB {
 
 			ResultSet rs = stmt.executeQuery();
 
-			return new Pizzas(rs.getInt("id"),
+			return new Pizza(rs.getInt("id"),
 				rs.getInt("size_id"),
 				rs.getInt("order_id"));
 		}

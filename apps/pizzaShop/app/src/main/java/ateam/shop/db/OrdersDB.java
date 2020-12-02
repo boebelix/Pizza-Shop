@@ -1,7 +1,7 @@
-package Model;
+package ateam.shop.db;
 
 import ateam.DBConnection.DBConnector;
-import ateam.model.entity.Orders;
+import ateam.model.entity.Order;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -13,7 +13,7 @@ public class OrdersDB {
 	@Inject
 	private DBConnector connector;
 
-	public int insertNewOrder(Orders orders) throws SQLException {
+	public int insertNewOrder(Order orders) throws SQLException {
 
 		try(Connection connection=connector.getConnection()) {
 			PreparedStatement statement = connection.prepareStatement("insert into orders (id, order_date, order_sent, postal_code, street, hnumber, city) VALUES (?,?,?,?,?,?)");
@@ -29,14 +29,14 @@ public class OrdersDB {
 		}
 	}
 
-	public Orders getOrderById(int id) throws SQLException {
+	public Order getOrderById(int id) throws SQLException {
 
 		try(Connection connection=connector.getConnection()) {
 			PreparedStatement stmt = connection.prepareStatement("select * from orders where id equals ?");
 
 			ResultSet rs = stmt.executeQuery();
 
-			return new Orders(rs.getInt(1),
+			return new Order(rs.getInt(1),
 				rs.getDate(2),
 				rs.getDate(3),
 				rs.getString(4),
