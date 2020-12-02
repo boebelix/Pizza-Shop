@@ -7,6 +7,9 @@ const CANVAS_HEIGHT = 10;
 const CANVAS_WIDTH = 240;
 const CANVAS_FACTOR = 0.4;
 const REGEX_SIGNS = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+const PASSWORD_ERROR_EQUALITY = "Passwörter stimmen nicht überein";
+const EMAIL_ERROR_EQUALITY = "E-mail-Adressen stimmen nicht überein";
+const SERVER_ADDRESS = "http://localhost:9080";
 
 const setUserData = (JSON) => {
 	USER_JSON = JSON;

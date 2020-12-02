@@ -42,8 +42,8 @@
 	<div class="overlay_content">
 		<img src="style/images/logo.png" alt="Our Logo" width="80" height="80"><br>
 		<h1>Registrieren</h1>
-		<p id="error_server" class="error_message"></p>
-		<p id="error_password" class="error_message">Passwörter stimmen nicht über ein</p>
+		<p id="error_server" class="error"></p>
+		<p id="error_password" class="error"></p>
 		<label for="email_signup"><b>E-Mail und Nutzername</b></label><br>
 		<input class="input_login" type="text" placeholder="E-Mail" id="email_signup" name="email_signup" required>
 		<input class="input_login" type="text" placeholder="Nutzername" id="username_signup" name="username_signup"
@@ -184,15 +184,15 @@
 		<h1>Dein Profil</h1>
 		<p id="error_profile_change" class="error"></p>
 		<p id="submitted_profile_change" class="submitted_message"></p>
-		<form id="form_email_profile" action="" method="post">
+		
 			<label for="email_profile"><b>E-Mail ändern</b></label><br>
 			<input class="input_login" type="text" placeholder="E-Mail" id="email_profile" name="email_profile"
 				   required><br>
 			<input class="input_login" type="text" placeholder="E-Mail wiederholen" id="email_profile_repeat"
 				   name="email_profile_repeat" required><br>
-			<button class="button_login" type="button">Übernehmen</button>
+			<button id ="email_change" class="button_login" type="button">Übernehmen</button>
 			<br>
-		</form>
+
 			<label for="password_new_profile"><b>Passwort festlegen</b></label><br>
 			<input class="input_login" type="password" placeholder="Passwort" id="password_new_profile"
 				   name="password_new_profile" required><br>
@@ -200,7 +200,7 @@
 				   name="password_new_profile_repeat" required><br>
 			<button type="submit" class="button_login" id="passwd_change">Übernehmen</button>
 			<br>
-		<form id="form_address_profile" action="" method="post">
+		
 			<label for="street_profile"><b>Straße und Hausnummer</b></label><br>
 			<input class="input_login" type="text" placeholder="Straße" id="street_profile" name="street_profile"
 				   required>
@@ -214,9 +214,9 @@
 			<label for="country_profile"><b>Land</b></label><br>
 			<input class="input_login" type="text" placeholder="Land" id="country_profile" name="country_profile"
 				   required><br>
-			<button type="submit" class="button_login">Übernehmen</button>
+			<button id="address_change" class="button_login">Übernehmen</button>
 			<br>
-		</form>
+		
 		<button id="profile_back_button" class="button_logout">Zurück</button>
 		<button id="logout_button"
 				type="button" class="button_logout">Abmelden

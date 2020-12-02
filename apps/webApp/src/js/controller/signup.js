@@ -59,7 +59,7 @@ const submitData = async () => {
 	let name = isLengthValid("name_signup");
 	let prename = isLengthValid("prename_signup");
 	let username = isLengthValid("username_signup");
-	let password = passwordValidator("password_signup", "password_signup_repeat");
+	let password = equalityValidator("password_signup", "password_signup_repeat", "error_password", PASSWORD_ERROR_EQUALITY);
 	let street = isLengthValid("street_signup");
 	let number = isLengthValid("number_signup");
 	let postalcode = isLengthValid("postalcode_signup");
@@ -84,20 +84,16 @@ const submitData = async () => {
 			"city": document.getElementById("city_signup").value,
 			"country": document.getElementById("country_signup").value
 		};
-		let error = await postData('http://localhost:9080/user', data);
+		let error = await postData(SERVER_ADDRESS+'/user', data);
 
 		if (error.status == RESPONSE_OK) {
-			console.log(error.message);
-			document.getElementById("error_server").style.display = "none";
 			document.getElementById("error_server").innerHTML = "";
 			//Login here
 			document.getElementById("username_login").value = data.username;
 			document.getElementById("password_login").value = data.password;
 			login();
 		} else {
-			console.log(error.message);
-			document.getElementById("error_server").innerHTML = decode_utf(error.message);
-			document.getElementById("error_server").style.display = "block";
+			document.getElementById("error_server").innerHTML = decodeUtf(error.message);
 		}
 	}
 }
@@ -121,13 +117,4 @@ const postData = async (url, data) => {
 	return error;
 }
 
-const decode_utf = (message) => {
-	let first_replace = message.replace(/ÃŸ/g, 'ß');
-	let decoded_message;
-	try {
-		decoded_message = decodeURIComponent(escape(first_replace));
-	} catch (e) {
-		decoded_message = first_replace;
-	}
-	return decoded_message;
-}
+
