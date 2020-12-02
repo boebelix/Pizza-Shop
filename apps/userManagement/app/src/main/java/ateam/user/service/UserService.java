@@ -17,8 +17,7 @@ public class UserService {
 
 	public User createUser(User user) {
 		user.setPassword(passwordService.hashPassword(user.getPassword()));
-		userDatabase.createUser(user);
-		return user;
+		return userDatabase.createUser(user);
 	}
 
 	public User loadUser(int id) {
@@ -29,4 +28,10 @@ public class UserService {
 		return userDatabase.loadUser(username);
 	}
 
+	public User updateUser(User user) {
+		if (user.getPassword() != null) {
+			user.setPassword(passwordService.hashPassword(user.getPassword()));
+		}
+		return userDatabase.updateUser(user);
+	}
 }
