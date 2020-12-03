@@ -5,13 +5,26 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
 
 public class Validator {
+
+	/**
+	 * Add this annotation to all Attributes that contain objects should get their
+	 * inner structure validated.
+	 */
+	@Retention(RetentionPolicy.RUNTIME)
+	@Target(ElementType.FIELD)
+	public @interface Valid {
+
+	}
 
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.FIELD)
 	public @interface Required {
-		String errorMessage() default "%fieldname% required (not null)!";
+		String errorMessage() default "%fieldname% benötigt!";
 	}
 
 	@Retention(RetentionPolicy.RUNTIME)
@@ -21,50 +34,77 @@ public class Validator {
 		String errorMessage();
 	}
 
-	/**
-	 *
-	 */
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.FIELD)
 	public @interface Min {
 		long value();
-		String errorMessage() default "%fieldname% should have a length of at least %value%!";
+		String errorMessage() default "%fieldname% benötigt eine größe von mindestens %value%!";
 	}
 
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.FIELD)
 	public @interface Max {
 		long value();
-		String errorMessage() default "%fieldname% should have a length of max %value%!";
+		String errorMessage() default "%fieldname% benötigt eine größe von mindestens %value%!";
 	}
 
-	public static void validate(Object object) {
+	public static void validate(Object object, Class<?>... ignoreAnnotations) {
+		validate(object, new HashSet<>(), new HashSet<>(Arrays.asList(ignoreAnnotations)));
+	}
+
+	private static void validate(Object object, HashSet<Object> seenObjects, HashSet<Class<?>> ignoreAnnotations) {
+		validateObjects(object, seenObjects, ignoreAnnotations);
+		if(object instanceof Iterable) {
+			for(Object o : (Iterable) object) {
+				validate(o, seenObjects, ignoreAnnotations);
+			}
+		} else if(object instanceof Object[]) {
+			for(Object o : (Object[]) object) {
+				validate(o, seenObjects, ignoreAnnotations);
+			}
+		}
+	}
+
+	private static void validateObjects(Object object, HashSet<Object> seenObjects, HashSet<Class<?>> ignoreAnnotations) {
+		if (seenObjects.contains(object)) {
+			return;
+		} else {
+			seenObjects.add(object);
+		}
+
 		for(Field field : object.getClass().getDeclaredFields()) {
 			try {
 				field.setAccessible(true);
-				if(field.isAnnotationPresent(Required.class) && field.get(object) == null) {
+				Object fieldValue = field.get(object);
+				if(!ignoreAnnotations.contains(Required.class) && field.isAnnotationPresent(Required.class) && fieldValue == null) {
 					throw new ValidationException(field.getAnnotation(Required.class).errorMessage().replace("%fieldname%", field.getName()));
 				}
-				if(field.isAnnotationPresent(Regex.class) && field.get(object) != null) {
-					String string = String.valueOf(field.get(object));
-					String regex = field.getAnnotation(Regex.class).regex();
-					if(!string.matches(regex)) {
-						throw new ValidationException(field.getAnnotation(Regex.class).errorMessage().replace("%fieldname%", field.getName()));
+				if(fieldValue != null) {
+					if(!ignoreAnnotations.contains(Regex.class) && field.isAnnotationPresent(Regex.class)) {
+						String string = String.valueOf(fieldValue);
+						String regex = field.getAnnotation(Regex.class).regex();
+						if(!string.matches(regex)) {
+							throw new ValidationException(field.getAnnotation(Regex.class).errorMessage().replace("%fieldname%", field.getName()));
+						}
 					}
-				}
-				if(field.isAnnotationPresent(Min.class) && field.get(object) != null) {
-					long min = field.getAnnotation(Min.class).value();
-					if(checkIsSmallerThen(field.get(object), min)) {
-						throw new ValidationException(field.getAnnotation(Min.class).errorMessage()
-							.replace("%fieldname%", field.getName()).replace("%value%", String.valueOf(min)));
+					if(!ignoreAnnotations.contains(Min.class) && field.isAnnotationPresent(Min.class)) {
+						long min = field.getAnnotation(Min.class).value();
+						if(getObjectLength(fieldValue) < getObjectLength(min)) {
+							throw new ValidationException(field.getAnnotation(Min.class).errorMessage()
+								.replace("%fieldname%", field.getName()).replace("%value%", String.valueOf(min)));
+						}
 					}
-				}
-				if(field.isAnnotationPresent(Max.class) && field.get(object) != null) {
-					long max = field.getAnnotation(Max.class).value();
-					if(checkIsSmallerThen(max, field.get(object))) {
-						throw new ValidationException(field.getAnnotation(Max.class).errorMessage()
-							.replace("%fieldname%", field.getName()).replace("%value%", String.valueOf(max)));
+					if(!ignoreAnnotations.contains(Max.class) && field.isAnnotationPresent(Max.class)) {
+						long max = field.getAnnotation(Max.class).value();
+						if(getObjectLength(max) < getObjectLength(fieldValue)) {
+							throw new ValidationException(field.getAnnotation(Max.class).errorMessage()
+								.replace("%fieldname%", field.getName()).replace("%value%", String.valueOf(max)));
+						}
 					}
+					if(!ignoreAnnotations.contains(Valid.class) && field.isAnnotationPresent(Valid.class)) {
+						validate(fieldValue, seenObjects, ignoreAnnotations);
+					}
+
 				}
 				field.setAccessible(false);
 			} catch (IllegalAccessException e) {
@@ -74,22 +114,19 @@ public class Validator {
 		}
 	}
 
-	private static boolean checkIsSmallerThen(Object left, Object right) {
+	private static long getObjectLength(Object object) {
 		final String isNumericRegex = "^\\d+$";
-		String leftString = String.valueOf(left);
-		String rightString = String.valueOf(right);
-		Long leftValue;
-		if(leftString.matches(isNumericRegex)) {
-			leftValue = Long.parseLong(leftString);
+		String stringValue = String.valueOf(object);
+		long numericValue;
+		if(object instanceof Object[]) {
+			numericValue = ((Object[]) object).length;
+		} else if(object instanceof Collection) {
+			numericValue = ((Collection) object).size();
+		} else if(stringValue.matches(isNumericRegex)) {
+			numericValue = Long.parseLong(stringValue);
 		} else {
-			leftValue = (long) (leftString.length());
+			numericValue = stringValue.length();
 		}
-		Long rightValue;
-		if(rightString.matches(isNumericRegex)) {
-			rightValue = Long.parseLong(rightString);
-		} else {
-			rightValue = (long) (rightString.length());
-		}
-		return leftValue < rightValue;
+		return numericValue;
 	}
 }

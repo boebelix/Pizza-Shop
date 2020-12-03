@@ -1,4 +1,4 @@
-package ateam.user.db;
+package ateam.DBConnection;
 
 import javax.inject.Singleton;
 import javax.naming.Context;
@@ -9,13 +9,13 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 @Singleton
-public class DBConnection {
+public class DBConnector {
 	private DataSource dataSource;
 
-	public DBConnection() {
+	public DBConnector() {
 		try {
 			Context ctxt = new InitialContext();
-			this.dataSource = (DataSource) ctxt.lookup("jdbc/mySQL");
+			dataSource = (DataSource) ctxt.lookup("jdbc/mySQL");
 		} catch (NamingException e) {
 			e.printStackTrace();
 			System.exit(1);

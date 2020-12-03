@@ -19,66 +19,79 @@
 
 <body>
 
-	<!-- DIV Container for Login-->
-	<div id="login_state" class="overlay">
-		<div class="overlay_content">
-			<img src="style/images/logo.png" alt="Our Logo" width="80" height="80"><br>
-			<h1>Sign in</h1>
-			<p id="error_login"></p>
-			<label for="username_login"><b>E-Mail/Nutzername</b></label><br>
-			<input class="input_login" type="text" placeholder="Nutzername eingeben" id="username_login"
-				name="username_login" required><br>
-			<label for="password_login"><b>Passwort</b></label><br>
-			<input class="input_login" type="password" placeholder="Passwort eingeben" id="password_login"
-				name="password_login" required><br>
-			<button id="login_submit_button" type="button" class="button_login">Login</button><br>
-			<button id="login_register_button" class="scene_before">Noch kein Nutzer? Registrieren</button>
-		</div>
+<!-- DIV Container for Login-->
+<div id="login_state" class="overlay">
+	<div class="overlay_content">
+		<img src="style/images/logo.png" alt="Our Logo" width="80" height="80"><br>
+		<h1>Sign in</h1>
+		<p id="error_login"></p>
+		<label for="username_login"><b>E-Mail/Nutzername</b></label><br>
+		<input class="input_login" type="text" placeholder="Nutzername eingeben" id="username_login"
+			   name="username_login" required><br>
+		<label for="password_login"><b>Passwort</b></label><br>
+		<input class="input_login" type="password" placeholder="Passwort eingeben" id="password_login"
+			   name="password_login" required><br>
+		<button id="login_submit_button" type="button" class="button_login">Login</button>
+		<br>
+		<button id="login_register_button" class="scene_before">Noch kein Nutzer? Registrieren</button>
 	</div>
+</div>
 
-	<!-- DIV Container for Signup-->
-	<div id="signup_state" class="overlay">
-		<div class="overlay_content">
-			<img src="style/images/logo.png" alt="Our Logo" width="80" height="80"><br>
-			<h1>Registrieren</h1>
-			<p id="error_server" class="error_message"></p>
-			<p id="error_password" class="error_message">Passwörter stimmen nicht über ein</p>
-			<label for="email_signup"><b>E-Mail und Nutzername</b></label><br>
-			<input class="input_login" type="text" placeholder="E-Mail" id="email_signup" name="email_signup" required>
-			<input class="input_login" type="text" placeholder="Nutzername" id="username_signup" name="username_signup"
-				required><br>
-			<label for="name_signup"><b>Nach- und Vorname</b></label><br>
-			<input class="input_login" type="text" placeholder="Nachname" id="name_signup" name="name_signup" required>
-			<input class="input_login" type="text" placeholder="Vorname" id="prename_signup" name="prename_signup"
-				required><br>
-			<label for="password_signup"><b>Passwort festlegen</b></label><br>
-			<input class="input_login" type="password" placeholder="Passwort" id="password_signup"
-				name="password_signup" required>
-			<input class="input_login" type="password" placeholder="Wiederholen" id="password_signup_repeat"
-				name="password_signup_repeat" required><br>
-			<label for="street_signup"><b>Straße und Hausnummer</b></label><br>
-			<input class="input_login" type="text" placeholder="Straße" id="street_signup" name="street_signup"
-				required>
-			<input class="input_login" type="text" placeholder="Hausnummer" id="number_signup" name="number_signup"
-				required><br>
-			<label for="postalcode_signup"><b>PLZ und Stadt</b></label><br>
-			<input class="input_login" type="text" placeholder="PLZ" id="postalcode_signup" name="postalcode_signup"
-				required>
-			<input class="input_login" type="text" placeholder="Ort/Stadt" id="city_signup" name="city_signup"
-				required><br>
-			<label for="country_signup"><b>Land</b></label><br>
-			<input class="input_login" type="text" placeholder="Land" id="country_signup" name="country_signup"
-				required><br>
-			<button id="register_submit_button" type="button" class="button_login">Registrieren</button><br>
-			<button id="register_back_button" class="scene_before">Zurück zum Login</button>
-		</div>
+<!-- DIV Container for Signup-->
+<div id="signup_state" class="overlay">
+	<div class="overlay_content">
+		<img src="style/images/logo.png" alt="Our Logo" width="80" height="80"><br>
+		<h1>Registrieren</h1>
+		<p id="error_server" class="error_message"></p>
+		<p id="error_password" class="error_message">Passwörter stimmen nicht über ein</p>
+		<label for="email_signup"><b>E-Mail und Nutzername</b></label><br>
+		<input class="input_login" type="text" placeholder="E-Mail" id="email_signup" name="email_signup" required>
+		<input class="input_login" type="text" placeholder="Nutzername" id="username_signup" name="username_signup"
+			   required><br>
+		<label for="name_signup"><b>Nach- und Vorname</b></label><br>
+		<input class="input_login" type="text" placeholder="Nachname" id="name_signup" name="name_signup" required>
+		<input class="input_login" type="text" placeholder="Vorname" id="prename_signup" name="prename_signup"
+			   required><br>
+		<label for="password_signup"><b>Passwort festlegen</b></label><br>
+		<input class="input_login" type="password" placeholder="Passwort" id="password_signup"
+			   name="password_signup" required>
+		<input class="input_login" type="password" placeholder="Wiederholen" id="password_signup_repeat"
+			   name="password_signup_repeat" required><br>
+		<canvas id="pwdCanvas" width="240" height="10" style="border: 1px solid #d3d3d3;"></canvas>
+		<br>
+		<span id="passwdMsg"></span><br>
+		<label for="street_signup"><b>Straße und Hausnummer</b></label><br>
+		<input class="input_login" type="text" placeholder="Straße" id="street_signup" name="street_signup"
+			   required>
+		<input class="input_login" type="text" placeholder="Hausnummer" id="number_signup" name="number_signup"
+			   required><br>
+		<label for="postalcode_signup"><b>PLZ und Stadt</b></label><br>
+		<input class="input_login" type="text" placeholder="PLZ" id="postalcode_signup" name="postalcode_signup"
+			   required>
+		<input class="input_login" type="text" placeholder="Ort/Stadt" id="city_signup" name="city_signup"
+			   required><br>
+		<label for="country_signup"><b>Land</b></label><br>
+		<input class="input_login" type="text" placeholder="Land" id="country_signup" name="country_signup"
+			   required><br>
+		<button id="register_submit_button" type="button" class="button_login">Registrieren</button>
+		<br>
+		<button id="register_back_button" class="scene_before">Zurück zum Login</button>
 	</div>
+</div>
 
-	<!-- DIV Container for Main Overview-->
-	<div id="menu_state" class="menu_state">
+<!-- DIV Container for Main Overview-->
+<div id="menu_state" class="menu_state">
+	<div id="videoDiv">
+		<video muted autoplay poster="style/images/Background_Login.jpg" id="bgvid">
+			<source src="style/video/background_video.webm" type="video/webm">
+		</video>
+		<div id="darkOverlay"></div>
+	</div>
+	<div class="foreground">
 		<div class="titlebar">
 			<img src="style/images/logo.png" alt="Our Logo" width="80" height="80">
-			<h1 class="white_title inline">Willkommen, <div class="inline" id="username_menu"></div>
+			<h1 class="white_title inline">Willkommen,
+				<div class="inline" id="username_menu"></div>
 			</h1>
 		</div>
 		<div id="overlay_overview" class="overlay_overview">
@@ -99,113 +112,120 @@
 			</div>
 		</div>
 	</div>
+</div>
 
-	<!-- DIV Container for Order a Pizza-->
-	<div id="order_state" class="overlay">
-		<div class="overlay_content_big">
-			<img src="style/images/logo.png" alt="Our Logo" width="80" height="80">
-			<h1>Stelle Dir deine Pizza zusammen</h1>
-			<div>
-				<button class="button_size">Klein</button>
-				<button class="button_size button_size_selected">Mittel</button>
-				<button class="button_size">Groß</button>
-			</div>
-			<div class="margin20px">
-				<table id="topping_list" class="topping_list">
-					<tr>
-						<td></td>
-					</tr>
-				</table>
-				<p>
-				<div class="inline">Grundpreis:</div>
-				<div id="basic_price" class="inline"></div>
-				</p>
-				<p>
-				<div class="inline">Extras:</div>
-				<div id="extra_price" class="inline"></div>
-				</p>
-				<p>
-				<div class="inline">Gesamtbetrag:</div>
-				<div id="total_price" class="inline"></div>
-				</p>
-				<button id="order_back_button" class="button_logout">Zurück</button>
-				<button id="order_continue_button" class="button_login">Weiter</button>
-			</div>
+<!-- DIV Container for Order a Pizza-->
+<div id="order_state" class="overlay">
+	<div class="overlay_content_big">
+		<img src="style/images/logo.png" alt="Our Logo" width="80" height="80">
+		<h1>Stelle Dir deine Pizza zusammen</h1>
+		<div>
+			<button class="button_size">Klein</button>
+			<button class="button_size button_size_selected">Mittel</button>
+			<button class="button_size">Groß</button>
 		</div>
-	</div>
-
-	<!-- DIV Container for final order-->
-	<div id="order_overview_state" class="overlay">
-		<div class="overlay_content_big">
-			<img src="style/images/logo.png" alt="Our Logo" width="80" height="80">
-			<h1>Bestellübersicht</h1>
+		<div class="margin20px">
+			<table id="topping_list" class="topping_list">
+				<tr>
+					<td></td>
+				</tr>
+			</table>
+			<p>
+			<div class="inline">Grundpreis:</div>
+			<div id="basic_price" class="inline"></div>
+			</p>
+			<p>
+			<div class="inline">Extras:</div>
+			<div id="extra_price" class="inline"></div>
+			</p>
 			<p>
 			<div class="inline">Gesamtbetrag:</div>
 			<div id="total_price" class="inline"></div>
 			</p>
-			<button id="final_add_button" class="button_login">Weitere Pizza hinzufügen</button>
-			<button id="final_order_button" class="button_login">Kostenpflichtig bestellen</button></br>
-			<button id="final_back_button" class="button_logout">Abbrechen</button>
+			<button id="order_back_button" class="button_logout">Zurück</button>
+			<button id="order_continue_button" class="button_login">Weiter</button>
 		</div>
 	</div>
-	</div>
+</div>
 
-	<!-- DIV Container for ordered Pizzas-->
-	<div id="order_history_state" class="overlay">
-		<div class="overlay_content_big">
-			<img src="style/images/logo.png" alt="Our Logo" width="80" height="80">
-			<h1>Hier siehst du deine Bestellungen</h1>
-			<table id="ordered_div">
-			</table>
+<!-- DIV Container for final order-->
+<div id="order_overview_state" class="overlay">
+	<div class="overlay_content_big">
+		<img src="style/images/logo.png" alt="Our Logo" width="80" height="80">
+		<h1>Bestellübersicht</h1>
+		<p>
+		<div class="inline">Gesamtbetrag:</div>
+		<div id="total_price" class="inline"></div>
+		</p>
+		<button id="final_add_button" class="button_login">Weitere Pizza hinzufügen</button>
+		<button id="final_order_button" class="button_login">Kostenpflichtig bestellen</button>
+		</br>
+		<button id="final_back_button" class="button_logout">Abbrechen</button>
+	</div>
+</div>
+</div>
+
+<!-- DIV Container for ordered Pizzas-->
+<div id="order_history_state" class="overlay">
+	<div class="overlay_content_big">
+		<img src="style/images/logo.png" alt="Our Logo" width="80" height="80">
+		<h1>Hier siehst du deine Bestellungen</h1>
+		<table id="ordered_div">
+		</table>
+		<br>
+		<button id="ordered_back_button" class="button_logout">Zurück</button>
+	</div>
+</div>
+
+<!-- DIV Container for profile change-->
+<div id="profile_state" class="overlay">
+	<div class="overlay_content_big">
+		<img src="style/images/logo.png" alt="Our Logo" width="80" height="80">
+		<h1>Dein Profil</h1>
+		<form id="form_email_profile" action="" method="post">
+			<label for="email_profile"><b>E-Mail ändern</b></label><br>
+			<input class="input_login" type="text" placeholder="E-Mail" id="email_profile" name="email_profile"
+				   required><br>
+			<input class="input_login" type="text" placeholder="E-Mail wiederholen" id="email_profile_repeat"
+				   name="email_profile_repeat" required><br>
+			<button type="submit" class="button_login">Übernehmen</button>
 			<br>
-			<button id="ordered_back_button" class="button_logout">Zurück</button>
-		</div>
+		</form>
+		<form id="form_password_profile" action="" method="post">
+			<label for="password_current_profile"><b>Passwort festlegen</b></label><br>
+			<input class="input_login" type="password" placeholder="Aktuelles Passwort"
+				   id="password_current_profile" name="password_current_profile" required><br>
+			<input class="input_login" type="password" placeholder="Passwort" id="password_new_profile"
+				   name="password_new_profile" required><br>
+			<input class="input_login" type="password" placeholder="Wiederholen" id="password_new_profile_repeat"
+				   name="password_new_profile_repeat" required><br>
+			<button type="submit" class="button_login">Übernehmen</button>
+			<br>
+		</form>
+		<form id="form_address_profile" action="" method="post">
+			<label for="street_profile"><b>Straße und Hausnummer</b></label><br>
+			<input class="input_login" type="text" placeholder="Straße" id="street_profile" name="street_profile"
+				   required>
+			<input class="input_login" type="text" placeholder="Hausnummer" id="number_profile"
+				   name="number_profile" required><br>
+			<label for="postalcode_profile"><b>PLZ und Stadt</b></label><br>
+			<input class="input_login" type="text" placeholder="PLZ" id="postalcode_profile"
+				   name="postalcode_profile" required>
+			<input class="input_login" type="text" placeholder="Ort/Stadt" id="city_profile" name="city_profile"
+				   required><br>
+			<label for="country_profile"><b>Land</b></label><br>
+			<input class="input_login" type="text" placeholder="Land" id="country_profile" name="country_profile"
+				   required><br>
+			<button type="submit" class="button_login">Übernehmen</button>
+			<br>
+		</form>
+		<button id="profile_back_button" class="button_logout">Zurück</button>
+		<button id="logout_button"
+				type="button" class="button_logout">Abmelden
+		</button>
 	</div>
-
-	<!-- DIV Container for profile change-->
-	<div id="profile_state" class="overlay">
-		<div class="overlay_content_big">
-			<img src="style/images/logo.png" alt="Our Logo" width="80" height="80">
-			<h1>Dein Profil</h1>
-			<form id="form_email_profile" action="" method="post">
-				<label for="email_profile"><b>E-Mail ändern</b></label><br>
-				<input class="input_login" type="text" placeholder="E-Mail" id="email_profile" name="email_profile"
-					required><br>
-				<input class="input_login" type="text" placeholder="E-Mail wiederholen" id="email_profile_repeat"
-					name="email_profile_repeat" required><br>
-				<button type="submit" class="button_login">Übernehmen</button><br>
-			</form>
-			<form id="form_password_profile" action="" method="post">
-				<label for="password_current_profile"><b>Passwort festlegen</b></label><br>
-				<input class="input_login" type="password" placeholder="Aktuelles Passwort"
-					id="password_current_profile" name="password_current_profile" required><br>
-				<input class="input_login" type="password" placeholder="Passwort" id="password_new_profile"
-					name="password_new_profile" required><br>
-				<input class="input_login" type="password" placeholder="Wiederholen" id="password_new_profile_repeat"
-					name="password_new_profile_repeat" required><br>
-				<button type="submit" class="button_login">Übernehmen</button><br>
-			</form>
-			<form id="form_address_profile" action="" method="post">
-				<label for="street_profile"><b>Straße und Hausnummer</b></label><br>
-				<input class="input_login" type="text" placeholder="Straße" id="street_profile" name="street_profile"
-					required>
-				<input class="input_login" type="text" placeholder="Hausnummer" id="number_profile"
-					name="number_profile" required><br>
-				<label for="postalcode_profile"><b>PLZ und Stadt</b></label><br>
-				<input class="input_login" type="text" placeholder="PLZ" id="postalcode_profile"
-					name="postalcode_profile" required>
-				<input class="input_login" type="text" placeholder="Ort/Stadt" id="city_profile" name="city_profile"
-					required><br>
-				<label for="country_profile"><b>Land</b></label><br>
-				<input class="input_login" type="text" placeholder="Land" id="country_profile" name="country_profile"
-					required><br>
-				<button type="submit" class="button_login">Übernehmen</button><br>
-			</form>
-			<button id="profile_back_button" class="button_logout">Zurück</button><button id="logout_button"
-				type="button" class="button_logout">Abmelden</button>
-		</div>
-	</div>
-	</div>
+</div>
+</div>
 </body>
 
 </html>

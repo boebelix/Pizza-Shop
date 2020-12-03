@@ -18,6 +18,9 @@ java {
 	sourceCompatibility = JavaVersion.VERSION_1_8
 	targetCompatibility = JavaVersion.VERSION_1_8
 }
+war {
+	archiveName("procurementService.war")
+}
 
 dependencies {
 	implementation project(path: ':apps:microprofile-commons')
