@@ -2,7 +2,7 @@ package ateam.logistics.service;
 
 import ateam.client.user.UserInternalClient;
 import ateam.exceptionmapper.UnauthorizedExceptionMapper;
-import ateam.exceptionmapper.ValidatorExceptionMapper;
+import ateam.exceptionmapper.ValidationExceptionMapper;
 import ateam.logistics.model.LogisticsLog;
 import ateam.model.entity.LogisticsPostInput;
 import ateam.model.entity.User;
@@ -28,7 +28,7 @@ import java.net.URISyntaxException;
 
 @Path("/delivery")
 @Singleton
-@RegisterProvider(ValidatorExceptionMapper.class)
+@RegisterProvider(ValidationExceptionMapper.class)
 @RegisterProvider(UnauthorizedExceptionMapper.class)
 public class LogisticsController {
 	@POST

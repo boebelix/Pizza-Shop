@@ -1,6 +1,6 @@
 package ateam.client.procurement;
 
-import ateam.client.mapper.ValidatorExceptionResponseMapper;
+import ateam.client.mapper.ValidationExceptionResponseMapper;
 import ateam.model.entity.ProcurementLog;
 import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
@@ -14,7 +14,7 @@ import java.io.IOException;
 
 @Path("/procurement")
 @RegisterRestClient
-@RegisterProvider(ValidatorExceptionResponseMapper.class)
+@RegisterProvider(ValidationExceptionResponseMapper.class)
 public interface ProcurementClient {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
