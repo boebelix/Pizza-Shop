@@ -9,7 +9,7 @@ import javax.ws.rs.ext.Provider;
 import java.util.Date;
 
 @Provider
-public class ValidatorExceptionMapper implements ExceptionMapper<ValidationException> {
+public class ValidationExceptionMapper implements ExceptionMapper<ValidationException> {
 	@Override
 	public Response toResponse(ValidationException e) {
 		System.out.println("ValidationException! Returning code 400. Message: " + e.getMessage());
