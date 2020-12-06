@@ -24,12 +24,12 @@ const login = async () => {
 		setCookie("uuid", output.token, 1);
 		setUserData(output.user);
 	} else {
-		document.getElementById("error_login").innerHTML = output.message;
+		document.getElementById("error_login").innerHTML = decodeUtf(output.message);
 	}
 }
 
 const response = async (data) => {
-	const output = await fetch("http://localhost:9080/auth", {
+	const output = await fetch(SERVER_ADDRESS+"/auth", {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'

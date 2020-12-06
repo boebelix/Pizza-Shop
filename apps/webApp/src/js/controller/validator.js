@@ -9,11 +9,11 @@ const isLengthValid = (id) => {
 	}
 }
 
-const passwordValidator = (id_passw, id_repeat) => {
+const equalityValidator = (id_first, id_repeat, id_error, message) => {
 	let ret = true;
-	const first = document.getElementById(id_passw);
+	const first = document.getElementById(id_first);
 	const second = document.getElementById(id_repeat);
-	const error = document.getElementById("error_password");
+	const error = document.getElementById(id_error);
 
 	if (first.value.length == 0) {
 		first.classList.add("btn_error");
@@ -26,14 +26,14 @@ const passwordValidator = (id_passw, id_repeat) => {
 	if (first.value != second.value) {
 		first.classList.add("btn_error");
 		second.classList.add("btn_error");
-		error.style.display = "block";
+		error.innerHTML=message;
 		ret = false;
 	}
 
 	if (ret) {
 		first.classList.remove("btn_error");
 		second.classList.remove("btn_error");
-		error.style.display = "none";
+		error.innerHTML="";
 	}
 	return ret;
 }
