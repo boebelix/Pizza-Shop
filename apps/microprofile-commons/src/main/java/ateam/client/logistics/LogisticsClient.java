@@ -1,9 +1,11 @@
 package ateam.client.logistics;
 
+import ateam.client.mapper.LogServiceExceptionResponseMapper;
 import ateam.client.mapper.UnauthorizedExceptionResponseMapper;
 import ateam.client.mapper.ValidationExceptionResponseMapper;
 import ateam.model.entity.LogisticsPostInput;
 import ateam.model.exception.UnauthorizedException;
+import ateam.util.LogServiceException;
 import ateam.validator.ValidationException;
 import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
@@ -21,6 +23,7 @@ import java.net.URISyntaxException;
 @RegisterRestClient
 @RegisterProvider(ValidationExceptionResponseMapper.class)
 @RegisterProvider(UnauthorizedExceptionResponseMapper.class)
+@RegisterProvider(LogServiceExceptionResponseMapper.class)
 public interface LogisticsClient {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
