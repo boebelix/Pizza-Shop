@@ -1,6 +1,6 @@
 package ateam.shop.db;
 
-import ateam.DBConnection.DBConnector;
+import ateam.db.DBConnection;
 import ateam.model.entity.Order;
 import ateam.model.entity.PizzaTopping;
 import ateam.model.entity.Pizza;
@@ -16,7 +16,7 @@ import java.util.List;
 public class DBManager {
 
 	@Inject
-	private DBConnector connector;
+	private DBConnection connector;
 
 	@Inject
 	private PizzaToppingDB pizzaTopping;
