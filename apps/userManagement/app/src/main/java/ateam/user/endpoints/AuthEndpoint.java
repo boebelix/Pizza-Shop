@@ -2,7 +2,7 @@ package ateam.user.endpoints;
 
 import ateam.exceptionmapper.UnauthorizedExceptionMapper;
 import ateam.exceptionmapper.UserServiceExceptionMapper;
-import ateam.exceptionmapper.ValidatorExceptionMapper;
+import ateam.exceptionmapper.ValidationExceptionMapper;
 import ateam.model.entity.User;
 import ateam.model.exception.UnauthorizedException;
 import ateam.model.request.LoginData;
@@ -21,7 +21,7 @@ import javax.ws.rs.core.Response;
 import java.util.UUID;
 
 @Path("/auth")
-@RegisterProvider(ValidatorExceptionMapper.class)
+@RegisterProvider(ValidationExceptionMapper.class)
 @RegisterProvider(UnauthorizedExceptionMapper.class)
 @RegisterProvider(UserServiceExceptionMapper.class)
 @Singleton

@@ -9,7 +9,6 @@ import ateam.model.exception.UserServiceException;
 import ateam.validator.ValidationException;
 import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
-import sun.security.validator.ValidatorException;
 
 import javax.ws.rs.*;
 import java.util.UUID;
@@ -19,7 +18,7 @@ import java.util.UUID;
 @RegisterRestClient
 @RegisterProvider(UnauthorizedExceptionResponseMapper.class)
 @RegisterProvider(ConflictExceptionResponseMapper.class)
-@RegisterProvider(ValidatorExceptionResponseMapper.class)
+@RegisterProvider(ValidationExceptionResponseMapper.class)
 @RegisterProvider(UserServiceExceptionResponseMapper.class)
 @RegisterProvider(UnknownEntityExceptionResponseMapper.class)
 public interface UserClient {
@@ -33,6 +32,6 @@ public interface UserClient {
 	@PUT
 	@Path("/{userId}")
 	User updateUser(@HeaderParam("Authorization") UUID loginId, @PathParam("userId") int userId, User user) throws
-		ValidatorException, UnknownEntityException, UserServiceException, ConflictException, UnauthorizedException;
+		ValidationException, UnknownEntityException, UserServiceException, ConflictException, UnauthorizedException;
 
 }

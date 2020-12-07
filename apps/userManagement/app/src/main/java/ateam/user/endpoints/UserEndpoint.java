@@ -18,7 +18,7 @@ import javax.ws.rs.core.Response;
 import java.util.UUID;
 
 @Path("/user")
-@RegisterProvider(ValidatorExceptionMapper.class)
+@RegisterProvider(ValidationExceptionMapper.class)
 @RegisterProvider(UserServiceExceptionMapper.class)
 @RegisterProvider(UnauthorizedExceptionMapper.class)
 @RegisterProvider(ConflictExceptionMapper.class)

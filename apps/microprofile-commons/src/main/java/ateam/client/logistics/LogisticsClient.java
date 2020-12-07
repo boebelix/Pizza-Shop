@@ -1,7 +1,7 @@
 package ateam.client.logistics;
 
 import ateam.client.mapper.UnauthorizedExceptionResponseMapper;
-import ateam.client.mapper.ValidatorExceptionResponseMapper;
+import ateam.client.mapper.ValidationExceptionResponseMapper;
 import ateam.model.entity.LogisticsPostInput;
 import ateam.model.exception.UnauthorizedException;
 import ateam.validator.ValidationException;
@@ -19,7 +19,7 @@ import java.net.URISyntaxException;
 
 @Path("/delivery")
 @RegisterRestClient
-@RegisterProvider(ValidatorExceptionResponseMapper.class)
+@RegisterProvider(ValidationExceptionResponseMapper.class)
 @RegisterProvider(UnauthorizedExceptionResponseMapper.class)
 public interface LogisticsClient {
 	@POST

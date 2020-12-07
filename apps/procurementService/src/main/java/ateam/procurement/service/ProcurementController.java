@@ -1,6 +1,6 @@
 package ateam.procurement.service;
 
-import ateam.exceptionmapper.ValidatorExceptionMapper;
+import ateam.exceptionmapper.ValidationExceptionMapper;
 import ateam.model.entity.ProcurementLog;
 import ateam.util.LogService;
 import ateam.validator.ValidationException;
@@ -19,7 +19,7 @@ import javax.ws.rs.core.Response;
 import java.io.IOException;
 
 @Path("/procurement")
-@RegisterProvider(ValidatorExceptionMapper.class)
+@RegisterProvider(ValidationExceptionMapper.class)
 @Singleton
 public class ProcurementController {
 	@POST

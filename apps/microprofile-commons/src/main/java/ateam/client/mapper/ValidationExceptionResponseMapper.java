@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
 @Provider
-public class ValidatorExceptionResponseMapper implements ResponseExceptionMapper<ValidationException> {
+public class ValidationExceptionResponseMapper implements ResponseExceptionMapper<ValidationException> {
 
 	@Override
 	public boolean handles(int statusCode, MultivaluedMap<String, Object> headers) {

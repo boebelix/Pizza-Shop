@@ -72,3 +72,14 @@ const loadUser = async (uuid) => {
 	json.status = status;
 	return json;
 }
+
+const decodeUtf = (message) => {
+	let first_replace = message.replace(/ÃŸ/g, 'ß');
+	let decoded_message;
+	try {
+		decoded_message = decodeURIComponent(escape(first_replace));
+	} catch (e) {
+		decoded_message = first_replace;
+	}
+	return decoded_message;
+}
