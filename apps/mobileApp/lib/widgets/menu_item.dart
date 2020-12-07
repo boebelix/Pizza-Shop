@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:woche3_app/models/meal.dart';
-import 'package:woche3_app/screens/meal_detail_screen.dart';
-import 'package:woche3_app/widgets/meal_picture.dart';
-import 'package:woche3_app/widgets/price.dart';
-import 'package:woche3_app/widgets/rating.dart';
+import 'package:app/models/meal.dart';
+import 'package:app/screens/meal_detail_screen.dart';
+import 'package:app/widgets/price.dart';
+import 'package:app/widgets/rating.dart';
+
+import 'meal_picture.dart';
 
 
 class MenuItemCard extends StatelessWidget {

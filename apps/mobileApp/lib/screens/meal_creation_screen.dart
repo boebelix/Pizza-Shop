@@ -1,10 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:app/models/meal.dart';
+import 'package:app/models/meals.dart';
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:woche3_app/models/meal.dart';
-import 'package:provider/provider.dart';
-import 'package:woche3_app/models/meals.dart';
 
 class MealCreationScreen extends StatefulWidget {
   static const String routeName = "/createMeal";

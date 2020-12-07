@@ -1,7 +1,8 @@
+import 'package:app/models/meal.dart';
+import 'package:app/widgets/rating.dart';
 import 'package:flutter/material.dart';
-import 'package:woche3_app/models/meal.dart';
-import 'package:woche3_app/widgets/meal_picture.dart';
-import 'package:woche3_app/widgets/rating.dart';
+import 'package:app/widgets/meal_picture.dart';
+
 
 class MealDetailScreen extends StatelessWidget {
   static const String routeName = "/mealDetails";

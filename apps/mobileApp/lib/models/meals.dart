@@ -1,7 +1,7 @@
 import 'dart:collection';
-
 import 'package:flutter/foundation.dart';
-import 'package:woche3_app/models/meal.dart';
+import 'meal.dart';
+
 
 class Meals extends ChangeNotifier {
   List<Meal> _meals = [
