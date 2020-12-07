@@ -1,8 +1,10 @@
+import 'package:app/models/user.dart';
+import 'package:app/models/users.dart';
 import 'package:flutter/material.dart';
-import 'package:woche3_app2/models/user.dart';
 import 'package:provider/provider.dart';
-import 'package:woche3_app2/models/users.dart';
-import 'package:woche3_app2/screens/create_user_screen.dart';
+
+import 'create_user_screen.dart';
+
 
 class HomeScreen extends StatelessWidget {
   @override

@@ -56,10 +56,9 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Flexible(child: NavMenuItem()),
-              Flexible(child: NavMenuItem()),
-              Flexible(child: NavMenuItem()),
-              Flexible(child: NavMenuItem()),
+              Flexible(child: NavMenuItem(position: 1, headlineTxt: 'Bestellung',)),
+              Flexible(child: NavMenuItem(position: 2, headlineTxt: 'Bestellübersicht',)),
+              Flexible(child: NavMenuItem(position: 3, headlineTxt: 'Profil',)),
             ],
           ),
         ),
