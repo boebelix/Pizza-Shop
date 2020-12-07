@@ -31,7 +31,7 @@ war {
 
 
 dependencies {
-	compile project(path: ':apps:microprofile-commons')
+	implementation project(path: ':apps:microprofile-commons')
 
 	implementation "org.eclipse.microprofile:microprofile:${micoprofileVersion}"
 }
