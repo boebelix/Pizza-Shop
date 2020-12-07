@@ -13,7 +13,9 @@ CREATE TABLE `orders`
 CREATE TABLE `toppings`
 (
     `id`   int PRIMARY KEY AUTO_INCREMENT,
-    `name` varchar(255)
+    `name` varchar(255),
+    `base_amount` int,
+    `unit` varchar(16)
 );
 
 CREATE TABLE `sizes`
@@ -21,13 +23,15 @@ CREATE TABLE `sizes`
     `id`            int PRIMARY KEY AUTO_INCREMENT,
     `radius`        int,
     `base_price`    decimal(4, 4),
-    `topping_price` decimal(4, 4)
+    `topping_price` decimal(4, 4),
+    `dough_amount` int,
+    `topping_factor` decimal(4, 4)
 );
 
 CREATE TABLE `pizzas`
 (
     `id`      int PRIMARY KEY AUTO_INCREMENT,
-    `order_id` int
+    `order_id` int,
     `size_id` int
 );
 
