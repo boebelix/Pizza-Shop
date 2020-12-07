@@ -14,10 +14,6 @@ public class ShopExceptionMapper implements ExceptionMapper<ShopException> {
 	public Response toResponse(ShopException e) {
 		System.out.println("ShopException! Returning code 500. Message: " + e.getMessage());
 		e.printStackTrace();
-		ExceptionResponse response = new ExceptionResponse();
-		response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-		response.setTimestamp(new Date());
-		response.setMessage(e.getMessage());
-		return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(response).build();
+		return getResponse(e.getMessage(), e);
 	}
 }
