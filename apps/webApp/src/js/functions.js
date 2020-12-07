@@ -83,3 +83,23 @@ const decodeUtf = (message) => {
 	}
 	return decoded_message;
 }
+
+
+const response = async (url, data, type, header) => {
+	const output = await fetch(url, {
+		method: type,
+		headers: header,
+		body: JSON.stringify(data)
+	});
+	console.log(output);
+	const status = output.status;
+	if (status == RESPONSE_INTERNAL_SERVER_ERROR) {
+		return {"message": "Serverfehler", "status": RESPONSE_INTERNAL_SERVER_ERROR};
+	}
+	if (status == RESPONSE_NOT_FOUND) {
+		return {"message": "Serverfehler", "status": RESPONSE_NOT_FOUND};
+	}
+	let json = await output.json();
+	json.status = status;
+	return json;
+}

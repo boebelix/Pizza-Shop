@@ -26,11 +26,15 @@ const changeAddress = async () => {
 			"city": city.value,
 			"country": country.value
 		};
+		let headerAuth = {
+			'Content-Type': 'application/json',
+			'Authorization': getCookie("uuid"),
+			"Access-Control-Allow-Origin": "*"
+		};
+		let responseAnswer = await response(SERVER_ADDRESS+SERVER_USER+"/"+USER_JSON.userId, data, TYPE_PUT, headerAuth);
 
-		let response = await updateData(SERVER_ADDRESS+'/user/'+USER_JSON.userId, data);
-
-		if (response.status != RESPONSE_OK){
-			error.innerHTML = decodeUtf(response.message);
+		if (responseAnswer.status != RESPONSE_OK){
+			error.innerHTML = decodeUtf(responseAnswer.message);
 		}else{
 			submitted.innerHTML = "Adresse erfolgreich geändert";
 			error.innerHTML = "";
@@ -48,10 +52,15 @@ const changeEmail = async () => {
 
 	if(equalityValidator(email.id, emailRepeat.id,error.id,EMAIL_ERROR_EQUALITY)){
 		const data = {"email": email.value};
-		let response = await updateData(SERVER_ADDRESS+'/user/'+USER_JSON.userId, data);
+		let headerAuth = {
+			'Content-Type': 'application/json',
+			'Authorization': getCookie("uuid"),
+			"Access-Control-Allow-Origin": "*"
+		};
+		let responseAnswer = await response(SERVER_ADDRESS+SERVER_USER+"/"+USER_JSON.userId, data, TYPE_PUT, headerAuth);
 
-		if (response.status != RESPONSE_OK){
-			error.innerHTML = decodeUtf(response.message);
+		if (responseAnswer.status != RESPONSE_OK){
+			error.innerHTML = decodeUtf(responseAnswer.message);
 		}else{
 			submitted.innerHTML = "Email erfolgreich geändert";
 			error.innerHTML = "";
@@ -69,33 +78,20 @@ const changePasswd = async () => {
 
 	if(equalityValidator(newPasswd.id, newPasswdRepeat.id,error.id,PASSWORD_ERROR_EQUALITY)){
 		const data = {"password": newPasswd.value};
-		let response = await updateData(SERVER_ADDRESS+'/user/'+USER_JSON.userId, data);
+		let headerAuth = {
+			'Content-Type': 'application/json',
+			'Authorization': getCookie("uuid"),
+			"Access-Control-Allow-Origin": "*"
+		};
+		let responseAnswer = await response(SERVER_ADDRESS+SERVER_USER+"/"+USER_JSON.userId, data, TYPE_PUT, headerAuth);
 
-		if (response.status != RESPONSE_OK){
-			error.innerHTML = decodeUtf(response.message);
+		if (responseAnswer.status != RESPONSE_OK){
+			error.innerHTML = decodeUtf(responseAnswer.message);
 		}else{
 			submitted.innerHTML = "Passwort erfolgreich geändert";
 			error.innerHTML = "";
 		}
 	}
-}
-
-const updateData = async (url, data) => {
-	const output = await fetch(url, {
-		method: 'PUT',
-		headers: {
-			'Content-Type': 'application/json',
-			'Authorization': getCookie("uuid")
-		},
-		body: JSON.stringify(data)
-	});
-	const status = output.status;
-	if (status == RESPONSE_INTERNAL_SERVER_ERROR) {
-		return {"message": "Serverfehler", "status": RESPONSE_INTERNAL_SERVER_ERROR};
-	}
-	let json = await output.json();
-	json.status = status;
-	return json;
 }
 
 const logout = () => {
