@@ -21,7 +21,7 @@
     <!-- The MP JWT configuration that injects the caller's JWT into a ResourceScoped bean for inspection. -->
     <mpJwt id="jwtUserConsumer" keyName="theKeyId" audiences="targetService" issuer="team-a"/>
 
-	<jndiEntry id="appServicePassword" jndiName="appServicePassword" value="ferEG42gs4tgdsGFDS" />
+	<jndiEntry id="userServicePassword" jndiName="userServicePassword" value="ferwfrwe435gsd" />
 	<jndiEntry id="LogisticsLogPath" jndiName="LogisticsLogPath" value="logistics.log" />
-	<jndiEntry id="UserInternURI" jndiName="UserInternURI" value="http://localhost:9080/user_intern/" />
+	<jndiEntry id="UserInternURI" jndiName="UserInternURI" value="http://localhost:9080" />
 </server>

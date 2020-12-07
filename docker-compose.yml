@@ -44,6 +44,17 @@ services:
         environment:
             - MYSQL_DATABASE=pizzashop
             - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    service-logistics:
+        container_name: aTeamLogisticsService
+        image: ateam/logisticsservice:latest
+        ports:
+            - 9081:9080
+            - 9444:9443
+        depends_on:
+            - service-user
+        environment:
+            - USER_SERVICE_PASSWORD=ferwfrwe435gsd
+            - USER_SERVICE_PATH=http://service-user:9080
 
 
 volumes:

@@ -10,6 +10,12 @@ buildscript {
 		classpath "io.openliberty.tools:liberty-gradle-plugin:${libertyPluginVersion}"
 	}
 }
+
+plugins {
+	id 'com.bmuschko.docker-remote-api' version '6.6.1'
+}
+
+
 apply plugin: 'java'
 apply plugin: 'liberty'
 apply plugin: 'war'
@@ -18,6 +24,7 @@ java {
 	sourceCompatibility = JavaVersion.VERSION_1_8
 	targetCompatibility = JavaVersion.VERSION_1_8
 }
+
 war {
 	archiveName("procurementService.war")
 }
@@ -26,4 +33,31 @@ dependencies {
 	implementation project(path: ':apps:microprofile-commons')
 
 	implementation "org.eclipse.microprofile:microprofile:${micoprofileVersion}"
+}
+
+
+import com.bmuschko.gradle.docker.tasks.container.*
+import com.bmuschko.gradle.docker.tasks.image.*
+
+task createDockerfile(type: Dockerfile) {
+	from 'open-liberty'
+	instruction  'COPY --chown=1001:0 ./build/libs/procurementService.war /config/apps/procurementService.war'
+	instruction  'COPY --chown=1001:0 ./src/main/liberty/config/ /config/'
+	instruction  'COPY --chown=1001:0 ./docker/configOverrides /config/configDropins/overrides/'
+	environmentVariable 'SERVICE_PASSWORD', 'ferwfrwe435gsd'
+	instruction  'RUN configure.sh'
+}
+
+task buildImage(type: DockerBuildImage) {
+	dependsOn createDockerfile
+	inputDir = project.projectDir
+	dockerFile = createDockerfile.destFile
+	images.add('ateam/procurementservice:latest')
+}
+
+task createContainer(type: DockerCreateContainer) {
+	dependsOn buildImage
+	targetImageId buildImage.getImageId()
+	containerName = 'aTeamProcurementService'
+	hostConfig.portBindings = ["${procurementServiceDevDockerHttpPort}:9080", "${procurementServiceDevDockerHttpsPort}:9443"]
 }
