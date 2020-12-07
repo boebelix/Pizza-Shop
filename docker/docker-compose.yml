@@ -1,14 +1,14 @@
 version: '3.0'
 
 services:
-    service-user:
+    userService:
         container_name: aTeamUserManagement
         image: ateam/usermanagement:latest
         ports:
             - 9080:9080
             - 9443:9443
         depends_on:
-            -   db-user
+            -   userDB
         environment:
             - DB_NAME=usermanagement
             - DB_HOST=db-user
@@ -16,7 +16,7 @@ services:
             - DB_USER=root
             - DB_PW=
             - SERVICE_PASSWORD=ferwfrwe435gsd
-    db-user:
+    userDB:
         container_name: aTeamUserManagementDB
         image: ateam/userdb:latest
         volumes:
@@ -30,7 +30,7 @@ services:
         environment:
             - MYSQL_DATABASE=usermanagement
             - MYSQL_ALLOW_EMPTY_PASSWORD=true
-    db-pizza:
+    pizzaDB:
         container_name: aTeamPizzaShopDB
         image: ateam/pizzashopdb:latest
         volumes:
@@ -44,18 +44,18 @@ services:
         environment:
             - MYSQL_DATABASE=pizzashop
             - MYSQL_ALLOW_EMPTY_PASSWORD=true
-    service-logistics:
+    logisticsService:
         container_name: aTeamLogisticsService
         image: ateam/logisticsservice:latest
         ports:
             - 9081:9080
             - 9444:9443
         depends_on:
-            - service-user
+            - userService
         environment:
             - USER_SERVICE_PASSWORD=ferwfrwe435gsd
-            - USER_SERVICE_PATH=http://service-user:9080
-    service-procurement:
+            - USER_SERVICE_PATH=http://userService:9080
+    procurementService:
         container_name: aTeamProcurementService
         image: ateam/procurementservice:latest
         ports:
