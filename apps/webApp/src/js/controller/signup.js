@@ -93,7 +93,7 @@ const submitData = async () => {
 			"city": document.getElementById("city_signup").value,
 			"country": document.getElementById("country_signup").value
 		};
-		let error = await response(SERVER_ADDRESS+SERVER_USER, data, TYPE_POST, HEADER_BASIC);
+		let error = await response(SERVER_ADDRESS + SERVER_USER, data, TYPE_POST, HEADER_BASIC);
 
 		if (error.status == RESPONSE_OK) {
 			document.getElementById("error_server").innerHTML = "";

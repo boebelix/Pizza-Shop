@@ -26,14 +26,14 @@ const equalityValidator = (id_first, id_repeat, id_error, message) => {
 	if (first.value != second.value) {
 		first.classList.add("btn_error");
 		second.classList.add("btn_error");
-		error.innerHTML=message;
+		error.innerHTML = message;
 		ret = false;
 	}
 
 	if (ret) {
 		first.classList.remove("btn_error");
 		second.classList.remove("btn_error");
-		error.innerHTML="";
+		error.innerHTML = "";
 	}
 	return ret;
 }

@@ -15,7 +15,7 @@ const login = async () => {
 		"password": password.value
 	}
 
-	const output = await response(SERVER_ADDRESS+SERVER_AUTH,data, TYPE_POST, HEADER_BASIC);
+	const output = await response(SERVER_ADDRESS + SERVER_AUTH, data, TYPE_POST, HEADER_BASIC);
 
 	if (output.status == RESPONSE_OK) {
 		document.getElementById("error_login").innerHTML = "";
