@@ -1,0 +1,43 @@
+buildscript {
+	repositories {
+		mavenCentral()
+		jcenter()
+	}
+	dependencies {
+		classpath 'io.github.http-builder-ng:http-builder-ng-okhttp:1.0.4'
+	}
+}
+
+ext.waitForApplication = { url, timeoutSec ->
+	if (timeoutSec == null) {
+		timeoutSec = 30
+	}
+
+	def http = groovyx.net.http.HttpBuilder.configure {
+		request.uri = url
+	}
+	def ok = false
+	def failed = false
+	def started = System.currentTimeMillis()
+	while (!ok && !failed) {
+		http.get {
+			request.uri.path = "/health"
+			response.success {
+				ok = true
+				println "\nSuccessful after ${System.currentTimeMillis() - started}ms"
+			}
+			response.exception { t ->
+				print '.'
+				System.out.flush()
+
+				if (System.currentTimeMillis() - started > (timeoutSec * 1000)) {
+					failed = true
+					println "\n Unable to reach $url"
+				} else {
+					sleep(1000)
+				}
+			}
+		}
+	}
+	return ok
+}

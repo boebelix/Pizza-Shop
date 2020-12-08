@@ -1,6 +1,7 @@
 plugins {
 	id 'java'
 }
+apply from: './testUtils.gradle'
 
 java {
 	sourceCompatibility = JavaVersion.VERSION_1_8
@@ -10,6 +11,15 @@ java {
 dependencies {
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'
 	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.2'
+
+	// JSON-B
+	testCompile group: 'org.eclipse', name: 'yasson', version: '1.0.3'
+	testCompile group: 'org.glassfish', name: 'javax.json', version: '1.1.4'
+	// Type-safe REST client
+	testCompile group: 'org.apache.cxf', name: 'cxf-rt-rs-client', version: '3.3.0'
+	testCompile group: 'cglib', name: 'cglib-nodep', version: '3.2.10'
+
+	implementation project(':apps:userManagement:app')
 }
 
 test {
@@ -19,6 +29,11 @@ test {
 task runIntegrationTest(type: Test) {
 	dependsOn clean, ':docker:execComposeUp'
 	finalizedBy ':docker:execComposeDown'
+	doFirst {
+		if (!waitForApplication("http://localhost:9080/", 30)) {
+			throw new TaskExecutionException(runIntegrationTest, new Exception("unable to reach application"))
+		}
+	}
 	useJUnitPlatform()
 	testLogging {
 		events "passed", "skipped", "failed"
