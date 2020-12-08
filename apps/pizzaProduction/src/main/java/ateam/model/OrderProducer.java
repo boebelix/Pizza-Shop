@@ -7,9 +7,9 @@ import javax.inject.Singleton;
 @Singleton
 public class OrderProducer {
 
-	public void produceOrder(Order order)
+	public boolean produceOrder(Order order, int uuid)
 	{
-
+		return (order.getPizzas()!=null&& !order.getPizzas().isEmpty());
 	}
 }
 

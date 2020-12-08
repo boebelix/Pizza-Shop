@@ -32,12 +32,13 @@ public class ProductionEndpoint {
 	@POST
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response produceOrder(@RequestBody(required = true)Order order) throws UnknownEntityException {
+	public Response produceOrder(@RequestBody(required = true)Order order, int uuid) throws UnknownEntityException {
 
 		Validator.validate(order);
 
-		producer.produceOrder(order);
+		if(producer.produceOrder(order,uuid))
+			return Response.status(Response.Status.OK.getStatusCode()).build();
 
-		return Response.status(Response.Status.OK.getStatusCode()).build();
+		return Response.status(Response.Status.BAD_REQUEST.getStatusCode()).build();
 	}
 }
