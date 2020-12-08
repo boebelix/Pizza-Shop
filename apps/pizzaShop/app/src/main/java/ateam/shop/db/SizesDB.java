@@ -21,9 +21,9 @@ public class SizesDB {
 			PreparedStatement statement = connection.prepareStatement("insert into sizes ( radius, base_price, topping_price, dough_amount, topping_factor) VALUES (?,?,?,?,?)");
 			statement.setInt(1, dto.getRadius());
 			statement.setFloat(2, dto.getBasePrice());
-			statement.setFloat(3, dto.getTopping_price());
+			statement.setFloat(3, dto.getToppingPrice());
 			statement.setInt(4, dto.getDoughAmount());
-			statement.setFloat(5, dto.getTopping_factor());
+			statement.setFloat(5, dto.getToppingFactor());
 			statement.executeUpdate();
 		}
 	}

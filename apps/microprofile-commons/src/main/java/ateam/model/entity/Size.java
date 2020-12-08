@@ -19,23 +19,23 @@ public class Size {
 	private int doughAmount;
 
 	@Validator.Required
-	private float topping_factor;
+	private float toppingFactor;
 
-	public Size(int id, int radius, float basePrice, float topping_price, int doughAmount, float topping_factor) {
+	public Size(int id, int radius, float basePrice, float toppingPrice, int doughAmount, float toppingFactor) {
 		this.id = id;
 		this.radius = radius;
 		this.basePrice = basePrice;
-		this.toppingPrice = topping_price;
+		this.toppingPrice = toppingPrice;
 		this.doughAmount = doughAmount;
-		this.topping_factor = topping_factor;
+		this.toppingFactor = toppingFactor;
 	}
 
-	public Size(int radius, float basePrice, float topping_price, int doughAmount, float topping_factor) {
+	public Size(int radius, float basePrice, float topping_price, int doughAmount, float toppingFactor) {
 		this.radius = radius;
 		this.basePrice = basePrice;
 		this.toppingPrice = topping_price;
 		this.doughAmount = doughAmount;
-		this.topping_factor = topping_factor;
+		this.toppingFactor = toppingFactor;
 	}
 
 	public int getId() {
@@ -62,11 +62,11 @@ public class Size {
 		this.basePrice = basePrice;
 	}
 
-	public float getTopping_price() {
+	public float getToppingPrice() {
 		return toppingPrice;
 	}
 
-	public void setTopping_price(float toppingPrice) {
+	public void setToppingPrice(float toppingPrice) {
 		this.toppingPrice = toppingPrice;
 	}
 
@@ -78,11 +78,11 @@ public class Size {
 		this.doughAmount = doughAmount;
 	}
 
-	public float getTopping_factor() {
-		return topping_factor;
+	public float getToppingFactor() {
+		return toppingFactor;
 	}
 
-	public void setTopping_factor(float topping_factor) {
-		this.topping_factor = topping_factor;
+	public void setToppingFactor(float toppingFactor) {
+		this.toppingFactor = toppingFactor;
 	}
 }
