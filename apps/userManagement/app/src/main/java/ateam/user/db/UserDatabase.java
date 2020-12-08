@@ -1,6 +1,6 @@
 package ateam.user.db;
 
-import ateam.db.DBConnection;
+import ateam.DBConnection.DBConnector;
 import ateam.model.entity.User;
 import ateam.model.exception.ConflictException;
 import ateam.model.exception.UnknownEntityException;
@@ -15,7 +15,7 @@ import java.sql.*;
 public class UserDatabase {
 
 	@Inject
-	DBConnection dbConnection;
+	private DBConnector dbConnection;
 
 	public User createUser(User user) {
 		try (Connection con = dbConnection.getConnection()) {

@@ -1,6 +1,6 @@
 package ateam.shop.db;
 
-import ateam.db.DBConnection;
+import ateam.DBConnection.DBConnector;
 import ateam.model.entity.Pizza;
 
 import javax.inject.Inject;
@@ -13,7 +13,7 @@ import java.util.List;
 public class PizzasDB {
 
 	@Inject
-	private DBConnection connector;
+	private DBConnector connector;
 
 	public int createPizzaEntry(Pizza dto) throws SQLException {
 		try(Connection connection=connector.getConnection()) {

@@ -1,6 +1,6 @@
 package ateam.shop.db;
 
-import ateam.db.DBConnection;
+import ateam.DBConnection.DBConnector;
 import ateam.model.entity.Order;
 
 import javax.inject.Inject;
@@ -11,7 +11,7 @@ import java.sql.*;
 public class OrdersDB {
 
 	@Inject
-	private DBConnection connector;
+	private DBConnector connector;
 
 	public int insertNewOrder(Order orders) throws SQLException {
 

@@ -1,6 +1,6 @@
 package ateam.shop.db;
 
-import ateam.db.DBConnection;
+import ateam.DBConnection.DBConnector;
 import ateam.model.entity.Topping;
 
 import javax.inject.Inject;
@@ -11,7 +11,7 @@ import java.sql.*;
 public class ToppingsDB {
 
 	@Inject
-	private DBConnection connector;
+	private DBConnector connector;
 
 	public void createToppingsEntry(Topping dto) throws SQLException {
 		try(Connection connection=connector.getConnection()) {
