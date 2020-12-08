@@ -5,7 +5,10 @@ import ateam.model.entity.PizzaTopping;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,7 +31,7 @@ public class PizzaToppingDB {
 	public List<PizzaTopping> getPizzaToppingByPizzaId(int pizzaId) throws SQLException {
 
 		try(Connection connection=connector.getConnection()) {
-			PreparedStatement stmt = connection.prepareStatement("select * from pizza_topping where pizza_id equals ?");
+			PreparedStatement stmt = connection.prepareStatement("select * from pizza_topping where pizza_id = ?");
 			stmt.setInt(1,pizzaId);
 
 			ResultSet rs = stmt.executeQuery();
