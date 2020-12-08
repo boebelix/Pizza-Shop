@@ -10,6 +10,8 @@ const initSignup = () => {
 
 const isPasswordValid = () => {
 	const passwd = document.getElementById("password_signup").value;
+	let errorPasswd = document.getElementById("error_password");
+	let passwdMsg = document.getElementById("passwdMsg");
 	let hasMinLen = passwd.length >= MIN_SIGNS;
 	let hasUpperAndLowercase = passwd.toUpperCase() != passwd && passwd.toLowerCase() != passwd;
 	let usesNumAndSpecial = /\d/.test(passwd) && REGEX_SIGNS.test(passwd);
@@ -20,26 +22,33 @@ const isPasswordValid = () => {
 
 	if (passwd.length === 0) {
 		factor = 5 * CANVAS_FACTOR;
+		errorPasswd.innerHTML = "Das Passwortfeld ist leer";
+		passwdMsg.innerHTML = "Wir stellen uns das Passwort einfach vor...";
 	} else if (!hasMinLen) {
-		document.querySelector("#passwdMsg").innerHTML = "nicht sicher";
+		passwdMsg.innerHTML = "Das soll ein Passwort sein?";
 		barColorLeft = "#F00";
 		factor = 1 * CANVAS_FACTOR;
+		errorPasswd.innerHTML = "Das Passwort benötigt mindestens 5 Zeichen";
 	} else if (hasUpperAndLowercase && usesNumAndSpecial && hasMoreThanSeven) {
-		document.querySelector("#passwdMsg").innerHTML = "sehr sicher";
+		passwdMsg.innerHTML = "Mich hackt niemand";
 		barColorLeft = "#4D4";
 		factor = 5 * CANVAS_FACTOR;
+		errorPasswd.innerHTML = "";
 	} else if (hasUpperAndLowercase && usesNumAndSpecial) {
-		document.querySelector("#passwdMsg").innerHTML = "sicher";
+		passwdMsg.innerHTML = "Nahezu perfekt";
 		barColorLeft = "#3B3";
 		factor = 4 * CANVAS_FACTOR;
+		errorPasswd.innerHTML = "Bei 7 Zeichen gilt das Passwort als sehr sicher";
 	} else if (hasUpperAndLowercase) {
-		document.querySelector("#passwdMsg").innerHTML = "mittel sicher";
+		passwdMsg.innerHTML = "Der halbe Weg ist geschafft";
 		barColorLeft = "#DB0";
 		factor = 3 * CANVAS_FACTOR;
+		errorPasswd.innerHTML = "Das Passwort muss Sonderzeichen und Zahlen enthalten";
 	} else {
-		document.querySelector("#passwdMsg").innerHTML = "akzeptabel";
+		passwdMsg.innerHTML = "Schon besser";
 		barColorLeft = "#D50";
 		factor = 2 * CANVAS_FACTOR;
+		errorPasswd.innerHTML = "Das Passwort muss sowohl Groß- und Kleinbuchstaben enthalten, sowie Sonderzeichen und Zahlen";
 	}
 
 	let c = document.querySelector("#pwdCanvas");
@@ -84,7 +93,7 @@ const submitData = async () => {
 			"city": document.getElementById("city_signup").value,
 			"country": document.getElementById("country_signup").value
 		};
-		let error = await postData(SERVER_ADDRESS+'/user', data);
+		let error = await response(SERVER_ADDRESS + SERVER_USER, data, TYPE_POST, HEADER_BASIC);
 
 		if (error.status == RESPONSE_OK) {
 			document.getElementById("error_server").innerHTML = "";
@@ -98,23 +107,6 @@ const submitData = async () => {
 	}
 }
 
-const postData = async (url, data) => {
-	let error;
-	const response = await fetch(url, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(data)
-	});
-	if (response.status === RESPONSE_OK) {
-		error = {"message": "Successfully registered", "status": RESPONSE_OK};
-	} else if (response.status === RESPONSE_INTERNAL_SERVER_ERROR) {
-		error = {"message": "Serverfehler", "status": RESPONSE_INTERNAL_SERVER_ERROR}
-	} else {
-		return await response.json();
-	}
-	return error;
-}
+
 
 

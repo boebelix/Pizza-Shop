@@ -309,10 +309,10 @@ body {
 	z-index: 150;
 }
 
-.submitted_message{
+.submitted_message {
 	color: green;
 }
 
-.error{
+.error {
 	color: red;
 }
