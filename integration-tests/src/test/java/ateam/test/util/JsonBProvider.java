@@ -1,4 +1,4 @@
-package de.hskl.test.util;
+package ateam.test.util;
 
 
 import org.junit.platform.commons.logging.Logger;

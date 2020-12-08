@@ -1,8 +1,8 @@
-package de.hskl.test;
+package ateam.test;
 
 import ateam.model.entity.User;
 import ateam.user.endpoints.UserEndpoint;
-import de.hskl.test.util.JsonBProvider;
+import ateam.test.util.JsonBProvider;
 import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,6 @@ class MyFirstUnitTest {
 	@BeforeAll
 	public static void setupClass() {
 		List<Class<?>> providers = new ArrayList<>();
-		//providers.add(JsonBindingProvider.class); // trivial implementation of a JAX-RS MessageBodyReader/Writer
 		providers.add(JsonBProvider.class);
 		String appPath = "http://localhost:9080/";
 		userEndpoint = JAXRSClientFactory.create(appPath, UserEndpoint.class, providers);
