@@ -40,7 +40,7 @@ public class LogisticsController {
 		UserInternalClient userInternalClient = RestClientBuilder.newBuilder()
 			.baseUri(userURI)
 			.build(UserInternalClient.class);
-		User user = userInternalClient.getUser(input.getUserId(), InitialContext.doLookup("appServicePassword"));
+		User user = userInternalClient.getUser(input.getUserId(), InitialContext.doLookup("userServicePassword"));
 
 		LogisticsLog log = new LogisticsLog(user);
 		LogService logService = new LogService(InitialContext.doLookup("LogisticsLogPath"));
