@@ -1,6 +1,8 @@
 package ateam.test.userService;
 
-import ateam.test.userService.model.UserRequest;
+import ateam.model.entity.User;
+import ateam.model.exception.ExceptionResponse;
+import ateam.test.util.ServiceResponse;
 import ateam.test.util.TestConstants;
 import ateam.test.util.TestUtils;
 import ateam.user.endpoints.UserEndpoint;
@@ -9,7 +11,10 @@ import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.Response;
 
+import java.io.InputStream;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 class UserEndpointTest {
@@ -23,21 +28,23 @@ class UserEndpointTest {
 
 	@Test
 	void createUser() {
-		UserRequest toCreate = new UserRequest();
-		toCreate.setCity("Zweibrücken");
-		toCreate.setCountry("Deutschland");
-		toCreate.setEmail("test@stud.hs-kl.de");
-		toCreate.setNumber("42");
-		toCreate.setStreet("Amerikastraße");
-		toCreate.setPostalCode("66482");
-		toCreate.setFirstName("Max");
-		toCreate.setLastName("Mustermann");
-		toCreate.setPassword("123456789#!TesT");
-		toCreate.setUsername("studi");
-
+		User toCreate = UserServiceTestUtils.createDefaultUser("createUser");
 		Response response = userEndpoint.createUser(toCreate);
 
 		assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+	}
+
+	@Test
+	void createUserTwice_shouldConflict() {
+		User toCreate = UserServiceTestUtils.createDefaultUser("createUser_shouldConflict");
+		userEndpoint.createUser(toCreate);
+		Response conflictResponse = userEndpoint.createUser(toCreate);
+
+		ServiceResponse<User> serviceResponse = ServiceResponse.parse(conflictResponse, User.class);
+		assertTrue(serviceResponse.hasError());
+		ExceptionResponse exceptionResponse = serviceResponse.getErrorEntity().get();
+		assertEquals(Response.Status.CONFLICT.getStatusCode(), exceptionResponse.getStatus());
+		assertTrue(exceptionResponse.getMessage().startsWith("Es existiert bereits ein Nutzer"));
 	}
 
 }

@@ -44,7 +44,7 @@ public class JsonBProvider implements MessageBodyWriter<Object>, MessageBodyRead
 	}
 
 	@SuppressWarnings("resource")
-	private static String convertStreamToString(java.io.InputStream is) {
+	private static String convertStreamToString(InputStream is) {
 		try (Scanner s = new Scanner(is).useDelimiter("\\A")) {
 			return s.hasNext() ? s.next() : "";
 		}

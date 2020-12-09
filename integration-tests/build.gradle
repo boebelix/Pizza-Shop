@@ -3,6 +3,8 @@ plugins {
 }
 apply from: './testUtils.gradle'
 
+def USER_SERVICE_BASE_URL = "http://localhost:9080/"
+
 java {
 	sourceCompatibility = JavaVersion.VERSION_1_8
 	targetCompatibility = JavaVersion.VERSION_1_8
@@ -31,7 +33,7 @@ task runIntegrationTest(type: Test) {
 	dependsOn clean, ':docker:execComposeUp'
 	finalizedBy ':docker:execComposeDown'
 	doFirst {
-		if (!waitForApplication("http://localhost:9080/", 60)) {
+		if (!waitForApplication(USER_SERVICE_BASE_URL, 60)) {
 			throw new TaskExecutionException(runIntegrationTest, new Exception("unable to reach application"))
 		}
 	}
