@@ -7,6 +7,16 @@ class Meals extends ChangeNotifier {
   List<Meal> _meals = [
     Meal(
       imagePath:
+      "https://static.essen-und-trinken.de/bilder/6b/3f/58617/facebook_image/klassischer-burger.jpg",
+      name: "Erstelle dir deine eigene Pizza",
+      description:
+      "Sei dein eigener Koch",
+      price: 0.0,
+      rating: 5.0,
+      numberOfRatings: 0,
+    ),
+    Meal(
+      imagePath:
           "https://static.essen-und-trinken.de/bilder/6b/3f/58617/facebook_image/klassischer-burger.jpg",
       name: "Classic Burger",
       description:
