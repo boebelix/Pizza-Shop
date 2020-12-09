@@ -13,6 +13,6 @@ const getStateByName = (name) => {
 			return STATES[i];
 		}
 	}
-	return STATES[0];
+	return getStateByName(STATE_MENU);
 }
 

@@ -21,15 +21,25 @@ const HEADER_BASIC = {
 	'Content-Type': 'application/json'
 };
 
+const STATE_MENU = "menu_state";
+const STATE_SIGNUP = "signup_state";
+const STATE_PROFILE = "profile_state";
+const STATE_LOGIN = "login_state";
+const STATE_ORDER_OVERVIEW = "order_overview_state";
+const STATE_ORDER_HISTORY = "order_history_state";
+const STATE_ORDER = "order_state";
+
 const STATES = [
-	new State("menu_state", false),
-	new State("signup_state", false),
-	new State("profile_state", true),
-	new State("login_state", false),
-	new State("order_overview_state", false),
-	new State("order_history_state", true),
-	new State("order_state", false)];
-let STATE_CALLBACK = STATES[0];
+	new State(STATE_MENU, false),
+	new State(STATE_SIGNUP, false),
+	new State(STATE_PROFILE, true),
+	new State(STATE_LOGIN, false),
+	new State(STATE_ORDER_OVERVIEW, false),
+	new State(STATE_ORDER_HISTORY, true),
+	new State(STATE_ORDER, false)];
+
+let STATE_HISTORY = STATE_MENU;
+let STATE_CALLBACK = STATE_MENU;
 
 
 const setUserData = (JSON) => {
@@ -41,7 +51,7 @@ const setUserData = (JSON) => {
 	document.getElementById("postalcode_profile").value = USER_JSON.postalCode;
 	document.getElementById("country_profile").value = USER_JSON.country;
 	LOGGED_IN = true;
-	setState(STATE_CALLBACK.name);
+	setState(STATE_CALLBACK);
 }
 
 const setCookie = (cname, cvalue, exdays) => {

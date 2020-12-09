@@ -1,8 +1,8 @@
 const setState = (stateID) => {
 	const state = getStateByName(stateID);
 	if(state.hasToBeLoggedIn && !LOGGED_IN) {
-		STATE_CALLBACK = state;
-		setState("login_state");
+		STATE_CALLBACK = stateID;
+		setState(STATE_LOGIN);
 		return;
 	}
 	for (let i = 0; i < STATES.length; i++) {
@@ -11,6 +11,9 @@ const setState = (stateID) => {
 		} else {
 			document.getElementById(STATES[i].name).style.display = "block";
 		}
+	}
+	if(stateID != STATE_LOGIN && stateID != STATE_SIGNUP) {
+		STATE_HISTORY = stateID;
 	}
 }
 
@@ -49,7 +52,7 @@ const loadUserFromCookies = async () => {
 }
 
 window.onload = () => {
-	setState("menu_state");
+	setState(STATE_MENU);
 	// Begin Test Data
 	createIngredientButtons(["Tomate", "Salamai", "Mozarella", "Paprika", "Zwiebel"]);
 	loadOrderHistory({

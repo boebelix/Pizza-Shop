@@ -1,5 +1,5 @@
 const initProfile = () => {
-	document.getElementById("profile_back_button").addEventListener("click", () => setState("menu_state"));
+	document.getElementById("profile_back_button").addEventListener("click", () => setState(STATE_MENU));
 	document.getElementById("logout_button").addEventListener("click", () => logout());
 	document.getElementById("passwd_change").addEventListener("click", () => changePasswd());
 	document.getElementById("email_change").addEventListener("click", () => changeEmail());
@@ -93,5 +93,5 @@ const changePasswd = async () => {
 
 const logout = () => {
 	setCookie("uuid", "", 0);
-	setState("login_state");
+	setState(STATE_MENU);
 }
