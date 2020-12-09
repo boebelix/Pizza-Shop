@@ -19,12 +19,6 @@ services:
     userDB:
         container_name: aTeamUserManagementDB
         image: ateam/userdb:latest
-        volumes:
-            -   type: volume
-                source: usermanagement-db-data
-                target: /var/lib/mysql
-                volume:
-                    nocopy: true
         ports:
             -   3306:3306
         environment:
@@ -33,12 +27,6 @@ services:
     pizzaDB:
         container_name: aTeamPizzaShopDB
         image: ateam/pizzashopdb:latest
-        volumes:
-            -   type: volume
-                source: pizzashop-db-data
-                target: /var/lib/mysql
-                volume:
-                    nocopy: true
         ports:
             -   3307:3306
         environment:
@@ -61,7 +49,3 @@ services:
         ports:
             - 9082:9080
             - 9445:9443
-
-volumes:
-    usermanagement-db-data:
-    pizzashop-db-data:

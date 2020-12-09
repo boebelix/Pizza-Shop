@@ -1,36 +1,29 @@
-package ateam.test;
+package ateam.test.userService;
 
-import ateam.model.entity.User;
+import ateam.test.userService.model.UserRequest;
+import ateam.test.util.TestConstants;
+import ateam.test.util.TestUtils;
 import ateam.user.endpoints.UserEndpoint;
-import ateam.test.util.JsonBProvider;
-import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+import javax.ws.rs.core.Response;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class MyFirstUnitTest {
+
+class UserEndpointTest {
 
 	private static UserEndpoint userEndpoint;
 
 	@BeforeAll
 	public static void setupClass() {
-		List<Class<?>> providers = new ArrayList<>();
-		providers.add(JsonBProvider.class);
-		String appPath = "http://localhost:9080/";
-		userEndpoint = JAXRSClientFactory.create(appPath, UserEndpoint.class, providers);
+		userEndpoint = TestUtils.setupClient(TestConstants.USER_SERVICE_URI, UserEndpoint.class);
 	}
 
 	@Test
-	void addition() throws InterruptedException {
-
-		TimeUnit.SECONDS.sleep(30);
-
-		User toCreate = new User();
+	void createUser() {
+		UserRequest toCreate = new UserRequest();
 		toCreate.setCity("Zweibrücken");
 		toCreate.setCountry("Deutschland");
 		toCreate.setEmail("test@stud.hs-kl.de");
@@ -40,8 +33,11 @@ class MyFirstUnitTest {
 		toCreate.setFirstName("Max");
 		toCreate.setLastName("Mustermann");
 		toCreate.setPassword("123456789#!TesT");
+		toCreate.setUsername("studi");
 
-		userEndpoint.createUser(toCreate);
+		Response response = userEndpoint.createUser(toCreate);
+
+		assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
 	}
 
 }
