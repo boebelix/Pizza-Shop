@@ -17,8 +17,16 @@ The `local.properties` file must never be checked in to version control. The exa
 To build the APKs, navigate into `./apps/mobileApp/android` and run `./gradlew clean build` (on Linux) or `gradlew.bat clean build` (on Windows)
 
 
-### Building everything
+### Building all Services (except the Flutter App)
 #### Windows
 `gradlew.bat clean build`
 #### Linux / Mac
 `./gradlew.sh clean build`
+
+### Building Docker Containers
+Ensure that the services are built and run `gradlew buildImage`. Alternatively you can build the services and the
+images in one go by running `gradlew clean build buildImage`.
+
+## Integration Tests
+You can run the integration tests by executing `gradlew runIntegrationTest`. This will start the system via docker,
+run the tests, and shut down the containers. Be sure that you build the containers beforehand.
