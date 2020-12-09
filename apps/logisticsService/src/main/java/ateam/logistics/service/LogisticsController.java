@@ -56,10 +56,8 @@ public class LogisticsController {
 		User user = userInternalClient.getUser(input.getUserId(), userInternPW);
 
 		LogisticsLog log = new LogisticsLog(user);
-
-		logService.log(log);
-
 		Validator.validate(log);
+		logService.log(log);
 
 		return Response.status(Response.Status.CREATED.getStatusCode()).build();
 	}

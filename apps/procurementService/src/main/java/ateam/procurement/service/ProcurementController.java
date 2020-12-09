@@ -39,7 +39,7 @@ public class ProcurementController {
 		Validator.validate(log);
 		System.out.println(log.toString());
 
-		boolean writeSuccessful = logService.log(log);
+		logService.log(log);
 		return Response.status(Response.Status.CREATED.getStatusCode()).build();
 	}
 }
