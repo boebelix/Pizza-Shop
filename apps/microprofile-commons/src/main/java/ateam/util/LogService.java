@@ -12,13 +12,19 @@ public class LogService {
 	private final FileWriter writer;
 	private static final Jsonb builder = JsonbBuilder.create();
 
-	public LogService(final String filePath) throws IOException {
+	public LogService(final String filePath) throws LogServiceException{
 		this.file = new File(filePath);
-		file.createNewFile();
-		writer = new FileWriter(file, true);
+		try{
+			file.createNewFile();
+			writer = new FileWriter(file, true);
+		}
+		catch (IOException e)
+		{
+			throw new LogServiceException("IOException occured when creating LogService Object",e);
+		}
 	}
 
-	public boolean log(final Object object) {
+	public boolean log(final Object object) throws LogServiceException{
 
 		try {
 
@@ -26,20 +32,22 @@ public class LogService {
 			writer.write("\n");
 
 			writer.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return false;
+		}
+		catch (IOException e)
+		{
+			throw new LogServiceException("IOException occured when trying to write Log",e);
 		}
 		return true;
 	}
 
-	public boolean close() {
+	public boolean close() throws LogServiceException {
 		try {
 			writer.close();
 			return true;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return false;
+		}
+		catch (IOException e)
+		{
+			throw new LogServiceException("IOException occured when closing LogService Object Writer",e);
 		}
 	}
 
