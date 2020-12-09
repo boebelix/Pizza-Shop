@@ -36,13 +36,13 @@ import java.net.URISyntaxException;
 public class LogisticsController {
 
 	private final LogService logService;
-	private URI userInternURI;
-	private String userInternPW;
+	private final URI userInternURI;
+	private final String userInternPW;
 
 	public LogisticsController() throws NamingException, LogServiceException, URISyntaxException {
 		this.logService = new LogService(InitialContext.doLookup("procurementLogPath"));
 		this.userInternURI = new URI(InitialContext.doLookup("UserInternURI"));
-		this.userInternPW = InitialContext.doLookup("appServicePassword");
+		this.userInternPW = InitialContext.doLookup("userServicePassword");
 	}
 
 	@POST
