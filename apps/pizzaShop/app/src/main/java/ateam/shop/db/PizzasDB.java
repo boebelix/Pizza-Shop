@@ -1,11 +1,14 @@
 package ateam.shop.db;
 
-import ateam.DBConnection.DBConnector;
+import ateam.db.DBConnection;
 import ateam.model.entity.Pizza;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,7 +16,7 @@ import java.util.List;
 public class PizzasDB {
 
 	@Inject
-	private DBConnector connector;
+	private DBConnection connector;
 
 	public int createPizzaEntry(Pizza dto) throws SQLException {
 		try(Connection connection=connector.getConnection()) {
@@ -29,7 +32,7 @@ public class PizzasDB {
 	public List<Pizza> getPizzaByOrderId(int orderId) throws SQLException {
 
 		try(Connection connection=connector.getConnection()) {
-			PreparedStatement stmt = connection.prepareStatement("select * from pizzas where order_id equals ?");
+			PreparedStatement stmt = connection.prepareStatement("select * from pizzas where order_id = ?");
 			stmt.setInt(1,orderId);
 
 			ResultSet rs = stmt.executeQuery();
@@ -50,7 +53,7 @@ public class PizzasDB {
 
 		try(Connection connection=connector.getConnection()) {
 
-			PreparedStatement stmt = connection.prepareStatement("select * from pizzas where order_id equals ?");
+			PreparedStatement stmt = connection.prepareStatement("select * from pizzas where order_id = ?");
 			stmt.setInt(1,id);
 
 			ResultSet rs = stmt.executeQuery();

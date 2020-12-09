@@ -36,15 +36,6 @@ dependencies {
 	implementation "org.eclipse.microprofile:microprofile:${micoprofileVersion}"
 }
 
-
-dependencies {
-	implementation project(path: ':apps:microprofile-commons')
-	implementation "org.eclipse.microprofile:microprofile:${micoprofileVersion}"
-}
-
-
-
-
 import com.bmuschko.gradle.docker.tasks.container.*
 import com.bmuschko.gradle.docker.tasks.image.*
 

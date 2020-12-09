@@ -1,17 +1,20 @@
 package ateam.shop.db;
 
-import ateam.DBConnection.DBConnector;
+import ateam.db.DBConnection;
 import ateam.model.entity.Order;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @Singleton
 public class OrdersDB {
 
 	@Inject
-	private DBConnector connector;
+	private DBConnection connector;
 
 	public int insertNewOrder(Order orders) throws SQLException {
 
@@ -32,7 +35,7 @@ public class OrdersDB {
 	public Order getOrderById(int id) throws SQLException {
 
 		try(Connection connection=connector.getConnection()) {
-			PreparedStatement stmt = connection.prepareStatement("select * from orders where id equals ?");
+			PreparedStatement stmt = connection.prepareStatement("select * from orders where id = ?");
 
 			ResultSet rs = stmt.executeQuery();
 

@@ -1,0 +1,3 @@
+<server>
+	<jndiEntry id="procurementLogPath" jndiName="procurementLogPath" value="procurement.log" />
+</server>
