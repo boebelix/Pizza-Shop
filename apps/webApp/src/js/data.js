@@ -1,6 +1,7 @@
-var USER_JSON = {};
+let USER_JSON = {};
 const RESPONSE_OK = 200;
 const RESPONSE_INTERNAL_SERVER_ERROR = 500;
+const RESPONSE_NOT_FOUND = 404;
 const MIN_SIGNS = 5;
 const SAFE_SIGNS = 7;
 const CANVAS_HEIGHT = 10;
@@ -10,6 +11,14 @@ const REGEX_SIGNS = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 const PASSWORD_ERROR_EQUALITY = "Passwörter stimmen nicht überein";
 const EMAIL_ERROR_EQUALITY = "E-mail-Adressen stimmen nicht überein";
 const SERVER_ADDRESS = "http://localhost:9080";
+const SERVER_AUTH = "/auth";
+const SERVER_USER = "/user";
+const TYPE_POST = 'POST';
+const TYPE_PUT = 'PUT';
+const HEADER_BASIC = {
+	'Content-Type': 'application/json'
+};
+
 
 const setUserData = (JSON) => {
 	USER_JSON = JSON;
@@ -23,18 +32,18 @@ const setUserData = (JSON) => {
 }
 
 const setCookie = (cname, cvalue, exdays) => {
-	var d = new Date();
+	let d = new Date();
 	d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-	var expires = "expires=" + d.toUTCString();
+	let expires = "expires=" + d.toUTCString();
 	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
 const getCookie = (cname) => {
-	var name = cname + "=";
-	var decodedCookie = decodeURIComponent(document.cookie);
-	var ca = decodedCookie.split(';');
-	for (var i = 0; i < ca.length; i++) {
-		var c = ca[i];
+	let name = cname + "=";
+	let decodedCookie = decodeURIComponent(document.cookie);
+	let ca = decodedCookie.split(';');
+	for (let i = 0; i < ca.length; i++) {
+		let c = ca[i];
 		while (c.charAt(0) == ' ') {
 			c = c.substring(1);
 		}

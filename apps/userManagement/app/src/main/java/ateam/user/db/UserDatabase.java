@@ -15,7 +15,7 @@ import java.sql.*;
 public class UserDatabase {
 
 	@Inject
-	DBConnection dbConnection;
+	private DBConnection dbConnection;
 
 	public User createUser(User user) {
 		try (Connection con = dbConnection.getConnection()) {
