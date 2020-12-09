@@ -6,14 +6,14 @@ import 'package:provider/provider.dart';
 
 class CreateUserScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey();
-  final TextEditingController name = TextEditingController();
-  final TextEditingController username = TextEditingController();
-  final TextEditingController street = TextEditingController();
-  final TextEditingController number = TextEditingController();
-  final TextEditingController city = TextEditingController();
-  final TextEditingController zip = TextEditingController();
-  final TextEditingController email = TextEditingController();
-  final TextEditingController phone = TextEditingController();
+    final TextEditingController name = TextEditingController();
+    final TextEditingController username = TextEditingController();
+    final TextEditingController street = TextEditingController();
+    final TextEditingController number = TextEditingController();
+    final TextEditingController city = TextEditingController();
+    final TextEditingController zip = TextEditingController();
+    final TextEditingController email = TextEditingController();
+    final TextEditingController phone = TextEditingController();
 
 
   @override

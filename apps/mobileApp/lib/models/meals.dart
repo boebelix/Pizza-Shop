@@ -4,10 +4,14 @@ import 'meal.dart';
 
 
 class Meals extends ChangeNotifier {
+  /*
+  * Bilder von
+  * https://www.essen-und-trinken.de/pizza/73081-cstr-die-besten-pizza-rezepte
+  * */
   List<Meal> _meals = [
     Meal(
       imagePath:
-      "https://static.essen-und-trinken.de/bilder/6b/3f/58617/facebook_image/klassischer-burger.jpg",
+      "https://image.essen-und-trinken.de/11915996/t/Gf/v8/w960/r1/-/267910--5613-.jpg",
       name: "Erstelle dir deine eigene Pizza",
       description:
       "Sei dein eigener Koch",
@@ -17,8 +21,8 @@ class Meals extends ChangeNotifier {
     ),
     Meal(
       imagePath:
-          "https://static.essen-und-trinken.de/bilder/6b/3f/58617/facebook_image/klassischer-burger.jpg",
-      name: "Classic Burger",
+          "https://image.essen-und-trinken.de/11832544/t/dG/v9/w960/r1/-/385730--8868-.jpg",
+      name: "Blumenkohl-Pizza",
       description:
           "with beef, cheese, onion, tomato, with beef, cheese, onion, tomato, with beef, cheese, onion, tomato",
       price: 5.5,
@@ -27,8 +31,8 @@ class Meals extends ChangeNotifier {
     ),
     Meal(
       imagePath:
-          "https://cdn.gutekueche.de/upload/rezept/141/1600x1200_pommes-frites-aus-belgien.jpg",
-      name: "Pommes",
+          "https://image.essen-und-trinken.de/11834520/t/hS/v9/w960/r1/-/deep-pan-pizza-53e2c013fa70fb58aa2cc59fcb688cf8-fjt2016010662-jpg--9857-.jpg",
+      name: "Deep Pan Pizza",
       description: "with ketchup",
       price: 3,
       rating: 3.47,
@@ -36,8 +40,8 @@ class Meals extends ChangeNotifier {
     ),
     Meal(
       imagePath:
-          "https://s3.eu-central-1.amazonaws.com/dtsee-media/media/image/f2/bd/64/Tajine-mit-Meeresfruechten-Rezepte-Hauptgerichte-Aufmacher-Bildformat-32-25.jpg",
-      name: "Tajine",
+          "https://image.essen-und-trinken.de/11917780/t/WY/v8/w960/r1/-/chili-con-carne-pizza-7050db21f20e777cda3f024743b6810a-fjt2013030321-jpg--6548-.jpg",
+      name: "Chili-con-Carne-Pizza",
       description: "with shrimps and others",
       price: 7.8,
       rating: 4.7,
@@ -45,8 +49,8 @@ class Meals extends ChangeNotifier {
     ),
     Meal(
       imagePath:
-          "https://img.delicious.com.au/0Hfc6oZG/w1200/del/2017/03/creamy-pumpkin-soup-43936-2.jpg",
-      name: "Pumpkin Soup",
+          "https://image.essen-und-trinken.de/11940766/t/eC/v10/w960/r1/-/pizza-sushi-style-jpg--59070-.jpg",
+      name: "Sushi Style mit Spinatsalat",
       description:
           "with pumpkins, Lorem ipsum dolor sit amet, consetetur sadipscing",
       price: 0.75,
@@ -55,17 +59,8 @@ class Meals extends ChangeNotifier {
     ),
     Meal(
       imagePath:
-          "https://assets.wsimgs.com/wsimgs/ab/images/dp/recipe/202032/0014/img95l.jpg",
-      name: "Hummus",
-      description: "with chickpeas, sed diam voluptua. At vero eos et a",
-      price: 2.65,
-      rating: 4.449,
-      numberOfRatings: 99,
-    ),
-    Meal(
-      imagePath:
-          "https://images.eatsmarter.de/sites/default/files/styles/max_size/public/mandel-porridge-mit-heidelbeeren-656183.jpg",
-      name: "Porridge",
+          "https://image.essen-und-trinken.de/11832944/t/UG/v9/w960/r1/-/scharfe-pizza-mit-avocado-bca3d2ffa275013797b2a30c77dccc0a-fjt2015050231-jpg--9068-.jpg",
+      name: "Scharfe Pizza mit Avocado",
       description:
           "with blue berries, vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr",
       price: 1.5,
@@ -74,8 +69,8 @@ class Meals extends ChangeNotifier {
     ),
     Meal(
       imagePath:
-          "https://img.chefkoch-cdn.de/rezepte/1281481233561735/bilder/909363/crop-360x240/rumpsteak-medium-mit-gelinggarantie.jpg",
-      name: "Rump Steak",
+          "https://image.essen-und-trinken.de/11910910/t/SS/v8/w960/r1/-/alpen-pizzamitpfifferlingenundspeck-ec0975dde3a6c6cc01a8e9437732346c-et2009090302-jpg--3027-.jpg",
+      name: "Alpen Pizza mit Pfifferlingen und Speck",
       description: "with beef ipsum dolor sit amet. Lorem ipsum dolor ",
       price: 16.90,
       rating: 3.3,
@@ -83,8 +78,8 @@ class Meals extends ChangeNotifier {
     ),
     Meal(
       imagePath:
-          "https://images.eatsmarter.de/sites/default/files/styles/max_size/public/bunte-wraps-mit-gemuese-655718.jpg",
-      name: "Colorful Wrap",
+          "https://image.essen-und-trinken.de/11912372/t/Cm/v8/w960/r1/-/pizza-mit-salsiccia-und-fenchel-306d1daf7e67ced12672f6a826dc9813-et2010090761-jpg--3782-.jpg",
+      name: "Pizza mit Salsiccia und Fenchel",
       description: "with vegetables",
       price: 5,
       rating: 3.3,
