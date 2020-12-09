@@ -39,7 +39,6 @@ dependencies {
 import com.bmuschko.gradle.docker.tasks.container.*
 import com.bmuschko.gradle.docker.tasks.image.*
 
-// TODO: https://www.datanovia.com/en/lessons/docker-compose-wait-for-container-using-wait-tool/docker-compose-wait-for-mysql-container-to-be-ready/
 task createDockerfile(type: Dockerfile) {
 	from 'open-liberty'
 	instruction  'COPY --chown=1001:0 ./build/libs/userManagement.war /config/apps/userManagement.war'
@@ -51,6 +50,10 @@ task createDockerfile(type: Dockerfile) {
 	environmentVariable 'DB_USER', 'root'
 	environmentVariable 'SERVICE_PASSWORD', 'ferwfrwe435gsd'
 	instruction  'RUN configure.sh'
+
+	environmentVariable 'WAIT_VERSION', '2.7.2'
+	instruction 'ADD --chown=1001:0 https://github.com/ufoscout/docker-compose-wait/releases/download/$WAIT_VERSION/wait /wait'
+	runCommand 'chmod +x /wait'
 }
 
 task buildImage(type: DockerBuildImage) {

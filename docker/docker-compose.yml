@@ -11,11 +11,15 @@ services:
             -   userDB
         environment:
             - DB_NAME=usermanagement
-            - DB_HOST=db-user
+            - DB_HOST=userDB
             - DB_PORT=3306
             - DB_USER=root
             - DB_PW=
             - SERVICE_PASSWORD=ferwfrwe435gsd
+            - WAIT_HOSTS=userDB:3306
+            - WAIT_HOSTS_TIMEOUT=60
+            - WAIT_SLEEP_INTERVAL=5
+        command: sh -c "/wait && /opt/ol/wlp/bin/server run defaultServer"
     userDB:
         container_name: aTeamUserManagementDB
         image: ateam/userdb:latest

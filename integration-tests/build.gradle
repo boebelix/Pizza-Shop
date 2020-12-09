@@ -31,7 +31,7 @@ task runIntegrationTest(type: Test) {
 	dependsOn clean, ':docker:execComposeUp'
 	finalizedBy ':docker:execComposeDown'
 	doFirst {
-		if (!waitForApplication("http://localhost:9080/", 30)) {
+		if (!waitForApplication("http://localhost:9080/", 60)) {
 			throw new TaskExecutionException(runIntegrationTest, new Exception("unable to reach application"))
 		}
 	}
