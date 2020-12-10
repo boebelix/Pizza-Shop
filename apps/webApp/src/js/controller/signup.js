@@ -1,6 +1,6 @@
 const initSignup = () => {
 	document.getElementById("register_submit_button").addEventListener("click", () => submitData());
-	document.getElementById("register_back_button").addEventListener("click", () => setState("login_state"));
+	document.getElementById("register_back_button").addEventListener("click", () => setState(STATE_LOGIN));
 	document.getElementById("password_signup").addEventListener("keyup", () => isPasswordValid());
 	let canvas = document.querySelector("#pwdCanvas");
 	let ctx = canvas.getContext("2d");

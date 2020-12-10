@@ -1,6 +1,7 @@
 const initLogin = () => {
 	document.getElementById("login_submit_button").addEventListener("click", () => login());
-	document.getElementById("login_register_button").addEventListener("click", () => setState("signup_state"));
+	document.getElementById("login_register_button").addEventListener("click", () => setState(STATE_SIGNUP));
+	document.getElementById("login_back_button").addEventListener("click", () => setState(STATE_HISTORY));
 }
 
 const login = async () => {

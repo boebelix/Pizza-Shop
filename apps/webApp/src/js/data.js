@@ -1,7 +1,8 @@
 let USER_JSON = {};
+let LOGGED_IN = false;
 const RESPONSE_OK = 200;
 const RESPONSE_INTERNAL_SERVER_ERROR = 500;
-const RESPONSE_NOT_FOUND = 404;
+const RESPONSE_NOT_FOUND = 400;
 const MIN_SIGNS = 5;
 const SAFE_SIGNS = 7;
 const CANVAS_HEIGHT = 10;
@@ -15,9 +16,30 @@ const SERVER_AUTH = "/auth";
 const SERVER_USER = "/user";
 const TYPE_POST = 'POST';
 const TYPE_PUT = 'PUT';
+const TYPE_GET = 'GET';
 const HEADER_BASIC = {
 	'Content-Type': 'application/json'
 };
+
+const STATE_MENU = "menu_state";
+const STATE_SIGNUP = "signup_state";
+const STATE_PROFILE = "profile_state";
+const STATE_LOGIN = "login_state";
+const STATE_ORDER_OVERVIEW = "order_overview_state";
+const STATE_ORDER_HISTORY = "order_history_state";
+const STATE_ORDER = "order_state";
+
+const STATES = [
+	new State(STATE_MENU, false),
+	new State(STATE_SIGNUP, false),
+	new State(STATE_PROFILE, true),
+	new State(STATE_LOGIN, false),
+	new State(STATE_ORDER_OVERVIEW, false),
+	new State(STATE_ORDER_HISTORY, true),
+	new State(STATE_ORDER, false)];
+
+let STATE_HISTORY = STATE_MENU;
+let STATE_CALLBACK = STATE_MENU;
 
 
 const setUserData = (JSON) => {
@@ -28,10 +50,14 @@ const setUserData = (JSON) => {
 	document.getElementById("city_profile").value = USER_JSON.city;
 	document.getElementById("postalcode_profile").value = USER_JSON.postalCode;
 	document.getElementById("country_profile").value = USER_JSON.country;
-	setState("menu_state");
+	LOGGED_IN = true;
+	setState(STATE_CALLBACK);
 }
 
 const setCookie = (cname, cvalue, exdays) => {
+	if(exdays === 0) {
+		LOGGED_IN = false;
+	}
 	let d = new Date();
 	d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
 	let expires = "expires=" + d.toUTCString();
