@@ -5,6 +5,7 @@ import ateam.exceptionmapper.UnknownEntityExceptionMapper;
 import ateam.exceptionmapper.ValidationExceptionMapper;
 import ateam.model.OrderProducer;
 import ateam.model.entity.Order;
+import ateam.model.entity.ShopProductionItem;
 import ateam.model.exception.UnknownEntityException;
 
 import ateam.validator.Validator;
@@ -33,13 +34,15 @@ public class ProductionEndpoint {
 	@POST
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response produceOrder(@RequestBody(required = true)Order order, UUID uuid) throws UnknownEntityException {
+	public Response produceOrder(@RequestBody(required = true)ShopProductionItem toProduce) throws UnknownEntityException {
 
-		Validator.validate(order);
+		Validator.validate(toProduce);
 
-		if(order.getPizzas()!=null&& !order.getPizzas().isEmpty())
-			return Response.status(Response.Status.OK.getStatusCode()).build();
+		if(toProduce.getItems()==null&& toProduce.getItems().isEmpty())
+			return Response.status(Response.Status.BAD_REQUEST.getStatusCode()).build();
 
-		return Response.status(Response.Status.BAD_REQUEST.getStatusCode()).build();
+
+		producer.produceOrder(toProduce);
+		return Response.status(Response.Status.OK.getStatusCode()).build();
 	}
 }
