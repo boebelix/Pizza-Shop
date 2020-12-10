@@ -18,6 +18,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.UUID;
 
 @Path("/production")
 @RegisterProvider(ValidationExceptionMapper.class)
@@ -32,11 +33,11 @@ public class ProductionEndpoint {
 	@POST
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response produceOrder(@RequestBody(required = true)Order order, int uuid) throws UnknownEntityException {
+	public Response produceOrder(@RequestBody(required = true)Order order, UUID uuid) throws UnknownEntityException {
 
 		Validator.validate(order);
 
-		if(producer.produceOrder(order,uuid))
+		if(order.getPizzas()!=null&& !order.getPizzas().isEmpty())
 			return Response.status(Response.Status.OK.getStatusCode()).build();
 
 		return Response.status(Response.Status.BAD_REQUEST.getStatusCode()).build();

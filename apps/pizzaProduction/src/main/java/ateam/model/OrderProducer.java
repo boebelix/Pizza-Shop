@@ -3,13 +3,14 @@ package ateam.model;
 import ateam.model.entity.Order;
 
 import javax.inject.Singleton;
+import java.util.UUID;
 
 @Singleton
 public class OrderProducer {
 
-	public boolean produceOrder(Order order, int uuid)
+	public void produceOrder(Order order, UUID uuid)
 	{
-		return (order.getPizzas()!=null&& !order.getPizzas().isEmpty());
+
 	}
 }
 
