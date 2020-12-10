@@ -1,0 +1,5 @@
+<server>
+	<jndiEntry id="userServicePassword" jndiName="userServicePassword" value="${env.USER_SERVICE_PASSWORD}" />
+	<jndiEntry id="LogisticsLogPath" jndiName="LogisticsLogPath" value="logistics.log" />
+	<jndiEntry id="UserInternURI" jndiName="UserInternURI" value="${env.USER_SERVICE_PATH}" />
+</server>

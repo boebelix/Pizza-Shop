@@ -1,6 +1,7 @@
 package ateam.logistics.service;
 
 import ateam.client.user.UserInternalClient;
+import ateam.exceptionmapper.LogServiceExceptionMapper;
 import ateam.exceptionmapper.UnauthorizedExceptionMapper;
 import ateam.exceptionmapper.ValidationExceptionMapper;
 import ateam.logistics.model.LogisticsLog;
@@ -8,6 +9,7 @@ import ateam.model.entity.LogisticsPostInput;
 import ateam.model.entity.User;
 import ateam.model.exception.UnauthorizedException;
 import ateam.util.LogService;
+import ateam.util.LogServiceException;
 import ateam.validator.ValidationException;
 import ateam.validator.Validator;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
@@ -30,28 +32,33 @@ import java.net.URISyntaxException;
 @Singleton
 @RegisterProvider(ValidationExceptionMapper.class)
 @RegisterProvider(UnauthorizedExceptionMapper.class)
+@RegisterProvider(LogServiceExceptionMapper.class)
 public class LogisticsController {
+
+	private final LogService logService;
+	private final URI userInternURI;
+	private final String userInternPW;
+
+	public LogisticsController() throws NamingException, LogServiceException, URISyntaxException {
+		this.logService = new LogService(InitialContext.doLookup("procurementLogPath"));
+		this.userInternURI = new URI(InitialContext.doLookup("UserInternURI"));
+		this.userInternPW = InitialContext.doLookup("userServicePassword");
+	}
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createLogisticsLog(LogisticsPostInput input) throws IOException, URISyntaxException, UnauthorizedException, NamingException, ValidationException {
+	public Response createLogisticsLog(LogisticsPostInput input)throws LogServiceException, UnauthorizedException, ValidationException {
 		Validator.validate(input);
-		URI userURI = new URI(InitialContext.doLookup("UserInternURI"));
 		UserInternalClient userInternalClient = RestClientBuilder.newBuilder()
-			.baseUri(userURI)
+			.baseUri(userInternURI)
 			.build(UserInternalClient.class);
-		User user = userInternalClient.getUser(input.getUserId(), InitialContext.doLookup("appServicePassword"));
+		User user = userInternalClient.getUser(input.getUserId(), userInternPW);
 
 		LogisticsLog log = new LogisticsLog(user);
-		LogService logService = new LogService(InitialContext.doLookup("LogisticsLogPath"));
-		boolean writeSuccessful = logService.log(log);
 		Validator.validate(log);
+		logService.log(log);
 
-		if (writeSuccessful) {
-			return Response.status(Response.Status.CREATED.getStatusCode()).build();
-		} else {
-			return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), "write to Log not successful").build();
-		}
-
+		return Response.status(Response.Status.CREATED.getStatusCode()).build();
 	}
 }

@@ -1,6 +1,6 @@
-package ateam.DBConnection;
+package ateam.db;
 
-import javax.inject.Singleton;
+import javax.enterprise.context.ApplicationScoped;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -8,11 +8,11 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@Singleton
-public class DBConnector {
+@ApplicationScoped
+public class DBConnection {
 	private DataSource dataSource;
 
-	public DBConnector() {
+	public DBConnection() {
 		try {
 			Context ctxt = new InitialContext();
 			dataSource = (DataSource) ctxt.lookup("jdbc/mySQL");

@@ -31,19 +31,10 @@ war {
 
 
 dependencies {
-	compile project(path: ':apps:microprofile-commons')
-
-	implementation "org.eclipse.microprofile:microprofile:${micoprofileVersion}"
-}
-
-
-dependencies {
 	implementation project(path: ':apps:microprofile-commons')
+
 	implementation "org.eclipse.microprofile:microprofile:${micoprofileVersion}"
 }
-
-
-
 
 import com.bmuschko.gradle.docker.tasks.container.*
 import com.bmuschko.gradle.docker.tasks.image.*
@@ -59,6 +50,10 @@ task createDockerfile(type: Dockerfile) {
 	environmentVariable 'DB_USER', 'root'
 	environmentVariable 'SERVICE_PASSWORD', 'ferwfrwe435gsd'
 	instruction  'RUN configure.sh'
+
+	environmentVariable 'WAIT_VERSION', '2.7.2'
+	instruction 'ADD --chown=1001:0 https://github.com/ufoscout/docker-compose-wait/releases/download/$WAIT_VERSION/wait /wait'
+	runCommand 'chmod +x /wait'
 }
 
 task buildImage(type: DockerBuildImage) {

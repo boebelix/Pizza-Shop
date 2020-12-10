@@ -1,0 +1,17 @@
+import org.gradle.internal.os.OperatingSystem
+
+task execComposeUp(type: Exec) {
+	if (OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'docker-compose', 'up', '-d'
+	} else {
+		commandLine 'docker-compose', 'up', '-d'
+	}
+}
+
+task execComposeDown(type: Exec) {
+	if (OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'docker-compose', 'down'
+	} else {
+		commandLine 'docker-compose', 'down'
+	}
+}

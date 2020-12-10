@@ -309,10 +309,50 @@ body {
 	z-index: 150;
 }
 
-.submitted_message{
+.submitted_message {
 	color: green;
 }
 
-.error{
+.error {
 	color: red;
+}
+
+#login_back_button {
+	background-color: #c46134;
+	border-radius: 4px;
+	border: 2px solid #96593d;
+	color: #fff;
+	font-size: 20px;
+	text-align: center;
+	width: 100px;
+	transition: all 0.5s;
+	cursor: pointer;
+	padding: 4px;
+	float: inline-start;
+}
+
+#login_back_button span {
+	cursor: pointer;
+	display: inline;
+	position: relative;
+	transition: 0.5s;
+}
+
+#login_back_button span:after {
+	content: '\00ab';
+	position: absolute;
+	opacity: 0;
+	top: 0;
+	left: -12px;
+	transition: 0.5s;
+}
+
+#login_back_button:hover span {
+	padding-left: 25px;
+	margin-right: -10px;
+}
+
+#login_back_button:hover span:after {
+	opacity: 1;
+	left: 0;
 }

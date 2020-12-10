@@ -1,51 +1,55 @@
 version: '3.0'
 
 services:
-    service-user:
+    userService:
         container_name: aTeamUserManagement
         image: ateam/usermanagement:latest
         ports:
             - 9080:9080
             - 9443:9443
         depends_on:
-            -   db-user
+            -   userDB
         environment:
             - DB_NAME=usermanagement
-            - DB_HOST=db-user
+            - DB_HOST=userDB
             - DB_PORT=3306
             - DB_USER=root
             - DB_PW=
             - SERVICE_PASSWORD=ferwfrwe435gsd
-    db-user:
+            - WAIT_HOSTS=userDB:3306
+            - WAIT_HOSTS_TIMEOUT=60
+            - WAIT_SLEEP_INTERVAL=5
+        command: sh -c "/wait && /opt/ol/wlp/bin/server run defaultServer"
+    userDB:
         container_name: aTeamUserManagementDB
         image: ateam/userdb:latest
-        volumes:
-            -   type: volume
-                source: usermanagement-db-data
-                target: /var/lib/mysql
-                volume:
-                    nocopy: true
         ports:
             -   3306:3306
         environment:
             - MYSQL_DATABASE=usermanagement
             - MYSQL_ALLOW_EMPTY_PASSWORD=true
-    db-pizza:
+    pizzaDB:
         container_name: aTeamPizzaShopDB
         image: ateam/pizzashopdb:latest
-        volumes:
-            -   type: volume
-                source: pizzashop-db-data
-                target: /var/lib/mysql
-                volume:
-                    nocopy: true
         ports:
             -   3307:3306
         environment:
             - MYSQL_DATABASE=pizzashop
             - MYSQL_ALLOW_EMPTY_PASSWORD=true
-
-
-volumes:
-    usermanagement-db-data:
-    pizzashop-db-data:
+    logisticsService:
+        container_name: aTeamLogisticsService
+        image: ateam/logisticsservice:latest
+        ports:
+            - 9081:9080
+            - 9444:9443
+        depends_on:
+            - userService
+        environment:
+            - USER_SERVICE_PASSWORD=ferwfrwe435gsd
+            - USER_SERVICE_PATH=http://userService:9080
+    procurementService:
+        container_name: aTeamProcurementService
+        image: ateam/procurementservice:latest
+        ports:
+            - 9082:9080
+            - 9445:9443

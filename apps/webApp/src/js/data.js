@@ -1,6 +1,8 @@
-var USER_JSON = {};
+let USER_JSON = {};
+let LOGGED_IN = false;
 const RESPONSE_OK = 200;
 const RESPONSE_INTERNAL_SERVER_ERROR = 500;
+const RESPONSE_NOT_FOUND = 400;
 const MIN_SIGNS = 5;
 const SAFE_SIGNS = 7;
 const CANVAS_HEIGHT = 10;
@@ -10,6 +12,35 @@ const REGEX_SIGNS = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 const PASSWORD_ERROR_EQUALITY = "Passwörter stimmen nicht überein";
 const EMAIL_ERROR_EQUALITY = "E-mail-Adressen stimmen nicht überein";
 const SERVER_ADDRESS = "http://localhost:9080";
+const SERVER_AUTH = "/auth";
+const SERVER_USER = "/user";
+const TYPE_POST = 'POST';
+const TYPE_PUT = 'PUT';
+const TYPE_GET = 'GET';
+const HEADER_BASIC = {
+	'Content-Type': 'application/json'
+};
+
+const STATE_MENU = "menu_state";
+const STATE_SIGNUP = "signup_state";
+const STATE_PROFILE = "profile_state";
+const STATE_LOGIN = "login_state";
+const STATE_ORDER_OVERVIEW = "order_overview_state";
+const STATE_ORDER_HISTORY = "order_history_state";
+const STATE_ORDER = "order_state";
+
+const STATES = [
+	new State(STATE_MENU, false),
+	new State(STATE_SIGNUP, false),
+	new State(STATE_PROFILE, true),
+	new State(STATE_LOGIN, false),
+	new State(STATE_ORDER_OVERVIEW, false),
+	new State(STATE_ORDER_HISTORY, true),
+	new State(STATE_ORDER, false)];
+
+let STATE_HISTORY = STATE_MENU;
+let STATE_CALLBACK = STATE_MENU;
+
 
 const setUserData = (JSON) => {
 	USER_JSON = JSON;
@@ -19,22 +50,26 @@ const setUserData = (JSON) => {
 	document.getElementById("city_profile").value = USER_JSON.city;
 	document.getElementById("postalcode_profile").value = USER_JSON.postalCode;
 	document.getElementById("country_profile").value = USER_JSON.country;
-	setState("menu_state");
+	LOGGED_IN = true;
+	setState(STATE_CALLBACK);
 }
 
 const setCookie = (cname, cvalue, exdays) => {
-	var d = new Date();
+	if(exdays === 0) {
+		LOGGED_IN = false;
+	}
+	let d = new Date();
 	d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-	var expires = "expires=" + d.toUTCString();
+	let expires = "expires=" + d.toUTCString();
 	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
 const getCookie = (cname) => {
-	var name = cname + "=";
-	var decodedCookie = decodeURIComponent(document.cookie);
-	var ca = decodedCookie.split(';');
-	for (var i = 0; i < ca.length; i++) {
-		var c = ca[i];
+	let name = cname + "=";
+	let decodedCookie = decodeURIComponent(document.cookie);
+	let ca = decodedCookie.split(';');
+	for (let i = 0; i < ca.length; i++) {
+		let c = ca[i];
 		while (c.charAt(0) == ' ') {
 			c = c.substring(1);
 		}
