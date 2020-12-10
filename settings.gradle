@@ -20,3 +20,6 @@ include(':apps:userManagement:db')
 include(':apps:webApp')
 include(':apps:microprofile-commons')
 
+include(':docker')
+include(':integration-tests')
+
