@@ -1,0 +1,45 @@
+plugins {
+	id 'java'
+}
+apply from: './testUtils.gradle'
+
+def USER_SERVICE_BASE_URL = "http://localhost:9080/"
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.2'
+
+	// JSON-B
+	testImplementation group: 'org.eclipse', name: 'yasson', version: '1.0.3'
+	testImplementation group: 'org.glassfish', name: 'javax.json', version: '1.1.4'
+	// Type-safe REST client
+	testImplementation group: 'org.apache.cxf', name: 'cxf-rt-rs-client', version: '3.3.0'
+	testImplementation group: 'cglib', name: 'cglib-nodep', version: '3.2.10'
+
+	testImplementation project(':apps:userManagement:app')
+	testImplementation project(':apps:microprofile-commons')
+}
+
+test {
+	// disable default test method
+}
+
+task runIntegrationTest(type: Test) {
+	dependsOn clean, ':docker:execComposeUp'
+	finalizedBy ':docker:execComposeDown'
+	doFirst {
+		if (!waitForApplication(USER_SERVICE_BASE_URL, 60)) {
+			throw new TaskExecutionException(runIntegrationTest, new Exception("unable to reach application"))
+		}
+	}
+	useJUnitPlatform()
+	testLogging {
+		events "passed", "skipped", "failed"
+		showStandardStreams = true
+	}
+}

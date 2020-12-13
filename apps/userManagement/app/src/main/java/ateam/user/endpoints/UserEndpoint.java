@@ -49,6 +49,7 @@ public class UserEndpoint {
 	@POST
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createUser(@RequestBody(required = true) User user) {
 		user.setUserId(0);
 		user.setCreateAt(null);
