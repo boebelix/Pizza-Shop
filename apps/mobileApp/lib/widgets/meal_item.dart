@@ -15,7 +15,7 @@ class MenuItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const double radius = 8;
-    const double itemHeight = 100;
+    const double itemHeight = 120;
     return Card(
       elevation: 8,
       shape: RoundedRectangleBorder(

@@ -15,7 +15,7 @@ class Meals extends ChangeNotifier {
       name: "Erstelle dir deine eigene Pizza",
       description:
       "Sei dein eigener Koch",
-      price: 0.0,
+      price: 10.0,
       rating: 5.0,
       numberOfRatings: 0,
     ),
