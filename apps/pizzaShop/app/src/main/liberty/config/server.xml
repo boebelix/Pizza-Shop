@@ -31,4 +31,8 @@
 
 	<jndiEntry id="appOrderPassword" jndiName="appOrderPassword" value="ferEG42gs4tgdsGFDS" />
 
+	<jndiEntry id="UserServiceInternURI" jndiName="UserInternURI" value="http://localhost:9080" />
+	<jndiEntry id="pizzaProductionPassword" jndiName="userServicePassword" value="ferwfrwe435gsd" />
+	<jndiEntry id="pizzaProductionInternURI" jndiName="UserInternURI" value="http://localhost:9080" />
+
 </server>
