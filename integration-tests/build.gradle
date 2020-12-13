@@ -23,6 +23,7 @@ dependencies {
 
 	testImplementation project(':apps:userManagement:app')
 	testImplementation project(':apps:microprofile-commons')
+	testImplementation project(':apps:pizzaProduction')
 }
 
 test {

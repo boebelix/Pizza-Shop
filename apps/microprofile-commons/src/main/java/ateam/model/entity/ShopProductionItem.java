@@ -16,6 +16,7 @@ public class ShopProductionItem {
 
 	@Validator.Required
 	@Validator.Valid
+	@Validator.Min(1)
 	List<Pizza> items;
 
 	public ShopProductionItem(int userID, int orderId, List<Pizza> items) {

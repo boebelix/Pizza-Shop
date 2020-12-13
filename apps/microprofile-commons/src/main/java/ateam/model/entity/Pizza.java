@@ -8,6 +8,7 @@ import java.util.List;
 public class Pizza {
 
 	@Validator.Required
+	@Validator.Min(1)
 	@Validator.Valid
 	List<Topping> toppings;
 

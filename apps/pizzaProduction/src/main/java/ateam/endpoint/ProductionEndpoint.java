@@ -4,7 +4,6 @@ import ateam.exceptionmapper.ShopExceptionMapper;
 import ateam.exceptionmapper.UnknownEntityExceptionMapper;
 import ateam.exceptionmapper.ValidationExceptionMapper;
 import ateam.model.OrderProducer;
-import ateam.model.entity.Order;
 import ateam.model.entity.ShopProductionItem;
 import ateam.model.exception.UnknownEntityException;
 
@@ -19,7 +18,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.UUID;
 
 @Path("/production")
 @RegisterProvider(ValidationExceptionMapper.class)
@@ -41,8 +39,8 @@ public class ProductionEndpoint {
 		if(toProduce.getItems()==null&& toProduce.getItems().isEmpty())
 			return Response.status(Response.Status.BAD_REQUEST.getStatusCode()).build();
 
-
 		producer.produceOrder(toProduce);
+
 		return Response.status(Response.Status.OK.getStatusCode()).build();
 	}
 }
