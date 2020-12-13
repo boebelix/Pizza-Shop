@@ -5,8 +5,10 @@ import ateam.exceptionmapper.UnknownEntityExceptionMapper;
 import ateam.exceptionmapper.ValidationExceptionMapper;
 import ateam.model.OrderProducer;
 import ateam.model.entity.ShopProductionItem;
+import ateam.model.exception.ShopException;
 import ateam.model.exception.UnknownEntityException;
 
+import ateam.validator.ValidationException;
 import ateam.validator.Validator;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
@@ -32,13 +34,9 @@ public class ProductionEndpoint {
 	@POST
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response produceOrder(@RequestBody(required = true)ShopProductionItem toProduce) throws UnknownEntityException {
+	public Response produceOrder(@RequestBody(required = true) ShopProductionItem toProduce) throws UnknownEntityException, ShopException, ValidationException {
 
 		Validator.validate(toProduce);
-
-		if(toProduce.getItems()==null&& toProduce.getItems().isEmpty())
-			return Response.status(Response.Status.BAD_REQUEST.getStatusCode()).build();
-
 		producer.produceOrder(toProduce);
 
 		return Response.status(Response.Status.OK.getStatusCode()).build();

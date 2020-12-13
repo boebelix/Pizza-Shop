@@ -12,7 +12,7 @@ public class ShopProductionItem {
 	int userID;
 
 	@Validator.Required
-	int orderId;
+	int orderID;
 
 	@Validator.Required
 	@Validator.Valid
@@ -21,7 +21,7 @@ public class ShopProductionItem {
 
 	public ShopProductionItem(int userID, int orderId, List<Pizza> items) {
 		this.userID = userID;
-		this.orderId = orderId;
+		this.orderID = orderId;
 		this.items = items;
 	}
 
@@ -29,20 +29,20 @@ public class ShopProductionItem {
 		items=new LinkedList<>();
 	}
 
-	public int getuserID() {
+	public int getUserID() {
 		return userID;
 	}
 
-	public void setuserID(int userID) {
+	public void setUserID(int userID) {
 		this.userID = userID;
 	}
 
-	public int getOrderId() {
-		return orderId;
+	public int getOrderID() {
+		return orderID;
 	}
 
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setOrderID(int orderId) {
+		this.orderID = orderId;
 	}
 
 	public List<Pizza> getItems() {
