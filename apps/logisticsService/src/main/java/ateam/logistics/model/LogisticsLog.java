@@ -8,8 +8,7 @@ import java.util.Date;
 
 public class LogisticsLog {
 	@Validator.Required
-	@Validator.Min(1)
-	private String orderId;
+	private int orderId;
 
 	@Validator.Required
 	@Validator.Min(1)
@@ -46,7 +45,8 @@ public class LogisticsLog {
 	public LogisticsLog() {
 	}
 
-	public LogisticsLog(User user) {
+	public LogisticsLog(User user, int orderId) {
+		this.orderId=orderId;
 		this.firstName = user.getFirstName();
 		this.lastName = user.getLastName();
 		this.street = user.getStreet();
@@ -57,11 +57,11 @@ public class LogisticsLog {
 		time =  new Timestamp(new Date().getTime()).toString();
 	}
 
-	public String getOrderId() {
+	public int getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(String orderId) {
+	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
 
