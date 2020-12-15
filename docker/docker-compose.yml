@@ -55,7 +55,7 @@ services:
             - 9445:9443
     pizzaProduction:
         container_name: aTeamPizzaProduction
-        image: ateam/pizzaProduction:latest
+        image: ateam/pizza-production:latest
         ports:
             - 9083:9080
             - 9446:9443

@@ -10,6 +10,11 @@ buildscript {
 		classpath "io.openliberty.tools:liberty-gradle-plugin:${libertyPluginVersion}"
 	}
 }
+
+plugins {
+	id 'com.bmuschko.docker-remote-api' version '6.6.1'
+}
+
 apply plugin: 'java'
 apply plugin: 'liberty'
 apply plugin: 'war'
@@ -45,12 +50,12 @@ task buildImage(type: DockerBuildImage) {
 	dependsOn createDockerfile
 	inputDir = project.projectDir
 	dockerFile = createDockerfile.destFile
-	images.add('ateam/pizzaProduction:latest')
+	images.add('ateam/pizza-production:latest')
 }
 
 task createContainer(type: DockerCreateContainer) {
 	dependsOn buildImage
 	targetImageId buildImage.getImageId()
-	containerName = 'aTeampizzaProduction'
+	containerName = 'aTeamPizzaProduction'
 	hostConfig.portBindings = ["${pizzaProductionDevDockerHttpPort}:9080", "${pizzaProductionDevDockerHttpsPort}:9443"]
 }
