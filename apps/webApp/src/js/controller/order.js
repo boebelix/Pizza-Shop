@@ -1,5 +1,5 @@
 const initOrder = () => {
-	document.getElementById("ordered_back_button").addEventListener("click", () => setState("menu_state"));
+	document.getElementById("ordered_back_button").addEventListener("click", () => setState(STATE_MENU));
 
 	const buttons = document.getElementsByClassName("button_size");
 	for (button of buttons) {
