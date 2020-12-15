@@ -29,7 +29,7 @@ public class LogisticsControllerTest {
 		logisticsClient = TestUtils.setupClient(TestConstants.LOGISTICS_SERVICE_URI, LogisticsClient.class);
 
 		userEndpoint = TestUtils.setupClient(TestConstants.USER_SERVICE_URI, UserEndpoint.class);
-		User toCreate = UserServiceTestUtils.createDefaultUser("logisticsControllerTest3");
+		User toCreate = UserServiceTestUtils.createDefaultUser("logisticsControllerTest");
 		Response response = userEndpoint.createUser(toCreate);
 		ServiceResponse<User> serviceResponse = ServiceResponse.parse(response, User.class);
 		userId = serviceResponse.getResponseEntity().get().getUserId();

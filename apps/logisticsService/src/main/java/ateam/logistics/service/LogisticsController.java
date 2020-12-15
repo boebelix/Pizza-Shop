@@ -39,7 +39,7 @@ public class LogisticsController {
 	private final String userInternPW;
 
 	public LogisticsController() throws NamingException, LogServiceException, URISyntaxException {
-		this.logService = new LogService(InitialContext.doLookup("procurementLogPath"));
+		this.logService = new LogService(InitialContext.doLookup("LogisticsLogPath"));
 		this.userInternURI = new URI(InitialContext.doLookup("UserInternURI"));
 		this.userInternPW = InitialContext.doLookup("userServicePassword");
 	}
