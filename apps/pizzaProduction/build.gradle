@@ -24,3 +24,33 @@ dependencies {
 
 	implementation "org.eclipse.microprofile:microprofile:${micoprofileVersion}"
 }
+
+war {
+	archiveName("pizzaProduction.war")
+}
+
+
+import com.bmuschko.gradle.docker.tasks.container.*
+import com.bmuschko.gradle.docker.tasks.image.*
+
+task createDockerfile(type: Dockerfile) {
+	from 'open-liberty'
+	instruction  'COPY --chown=1001:0 ./build/libs/pizzaProduction.war /config/apps/pizzaProduction.war'
+	instruction  'COPY --chown=1001:0 ./src/main/liberty/config/ /config/'
+	instruction  'COPY --chown=1001:0 ./docker/configOverrides /config/configDropins/overrides/'
+	instruction  'RUN configure.sh'
+}
+
+task buildImage(type: DockerBuildImage) {
+	dependsOn createDockerfile
+	inputDir = project.projectDir
+	dockerFile = createDockerfile.destFile
+	images.add('ateam/pizzaProduction:latest')
+}
+
+task createContainer(type: DockerCreateContainer) {
+	dependsOn buildImage
+	targetImageId buildImage.getImageId()
+	containerName = 'aTeampizzaProduction'
+	hostConfig.portBindings = ["${pizzaProductionDevDockerHttpPort}:9080", "${pizzaProductionDevDockerHttpsPort}:9443"]
+}
