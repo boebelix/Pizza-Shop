@@ -1,73 +1,61 @@
 class User {
-  final int id;
-  final String name;
+  int id;
   final String username;
+  final String firstName;
+  final String lastName;
   final String email;
-  final Address address;
-  final String phone;
-  final String website;
+  final String password;
+  final String postalCode;
+  final String street;
+  final String number;
+  final String city;
+  final String country;
 
   User({
     this.id,
-    this.name,
     this.username,
+    this.firstName,
+    this.lastName,
     this.email,
-    this.address,
-    this.phone,
-    this.website,
+    this.password,
+    this.postalCode,
+    this.street,
+    this.number,
+    this.city,
+    this.country
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json['id'],
-        name: json['name'],
         username: json['username'],
+        firstName: json['firstName'],
+        lastName: json['lastName'],
         email: json['email'],
-        address:
-            json['address'] != null ? Address.fromJson(json['address']) : null,
-        phone: json['phone'],
-        website: json['website'],
+        password: json['password'],
+        postalCode: json['postalCode'],
+        street: json['street'],
+        number: json['number'],
+        city: json['city'],
+        country: json['country']
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "name": name,
-        "username": username,
-        "email": email,
-        "address": address?.toJson(),
-        "phone": phone,
-        "website": website,
+        "username":   username,
+        "firstName":  firstName,
+        "lastName":   lastName,
+        "email":      email,
+        "password":   password,
+        "postalCode": postalCode,
+        "street":     street,
+        "number":     number,
+        "city":       city,
+        "country":    country
       };
 
   @override
   String toString() {
-    return 'User{id: $id, name: $name}';
+    return 'User{id: $id, username: $username, firstName: $firstName, lastName: $lastName, email: $email, password: $password, postalCode: $postalCode, street: $street, number: $number, city: $city, country: $country}';
   }
 }
 
-class Address {
-  final String street;
-  final String suite;
-  final String city;
-  final String zipcode;
-
-  Address({
-    this.street,
-    this.suite,
-    this.city,
-    this.zipcode,
-  });
-
-  factory Address.fromJson(Map<String, dynamic> json) => Address(
-        street: json['street'],
-        suite: json['suite'],
-        city: json['city'],
-        zipcode: json['zipcode'],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "street": street,
-        "suite": suite,
-        "city": city,
-        "zipcode": zipcode,
-      };
-}
