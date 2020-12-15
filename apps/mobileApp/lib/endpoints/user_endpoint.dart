@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 
 class UserService {
   static UserService _instance;
+  final String url = "localhost:9080";
 
   factory UserService.instance() {
     _instance ??= UserService._private();
@@ -17,7 +18,7 @@ class UserService {
 
   Future<List<User>> getAllUsers() {
     return http
-        .get(Uri.https("jsonplaceholder.typicode.com", "/users"))
+        .get(Uri.https(url, "/users"))
         .then((response) {
       if (response.statusCode == HttpStatus.ok) {
         List<dynamic> usersJson = jsonDecode(response.body);
@@ -30,7 +31,7 @@ class UserService {
 
   Future<User> createUser(User user) {
     return http.post(
-      Uri.https("jsonplaceholder.typicode.com", "/users"),
+      Uri.https(url, "/user"),
       body: jsonEncode(user.toJson()),
       headers: {
         HttpHeaders.contentTypeHeader: ContentType.json.value,

@@ -1,5 +1,5 @@
 import 'package:app/models/user.dart';
-import 'package:app/services/user_service.dart';
+import 'file:///C:/Develop/TP/apps/mobileApp/lib/endpoints/user_endpoint.dart';
 import 'package:flutter/foundation.dart';
 
 
