@@ -11,7 +11,7 @@ public class Pizza {
 	@Validator.Valid
 	List<Topping> toppings;
 
-	private int iD;
+	private int id;
 
 	@Validator.Required
 	private int sizeId;
@@ -23,8 +23,8 @@ public class Pizza {
 		toppings = new LinkedList<Topping>();
 	}
 
-	public Pizza(int iD, int sizeId, int orderId) {
-		this.iD = iD;
+	public Pizza(int id, int sizeId, int orderId) {
+		this.id = id;
 		this.sizeId = sizeId;
 		this.orderId = orderId;
 		toppings = new LinkedList<Topping>();
@@ -42,12 +42,12 @@ public class Pizza {
 		this.orderId = orderId;
 	}
 
-	public int getID() {
-		return iD;
+	public int getId() {
+		return id;
 	}
 
-	public void setID(int iD) {
-		this.iD = iD;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getSizeId() {
