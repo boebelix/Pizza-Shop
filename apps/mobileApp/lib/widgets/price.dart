@@ -9,7 +9,7 @@ class Price extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      "\$${price.toStringAsFixed(2)}",
+      "${price.toStringAsFixed(2)} \€",
       style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold),
     );
   }

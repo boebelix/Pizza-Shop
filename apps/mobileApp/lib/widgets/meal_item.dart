@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:app/models/meal.dart';
 import 'package:app/screens/meal_detail_screen.dart';
 import 'package:app/widgets/price.dart';
-import 'package:app/widgets/rating.dart';
-
-import 'meal_picture.dart';
 
 
 class MenuItemCard extends StatelessWidget {
@@ -37,12 +34,6 @@ class MenuItemCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Flexible(
-                  flex: 2,
-                  fit: FlexFit.tight,
-                  child: MealPicture(imagePath: meal.imagePath),
-                ),
-                Flexible(
-                  flex: 5,
                   child: _MealInfo(meal: meal),
                 ),
               ],
@@ -62,7 +53,7 @@ class _MealInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(12.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -78,9 +69,9 @@ class _MealInfo extends StatelessWidget {
           ),
           Spacer(),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Rating(rating: meal.rating, numberOfRatings: meal.numberOfRatings),
+
               Price(price: meal.price),
             ],
           ),
