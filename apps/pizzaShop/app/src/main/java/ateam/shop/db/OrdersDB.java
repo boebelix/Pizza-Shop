@@ -16,37 +16,37 @@ public class OrdersDB {
 	@Inject
 	private DBConnection connector;
 
-	public int insertNewOrder(Order orders) throws SQLException {
+	public int insertNewOrder(Order order, Connection connection) throws SQLException {
+		PreparedStatement statement = connection.prepareStatement("insert into orders (id, order_date, order_sent, postal_code, street, hnumber, city) VALUES (?,?,?,?,?,?)");
+		statement.setDate(1, order.getOrderDate());
+		statement.setDate(2, order.getOrderArrived());
+		statement.setString(3, order.getPLZ());
+		statement.setString(4, order.getStreet());
+		statement.setString(5, order.getHouseNumber());
+		statement.setString(6, order.getCity());
+		statement.executeUpdate();
 
-		try(Connection connection=connector.getConnection()) {
-			PreparedStatement statement = connection.prepareStatement("insert into orders (id, order_date, order_sent, postal_code, street, hnumber, city) VALUES (?,?,?,?,?,?)");
-			statement.setDate(1, orders.getOrderDate());
-			statement.setDate(2, orders.getOrderArrived());
-			statement.setString(3, orders.getPLZ());
-			statement.setString(4, orders.getStreet());
-			statement.setString(5, orders.getHouseNumber());
-			statement.setString(6, orders.getCity());
-			statement.executeUpdate();
-
-			return statement.getGeneratedKeys().getInt(1);
-		}
+		return statement.getGeneratedKeys().getInt(1);
 	}
 
-	public Order getOrderById(int id) throws SQLException {
+	public Order getOrderById(int id, Connection connection) throws SQLException {
+		PreparedStatement stmt = connection.prepareStatement("select * from orders where id = ?");
 
-		try(Connection connection=connector.getConnection()) {
-			PreparedStatement stmt = connection.prepareStatement("select * from orders where id = ?");
-
-			ResultSet rs = stmt.executeQuery();
-
-			return new Order(rs.getInt(1),
-				rs.getDate(2),
-				rs.getDate(3),
-				rs.getString(4),
-				rs.getString(5),
-				rs.getString(6),
-				rs.getString(7));
+		ResultSet rs = stmt.executeQuery();
+		while (rs.next()) {
+			return orderFromRs(rs);
 		}
+		return null;
+	}
+
+	private Order orderFromRs(ResultSet rs) throws SQLException {
+		return new Order(rs.getInt(1),
+			rs.getDate(2),
+			rs.getDate(3),
+			rs.getString(4),
+			rs.getString(5),
+			rs.getString(6),
+			rs.getString(7));
 	}
 
 }

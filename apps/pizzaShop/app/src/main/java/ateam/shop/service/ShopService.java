@@ -1,8 +1,7 @@
 package ateam.shop.service;
 
 import ateam.model.entity.Order;
-import ateam.shop.db.OrdersDB;
-import ateam.shop.db.PizzaToppingDB;
+import ateam.shop.db.DBManager;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -11,14 +10,9 @@ import javax.inject.Singleton;
 public class ShopService {
 
 	@Inject
-	private OrdersDB ordersDB;
-
-	@Inject
-	private PizzaToppingDB pizzaToppingDB;
-
+	private DBManager dbManager;
 
 	public Order placeOrder(Order order) {
-		//Check foreign keys. Pizza Check if pizza id is needed
-		return ordersDB.insertNewOrder(order);
+		return dbManager.placeOrder(order);
 	}
 }

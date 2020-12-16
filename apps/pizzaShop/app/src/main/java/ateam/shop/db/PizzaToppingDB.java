@@ -1,50 +1,42 @@
 package ateam.shop.db;
 
-import ateam.db.DBConnection;
 import ateam.model.entity.PizzaTopping;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 @Singleton
 public class PizzaToppingDB {
 
-	@Inject
-	private DBConnection connector;
-
-	public void createPizzaToppingEntry(PizzaTopping dto) throws SQLException {
-		try(Connection connection=connector.getConnection()) {
-			PreparedStatement statement = connection.prepareStatement("insert into pizza_topping (pizza_id, topping_id, amount) VALUES (?,?,?)");
-			statement.setInt(1, dto.getPizzaId());
-			statement.setInt(2, dto.getToppingId());
-			statement.setInt(2, dto.getAmount());
-			statement.executeUpdate();
-		}
+	public void createPizzaToppingEntry(PizzaTopping dto, Connection connection) throws SQLException {
+		PreparedStatement statement = connection.prepareStatement("insert into pizza_topping (pizza_id, topping_id, amount) VALUES (?,?,?)");
+		statement.setInt(1, dto.getPizzaId());
+		statement.setInt(2, dto.getToppingId());
+		statement.setInt(2, dto.getAmount());
+		statement.executeUpdate();
 	}
 
-	public List<PizzaTopping> getPizzaToppingByPizzaId(int pizzaId) throws SQLException {
+	public List<PizzaTopping> getPizzaToppingByPizzaId(int pizzaId, Connection connection) throws SQLException {
+		PreparedStatement stmt = connection.prepareStatement("select * from pizza_topping where pizza_id = ?");
+		stmt.setInt(1,pizzaId);
 
-		try(Connection connection=connector.getConnection()) {
-			PreparedStatement stmt = connection.prepareStatement("select * from pizza_topping where pizza_id = ?");
-			stmt.setInt(1,pizzaId);
+		ResultSet rs = stmt.executeQuery();
+		List<PizzaTopping> toppingList = new ArrayList<>();
 
-			ResultSet rs = stmt.executeQuery();
-			List<PizzaTopping> toppingList = new LinkedList<PizzaTopping>();
-
-			while (rs.next()) {
-				toppingList.add(new PizzaTopping(rs.getInt("pizza_order_id"),
-					rs.getInt("topping_id"),
-					rs.getInt("amount")));
-			}
-
-			return toppingList;
+		while (rs.next()) {
+			toppingList.add(pizzaToppingFromRs(rs));
 		}
+		return toppingList;
 	}
 
+	private PizzaTopping pizzaToppingFromRs(ResultSet rs) throws SQLException {
+		return new PizzaTopping(rs.getInt("pizza_order_id"),
+			rs.getInt("topping_id"),
+			rs.getInt("amount"));
+	}
 }
