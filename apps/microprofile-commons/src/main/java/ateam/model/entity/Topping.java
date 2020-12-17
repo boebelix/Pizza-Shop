@@ -10,12 +10,13 @@ public class Topping {
 	@Validator.Regex(regex = "^[A-Z]([^0-9\\§\\%\\&\\!\\?])+?[a-z]$", errorMessage = "ToppingName muss mit einem Großbuchstaben anfangen und mit einem Kleinbuchstaben enden! Die Zeichen '§', '%', '&', '!' und '?' sind nicht erlaubt!")
 	private String name;
 
-	@Validator.Required
-	@Validator.Min(1)
+	@Validator.Required(errorMessage = "Basismenge benötigt")
+	@Validator.Min(value = 1, errorMessage = "Basismenge darf einen Wert von 1 nicht unterschreiten!")
 	private int baseAmount;
 
 	@Validator.Required
-	@Validator.Min(1)
+	@Validator.Min(value = 1, errorMessage = "Die Einheit muss aus mindestens einem Buchstaben bestehen")
+	@Validator.Max(value = 16, errorMessage = "Die Einheit darf aus maximal 16 Buchstaben bestehen")
 	private String unit;
 
 	public Topping(int id, String name, int baseAmount, String unit) {

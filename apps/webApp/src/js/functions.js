@@ -54,7 +54,7 @@ const loadUserFromCookies = async () => {
 window.onload = () => {
 	setState(STATE_MENU);
 	// Begin Test Data
-	createIngredientButtons(["Tomate", "Salamai", "Mozarella", "Paprika", "Zwiebel"]);
+	createIngredientButtons(["Tomate", "Salami", "Mozzarella", "Paprika", "Zwiebel"]);
 	loadOrderHistory({
 		"orders": [{"id": 1, "orderDate": "05.05.2020", "pizzaCount": 4}, {
 			"id": 2,

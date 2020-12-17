@@ -24,7 +24,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -40,7 +39,7 @@ public class LogisticsController {
 	private final String userInternPW;
 
 	public LogisticsController() throws NamingException, LogServiceException, URISyntaxException {
-		this.logService = new LogService(InitialContext.doLookup("procurementLogPath"));
+		this.logService = new LogService(InitialContext.doLookup("LogisticsLogPath"));
 		this.userInternURI = new URI(InitialContext.doLookup("UserInternURI"));
 		this.userInternPW = InitialContext.doLookup("userServicePassword");
 	}
@@ -48,14 +47,15 @@ public class LogisticsController {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createLogisticsLog(LogisticsPostInput input)throws LogServiceException, UnauthorizedException, ValidationException {
+	public Response createLogisticsLog(
+		LogisticsPostInput input) throws LogServiceException, UnauthorizedException, ValidationException {
 		Validator.validate(input);
 		UserInternalClient userInternalClient = RestClientBuilder.newBuilder()
 			.baseUri(userInternURI)
 			.build(UserInternalClient.class);
 		User user = userInternalClient.getUser(input.getUserId(), userInternPW);
 
-		LogisticsLog log = new LogisticsLog(user);
+		LogisticsLog log = new LogisticsLog(user, input.getOrderId());
 		Validator.validate(log);
 		logService.log(log);
 

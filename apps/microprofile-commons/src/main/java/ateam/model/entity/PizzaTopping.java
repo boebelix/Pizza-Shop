@@ -1,5 +1,6 @@
 package ateam.model.entity;
 
+import ateam.validator.Validator;
 import ateam.validator.Validator.Required;
 
 public class PizzaTopping {
@@ -8,6 +9,7 @@ public class PizzaTopping {
 	private int toppingId;
 
 	@Required
+	@Validator.Min(value = 1, errorMessage = "Amount has to be min 1")
 	private int amount;
 
 	@Required

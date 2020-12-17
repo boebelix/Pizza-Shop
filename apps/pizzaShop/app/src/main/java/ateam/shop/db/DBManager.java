@@ -2,8 +2,8 @@ package ateam.shop.db;
 
 import ateam.db.DBConnection;
 import ateam.model.entity.Order;
-import ateam.model.entity.PizzaTopping;
 import ateam.model.entity.Pizza;
+import ateam.model.entity.PizzaTopping;
 import ateam.model.entity.Topping;
 import ateam.model.exception.ShopException;
 
@@ -61,7 +61,7 @@ public class DBManager {
 
 			for (Pizza pizza : pizzas.getPizzaByOrderId(order.getId())) {
 
-				List<PizzaTopping> pizzaToppings = pizzaTopping.getPizzaToppingByPizzaId(pizza.getID());
+				List<PizzaTopping> pizzaToppings = pizzaTopping.getPizzaToppingByPizzaId(pizza.getId());
 
 				for (PizzaTopping toppingId : pizzaToppings) {
 					pizza.addTopping(toppings.getToppingById(toppingId.getToppingId()));
