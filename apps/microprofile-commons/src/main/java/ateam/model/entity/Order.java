@@ -24,14 +24,15 @@ public class Order {
 	private String postCode;
 
 	@Validator.Required
-	@Validator.Regex(regex = "^[A-Z]([^0-9\\§\\%\\&\\!\\?])+?[a-z]$", errorMessage = "Straße muss mit einem Großbuchstaben anfangen und mit einem Kleinbuchstaben enden! Zahlen, so wie die Zeichen '§', '%', '&', '!' und '?' sind nicht erlaubt!")
+	@Validator.Min(value = 1, errorMessage = "Das Feld \"Straße\" darf nicht leer sein!")
 	private String street;
 
 	@Validator.Required
+	@Validator.Min(value = 1, errorMessage = "Das Feld \"Hausnummer\" darf nicht leer sein!")
 	private String houseNumber;
 
 	@Validator.Required
-	@Validator.Regex(regex = "^[A-Z]([^\\0-9\\§\\%\\&\\!\\?])+?[a-z]$", errorMessage = "Stadt muss mit einem Großbuchstaben anfangen und mit einem Kleinbuchstaben enden! Zahlen, so wie die Zeichen '§', '%', '&', '!' und '?' sind nicht erlaubt!")
+	@Validator.Min(value = 1, errorMessage = "Das Feld \"Stadt\" darf nicht leer sein!")
 	private String city;
 
 	public Order() {
@@ -65,11 +66,11 @@ public class Order {
 		this.pizzas = pizzas;
 	}
 
-	public String getPLZ() {
+	public String getPostCode() {
 		return postCode;
 	}
 
-	public void setPLZ(String postCode) {
+	public void setPostCode(String postCode) {
 		this.postCode = postCode;
 	}
 

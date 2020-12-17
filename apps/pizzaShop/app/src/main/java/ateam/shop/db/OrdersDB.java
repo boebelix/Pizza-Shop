@@ -20,7 +20,7 @@ public class OrdersDB {
 		PreparedStatement statement = connection.prepareStatement("insert into orders (id, order_date, order_sent, postal_code, street, hnumber, city) VALUES (?,?,?,?,?,?)");
 		statement.setDate(1, order.getOrderDate());
 		statement.setDate(2, order.getOrderArrived());
-		statement.setString(3, order.getPLZ());
+		statement.setString(3, order.getPostCode());
 		statement.setString(4, order.getStreet());
 		statement.setString(5, order.getHouseNumber());
 		statement.setString(6, order.getCity());
