@@ -11,8 +11,8 @@ class UserService {
   static UserService _instance;
 
   /*
-  * localhost:9080 doesn't work her if you are use android emulator avd
-  * you have to change the ip to 10.0.2.2
+  * localhost:9080 doesn't work here if you are use android emulator avd
+  * you have to change the ip to 10.0.2.2:9080
   * https://stackoverflow.com/a/55786011/14755959
   * */
 
