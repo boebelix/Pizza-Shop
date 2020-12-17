@@ -30,7 +30,7 @@ services:
         container_name: aTeamPizzaShop
         image: ateam/pizzashop:latest
         ports:
-            -   8083:8080
+            -   9083:9080
             -   9446:9443
         depends_on:
             - pizzaDB
