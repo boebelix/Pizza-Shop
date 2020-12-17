@@ -23,16 +23,30 @@ services:
     userDB:
         container_name: aTeamUserManagementDB
         image: ateam/userdb:latest
-        ports:
-            -   3306:3306
         environment:
             - MYSQL_DATABASE=usermanagement
             - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    pizzaShop:
+        container_name: aTeamPizzaShop
+        image: ateam/pizzashop:latest
+        ports:
+            -   8083:8080
+            -   9446:9443
+        depends_on:
+            - pizzaDB
+        environment:
+            - DB_NAME=pizzashop
+            - DB_HOST=pizzaDB
+            - DB_PORT=3306
+            - DB_USER=root
+            - DB_PW=
+            - WAIT_HOSTS=pizzaDB:3306
+            - WAIT_HOSTS_TIMEOUT=60
+            - WAIT_SLEEP_INTERVAL=5
+        command: sh -c "/wait && /opt/ol/wlp/bin/server run defaultServer"
     pizzaDB:
         container_name: aTeamPizzaShopDB
         image: ateam/pizzashopdb:latest
-        ports:
-            -   3307:3306
         environment:
             - MYSQL_DATABASE=pizzashop
             - MYSQL_ALLOW_EMPTY_PASSWORD=true

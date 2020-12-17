@@ -39,7 +39,7 @@ CREATE TABLE `pizza_topping`
 (
     `pizza_id`   int,
     `topping_id` int,
-    `amount`     int,
+    `amount`     int not null ,
     PRIMARY KEY (`pizza_id`, `topping_id`)
 );
 

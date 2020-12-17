@@ -48,7 +48,7 @@ public class SizesDB {
 	}
 
 	private Size sizeFromRs(ResultSet rs) throws SQLException {
-		new Size(rs.getInt("id"),
+		return new Size(rs.getInt("id"),
 			rs.getInt("radius"),
 			rs.getFloat("base_price"),
 			rs.getFloat("topping_price"),

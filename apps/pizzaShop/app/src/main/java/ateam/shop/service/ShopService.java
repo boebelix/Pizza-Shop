@@ -13,6 +13,8 @@ public class ShopService {
 	private DBManager dbManager;
 
 	public Order placeOrder(Order order) {
-		return dbManager.placeOrder(order);
+		Order created = dbManager.placeOrder(order);
+		//Todo contact pizzaProduction
+		return created;
 	}
 }

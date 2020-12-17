@@ -15,10 +15,8 @@ public class Order {
 
 	private int id;
 
-	@Validator.Required
 	private Date orderDate;
 
-	@Validator.Required
 	private Date orderArrived;
 
 	@Validator.Required
