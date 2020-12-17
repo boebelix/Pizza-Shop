@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ProductionEndPointTest {
-/*
+
 	private static ProductionEndpoint productionEndpoint;
 
 	@BeforeAll
@@ -43,5 +43,5 @@ public class ProductionEndPointTest {
 		assertTrue(serviceResponse.hasError());
 		ExceptionResponse exceptionResponse = serviceResponse.getErrorEntity().get();
 		assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), exceptionResponse.getStatus());
-	}*/
+	}
 }
