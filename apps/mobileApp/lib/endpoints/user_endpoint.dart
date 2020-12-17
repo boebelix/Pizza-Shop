@@ -48,9 +48,9 @@ class UserService {
     ).then((response) {
 
       switch(response.statusCode) {
+        
         case HttpStatus.ok:{
           Map<String, dynamic> json = jsonDecode(response.body);
-          print(json);
           return User.fromJson(json);
         } break;
 
