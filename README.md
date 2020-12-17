@@ -31,3 +31,7 @@ images in one go by running `gradlew clean build buildImage`.
 ## Integration Tests
 You can run the integration tests by executing `gradlew runIntegrationTest`. This will start the system via docker,
 run the tests, and shut down the containers. Be sure that you build the containers beforehand.
+
+
+##
+You can start the docker containers with following command `gradlew execComposeUp` to stop with 'gradlew execComposeDown'
