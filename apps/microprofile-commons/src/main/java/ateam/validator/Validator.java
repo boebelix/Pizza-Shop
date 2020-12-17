@@ -10,7 +10,6 @@ import java.util.Collection;
 import java.util.HashSet;
 
 public class Validator {
-
 	/**
 	 * Add this annotation to all Attributes that contain objects should get their
 	 * inner structure validated.
@@ -37,14 +36,14 @@ public class Validator {
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.FIELD)
 	public @interface Min {
-		long value();
+		double value();
 		String errorMessage() default "%fieldname% benötigt eine größe von mindestens %value%!";
 	}
 
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.FIELD)
 	public @interface Max {
-		long value();
+		double value();
 		String errorMessage() default "%fieldname% benötigt eine größe von mindestens %value%!";
 	}
 
@@ -88,15 +87,17 @@ public class Validator {
 						}
 					}
 					if(!ignoreAnnotations.contains(Min.class) && field.isAnnotationPresent(Min.class)) {
-						long min = field.getAnnotation(Min.class).value();
-						if(getObjectLength(fieldValue) < getObjectLength(min)) {
+						double min = field.getAnnotation(Min.class).value();
+						double objLength = getObjectLength(fieldValue);
+						if(objLength < min && !epsilonEqual(objLength, min)) {
 							throw new ValidationException(field.getAnnotation(Min.class).errorMessage()
 								.replace("%fieldname%", field.getName()).replace("%value%", String.valueOf(min)));
 						}
 					}
 					if(!ignoreAnnotations.contains(Max.class) && field.isAnnotationPresent(Max.class)) {
-						long max = field.getAnnotation(Max.class).value();
-						if(getObjectLength(max) < getObjectLength(fieldValue)) {
+						double max = field.getAnnotation(Max.class).value();
+						double objLength = getObjectLength(fieldValue);
+						if(max < objLength && !epsilonEqual(objLength, max)) {
 							throw new ValidationException(field.getAnnotation(Max.class).errorMessage()
 								.replace("%fieldname%", field.getName()).replace("%value%", String.valueOf(max)));
 						}
@@ -114,16 +115,26 @@ public class Validator {
 		}
 	}
 
-	private static long getObjectLength(Object object) {
-		final String isNumericRegex = "^\\d+$";
+	private static boolean epsilonEqual(double a, double b) {
+		final double EPSILON = 0.0001d;
+		return Math.abs(a - b) < EPSILON;
+	}
+
+	private static double getObjectLength(Object object) {
+		final String isRealNumberRegex = "^\\d+(\\.\\d+)?$";
+		final String isCompleteNumberRegex = "^\\d+$";
 		String stringValue = String.valueOf(object);
-		long numericValue;
+		double numericValue;
 		if(object instanceof Object[]) {
 			numericValue = ((Object[]) object).length;
 		} else if(object instanceof Collection) {
 			numericValue = ((Collection) object).size();
-		} else if(stringValue.matches(isNumericRegex)) {
-			numericValue = Long.parseLong(stringValue);
+		} else if(stringValue.matches(isRealNumberRegex)) {
+			if(stringValue.matches(isCompleteNumberRegex)) {
+				numericValue = Long.parseLong(stringValue);
+			} else {
+				numericValue = Double.parseDouble(stringValue);
+			}
 		} else {
 			numericValue = stringValue.length();
 		}

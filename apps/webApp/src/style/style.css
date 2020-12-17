@@ -58,6 +58,7 @@ body {
 	border-radius: 3px;
 	padding: 10px 55px;
 	margin-top: 10px;
+	width: 15em;
 	background-color: gray;
 	color: white;
 }
@@ -355,4 +356,11 @@ body {
 #login_back_button:hover span:after {
 	opacity: 1;
 	left: 0;
+}
+
+.pizza_cards{
+	background: rgba(255, 247, 210, 0.753);
+	border-radius: 5px;
+	margin: 3%;
+	padding: 10px;
 }
