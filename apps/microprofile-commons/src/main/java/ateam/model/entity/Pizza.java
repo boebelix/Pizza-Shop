@@ -70,4 +70,22 @@ public class Pizza {
 	public void addTopping(Topping topping) {
 		toppings.add(topping);
 	}
+
+	@Override
+	public String toString()
+	{
+		String data="Pizza{";
+
+		data+="id="+id;
+
+		data+="sizeId="+sizeId;
+
+		data+="orderID"+orderId;
+
+		for(Topping topping:toppings)
+		{
+			data+=topping.toString();
+		}
+		return data+"}";
+	}
 }

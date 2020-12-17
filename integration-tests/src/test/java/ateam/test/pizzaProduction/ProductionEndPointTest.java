@@ -28,6 +28,9 @@ public class ProductionEndPointTest {
 	void sendOrder() {
 		System.out.println("sendOrder");
 		ShopProductionItem toCreate = ProductionTestUtils.createDefaultOrder();
+
+		System.out.println("sending"+toCreate.toString());
+
 		Response response = productionEndpoint.produceOrder(toCreate);
 
 		assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
@@ -37,11 +40,14 @@ public class ProductionEndPointTest {
 	void SendEmptyOrderShouldReturnError() {
 		System.out.println("sendFailed");
 		ShopProductionItem testItem= ProductionTestUtils.createEmptyOrder();
+		System.out.println("sending"+testItem.toString());
 		Response conflictResponse = productionEndpoint.produceOrder(testItem);
-
+		System.out.println("sent");
 		ServiceResponse<ShopProductionItem> serviceResponse = ServiceResponse.parse(conflictResponse, ShopProductionItem.class);
+		System.out.println("Response:"+serviceResponse.hasError());
 		assertTrue(serviceResponse.hasError());
 		ExceptionResponse exceptionResponse = serviceResponse.getErrorEntity().get();
+		System.out.println("Response Error:"+exceptionResponse.getStatus());
 		assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), exceptionResponse.getStatus());
 	}
 }

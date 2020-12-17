@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<server description="pizzaProduction">
+<server description="pizza-production">
 
     <featureManager>
         <feature>microProfile-3.3</feature>
@@ -9,7 +9,7 @@
                   httpPort="9080"
                   httpsPort="9443"/>
 
-    <webApplication location="pizzaProduction.war" contextRoot="/">
+    <webApplication location="pizza-production.war" contextRoot="/">
         <classloader apiTypeVisibility="+third-party" />
     </webApplication>
     <mpMetrics authentication="false"/>

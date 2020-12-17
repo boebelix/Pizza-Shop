@@ -62,4 +62,18 @@ public class ShopProductionItem {
 	{
 		return items.get(i);
 	}
+
+	@Override
+	public String toString()
+	{
+		String data="ShopProductionItem{";
+
+		data+="userID="+userID;
+		data+="orderID="+orderID;
+		for (Pizza item:items)
+		{
+			data+=item.toString();
+		}
+		return data+"}";
+	}
 }
