@@ -20,7 +20,11 @@ import javax.naming.NamingException;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.UUID;
 
 @RegisterProvider(ValidationExceptionMapper.class)
@@ -32,12 +36,16 @@ public class ShopEndpoint {
 	@Inject
 	private ShopService shopService;
 
-	private final UserClient userClient = RestClientBuilder
-		.newBuilder().baseUri(InitialContext.doLookup("UserServiceInternURI")).build(UserClient.class);
+	private final UserClient userClient;
 
-	public ShopEndpoint() throws NamingException {}
+	public ShopEndpoint() throws NamingException, URISyntaxException {
+		this.userClient = RestClientBuilder
+			.newBuilder().baseUri(new URI(InitialContext.doLookup("UserServiceInternURI"))).build(UserClient.class);
+	}
 
 	@POST
+	@Path("/")
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response placeOrder(@HeaderParam("Authorization") UUID loginId, @RequestBody(required = true) Order order) throws UnauthorizedException, ValidationException {
 		User user = userClient.getCurrentUser(loginId);
 		Validator.validate(order);

@@ -5,8 +5,8 @@ services:
         container_name: aTeamUserManagement
         image: ateam/usermanagement:latest
         ports:
-            - 9080:9080
-            - 9443:9443
+            - 9084:9080
+            - 9447:9443
         depends_on:
             -   userDB
         environment:
@@ -15,7 +15,6 @@ services:
             - DB_PORT=3306
             - DB_USER=root
             - DB_PW=
-            - SERVICE_PASSWORD=ferwfrwe435gsd
             - WAIT_HOSTS=userDB:3306
             - WAIT_HOSTS_TIMEOUT=60
             - WAIT_SLEEP_INTERVAL=5
@@ -26,6 +25,8 @@ services:
         environment:
             - MYSQL_DATABASE=usermanagement
             - MYSQL_ALLOW_EMPTY_PASSWORD=true
+        ports:
+            - 3006:3006
     pizzaShop:
         container_name: aTeamPizzaShop
         image: ateam/pizzashop:latest
@@ -40,6 +41,7 @@ services:
             - DB_PORT=3306
             - DB_USER=root
             - DB_PW=
+            - USER_SERVICE_PATH=http://userService:9084
             - WAIT_HOSTS=pizzaDB:3306
             - WAIT_HOSTS_TIMEOUT=60
             - WAIT_SLEEP_INTERVAL=5
@@ -50,6 +52,8 @@ services:
         environment:
             - MYSQL_DATABASE=pizzashop
             - MYSQL_ALLOW_EMPTY_PASSWORD=true
+        ports:
+            - 3007:3006
     logisticsService:
         container_name: aTeamLogisticsService
         image: ateam/logisticsservice:latest
@@ -60,7 +64,7 @@ services:
             - userService
         environment:
             - USER_SERVICE_PASSWORD=ferwfrwe435gsd
-            - USER_SERVICE_PATH=http://userService:9080
+            - USER_SERVICE_PATH=http://userService:9084
     procurementService:
         container_name: aTeamProcurementService
         image: ateam/procurementservice:latest

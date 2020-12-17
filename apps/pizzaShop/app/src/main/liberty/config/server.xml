@@ -22,8 +22,8 @@
 
 	<dataSource id="DefaultDataSource" jndiName="jdbc/mySQL">
 		<jdbcDriver libraryRef="MySQLLib" />
-		<properties databaseName="bestelldatenbank" serverName="localhost"
-					portNumber="3306" user="root" />
+		<properties databaseName="pizzashop" serverName="localhost"
+					portNumber="3307" user="root" />
 	</dataSource>
 	<library id="MySQLLib">
 		<file name="${server.config.dir}/mysql-connector-java-8.0.18.jar" />
@@ -31,8 +31,7 @@
 
 	<jndiEntry id="appOrderPassword" jndiName="appOrderPassword" value="ferEG42gs4tgdsGFDS" />
 
-	<jndiEntry id="UserServiceInternURI" jndiName="UserServiceInternURI" value="http://localhost:9080" />
-	<jndiEntry id="UserServicePassword" jndiName="UserServicePassword" value="ferwfrwe435gsd" />
+	<jndiEntry id="UserServiceInternURI" jndiName="UserServiceInternURI" value="http://localhost:9084" />
 	<jndiEntry id="PizzaProductionPassword" jndiName="PizzaProductionPassword" value="ferwfrwe435gsd" />
 	<jndiEntry id="PizzaProductionInternURI" jndiName="PizzaProductionInternURI" value="http://localhost:9080" />
 
