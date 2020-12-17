@@ -1,3 +1,4 @@
+import 'package:app/endpoints/user_endpoint.dart';
 import 'package:app/models/user.dart';
 import 'package:app/models/users.dart';
 import 'package:flutter/material.dart';
@@ -121,19 +122,21 @@ class CreateUserScreen extends StatelessWidget {
               child: Text("Registrierung absenden"),
               onPressed: () {
                 if (_formKey.currentState.validate()) {
-                  context.read<Users>().createUser(
-                        User(
-                            email: email.text,
-                            firstName: firstName.text,
-                            lastName: lastName.text,
-                            password: password.text,
-                            street: street.text,
-                            number: number.text,
-                            postalCode: postalCode.text,
-                            city: city.text,
-                            country: country.text),
-                      );
-                  Navigator.pop(context);
+                    UserService.instance().createUser(
+                      new User(
+                        email: email.text,
+                        username: username.text,
+                        firstName: firstName.text,
+                        lastName: lastName.text,
+                        password: password.text,
+                        street: street.text,
+                        number: number.text,
+                        postalCode: postalCode.text,
+                        city: city.text,
+                        country: country.text
+                      ),
+                    );
+                  //Navigator.pop(context);
                 }
               },
             ),
