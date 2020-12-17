@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:app/models/login_data.dart';
+import 'package:app/models/login_response.dart';
 import 'package:app/models/user.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,22 +25,12 @@ class UserService {
 
   UserService._private();
 
-  Future<List<User>> getAllUsers() {
-    return http
-        .get(Uri.http(_url, "/user"))
-        .then((response) {
-      if (response.statusCode == HttpStatus.ok) {
-        List<dynamic> usersJson = jsonDecode(response.body);
-        return usersJson.map((json) => User.fromJson(json)).toList();
-      } else {
-        throw Exception("Failed to load users");
-      }
-    });
-  }
 
   Future<User> createUser(User user) {
+    // TODO delete debug Ausgbabe
     print('create user');
     print(user.toJson());
+
     return http.post(
       Uri.http(_url, "/user"),
       body: jsonEncode(user.toJson()),
@@ -64,6 +56,45 @@ class UserService {
 
         case HttpStatus.internalServerError:{
           throw Exception("Internal server error userservice exception");
+        } break;
+
+        default: {
+          throw Exception("Exception: " + response.statusCode.toString());
+        }
+      }
+    });
+  }
+
+  Future<LoginResponse> loginUser(LoginData loginData) {
+    // TODO delete debug Ausgbabe
+    print('sign in user');
+    print(loginData.toJson());
+
+    return http.post(
+      Uri.http(_url, "/auth"),
+      body: jsonEncode(loginData.toJson()),
+      headers: {
+        HttpHeaders.contentTypeHeader: ContentType.json.value,
+      },
+    ).then((response) {
+
+      switch(response.statusCode) {
+
+        case HttpStatus.ok:{
+          Map<String, dynamic> json = jsonDecode(response.body);
+          return LoginResponse.fromJson(json);
+        } break;
+
+        case HttpStatus.badRequest:{
+          throw Exception("Validation exception");
+        } break;
+
+        case HttpStatus.unauthorized:{
+          throw Exception("Unauthorized exception (username/password invalid)");
+        } break;
+
+        case HttpStatus.internalServerError:{
+          throw Exception("Userservice exception");
         } break;
 
         default: {

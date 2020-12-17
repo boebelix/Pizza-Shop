@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class CreateUserScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey();
+
   final TextEditingController firstName = TextEditingController();
   final TextEditingController lastName = TextEditingController();
   final TextEditingController username = TextEditingController();
@@ -178,6 +179,7 @@ class CreateUserScreen extends StatelessWidget {
                 ],
               ),
             ),
+
             RaisedButton(
               child: Text("Registrierung absenden"),
               onPressed: () {
