@@ -1,12 +1,10 @@
 package ateam.shop.db;
 
 import ateam.model.entity.Pizza;
+import ateam.model.exception.PizzaShopException;
 
 import javax.inject.Singleton;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,12 +13,17 @@ public class PizzasDB {
 
 	public int createPizza(Pizza dto, Connection connection) throws SQLException {
 
-		PreparedStatement statement = connection.prepareStatement("insert into pizzas (order_id,size_id) VALUES (?,?)");
+		PreparedStatement statement = connection.prepareStatement("insert into pizzas (order_id,size_id) VALUES (?,?)",
+			Statement.RETURN_GENERATED_KEYS);
 		statement.setInt(1, dto.getOrderId());
 		statement.setInt(2, dto.getSizeId());
-		statement.executeUpdate();
+		statement.execute();
 
-		return statement.getGeneratedKeys().getInt(1);
+		ResultSet genKeys = statement.getGeneratedKeys();
+		while (genKeys.next()) {
+			return genKeys.getInt(1);
+		}
+		throw new PizzaShopException("Couldn't get pizza keys!");
 	}
 
 	public Pizza getPizzaById(int id, Connection connection) throws SQLException {

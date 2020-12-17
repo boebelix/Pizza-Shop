@@ -11,6 +11,7 @@ public class Order {
 
 	@Validator.Required
 	@Validator.Valid
+	@Validator.Min(value = 1, errorMessage = "Mindestens eine pizza pro Bestelltung")
 	List<Pizza> pizzas;
 
 	private int id;
@@ -35,11 +36,15 @@ public class Order {
 	@Validator.Min(value = 1, errorMessage = "Das Feld \"Stadt\" darf nicht leer sein!")
 	private String city;
 
+	@Validator.Required
+	@Validator.Min(value = 1, errorMessage = "Das Feld \"Land\" darf nicht leer sein!")
+	private String country;
+
 	public Order() {
 		pizzas = new LinkedList<Pizza>();
 	}
 
-	public Order(int id, Date orderDate, Date orderArrived, String PLZ, String street, String houseNumber, String city) {
+	public Order(int id, Date orderDate, Date orderArrived, String PLZ, String street, String houseNumber, String city, String country) {
 		this.id = id;
 		this.orderDate = orderDate;
 		this.orderArrived = orderArrived;
@@ -47,6 +52,7 @@ public class Order {
 		this.street = street;
 		this.houseNumber = houseNumber;
 		this.city = city;
+		this.country = country;
 	}
 
 	public Order(Date orderDate, Date orderArrived, String PLZ, String street, String houseNumber, String city) {
@@ -56,6 +62,14 @@ public class Order {
 		this.street = street;
 		this.houseNumber = houseNumber;
 		this.city = city;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 	public List<Pizza> getPizzas() {

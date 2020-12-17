@@ -1,12 +1,10 @@
 package ateam.shop.db;
 
 import ateam.model.entity.Size;
+import ateam.model.exception.PizzaShopException;
 
 import javax.inject.Singleton;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,16 +13,20 @@ public class SizesDB {
 
 	public int createSizeEntry(Size dto, Connection connection) throws SQLException {
 		PreparedStatement statement = connection
-			.prepareStatement("insert into sizes ( radius, base_price, topping_price, dough_amount, topping_factor) VALUES (?,?,?,?,?)");
+			.prepareStatement("insert into sizes ( radius, base_price, topping_price, dough_amount, topping_factor) VALUES (?,?,?,?,?)",
+				Statement.RETURN_GENERATED_KEYS);
 		statement.setInt(1, dto.getRadius());
 		statement.setFloat(2, dto.getBasePrice());
 		statement.setFloat(3, dto.getToppingPrice());
 		statement.setInt(4, dto.getDoughAmount());
 		statement.setFloat(5, dto.getToppingFactor());
 		statement.execute();
-		ResultSet rs = statement.getGeneratedKeys();
-		rs.next();
-		return rs.getInt(1);
+
+		ResultSet genKeys = statement.getGeneratedKeys();
+		while (genKeys.next()) {
+			return genKeys.getInt(1);
+		}
+		throw new PizzaShopException("Couldn't get size keys!");
 	}
 
 	public List<Size> getSizes(Connection connection) throws SQLException {

@@ -18,7 +18,7 @@ public class PizzaToppingDB {
 		statement.setInt(1, dto.getPizzaId());
 		statement.setInt(2, dto.getToppingId());
 		statement.setInt(2, dto.getAmount());
-		statement.executeUpdate();
+		statement.execute();
 	}
 
 	public List<PizzaTopping> getPizzaToppingByPizzaId(int pizzaId, Connection connection) throws SQLException {

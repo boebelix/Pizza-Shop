@@ -1,25 +1,27 @@
 package ateam.shop.db;
 
 import ateam.model.entity.Topping;
+import ateam.model.exception.PizzaShopException;
 
 import javax.inject.Singleton;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 @Singleton
 public class ToppingsDB {
 
 	public int createToppingsEntry(Topping dto, Connection connection) throws SQLException {
-		PreparedStatement statement = connection.prepareStatement("insert into toppings (name, base_amount, unit) VALUES (?,?,?)");
+		PreparedStatement statement = connection.prepareStatement("insert into toppings (name, base_amount, unit) VALUES (?,?,?)",
+			Statement.RETURN_GENERATED_KEYS);
 		statement.setString(1, dto.getName());
 		statement.setInt(2, dto.getBaseAmount());
 		statement.setString(3, dto.getUnit());
 		statement.execute();
-		ResultSet rs = statement.getGeneratedKeys();
-		rs.next();
-		return rs.getInt(1);
+
+		ResultSet genKeys = statement.getGeneratedKeys();
+		while (genKeys.next()) {
+			return genKeys.getInt(1);
+		}
+		throw new PizzaShopException("Couldn't get size keys!");
 	}
 
 	public Topping getToppingById(int id, Connection connection) throws SQLException {
