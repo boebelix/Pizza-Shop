@@ -9,7 +9,7 @@ class UserService {
   static UserService _instance;
 
   /*
-  * localhost:9080 doesn't work her if you are use android emulator adv
+  * localhost:9080 doesn't work her if you are use android emulator avd
   * you have to change the ip to 10.0.2.2
   * https://stackoverflow.com/a/55786011/14755959
   * */
@@ -46,12 +46,29 @@ class UserService {
         HttpHeaders.contentTypeHeader: ContentType.json.value,
       },
     ).then((response) {
-      print(response);
-      if (response.statusCode == HttpStatus.created) {
-        Map<String, dynamic> json = jsonDecode(response.body);
-        return User.fromJson(json);
-      } else {
-        throw Exception("Failed to create user");
+
+      switch(response.statusCode) {
+        case HttpStatus.ok:{
+          Map<String, dynamic> json = jsonDecode(response.body);
+          print(json);
+          return User.fromJson(json);
+        } break;
+
+        case HttpStatus.badRequest:{
+          throw Exception("Validation exception");
+        } break;
+
+        case HttpStatus.conflict:{
+          throw Exception("Conflict exception");
+        } break;
+
+        case HttpStatus.internalServerError:{
+          throw Exception("Internal server error userservice exception");
+        } break;
+
+        default: {
+          throw Exception("Exception: " + response.statusCode.toString());
+        }
       }
     });
   }
