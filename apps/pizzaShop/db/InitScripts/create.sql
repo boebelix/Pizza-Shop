@@ -1,38 +1,38 @@
 CREATE TABLE `orders`
 (
     `id`          int PRIMARY KEY AUTO_INCREMENT,
-    `order_date`  timestamp,
-    `order_sent`  datetime,
-    `postal_code` varchar(16),
-    `street`      varchar(255),
-    `number`      varchar(255),
-    `city`        varchar(255),
-    `country`     varchar(255)
+    `order_date`  timestamp not null ,
+    `order_sent`  datetime not null ,
+    `postal_code` varchar(16) not null ,
+    `street`      varchar(255) not null ,
+    `number`      varchar(255) not null ,
+    `city`        varchar(255) not null ,
+    `country`     varchar(255) not null
 );
 
 CREATE TABLE `toppings`
 (
     `id`   int PRIMARY KEY AUTO_INCREMENT,
-    `name` varchar(255),
-    `base_amount` int,
-    `unit` varchar(16)
+    `name` varchar(255) not null ,
+    `base_amount` int not null ,
+    `unit` varchar(16) not null
 );
 
 CREATE TABLE `sizes`
 (
     `id`            int PRIMARY KEY AUTO_INCREMENT,
-    `radius`        int,
-    `base_price`    NUMERIC(2),
-    `topping_price` NUMERIC(2),
-    `dough_amount` int,
-    `topping_factor` NUMERIC(2)
+    `radius`        int not null ,
+    `base_price`    NUMERIC(2) not null ,
+    `topping_price` NUMERIC(2) not null ,
+    `dough_amount` NUMERIC not null ,
+    `topping_factor` NUMERIC(2) not null
 );
 
 CREATE TABLE `pizzas`
 (
     `id`      int PRIMARY KEY AUTO_INCREMENT,
-    `order_id` int,
-    `size_id` int
+    `order_id` int not null ,
+    `size_id` int not null
 );
 
 CREATE TABLE `pizza_topping`
