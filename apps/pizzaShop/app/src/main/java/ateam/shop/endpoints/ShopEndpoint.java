@@ -1,10 +1,12 @@
 package ateam.shop.endpoints;
 
 import ateam.client.user.UserClient;
+import ateam.exceptionmapper.ShopExceptionMapper;
 import ateam.exceptionmapper.UnauthorizedExceptionMapper;
 import ateam.exceptionmapper.ValidationExceptionMapper;
 import ateam.model.entity.Order;
 import ateam.model.entity.User;
+import ateam.model.exception.ShopException;
 import ateam.model.exception.UnauthorizedException;
 import ateam.shop.service.ShopService;
 import ateam.validator.ValidationException;
@@ -29,6 +31,7 @@ import java.util.UUID;
 
 @RegisterProvider(ValidationExceptionMapper.class)
 @RegisterProvider(UnauthorizedExceptionMapper.class)
+@RegisterProvider(ShopExceptionMapper.class)
 @Path("/shop")
 @Singleton
 public class ShopEndpoint {
@@ -46,7 +49,7 @@ public class ShopEndpoint {
 	@POST
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response placeOrder(@HeaderParam("Authorization") UUID loginId, @RequestBody(required = true) Order order) throws UnauthorizedException, ValidationException {
+	public Response placeOrder(@HeaderParam("Authorization") UUID loginId, @RequestBody(required = true) Order order) throws UnauthorizedException, ValidationException, ShopException {
 		User user = userClient.getCurrentUser(loginId);
 		order.setCity(user.getCity());
 		order.setCountry(user.getCountry());

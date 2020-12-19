@@ -64,12 +64,28 @@ public class DBManager {
 
 	private int placeOrder(Order order, Connection connection) throws SQLException {
 		int orderId = ordersDB.insertNewOrder(order, connection);
-		for(Pizza pizza : order.getPizzas()) {
+		for (Pizza pizza : order.getPizzas()) {
 			pizza.setOrderId(orderId);
-			int pizzaId = pizzasDB.createPizza(pizza, connection);
-			for(PizzaTopping pizzaTopping : pizza.getToppings()) {
+			int pizzaId;
+			try {
+				pizzaId = pizzasDB.createPizza(pizza, connection);
+			} catch (SQLException e) {
+				if(e.getErrorCode() == 1452) {
+					throw new ShopException("Size with id " + pizza.getSizeId() + " doesn't exist!");
+				}
+				throw e;
+			}
+
+			for (PizzaTopping pizzaTopping : pizza.getToppings()) {
 				pizzaTopping.setPizzaId(pizzaId);
-				pizzaToppingDB.createPizzaToppingEntry(pizzaTopping, connection);
+				try {
+					pizzaToppingDB.createPizzaToppingEntry(pizzaTopping, connection);
+				} catch (SQLException e) {
+					if(e.getErrorCode() == 1452) {
+						throw new ShopException("Topping with id " + pizzaTopping.getToppingId() + " doesn't exist!");
+					}
+					throw e;
+				}
 			}
 		}
 		return orderId;
@@ -77,11 +93,11 @@ public class DBManager {
 
 	private Order getOrderById(int id, Connection connection) throws SQLException {
 		Order order = ordersDB.getOrderById(id, connection);
-		if(order == null) {
+		if (order == null) {
 			return order;
 		}
 		order.setPizzas(pizzasDB.getPizzasByOrderId(id, connection));
-		for(Pizza pizza : order.getPizzas()) {
+		for (Pizza pizza : order.getPizzas()) {
 			pizza.setToppings(pizzaToppingDB.getPizzaToppingByPizzaId(pizza.getID(), connection));
 		}
 		return order;
