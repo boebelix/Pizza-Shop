@@ -48,6 +48,11 @@ public class ShopEndpoint {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response placeOrder(@HeaderParam("Authorization") UUID loginId, @RequestBody(required = true) Order order) throws UnauthorizedException, ValidationException {
 		User user = userClient.getCurrentUser(loginId);
+		order.setCity(user.getCity());
+		order.setCountry(user.getCountry());
+		order.setStreet(user.getStreet());
+		order.setHouseNumber(user.getNumber());
+		order.setPostCode(user.getPostalCode());
 		Validator.validate(order);
 		order = shopService.placeOrder(order);
 		return Response.status(Response.Status.CREATED).entity(order).build();
