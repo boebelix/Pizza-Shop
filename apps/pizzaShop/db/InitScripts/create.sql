@@ -2,7 +2,7 @@ CREATE TABLE `orders`
 (
     `id`          int PRIMARY KEY AUTO_INCREMENT,
     `order_date`  timestamp not null ,
-    `order_sent`  datetime not null ,
+    `order_sent`  datetime,
     `postal_code` varchar(16) not null ,
     `street`      varchar(255) not null ,
     `number`      varchar(255) not null ,
