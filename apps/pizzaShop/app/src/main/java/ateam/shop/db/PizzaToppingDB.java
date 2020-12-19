@@ -17,7 +17,7 @@ public class PizzaToppingDB {
 		PreparedStatement statement = connection.prepareStatement("insert into pizza_topping (pizza_id, topping_id, amount) VALUES (?,?,?)");
 		statement.setInt(1, dto.getPizzaId());
 		statement.setInt(2, dto.getToppingId());
-		statement.setInt(2, dto.getAmount());
+		statement.setInt(3, dto.getAmount());
 		statement.execute();
 	}
 
@@ -35,7 +35,7 @@ public class PizzaToppingDB {
 	}
 
 	private PizzaTopping pizzaToppingFromRs(ResultSet rs) throws SQLException {
-		return new PizzaTopping(rs.getInt("pizza_order_id"),
+		return new PizzaTopping(rs.getInt("pizza_id"),
 			rs.getInt("topping_id"),
 			rs.getInt("amount"));
 	}

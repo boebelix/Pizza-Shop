@@ -22,10 +22,10 @@ CREATE TABLE `sizes`
 (
     `id`            int PRIMARY KEY AUTO_INCREMENT,
     `radius`        int,
-    `base_price`    decimal(4, 4),
-    `topping_price` decimal(4, 4),
+    `base_price`    NUMERIC(2),
+    `topping_price` NUMERIC(2),
     `dough_amount` int,
-    `topping_factor` decimal(4, 4)
+    `topping_factor` NUMERIC(2)
 );
 
 CREATE TABLE `pizzas`

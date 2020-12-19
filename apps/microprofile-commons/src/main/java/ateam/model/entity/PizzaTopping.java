@@ -14,6 +14,8 @@ public class PizzaTopping {
 
 	private int pizzaId;
 
+	public PizzaTopping() {}
+
 	public PizzaTopping(int pizzaId, int toppingId, int amount) {
 		this.pizzaId = pizzaId;
 		this.toppingId = toppingId;

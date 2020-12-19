@@ -65,6 +65,7 @@ public class DBManager {
 	private int placeOrder(Order order, Connection connection) throws SQLException {
 		int orderId = ordersDB.insertNewOrder(order, connection);
 		for(Pizza pizza : order.getPizzas()) {
+			pizza.setOrderId(orderId);
 			int pizzaId = pizzasDB.createPizza(pizza, connection);
 			for(PizzaTopping pizzaTopping : pizza.getToppings()) {
 				pizzaTopping.setPizzaId(pizzaId);

@@ -2,32 +2,30 @@ package ateam.model.entity;
 
 import ateam.validator.Validator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Pizza {
 
 	@Validator.Required
 	@Validator.Valid
-	List<PizzaTopping> toppings;
+	private List<PizzaTopping> toppings;
 
-	private int iD;
+	private int id;
 
 	@Validator.Required
 	private int sizeId;
 
-	@Validator.Required
 	private int orderId;
 
 	public Pizza() {
-		toppings = new ArrayList<>();
+
 	}
 
-	public Pizza(int iD, int sizeId, int orderId) {
-		this.iD = iD;
+	public Pizza(int id, int sizeId, int orderId, List<PizzaTopping> toppings) {
+		this.id = id;
 		this.sizeId = sizeId;
 		this.orderId = orderId;
-		toppings = new ArrayList<>();
+		this.toppings = toppings;
 	}
 
 	public Pizza(int sizeId) {
@@ -43,11 +41,11 @@ public class Pizza {
 	}
 
 	public int getID() {
-		return iD;
+		return id;
 	}
 
-	public void setID(int iD) {
-		this.iD = iD;
+	public void setID(int id) {
+		this.id = id;
 	}
 
 	public int getSizeId() {
