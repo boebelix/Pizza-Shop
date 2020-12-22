@@ -32,7 +32,6 @@ public class ProductionEndpoint {
 	OrderProducer producer;
 
 	@POST
-	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response produceOrder(@RequestBody(required = true) ShopProductionItem toProduce) throws UnknownEntityException, ShopException, ValidationException {
 
