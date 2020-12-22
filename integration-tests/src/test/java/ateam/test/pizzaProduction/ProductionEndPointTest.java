@@ -38,7 +38,7 @@ public class ProductionEndPointTest {
 
 	@Test
 	void SendEmptyOrderShouldReturnError() {
-		System.out.println("sendFailed");
+		System.out.println("sendInvalidPackage");
 		ShopProductionItem testItem= ProductionTestUtils.createEmptyOrder();
 		System.out.println("sending"+testItem.toString());
 		Response conflictResponse = productionEndpoint.produceOrder(testItem);
