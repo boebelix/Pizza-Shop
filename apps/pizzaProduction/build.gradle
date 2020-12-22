@@ -31,7 +31,7 @@ dependencies {
 }
 
 war {
-	archiveName("pizzaProduction.war")
+	archiveName("pizza-production.war")
 }
 
 
@@ -40,7 +40,7 @@ import com.bmuschko.gradle.docker.tasks.image.*
 
 task createDockerfile(type: Dockerfile) {
 	from 'open-liberty'
-	instruction  'COPY --chown=1001:0 ./build/libs/pizzaProduction.war /config/apps/pizzaProduction.war'
+	instruction  'COPY --chown=1001:0 ./build/libs/pizza-production.war /config/apps/pizza-production.war'
 	instruction  'COPY --chown=1001:0 ./src/main/liberty/config/ /config/'
 	instruction  'COPY --chown=1001:0 ./docker/configOverrides /config/configDropins/overrides/'
 	instruction  'RUN configure.sh'
@@ -56,6 +56,6 @@ task buildImage(type: DockerBuildImage) {
 task createContainer(type: DockerCreateContainer) {
 	dependsOn buildImage
 	targetImageId buildImage.getImageId()
-	containerName = 'aTeamPizzaProduction'
+	containerName = 'ateampizzaproduction'
 	hostConfig.portBindings = ["${pizzaProductionDevDockerHttpPort}:9080", "${pizzaProductionDevDockerHttpsPort}:9443"]
 }
