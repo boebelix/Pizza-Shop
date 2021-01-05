@@ -100,7 +100,7 @@ public class DBManager {
 		}
 		order.setPizzas(pizzasDB.getPizzasByOrderId(id, connection));
 		for (Pizza pizza : order.getPizzas()) {
-			pizza.setToppings(pizzaToppingDB.getPizzaToppingByPizzaId(pizza.getID(), connection));
+			pizza.setToppings(pizzaToppingDB.getPizzaToppingByPizzaId(pizza.getId(), connection));
 		}
 		return order;
 	}

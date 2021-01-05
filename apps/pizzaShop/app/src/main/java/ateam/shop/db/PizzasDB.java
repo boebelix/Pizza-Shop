@@ -50,7 +50,7 @@ public class PizzasDB {
 
 	private Pizza pizzaFromRs(ResultSet rs) throws SQLException {
 		Pizza pizza = new Pizza();
-		pizza.setID(rs.getInt("id"));
+		pizza.setId(rs.getInt("id"));
 		pizza.setOrderId(rs.getInt("order_id"));
 		pizza.setSizeId(rs.getInt("size_id"));
 		return pizza;
