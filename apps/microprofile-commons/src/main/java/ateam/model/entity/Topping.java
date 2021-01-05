@@ -30,6 +30,10 @@ public class Topping {
 		this.name = name;
 	}
 
+	public Topping() {
+
+	}
+
 	public int getId() {
 		return id;
 	}

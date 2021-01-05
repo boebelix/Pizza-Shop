@@ -5,7 +5,7 @@ import ateam.model.exception.ExceptionResponse;
 import ateam.test.util.ServiceResponse;
 import ateam.test.util.TestConstants;
 import ateam.test.util.TestUtils;
-import ateam.endpoint.ProductionEndpoint;
+import ateam.production.endpoint.ProductionEndpoint;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -42,6 +42,7 @@ public class ProductionEndPointTest {
 		ShopProductionItem testItem= ProductionTestUtils.createEmptyOrder();
 		System.out.println("sending"+testItem.toString());
 		Response conflictResponse = productionEndpoint.produceOrder(testItem);
+
 		System.out.println("sent");
 		ServiceResponse<ShopProductionItem> serviceResponse = ServiceResponse.parse(conflictResponse, ShopProductionItem.class);
 		System.out.println("Response:"+serviceResponse.hasError());

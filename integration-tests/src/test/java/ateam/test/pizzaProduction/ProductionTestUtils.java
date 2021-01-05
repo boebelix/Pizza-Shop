@@ -1,7 +1,6 @@
 package ateam.test.pizzaProduction;
 
 import ateam.model.entity.*;
-import ateam.test.userService.model.UserRequest;
 
 public class ProductionTestUtils {
 	public static ShopProductionItem createDefaultOrder() {
