@@ -2,7 +2,6 @@ package ateam.model.entity;
 
 import ateam.validator.Validator;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class Pizza {
@@ -10,25 +9,24 @@ public class Pizza {
 	@Validator.Required
 	@Validator.Min(1)
 	@Validator.Valid
-	List<Topping> toppings;
+	private List<PizzaTopping> toppings;
 
 	private int id;
 
 	@Validator.Required
 	private int sizeId;
 
-	@Validator.Required
 	private int orderId;
 
 	public Pizza() {
-		toppings = new LinkedList<Topping>();
+
 	}
 
-	public Pizza(int id, int sizeId, int orderId) {
+	public Pizza(int id, int sizeId, int orderId, List<PizzaTopping> toppings) {
 		this.id = id;
 		this.sizeId = sizeId;
 		this.orderId = orderId;
-		toppings = new LinkedList<Topping>();
+		this.toppings = toppings;
 	}
 
 	public Pizza(int sizeId) {
@@ -59,15 +57,15 @@ public class Pizza {
 		this.sizeId = sizeId;
 	}
 
-	public List<Topping> getToppings() {
+	public List<PizzaTopping> getToppings() {
 		return toppings;
 	}
 
-	public void setToppings(List<Topping> toppings) {
+	public void setToppings(List<PizzaTopping> toppings) {
 		this.toppings = toppings;
 	}
 
-	public void addTopping(Topping topping) {
+	public void addTopping(PizzaTopping topping) {
 		toppings.add(topping);
 	}
 

@@ -11,14 +11,13 @@ public class Order {
 
 	@Validator.Required
 	@Validator.Valid
+	@Validator.Min(value = 1, errorMessage = "Mindestens eine pizza pro Bestelltung")
 	List<Pizza> pizzas;
 
 	private int id;
 
-	@Validator.Required
 	private Date orderDate;
 
-	@Validator.Required
 	private Date orderArrived;
 
 	@Validator.Required
@@ -26,21 +25,26 @@ public class Order {
 	private String postCode;
 
 	@Validator.Required
-	@Validator.Regex(regex = "^[A-Z]([^0-9\\§\\%\\&\\!\\?])+?[a-z]$", errorMessage = "Straße muss mit einem Großbuchstaben anfangen und mit einem Kleinbuchstaben enden! Zahlen, so wie die Zeichen '§', '%', '&', '!' und '?' sind nicht erlaubt!")
+	@Validator.Min(value = 1, errorMessage = "Das Feld \"Straße\" darf nicht leer sein!")
 	private String street;
 
 	@Validator.Required
+	@Validator.Min(value = 1, errorMessage = "Das Feld \"Hausnummer\" darf nicht leer sein!")
 	private String houseNumber;
 
 	@Validator.Required
-	@Validator.Regex(regex = "^[A-Z]([^\\0-9\\§\\%\\&\\!\\?])+?[a-z]$", errorMessage = "Stadt muss mit einem Großbuchstaben anfangen und mit einem Kleinbuchstaben enden! Zahlen, so wie die Zeichen '§', '%', '&', '!' und '?' sind nicht erlaubt!")
+	@Validator.Min(value = 1, errorMessage = "Das Feld \"Stadt\" darf nicht leer sein!")
 	private String city;
+
+	@Validator.Required
+	@Validator.Min(value = 1, errorMessage = "Das Feld \"Land\" darf nicht leer sein!")
+	private String country;
 
 	public Order() {
 		pizzas = new LinkedList<Pizza>();
 	}
 
-	public Order(int id, Date orderDate, Date orderArrived, String PLZ, String street, String houseNumber, String city) {
+	public Order(int id, Date orderDate, Date orderArrived, String PLZ, String street, String houseNumber, String city, String country) {
 		this.id = id;
 		this.orderDate = orderDate;
 		this.orderArrived = orderArrived;
@@ -48,6 +52,7 @@ public class Order {
 		this.street = street;
 		this.houseNumber = houseNumber;
 		this.city = city;
+		this.country = country;
 	}
 
 	public Order(Date orderDate, Date orderArrived, String PLZ, String street, String houseNumber, String city) {
@@ -59,6 +64,14 @@ public class Order {
 		this.city = city;
 	}
 
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
 	public List<Pizza> getPizzas() {
 		return pizzas;
 	}
@@ -67,11 +80,11 @@ public class Order {
 		this.pizzas = pizzas;
 	}
 
-	public String getPLZ() {
+	public String getPostCode() {
 		return postCode;
 	}
 
-	public void setPLZ(String postCode) {
+	public void setPostCode(String postCode) {
 		this.postCode = postCode;
 	}
 
