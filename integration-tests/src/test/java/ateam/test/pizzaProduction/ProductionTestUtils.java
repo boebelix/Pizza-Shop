@@ -11,7 +11,9 @@ public class ProductionTestUtils {
 		testPizza.setSizeId(2);
 		Topping topping=new Topping(1,"Salami", 10,"Gramm");
 
-		testPizza.addTopping(topping);
+		PizzaTopping pizzaTopping = new PizzaTopping(testPizza.getId(), topping.getId(), 1);
+
+		testPizza.addTopping(pizzaTopping);
 
 		item.addPizza(testPizza);
 

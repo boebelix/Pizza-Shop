@@ -2,6 +2,7 @@ package ateam.model.entity;
 
 import ateam.validator.Validator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pizza {
@@ -19,7 +20,7 @@ public class Pizza {
 	private int orderId;
 
 	public Pizza() {
-
+		this.toppings = new ArrayList<>();
 	}
 
 	public Pizza(int id, int sizeId, int orderId, List<PizzaTopping> toppings) {
@@ -31,6 +32,7 @@ public class Pizza {
 
 	public Pizza(int sizeId) {
 		this.sizeId = sizeId;
+		this.toppings = new ArrayList<>();
 	}
 
 	public int getOrderId() {
@@ -70,20 +72,12 @@ public class Pizza {
 	}
 
 	@Override
-	public String toString()
-	{
-		String data="Pizza{";
-
-		data+="id="+id;
-
-		data+="sizeId="+sizeId;
-
-		data+="orderID"+orderId;
-
-		for(Topping topping:toppings)
-		{
-			data+=topping.toString();
-		}
-		return data+"}";
+	public String toString() {
+		return "Pizza{" +
+			"toppings=" + toppings +
+			", id=" + id +
+			", sizeId=" + sizeId +
+			", orderId=" + orderId +
+			'}';
 	}
 }
