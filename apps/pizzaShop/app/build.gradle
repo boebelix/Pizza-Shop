@@ -10,6 +10,11 @@ buildscript {
 		classpath "io.openliberty.tools:liberty-gradle-plugin:${libertyPluginVersion}"
 	}
 }
+
+plugins {
+	id 'com.bmuschko.docker-remote-api' version '6.6.1'
+}
+
 apply plugin: 'java'
 apply plugin: 'liberty'
 apply plugin: 'war'
@@ -27,4 +32,37 @@ dependencies {
 	implementation project(path: ':apps:microprofile-commons')
 
 	implementation "org.eclipse.microprofile:microprofile:${micoprofileVersion}"
+}
+
+import com.bmuschko.gradle.docker.tasks.container.*
+import com.bmuschko.gradle.docker.tasks.image.*
+
+task createDockerfile(type: Dockerfile) {
+	from 'open-liberty'
+	instruction  'COPY --chown=1001:0 ./build/libs/pizzaShop.war /config/apps/pizzaShop.war'
+	instruction  'COPY --chown=1001:0 ./src/main/liberty/config/ /config/'
+	instruction  'COPY --chown=1001:0 ./docker/configOverrides /config/configDropins/overrides/'
+	environmentVariable 'DB_NAME', 'bestelldatenbank'
+	environmentVariable 'DB_HOST', '127.0.0.1'
+	environmentVariable 'DB_Port', '3306'
+	environmentVariable 'DB_USER', 'root'
+	instruction  'RUN configure.sh'
+
+	environmentVariable 'WAIT_VERSION', '2.7.2'
+	instruction 'ADD --chown=1001:0 https://github.com/ufoscout/docker-compose-wait/releases/download/$WAIT_VERSION/wait /wait'
+	runCommand 'chmod +x /wait'
+}
+
+task buildImage(type: DockerBuildImage) {
+	dependsOn createDockerfile
+	inputDir = project.projectDir
+	dockerFile = createDockerfile.destFile
+	images.add('ateam/pizzashop:latest')
+}
+
+task createContainer(type: DockerCreateContainer) {
+	dependsOn buildImage
+	targetImageId buildImage.getImageId()
+	containerName = 'aTeamPizzaShop'
+	hostConfig.portBindings = ["${pizzaShopDevDockerHttpPort}:9080", "${pizzaShopDevDockerHttpsPort}:9443"]
 }
