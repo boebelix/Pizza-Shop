@@ -14,6 +14,8 @@ import java.sql.SQLException;
 @Singleton
 public class DBManager {
 
+	private static final int ERROR_CODE_NOT_EXISTING_FOREIGN_KEY = 1452;
+
 	@Inject
 	private DBConnection connector;
 
@@ -70,7 +72,7 @@ public class DBManager {
 			try {
 				pizzaId = pizzasDB.createPizza(pizza, connection);
 			} catch (SQLException e) {
-				if(e.getErrorCode() == 1452) {
+				if(e.getErrorCode() == ERROR_CODE_NOT_EXISTING_FOREIGN_KEY) {
 					throw new ShopException("Size with id " + pizza.getSizeId() + " doesn't exist!");
 				}
 				throw e;
@@ -81,7 +83,7 @@ public class DBManager {
 				try {
 					pizzaToppingDB.createPizzaToppingEntry(pizzaTopping, connection);
 				} catch (SQLException e) {
-					if(e.getErrorCode() == 1452) {
+					if(e.getErrorCode() == ERROR_CODE_NOT_EXISTING_FOREIGN_KEY) {
 						throw new ShopException("Topping with id " + pizzaTopping.getToppingId() + " doesn't exist!");
 					}
 					throw e;
