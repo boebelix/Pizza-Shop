@@ -41,7 +41,7 @@ services:
             - DB_PORT=3306
             - DB_USER=root
             - DB_PW=
-            - USER_SERVICE_PATH=http://userService:9084
+            - USER_SERVICE_PATH=http://userService:9080
             - WAIT_HOSTS=pizzaDB:3306
             - WAIT_HOSTS_TIMEOUT=60
             - WAIT_SLEEP_INTERVAL=5
@@ -64,7 +64,7 @@ services:
             - userService
         environment:
             - USER_SERVICE_PASSWORD=ferwfrwe435gsd
-            - USER_SERVICE_PATH=http://userService:9084
+            - USER_SERVICE_PATH=http://userService:9080
     procurementService:
         container_name: aTeamProcurementService
         image: ateam/procurementservice:latest
