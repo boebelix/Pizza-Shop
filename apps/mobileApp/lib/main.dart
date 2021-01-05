@@ -1,3 +1,6 @@
+import 'package:app/screens/create_user_screen.dart';
+import 'package:app/screens/login_user_screen.dart';
+import 'package:app/screens/user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -47,7 +50,9 @@ class App extends StatelessWidget {
       routes: {
         NavBottom.routeName: (_) => NavBottom(),
         MealCreationScreen.routeName: (_) => MealCreationScreen(),
-        MealDetailScreen.routeName: (_) => MealDetailScreen(),
+        UserScreen.routeName: (_) => UserScreen(),
+        LoginUser.routeName: (_) => LoginUser(),
+        CreateUserScreen.routeName: (_) => CreateUserScreen(),
       },
     );
   }

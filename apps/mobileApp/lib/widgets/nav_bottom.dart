@@ -1,4 +1,5 @@
 import 'package:app/screens/meal_list_screen.dart';
+import 'package:app/screens/user_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/create_user_screen.dart';
@@ -25,7 +26,7 @@ class _NavBottomState extends State<NavBottom> {
   final List<Widget> _children = [
     meal_list(),
     meal_list(),
-    CreateUserScreen(),
+    UserScreen(),
   ];
 
   void onTabTapped(int index) {
