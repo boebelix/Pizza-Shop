@@ -2,23 +2,29 @@ package ateam.model.entity;
 
 import ateam.validator.Validator;
 
+//Validations are not necessary, because new sized can't be created by the user. That's why there are no errormessages
 public class Size {
 
 	private int id;
 
 	@Validator.Required
+	@Validator.Min(1)
 	private int radius;
 
 	@Validator.Required
+	@Validator.Min(0)
 	private float basePrice;
 
 	@Validator.Required
+	@Validator.Min(0)
 	private float toppingPrice;
 
 	@Validator.Required
+	@Validator.Min(1)
 	private int doughAmount;
 
 	@Validator.Required
+	@Validator.Min(0)
 	private float toppingFactor;
 
 	public Size(int id, int radius, float basePrice, float toppingPrice, int doughAmount, float toppingFactor) {

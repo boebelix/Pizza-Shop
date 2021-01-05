@@ -4,8 +4,9 @@
 
 ### Building Flutter
 ### Preparing your system
-Before you can build this project, you have to copy & paste the `local.properties.example` File (in ./apps/mobileApp/android), change it's name to
-`local.properties` and change the following paths inside it so that they fit your system.
+1. Before you can build this project, you have to copy & paste the `local.properties.example` file. You can find the file in **`./apps/mobileApp/android`**.
+2. Change the name to `local.properties`
+3. Change the following paths inside it so that they fit your system.
 ```properties
 sdk.dir=<<path to android sdk>>
 flutter.sdk=<<path to flutter sdk (without /bin at the end)>>

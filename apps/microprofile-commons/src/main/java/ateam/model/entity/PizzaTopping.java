@@ -9,7 +9,7 @@ public class PizzaTopping {
 	private int toppingId;
 
 	@Required
-	@Validator.Min(1)
+	@Validator.Min(value = 1, errorMessage = "Amount has to be min 1")
 	private int amount;
 
 	private int pizzaId;
