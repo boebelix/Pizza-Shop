@@ -1,42 +1,37 @@
 package ateam.shop.db;
 
-import ateam.db.DBConnection;
 import ateam.model.entity.Topping;
+import ateam.model.exception.PizzaShopException;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 @Singleton
 public class ToppingsDB {
 
-	@Inject
-	private DBConnection connector;
+	public int createToppingsEntry(Topping dto, Connection connection) throws SQLException {
+		PreparedStatement statement = connection.prepareStatement("insert into toppings (name, base_amount, unit) VALUES (?,?,?)",
+			Statement.RETURN_GENERATED_KEYS);
+		statement.setString(1, dto.getName());
+		statement.setInt(2, dto.getBaseAmount());
+		statement.setString(3, dto.getUnit());
+		statement.execute();
 
-	public void createToppingsEntry(Topping dto) throws SQLException {
-		try(Connection connection=connector.getConnection()) {
-			PreparedStatement statement = connection.prepareStatement("insert into toppings (name, base_amount, unit) VALUES (?,?,?)");
-			statement.setString(1, dto.getName());
-			statement.setInt(2, dto.getBaseAmount());
-			statement.setString(3, dto.getUnit());
-			statement.executeUpdate();
+		ResultSet genKeys = statement.getGeneratedKeys();
+		while (genKeys.next()) {
+			return genKeys.getInt(1);
 		}
+		throw new PizzaShopException("Couldn't get size keys!");
 	}
 
-	public Topping getToppingById(int id) throws SQLException {
+	public Topping getToppingById(int id, Connection connection) throws SQLException {
+		PreparedStatement stmt = connection.prepareStatement("select * from toppings where id = ?");
+		stmt.setInt(1, id);
 
-		try(Connection connection=connector.getConnection()) {
-			PreparedStatement stmt = connection.prepareStatement("select * from toppings where id = ?");
-			stmt.setInt(1,id);
+		ResultSet rs = stmt.executeQuery();
 
-			ResultSet rs = stmt.executeQuery();
-
-			return new Topping(rs.getInt(1),
-				rs.getString(2), rs.getInt(3), rs.getString(4));
-		}
+		return new Topping(rs.getInt(1),
+			rs.getString(2), rs.getInt(3), rs.getString(4));
 	}
 
 }

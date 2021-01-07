@@ -3,7 +3,7 @@ plugins {
 }
 apply from: './testUtils.gradle'
 
-def USER_SERVICE_BASE_URL = "http://localhost:9080/"
+def USER_SERVICE_BASE_URL = "http://localhost:9084/"
 
 java {
 	sourceCompatibility = JavaVersion.VERSION_1_8
