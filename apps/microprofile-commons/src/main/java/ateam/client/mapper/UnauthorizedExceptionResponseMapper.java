@@ -4,6 +4,7 @@ import ateam.model.exception.ExceptionResponse;
 import ateam.model.exception.UnauthorizedException;
 import org.eclipse.microprofile.rest.client.ext.ResponseExceptionMapper;
 
+import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
@@ -18,6 +19,9 @@ public class UnauthorizedExceptionResponseMapper implements ResponseExceptionMap
 
 	@Override
 	public UnauthorizedException toThrowable(Response response) {
+		if(!response.bufferEntity()) {
+			throw new InternalServerErrorException("Another microservice throw an exception and we fucked up parsing it!");
+		}
 		ExceptionResponse exceptionResponse = (ExceptionResponse) response.getEntity();
 		return new UnauthorizedException(exceptionResponse.getMessage());
 	}
