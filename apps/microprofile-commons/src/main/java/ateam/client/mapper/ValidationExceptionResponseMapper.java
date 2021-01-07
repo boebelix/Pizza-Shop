@@ -22,7 +22,7 @@ public class ValidationExceptionResponseMapper implements ResponseExceptionMappe
 		if(!response.bufferEntity()) {
 			throw new InternalServerErrorException("Another microservice throw an exception and we fucked up parsing it!");
 		}
-		ExceptionResponse exceptionResponse = (ExceptionResponse) response.getEntity();
+		ExceptionResponse exceptionResponse = response.readEntity(ExceptionResponse.class);
 		return new ValidationException(exceptionResponse.getMessage());
 	}
 }
