@@ -19,10 +19,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
@@ -59,5 +56,14 @@ public class ShopEndpoint {
 		Validator.validate(order);
 		order = shopService.placeOrder(order);
 		return Response.status(Response.Status.CREATED).entity(order).build();
+	}
+
+	@GET
+	@Path("{orderId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getOrder(@HeaderParam("Authorization") UUID loginId, @PathParam("orderId") int orderId) throws UnauthorizedException {
+		//Check if logged in
+		userClient.getCurrentUser(loginId);
+		return Response.ok(shopService.getOrderById(orderId)).build();
 	}
 }
