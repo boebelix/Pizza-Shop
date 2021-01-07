@@ -1,6 +1,8 @@
 package ateam.shop.endpoints;
 
+import ateam.exceptionmapper.ShopExceptionMapper;
 import ateam.shop.service.PizzaService;
+import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -11,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/size")
+@RegisterProvider(ShopExceptionMapper.class)
 @Singleton
 public class SizeEndpoint {
 
