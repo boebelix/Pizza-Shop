@@ -7,7 +7,7 @@ class LoginResponse{
   LoginResponse({this.uuid, this.user});
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
-    uuid: json['UUID'],
+    uuid: json['token'],
     user: json['user'] != null ? User.fromJson(json['user']) : null,
   );
 
@@ -16,6 +16,10 @@ class LoginResponse{
     "user":   user.toJson(),
   };
 
+  @override
+  String toString() {
+    return 'LoginResponse{uuid: $uuid, user: $user}';
+  }
 }
 
 

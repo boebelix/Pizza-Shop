@@ -1,5 +1,5 @@
 class User {
-  int id;
+  final int userId;
   final String username;
   final String firstName;
   final String lastName;
@@ -12,7 +12,7 @@ class User {
   final String country;
 
   User({
-    this.id,
+    this.userId,
     this.username,
     this.firstName,
     this.lastName,
@@ -26,7 +26,7 @@ class User {
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json['id'],
+        userId: json['userId'],
         username: json['username'],
         firstName: json['firstName'],
         lastName: json['lastName'],
@@ -40,7 +40,7 @@ class User {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
+        "id": userId,
         "username":   username,
         "firstName":  firstName,
         "lastName":   lastName,
@@ -55,7 +55,7 @@ class User {
 
   @override
   String toString() {
-    return 'User{id: $id, username: $username, firstName: $firstName, lastName: $lastName, email: $email, password: $password, postalCode: $postalCode, street: $street, number: $number, city: $city, country: $country}';
+    return 'User{id: $userId, username: $username, firstName: $firstName, lastName: $lastName, email: $email, password: $password, postalCode: $postalCode, street: $street, number: $number, city: $city, country: $country}';
   }
 }
 
