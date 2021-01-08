@@ -1,4 +1,4 @@
-import 'package:app/models/http_exception.dart' as tm;
+import 'package:app/models/http_exception.dart';
 import 'package:app/models/user.dart';
 import 'package:app/services/signup_service.dart';
 import 'package:flutter/material.dart';
@@ -255,6 +255,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                   RaisedButton(
                     child: Text("Registrierung absenden"),
                     onPressed: () async {
+                      print('Hello');
                       if (_formKey.currentState.validate()) {
                         try {
                           final user = await SignUpService.instance().signUpUser(
@@ -269,8 +270,8 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                                 postalCode: postalCode.text,
                                 city: city.text,
                                 country: country.text),
-                          ).catchError((error){print(error);});
-                        } on Exception catch (error){
+                          );
+                        } on HttpException catch (error){
                           print('Error message setState' + error.toString());
 
                         } catch (error) {
