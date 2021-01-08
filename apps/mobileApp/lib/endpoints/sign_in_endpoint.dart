@@ -19,44 +19,26 @@ class SignInEndpoint {
   SignInEndpoint._private();
 
 
-  Future<LoginResponse> signInUser(LoginData loginData) {
+  Future<LoginResponse> signInUser(LoginData loginData) async {
     // TODO delete debug Ausgbabe
     print('sign in user');
     print(loginData.toJson());
 
-    return http.post(
+    return await http.post(
       Uri.http(Properties.url, "/auth"),
       body: jsonEncode(loginData.toJson()),
       headers: {
         HttpHeaders.contentTypeHeader: ContentType.json.value,
       },
     ).then((response) {
+      Map<String, dynamic> responseData = jsonDecode(response.body);
+      if (response.statusCode == HttpStatus.ok) {
+        final loginResponse = LoginResponse.fromJson(responseData);
+        print("LoginResponse " + loginResponse.toString());
 
-      switch(response.statusCode) {
-
-        case HttpStatus.ok:{
-          Map<String, dynamic> json = jsonDecode(response.body);
-          LoginResponse loginResponse = LoginResponse.fromJson(json);
-          print("LoginResponse" + loginResponse.toString());
-
-          return LoginResponse.fromJson(json);
-        } break;
-
-        case HttpStatus.badRequest:{
-          throw Exception("Validation exception");
-        } break;
-
-        case HttpStatus.unauthorized:{
-          throw Exception("Unauthorized exception (username/password invalid)");
-        } break;
-
-        case HttpStatus.internalServerError:{
-          throw Exception("Userservice exception");
-        } break;
-
-        default: {
-          throw Exception("Exception: " + response.statusCode.toString());
-        }
+        return LoginResponse.fromJson(responseData);
+      }else{
+        throw HttpException(responseData['message']);
       }
     });
   }

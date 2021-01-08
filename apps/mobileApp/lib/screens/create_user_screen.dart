@@ -1,30 +1,79 @@
-import 'package:app/endpoints/user_endpoint.dart';
+import 'package:app/models/http_exception.dart' as tm;
 import 'package:app/models/user.dart';
+import 'package:app/services/signup_service.dart';
 import 'package:flutter/material.dart';
 
-class CreateUserScreen extends StatelessWidget {
+class CreateUserScreen extends StatefulWidget {
   static const String routeName = "/createUserScreen";
 
+  @override
+  _CreateUserScreenState createState() => _CreateUserScreenState();
+}
+
+class _CreateUserScreenState extends State<CreateUserScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   final TextEditingController firstName = TextEditingController();
+
   final TextEditingController lastName = TextEditingController();
+
   final TextEditingController username = TextEditingController();
+
   final TextEditingController street = TextEditingController();
+
   final TextEditingController number = TextEditingController();
+
   final TextEditingController city = TextEditingController();
+
   final TextEditingController postalCode = TextEditingController();
+
   final TextEditingController email = TextEditingController();
+
   final TextEditingController password = TextEditingController();
+
   final TextEditingController passwordRepeat = TextEditingController();
+
   final TextEditingController country = TextEditingController();
 
-  // TODO Validator übernehmen aus Backend oder aus WebApp
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('An Error Occurred!'),
+        content: Text(message),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Okay'),
+            onPressed: () {
+              Navigator.of(ctx).pop();
+            },
+          )
+        ],
+      ),
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
     const radius = 8.0;
     const padding = 4.0;
+
+    firstName.text = 'Vorname';
+    lastName.text = 'Nachname';
+    username.text = 'test11';
+    street.text = 'Teststraße';
+    number.text = '11';
+    city.text = 'Teststadt';
+    postalCode.text = '11111';
+    email.text = 'test11@vip.com';
+    password.text = '!Test1234';
+    passwordRepeat.text = '!Test1234';
+    country.text = 'Testland';
+
+    String _errorMsg = '';
+
 
     return Scaffold(
       appBar: AppBar(
@@ -201,27 +250,39 @@ class CreateUserScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+                  Text('Hello before error message'),
+                  Text(_errorMsg),
                   RaisedButton(
                     child: Text("Registrierung absenden"),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState.validate()) {
-                        UserService.instance().createUser(
-                          new User(
-                              email: email.text,
-                              username: username.text,
-                              firstName: firstName.text,
-                              lastName: lastName.text,
-                              password: password.text,
-                              street: street.text,
-                              number: number.text,
-                              postalCode: postalCode.text,
-                              city: city.text,
-                              country: country.text),
-                        );
+                        try {
+                          final user = await SignUpService.instance().signUpUser(
+                            new User(
+                                email: email.text,
+                                username: username.text,
+                                firstName: firstName.text,
+                                lastName: lastName.text,
+                                password: password.text,
+                                street: street.text,
+                                number: number.text,
+                                postalCode: postalCode.text,
+                                city: city.text,
+                                country: country.text),
+                          ).catchError((error){print(error);});
+                        } on Exception catch (error){
+                          print('Error message setState' + error.toString());
+
+                        } catch (error) {
+                          print('Unbekannter Fehler');
+
+                        }
+
                         //Navigator.pop(context);
                       }
                     },
                   ),
+
                 ],
               ),
             ),

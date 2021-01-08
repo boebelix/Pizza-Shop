@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:app/models/http_exception.dart' as tm;
 import 'package:app/endpoints/properties.dart';
 import 'package:app/models/user.dart';
 import 'package:http/http.dart' as http;
@@ -18,32 +19,36 @@ class SignUpEndpoint {
   SignUpEndpoint._private();
 
 
-
   Future<User> signUpUser(User user) async {
     // TODO delete debug Ausgbabe
-    print('create user from ' + user.toString());
+    print('SignUp: Create user from ' + user.toString());
+    Map<String, dynamic> responseData;
 
-    try{
-      return http.post(
+    try {
+      final response = await http.post(
         Uri.http(Properties.url, "/user"),
         body: jsonEncode(user.toJson()),
         headers: {
           HttpHeaders.contentTypeHeader: ContentType.json.value,
         },
-      ).then((response) {
-        if (response.statusCode == HttpStatus.ok) {
-          Map<String, dynamic> json = jsonDecode(response.body);
+      );
 
-          return User.fromJson(json);
-        } else{
-          print('Endpoint Http Exception');
-          throw HttpException(jsonDecode(response.body)['message'].toString());
-        }
-      });
-    } catch (error){
-      throw Exception(error);
+      responseData = jsonDecode(response.body);
+      print('SignUp Endpoint responseData ' + responseData.toString());
+      print('Status Code 200: ' + response.statusCode.toString());
+
+      if (response.statusCode == 200) {
+        print('Status Code 200: ' + response.statusCode.toString());
+        return User.fromJson(responseData);
+      }else{
+        print('Status Code: ' + response.statusCode.toString());
+        print('Response Code Error: ' + responseData.toString());
+        throw Exception(responseData['message']);
+      }
+
+    }catch (error){
+      throw error;
     }
-
   }
 
 /*

@@ -1,16 +1,20 @@
-import 'package:app/endpoints/user_endpoint.dart';
+import 'package:app/endpoints/sign_in_endpoint.dart';
 import 'package:app/models/login_data.dart';
 import 'package:flutter/material.dart';
 
-class LoginUser extends StatelessWidget {
+class LoginUser extends StatefulWidget {
   static const String routeName = "/loginUserScreen";
 
+  @override
+  _LoginUserState createState() => _LoginUserState();
+}
+
+class _LoginUserState extends State<LoginUser> {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   final TextEditingController username = TextEditingController();
-  final TextEditingController password = TextEditingController();
 
-  // TODO Validator übernehmen aus Backend oder aus WebApp
+  final TextEditingController password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +73,7 @@ class LoginUser extends StatelessWidget {
                     child: Text("Einloggen"),
                     onPressed: () {
                       if (_formKey.currentState.validate()) {
-                        UserService.instance().loginUser(
+                        SignInEndpoint.instance().signInUser(
                           new LoginData(
                             username: username.text,
                             password: password.text,

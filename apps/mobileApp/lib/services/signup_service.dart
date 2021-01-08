@@ -17,16 +17,18 @@ class SignUpService {
   SignUpService._private();
 
   Future<Auth> signUpUser(User user) async {
-    SignUpEndpoint.instance().signUpUser(user).then((newUser) {
+    SignUpEndpoint.instance().signUpUser(user);
+
+   /*     .then((newUser) {
       LoginData loginData = LoginData(username: user.username, password: user.password);
 
-      /*
+      *//*
       * SignIn for get UUID
       * return Auth
-      * */
+      * *//*
 
       print('SignUpService: signUpUser');
       return SignInService.instance().signInUser(loginData);
-    });
+    });*/
   }
 }
