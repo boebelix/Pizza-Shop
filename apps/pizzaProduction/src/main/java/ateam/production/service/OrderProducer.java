@@ -16,6 +16,13 @@ public class OrderProducer {
 
 		List<ProcurementLogItem> toOrder=new LinkedList<>();
 
+		ProcurementLogItem dough= new ProcurementLogItem();
+
+		dough.setName("dough");
+		dough.setUnit("g");
+
+		int doughAmount=0;
+
 		for(Pizza pizza:toProduce.getItems())
 		{
 			toOrder.addAll(producePizza(pizza));
@@ -27,6 +34,8 @@ public class OrderProducer {
 			throw new ProductionException("Production got Interrupted");
 		}
 
+		toOrder.add(dough);
+
 		ProcurementLog procurementLog=new ProcurementLog();
 		procurementLog.setItems(toOrder);
 
@@ -36,10 +45,14 @@ public class OrderProducer {
 	{
 		List<ProcurementLogItem> used=new LinkedList<>();
 
+
+
 		for(PizzaTopping t:pizza.getToppings())
 		{
 			ProcurementLogItem item= new ProcurementLogItem();
 
+			item.setAmount(t.getAmount());
+			item.setUnit();
 
 			used.add(item);
 		}
