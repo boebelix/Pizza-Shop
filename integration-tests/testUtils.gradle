@@ -19,6 +19,7 @@ ext.waitForApplication = { url, timeoutSec ->
 	def ok = false
 	def failed = false
 	def started = System.currentTimeMillis()
+	println()
 	while (!ok && !failed) {
 		http.get {
 			request.uri.path = "/health"
