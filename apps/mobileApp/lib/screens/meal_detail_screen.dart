@@ -1,3 +1,5 @@
+import 'package:app/models/cart.dart';
+import 'package:provider/provider.dart';
 import 'package:app/models/meal.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +53,11 @@ class _MealInfo extends StatelessWidget {
           SizedBox(height: 8),
           RaisedButton(
             child: Text("Zum Warenkorb hinzufügen"),
-            onPressed: () => print("${meal.name} zum Warenkorb hinzugefügt"),
+            onPressed: () {
+              print("${meal.name} zum Warenkorb hinzugefügt");
+              context.read<Cart>().add(meal);
+
+            }
           ),
         ],
       ),

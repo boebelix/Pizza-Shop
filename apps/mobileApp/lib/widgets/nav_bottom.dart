@@ -1,3 +1,4 @@
+import 'package:app/screens/cart_screen.dart';
 import 'package:app/screens/meal_list_screen.dart';
 import 'package:app/screens/user_screen.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class _NavBottomState extends State<NavBottom> {
 
   final List<Widget> _children = [
     meal_list(),
-    meal_list(),
+    CartScreen(),
     UserScreen(),
   ];
 
