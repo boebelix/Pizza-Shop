@@ -53,6 +53,7 @@ class App extends StatelessWidget {
         UserScreen.routeName: (_) => UserScreen(),
         LoginUser.routeName: (_) => LoginUser(),
         CreateUserScreen.routeName: (_) => CreateUserScreen(),
+        MealDetailScreen.routeName: (_) => MealDetailScreen()
       },
     );
   }

@@ -35,25 +35,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
 
   final TextEditingController country = TextEditingController();
 
-
-  void _showErrorDialog(String message) {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text('An Error Occurred!'),
-        content: Text(message),
-        actions: <Widget>[
-          FlatButton(
-            child: Text('Okay'),
-            onPressed: () {
-              Navigator.of(ctx).pop();
-            },
-          )
-        ],
-      ),
-    );
-  }
-
+  String _errorMsg;
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +53,6 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
     password.text = '!Test1234';
     passwordRepeat.text = '!Test1234';
     country.text = 'Testland';
-
-    String _errorMsg = '';
-
 
     return Scaffold(
       appBar: AppBar(
@@ -250,15 +229,22 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                       ],
                     ),
                   ),
-                  Text('Hello before error message'),
-                  Text(_errorMsg),
+                  _errorMsg == null
+                      ? Container()
+                      : Text(
+                          _errorMsg,
+                          style: TextStyle(
+                            color: Colors.redAccent,
+                          ),
+                        ),
                   RaisedButton(
                     child: Text("Registrierung absenden"),
                     onPressed: () async {
                       print('Hello');
                       if (_formKey.currentState.validate()) {
                         try {
-                          final user = await SignUpService.instance().signUpUser(
+                          final user =
+                              await SignUpService.instance().signUpUser(
                             new User(
                                 email: email.text,
                                 username: username.text,
@@ -271,19 +257,18 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                                 city: city.text,
                                 country: country.text),
                           );
-                        } on HttpException catch (error){
-                          print('Error message setState' + error.toString());
-
+                        } on HttpException catch (error) {
+                          setState(() {
+                            _errorMsg = error.message;
+                            print('Error message setState' + error.message);
+                          });
                         } catch (error) {
                           print('Unbekannter Fehler');
-
                         }
-
                         //Navigator.pop(context);
                       }
                     },
                   ),
-
                 ],
               ),
             ),
