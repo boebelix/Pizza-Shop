@@ -1,4 +1,4 @@
-package ateam.service;
+package ateam.production.service;
 
 import ateam.model.entity.ShopProductionItem;
 
