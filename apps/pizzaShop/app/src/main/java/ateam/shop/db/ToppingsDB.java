@@ -5,6 +5,8 @@ import ateam.model.exception.PizzaShopException;
 
 import javax.inject.Singleton;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Singleton
 public class ToppingsDB {
@@ -29,9 +31,21 @@ public class ToppingsDB {
 		stmt.setInt(1, id);
 
 		ResultSet rs = stmt.executeQuery();
-
-		return new Topping(rs.getInt(1),
-			rs.getString(2), rs.getInt(3), rs.getString(4));
+		if (rs.next()) {
+			return new Topping(rs.getInt(1),
+				rs.getString(2), rs.getInt(3), rs.getString(4));
+		}
+		return null;
 	}
 
+    public List<Topping> getToppings(Connection connection) throws SQLException {
+		PreparedStatement stmt = connection.prepareStatement("select * from toppings");
+		ResultSet rs = stmt.executeQuery();
+		List<Topping> toppings = new ArrayList<>();
+		while (rs.next()) {
+			toppings.add(new Topping(rs.getInt(1),
+				rs.getString(2), rs.getInt(3), rs.getString(4)));
+		}
+		return toppings;
+    }
 }

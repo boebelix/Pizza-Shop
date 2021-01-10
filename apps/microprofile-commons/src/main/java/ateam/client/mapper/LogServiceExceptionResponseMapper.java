@@ -4,6 +4,7 @@ import ateam.model.exception.ExceptionResponse;
 import ateam.util.LogServiceException;
 import org.eclipse.microprofile.rest.client.ext.ResponseExceptionMapper;
 
+import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
@@ -13,7 +14,10 @@ public class LogServiceExceptionResponseMapper implements ResponseExceptionMappe
 
 	@Override
 	public LogServiceException toThrowable(Response response) {
-		ExceptionResponse exceptionResponse = (ExceptionResponse) response.getEntity();
+		if(!response.bufferEntity()) {
+			throw new InternalServerErrorException("Another microservice throw an exception and we fucked up parsing it!");
+		}
+		ExceptionResponse exceptionResponse = response.readEntity(ExceptionResponse.class);
 		return new LogServiceException(exceptionResponse.getMessage());
 	}
 
