@@ -3,7 +3,7 @@ package ateam.production.endpoint;
 import ateam.exceptionmapper.ShopExceptionMapper;
 import ateam.exceptionmapper.UnknownEntityExceptionMapper;
 import ateam.exceptionmapper.ValidationExceptionMapper;
-import ateam.production.model.OrderProducer;
+import ateam.service.OrderProducer;
 import ateam.model.entity.ShopProductionItem;
 import ateam.validator.Validator;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
