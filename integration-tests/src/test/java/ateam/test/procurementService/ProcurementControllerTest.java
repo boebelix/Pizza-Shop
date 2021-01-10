@@ -3,10 +3,8 @@ package ateam.test.procurementService;
 import ateam.client.procurement.ProcurementClient;
 import ateam.model.entity.ProcurementLog;
 import ateam.model.entity.ProcurementLogItem;
-import ateam.procurement.service.ProcurementController;
 import ateam.test.util.TestConstants;
 import ateam.test.util.TestUtils;
-import ateam.util.LogServiceException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

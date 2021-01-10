@@ -25,6 +25,7 @@ dependencies {
 	testImplementation project(':apps:microprofile-commons')
 	testImplementation project(':apps:procurementService')
 	testImplementation project(':apps:logisticsService')
+	testImplementation project(':apps:pizzaProduction')
 }
 
 test {

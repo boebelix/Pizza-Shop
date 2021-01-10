@@ -1,15 +1,14 @@
 package ateam.shop.db;
 
 import ateam.db.DBConnection;
-import ateam.model.entity.Order;
-import ateam.model.entity.Pizza;
-import ateam.model.entity.PizzaTopping;
+import ateam.model.entity.*;
 import ateam.model.exception.ShopException;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 @Singleton
 public class DBManager {
@@ -62,6 +61,30 @@ public class DBManager {
 		} catch (SQLException e) {
 			throw new ShopException("Error loading order", e);
 		}
+	}
+
+	public List<Topping> getToppings() {
+		try (Connection connection = connector.getConnection()) {
+			return getToppings(connection);
+		} catch (SQLException e) {
+			throw new ShopException("Error loading orders", e);
+		}
+	}
+
+	public List<Size> getSizes() {
+		try (Connection connection = connector.getConnection()) {
+			return getSizes(connection);
+		} catch (SQLException e) {
+			throw new ShopException("Error loading sizes", e);
+		}
+	}
+
+	private List<Size> getSizes(Connection connection) throws SQLException {
+		return sizesDB.getSizes(connection);
+	}
+
+	private List<Topping> getToppings(Connection connection) throws SQLException {
+		return toppingsDB.getToppings(connection);
 	}
 
 	private int placeOrder(Order order, Connection connection) throws SQLException {

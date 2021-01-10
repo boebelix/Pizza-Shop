@@ -30,6 +30,10 @@ public class Topping {
 		this.name = name;
 	}
 
+	public Topping() {
+
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -60,5 +64,16 @@ public class Topping {
 
 	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+
+	@Override
+	public String toString()
+	{
+		String data="topping{";
+		data+="id="+id;
+		data+="name="+name;
+		data+="baseAmount="+baseAmount;
+		data+="unit="+unit;
+		return data+"}";
 	}
 }

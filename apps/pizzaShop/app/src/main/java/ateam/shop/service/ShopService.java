@@ -20,4 +20,9 @@ public class ShopService {
 		//Todo contact pizzaProduction
 		return created;
 	}
+
+	public Order getOrderById(int oderId) {
+		return dbManager.getOrderById(oderId);
+	}
+
 }

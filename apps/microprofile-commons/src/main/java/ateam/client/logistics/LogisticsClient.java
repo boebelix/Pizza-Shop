@@ -5,7 +5,6 @@ import ateam.client.mapper.UnauthorizedExceptionResponseMapper;
 import ateam.client.mapper.ValidationExceptionResponseMapper;
 import ateam.model.entity.LogisticsPostInput;
 import ateam.model.exception.UnauthorizedException;
-import ateam.util.LogServiceException;
 import ateam.validator.ValidationException;
 import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
