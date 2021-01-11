@@ -33,9 +33,12 @@ public class OrderProducer {
 		{
 			toOrder.addAll(producePizza(pizza));
 
+			doughAmount+=pizza.getDoughAmount();
 		}
 
+		dough.setAmount(doughAmount);
 		toOrder.add(dough);
+
 
 		try {
 			Thread.sleep(10000);
