@@ -29,7 +29,7 @@ public class OrderProducer {
 
 		int doughAmount=0;
 
-		for(Pizza pizza:toProduce.getItems())
+		for(PizzaRestEntity pizza:toProduce.getItems())
 		{
 			toOrder.addAll(producePizza(pizza));
 
@@ -77,15 +77,15 @@ public class OrderProducer {
 
 	}
 
-	private List<ProcurementLogItem> producePizza(Pizza pizza)
+	private List<ProcurementLogItem> producePizza(PizzaRestEntity pizza)
 	{
 		List<ProcurementLogItem> used=new LinkedList<>();
 
-		for(PizzaTopping t:pizza.getToppings())
+		for(Topping t:pizza.getToppings())
 		{
 			ProcurementLogItem item= new ProcurementLogItem();
 
-			item.setAmount(t.getAmount());
+			item.setAmount((int)(t.getBaseAmount() * pizza.getToppingFactor()));
 			item.setUnit(t.getUnit());
 			item.setName(t.getName());
 			used.add(item);
