@@ -2,18 +2,19 @@ package ateam.test.pizzaProduction;
 
 import ateam.model.entity.*;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class ProductionTestUtils {
 	public static ShopProductionItem createDefaultOrder() {
 		ShopProductionItem item=new ShopProductionItem();
-		Pizza testPizza=new Pizza();
-		testPizza.setId(1);
-		testPizza.setOrderId(1);
-		testPizza.setSizeId(2);
+		List<Topping> toppings=new LinkedList<>();
+
+		toppings.add(new Topping(1,"Salami", 10,"g"));
+
+		PizzaRestEntity testPizza=new PizzaRestEntity(1,300,1.5,toppings);
+
 		Topping topping=new Topping(1,"Salami", 10,"Gramm");
-
-		PizzaTopping pizzaTopping = new PizzaTopping(testPizza.getId(), topping.getId(), 1);
-
-		testPizza.addTopping(pizzaTopping);
 
 		item.addPizza(testPizza);
 
