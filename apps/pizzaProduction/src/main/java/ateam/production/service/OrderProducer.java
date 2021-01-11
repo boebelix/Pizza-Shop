@@ -41,6 +41,7 @@ public class OrderProducer {
 			Thread.sleep(10000);
 		}catch(InterruptedException e)
 		{
+			System.out.println("interrupt");
 			throw new ProductionException("Production got Interrupted");
 		}
 
@@ -56,6 +57,7 @@ public class OrderProducer {
 		}
 		catch (Exception e)
 		{
+			System.out.println("logpath");
 			throw new ProductionException("couldn't find procurementLogPath: "+ e.getMessage(),e);
 		}
 
@@ -71,7 +73,8 @@ public class OrderProducer {
 		}
 		catch (Exception e)
 		{
-			throw new ProductionException("couldn't find procurementLogURI: "+ e.getMessage(),e);
+			System.out.println("internuri");
+			throw new ProductionException("couldn't find LogisticsInternURI: "+ e.getMessage(),e);
 		}
 
 
@@ -94,5 +97,7 @@ public class OrderProducer {
 		return used;
 	}
 
+	public OrderProducer() {
+	}
 }
 

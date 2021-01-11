@@ -24,6 +24,8 @@ public class PizzaRestEntity {
 		this.toppingFactor = toppingFactor;
 		this.toppings = toppings;
 	}
+	public PizzaRestEntity() {
+	}
 
 	public int getID() {
 		return ID;

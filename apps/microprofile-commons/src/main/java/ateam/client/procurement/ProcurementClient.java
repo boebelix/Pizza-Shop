@@ -22,5 +22,6 @@ public interface ProcurementClient {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+	@Path("")
 	Response createProcurementLog(ProcurementLog log) throws IOException;
 }

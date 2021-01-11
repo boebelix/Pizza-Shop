@@ -21,6 +21,6 @@
     <!-- The MP JWT configuration that injects the caller's JWT into a ResourceScoped bean for inspection. -->
     <mpJwt id="jwtUserConsumer" keyName="theKeyId" audiences="targetService" issuer="team-a"/>
 
-	<jndiEntry id="procurementInternURI" jndiName="procurementInternURI" value="http://localhost:9082" />>
+	<jndiEntry id="procurementInternURI" jndiName="procurementInternURI" value="http://localhost:9082" />
 	<jndiEntry id="LogisticsInternURI" jndiName="LogisticsInternURI" value="http://localhost:9081" />
 </server>

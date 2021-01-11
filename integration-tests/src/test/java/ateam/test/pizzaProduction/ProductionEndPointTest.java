@@ -1,5 +1,6 @@
 package ateam.test.pizzaProduction;
 
+import ateam.client.production.ProductionClient;
 import ateam.model.entity.ShopProductionItem;
 import ateam.model.exception.ExceptionResponse;
 import ateam.test.util.ServiceResponse;
@@ -11,37 +12,39 @@ import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.Response;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ProductionEndPointTest {
 
-	private static ProductionEndpoint productionEndpoint;
+	private static ProductionClient productionClient;
 
 	@BeforeAll
 	public static void setupClass() {
 		System.out.println("setUP");
-		productionEndpoint = TestUtils.setupClient(TestConstants.PRODUCTION_URI, ProductionEndpoint.class);
+		productionClient = TestUtils.setupClient(TestConstants.PRODUCTION_URI, ProductionClient.class);
 	}
 
 	@Test
-	void sendOrder() {
+	void sendOrder() throws IOException {
 		System.out.println("sendOrder");
 		ShopProductionItem toCreate = ProductionTestUtils.createDefaultOrder();
 
 		System.out.println("sending"+toCreate.toString());
 
-		Response response = productionEndpoint.produceOrder(toCreate);
+		Response response = productionClient.produceOrder(toCreate);
 
 		assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
 	}
 
 	@Test
-	void SendEmptyOrderShouldReturnError() {
+	void SendEmptyOrderShouldReturnError() throws IOException {
 		System.out.println("sendInvalidPackage");
 		ShopProductionItem testItem= ProductionTestUtils.createEmptyOrder();
 		System.out.println("sending"+testItem.toString());
-		Response conflictResponse = productionEndpoint.produceOrder(testItem);
+		Response conflictResponse = productionClient.produceOrder(testItem);
 
 		System.out.println("sent");
 		ServiceResponse<ShopProductionItem> serviceResponse = ServiceResponse.parse(conflictResponse, ShopProductionItem.class);
