@@ -1,11 +1,17 @@
 package ateam.production.service;
 
+import ateam.client.logistics.LogisticsClient;
 import ateam.client.procurement.ProcurementClient;
+import ateam.client.user.UserClient;
 import ateam.model.entity.*;
 import ateam.model.exception.ProductionException;
+import org.eclipse.microprofile.rest.client.RestClientBuilder;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import java.net.URI;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,7 +32,11 @@ public class OrderProducer {
 		for(Pizza pizza:toProduce.getItems())
 		{
 			toOrder.addAll(producePizza(pizza));
+
 		}
+
+		toOrder.add(dough);
+
 		try {
 			Thread.sleep(10000);
 		}catch(InterruptedException e)
@@ -34,10 +44,36 @@ public class OrderProducer {
 			throw new ProductionException("Production got Interrupted");
 		}
 
-		toOrder.add(dough);
 
 		ProcurementLog procurementLog=new ProcurementLog();
 		procurementLog.setItems(toOrder);
+		ProcurementClient procurement;
+		try {
+			procurement = RestClientBuilder
+				.newBuilder().baseUri(new URI(InitialContext.doLookup("procurementInternURI"))).build(ProcurementClient.class);
+
+			procurement.createProcurementLog(procurementLog);
+		}
+		catch (Exception e)
+		{
+			throw new ProductionException("couldn't find procurementLogPath: "+ e.getMessage(),e);
+		}
+
+		LogisticsPostInput logisticInput= new LogisticsPostInput();
+		logisticInput.setOrderId(toProduce.getOrderID());
+		logisticInput.setUserId(toProduce.getUserID());
+		LogisticsClient logistics;
+		try {
+			logistics = RestClientBuilder
+				.newBuilder().baseUri(new URI(InitialContext.doLookup("LogisticsInternURI"))).build(LogisticsClient.class);
+
+			logistics.createLogisticsLog(logisticInput);
+		}
+		catch (Exception e)
+		{
+			throw new ProductionException("couldn't find procurementLogURI: "+ e.getMessage(),e);
+		}
+
 
 	}
 
@@ -45,15 +81,13 @@ public class OrderProducer {
 	{
 		List<ProcurementLogItem> used=new LinkedList<>();
 
-
-
 		for(PizzaTopping t:pizza.getToppings())
 		{
 			ProcurementLogItem item= new ProcurementLogItem();
 
 			item.setAmount(t.getAmount());
-			item.setUnit();
-
+			item.setUnit(t.getUnit());
+			item.setName(t.getName());
 			used.add(item);
 		}
 
