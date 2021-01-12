@@ -21,7 +21,7 @@ CREATE TABLE `toppings`
 CREATE TABLE `sizes`
 (
     `id`            int PRIMARY KEY AUTO_INCREMENT,
-    `radius`        int not null UNIQUE,
+    `diameter`        int not null UNIQUE,
     `base_price`    NUMERIC(2) not null ,
     `topping_price` NUMERIC(2) not null ,
     `dough_amount` NUMERIC not null ,

@@ -9,7 +9,7 @@ public class Size {
 
 	@Validator.Required
 	@Validator.Min(1)
-	private int radius;
+	private int diameter;
 
 	@Validator.Required
 	@Validator.Min(0)
@@ -27,17 +27,17 @@ public class Size {
 	@Validator.Min(0)
 	private float toppingFactor;
 
-	public Size(int id, int radius, float basePrice, float toppingPrice, int doughAmount, float toppingFactor) {
+	public Size(int id, int diameter, float basePrice, float toppingPrice, int doughAmount, float toppingFactor) {
 		this.id = id;
-		this.radius = radius;
+		this.diameter = diameter;
 		this.basePrice = basePrice;
 		this.toppingPrice = toppingPrice;
 		this.doughAmount = doughAmount;
 		this.toppingFactor = toppingFactor;
 	}
 
-	public Size(int radius, float basePrice, float topping_price, int doughAmount, float toppingFactor) {
-		this.radius = radius;
+	public Size(int diameter, float basePrice, float topping_price, int doughAmount, float toppingFactor) {
+		this.diameter = diameter;
 		this.basePrice = basePrice;
 		this.toppingPrice = topping_price;
 		this.doughAmount = doughAmount;
@@ -52,12 +52,12 @@ public class Size {
 		this.id = id;
 	}
 
-	public int getRadius() {
-		return radius;
+	public int getDiameter() {
+		return diameter;
 	}
 
-	public void setRadius(int radius) {
-		this.radius = radius;
+	public void setDiameter(int diameter) {
+		this.diameter = diameter;
 	}
 
 	public float getBasePrice() {
