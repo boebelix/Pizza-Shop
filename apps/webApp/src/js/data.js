@@ -1,5 +1,8 @@
 let USER_JSON = {};
 let LOGGED_IN = false;
+let TOPPINGS = [];
+let SIZES = [];
+let CURRENT_ORDER = [];
 const RESPONSE_OK = 200;
 const RESPONSE_INTERNAL_SERVER_ERROR = 500;
 const RESPONSE_NOT_FOUND = 400;
@@ -11,14 +14,22 @@ const CANVAS_FACTOR = 0.4;
 const REGEX_SIGNS = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 const PASSWORD_ERROR_EQUALITY = "Passwörter stimmen nicht überein";
 const EMAIL_ERROR_EQUALITY = "E-mail-Adressen stimmen nicht überein";
-const SERVER_ADDRESS = "http://localhost:9080";
+const SERVER_ADDRESS_USER = "http://localhost:9084";
+const SERVER_ADDRESS_SHOP = "http://localhost:9083";
 const SERVER_AUTH = "/auth";
 const SERVER_USER = "/user";
+const SERVER_INGREDIENT = "/topping";
+const SERVER_SIZE = "/size";
+const SERVER_SHOP = "/shop";
 const TYPE_POST = 'POST';
 const TYPE_PUT = 'PUT';
 const TYPE_GET = 'GET';
 const HEADER_BASIC = {
 	'Content-Type': 'application/json'
+};
+let HEADER_UUID = {
+	'Content-Type': 'application/json',
+	'Authorization': ''
 };
 
 const STATE_MENU = "menu_state";
@@ -58,6 +69,7 @@ const setCookie = (cname, cvalue, exdays) => {
 	if(exdays === 0) {
 		LOGGED_IN = false;
 	}
+	HEADER_UUID.Authorization = UUID;
 	let d = new Date();
 	d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
 	let expires = "expires=" + d.toUTCString();
@@ -78,4 +90,22 @@ const getCookie = (cname) => {
 		}
 	}
 	return "";
+}
+
+const getSize = (id) => {
+	for(let i = 0; i < SIZES.length; i++) {
+		if(SIZES[i].id == id) {
+			return SIZES[i];
+		}
+	}
+	return null;
+}
+
+const getTopping = (id) => {
+	for(let i = 0; i < TOPPINGS.length; i++) {
+		if(TOPPINGS[i].id == id) {
+			return TOPPINGS[i];
+		}
+	}
+	return null;
 }

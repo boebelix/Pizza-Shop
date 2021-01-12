@@ -54,4 +54,3 @@ ALTER TABLE `pizza_topping`
 
 ALTER TABLE `pizza_topping`
     ADD FOREIGN KEY (`topping_id`) REFERENCES `toppings` (`id`);
-
