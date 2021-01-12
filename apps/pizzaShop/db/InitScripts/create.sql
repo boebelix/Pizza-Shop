@@ -55,3 +55,8 @@ ALTER TABLE `pizza_topping`
 ALTER TABLE `pizza_topping`
     ADD FOREIGN KEY (`topping_id`) REFERENCES `toppings` (`id`);
 
+INSERT INTO sizes (diameter, base_price, topping_price, dough_amount, topping_factor) VALUES
+(15, 7.5, 1, 100, 1), (18, 9, 1.3, 140, 1.3), (21, 12, 2, 200, 2), (25, 18, 3, 300, 3);
+
+INSERT INTO toppings (name, base_amount, unit) VALUES
+('Salami', 3, 'stk.'), ('Bacon', 2, 'stk.'), ('Mais', '15', 'g'), ('Oliven', 20, 'g')
