@@ -2,11 +2,14 @@ package ateam.test.pizzaProduction;
 
 import ateam.client.production.ProductionClient;
 import ateam.model.entity.ShopProductionItem;
+import ateam.model.entity.User;
 import ateam.model.exception.ExceptionResponse;
+import ateam.test.userService.UserServiceTestUtils;
 import ateam.test.util.ServiceResponse;
 import ateam.test.util.TestConstants;
 import ateam.test.util.TestUtils;
 import ateam.production.endpoint.ProductionEndpoint;
+import ateam.user.endpoints.UserEndpoint;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -29,8 +32,19 @@ public class ProductionEndPointTest {
 
 	@Test
 	void sendOrder() throws IOException {
+
+		UserEndpoint userEndpoint = TestUtils.setupClient(TestConstants.USER_SERVICE_URI, UserEndpoint.class);
+		User testUser = ProductionTestUtils.createUser();
+		Response userResponse = userEndpoint.createUser(testUser);
+
+		assertEquals(Response.Status.OK.getStatusCode(), userResponse.getStatus());
+
+		assertEquals(true, userResponse.hasEntity());
+
+		testUser=userResponse.readEntity(User.class);
+
 		System.out.println("sendOrder");
-		ShopProductionItem toCreate = ProductionTestUtils.createDefaultOrder();
+		ShopProductionItem toCreate = ProductionTestUtils.createDefaultOrder(testUser);
 
 		System.out.println("sending"+toCreate.toString());
 
