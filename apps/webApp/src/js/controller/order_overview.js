@@ -12,7 +12,6 @@ const submitOrder = async () => {
 	}
 	let data = {"pizzas" : CURRENT_ORDER}
 	let requestResponse = await response(SERVER_ADDRESS_SHOP + SERVER_SHOP, data, TYPE_POST, HEADER_UUID);
-	console.log(requestResponse);
 	if(requestResponse.status === 201) {
 		CURRENT_ORDER = [];
 		setState(STATE_ORDER_HISTORY);

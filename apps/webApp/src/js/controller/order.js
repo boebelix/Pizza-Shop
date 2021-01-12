@@ -38,7 +38,6 @@ const continuePressed = () => {
 		}
 	}
 	CURRENT_ORDER.push({"sizeId": getCurrentSizeId(), "toppings": toppingList});
-	console.log(CURRENT_ORDER);
 	reset();
 	setState(STATE_ORDER_OVERVIEW);
 }
