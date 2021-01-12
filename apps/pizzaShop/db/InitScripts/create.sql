@@ -13,7 +13,7 @@ CREATE TABLE `orders`
 CREATE TABLE `toppings`
 (
     `id`   int PRIMARY KEY AUTO_INCREMENT,
-    `name` varchar(255) not null ,
+    `name` varchar(255) not null UNIQUE,
     `base_amount` int not null ,
     `unit` varchar(16) not null
 );
@@ -21,7 +21,7 @@ CREATE TABLE `toppings`
 CREATE TABLE `sizes`
 (
     `id`            int PRIMARY KEY AUTO_INCREMENT,
-    `radius`        int not null ,
+    `radius`        int not null UNIQUE,
     `base_price`    NUMERIC(2) not null ,
     `topping_price` NUMERIC(2) not null ,
     `dough_amount` NUMERIC not null ,
