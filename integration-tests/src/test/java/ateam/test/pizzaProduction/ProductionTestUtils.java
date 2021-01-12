@@ -1,15 +1,16 @@
 package ateam.test.pizzaProduction;
 
 import ateam.model.entity.*;
+import ateam.test.userService.model.UserRequest;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class ProductionTestUtils {
-	public static ShopProductionItem createDefaultOrder(User testUser) {
+	public static ShopProductionItem createDefaultOrder(int userId) {
 		ShopProductionItem item=new ShopProductionItem();
 		item.setOrderID(1);
-		item.setUserID(testUser.getUserId());
+		item.setUserID(userId);
 		List<Topping> toppings=new LinkedList<>();
 
 		toppings.add(new Topping(1,"Salami", 10,"g"));
@@ -26,18 +27,18 @@ public class ProductionTestUtils {
 
 	public static User createUser()
 	{
-		User user=new User();
-		user.setCity("Zweibrücken");
-		user.setCountry("Deutschland");
-		user.setUsername("PizzaMampfer");
-		user.setFirstName("Maria");
-		user.setLastName("Musterfrau");
-		user.setEmail("mamu99999@stud.hs-kl.de");
-		user.setPassword("IcKWIllnEpIzzA444!!11!1!");
-		user.setPostalCode("");
-		user.setStreet("Am Rosengarten");
-		user.setNumber("66482");
-		return user;
+		return UserRequest.builder()
+			.username("PizzaMampfer")
+			.email("pizzamampfer" + "@stud.hs-kl.de")
+			.password("123456789#!TesT")
+			.firstName("Max")
+			.lastName("Mustermann")
+			.street("Amerikastraße")
+			.number("42")
+			.city("Zweibrücken")
+			.postalCode("66482")
+			.country("Deutschland")
+			.build();
 	}
 
 	public static ShopProductionItem createEmptyOrder()
