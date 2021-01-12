@@ -13,9 +13,9 @@ public class SizesDB {
 
 	public int createSizeEntry(Size dto, Connection connection) throws SQLException {
 		PreparedStatement statement = connection
-			.prepareStatement("insert into sizes ( radius, base_price, topping_price, dough_amount, topping_factor) VALUES (?,?,?,?,?)",
+			.prepareStatement("insert into sizes ( diameter, base_price, topping_price, dough_amount, topping_factor) VALUES (?,?,?,?,?)",
 				Statement.RETURN_GENERATED_KEYS);
-		statement.setInt(1, dto.getRadius());
+		statement.setInt(1, dto.getDiameter());
 		statement.setFloat(2, dto.getBasePrice());
 		statement.setFloat(3, dto.getToppingPrice());
 		statement.setInt(4, dto.getDoughAmount());
@@ -51,7 +51,7 @@ public class SizesDB {
 
 	private Size sizeFromRs(ResultSet rs) throws SQLException {
 		return new Size(rs.getInt("id"),
-			rs.getInt("radius"),
+			rs.getInt("diameter"),
 			rs.getFloat("base_price"),
 			rs.getFloat("topping_price"),
 			rs.getInt("dough_amount"),
