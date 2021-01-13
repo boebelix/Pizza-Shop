@@ -11,17 +11,16 @@ class UserButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 8,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(radius),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(radius),
-        child: GestureDetector(
-          onTap: () {
-            Navigator.pushNamed(context, destinationRoute);
-          },
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).pushNamed(destinationRoute);
+      },
+      child: Card(
+        elevation: 8,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(radius),
+        ),
+        child: ClipRRect(
           child: Container(
             height: itemHeight,
             child: Center(
