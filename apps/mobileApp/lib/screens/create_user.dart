@@ -48,10 +48,10 @@ class _CreateUserState extends State<CreateUser> {
     country.text = 'Testland';
 
     return Scaffold(
-        appBar: AppBar(
+      appBar: AppBar(
         title: Text('Anmelden'),
-    ),
-    body: Container(
+      ),
+      body: Container(
         decoration: new BoxDecoration(
           image: new DecorationImage(
             image: new AssetImage("images/Background_Login.jpg"),
@@ -263,9 +263,11 @@ class _CreateUserState extends State<CreateUser> {
                                 postalCode: postalCode.text,
                                 city: city.text,
                                 country: country.text),
-                          ).then((loginRepsonse) {
+                          )
+                              .then((loginRepsonse) {
+                            var tmp = loginRepsonse;
                             setState(() {
-                              _msg = 'Willkommen ${loginRepsonse.user.firstName}';
+                              _msg = 'Willkommen';
                             });
                           });
                         } on HttpException catch (error) {
@@ -289,7 +291,7 @@ class _CreateUserState extends State<CreateUser> {
             ),
           ),
         ),
-
-    ),);
+      ),
+    );
   }
 }

@@ -25,6 +25,7 @@ class User {
     this.country
   });
 
+
   factory User.fromJson(Map<String, dynamic> json) => User(
         userId: json['userId'],
         username: json['username'],
