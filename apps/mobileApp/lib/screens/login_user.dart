@@ -1,5 +1,8 @@
-import 'package:app/endpoints/sign_in_endpoint.dart';
+import 'package:app/models/http_exception.dart';
 import 'package:app/models/login_data.dart';
+import 'package:app/services/security/auth.dart';
+import 'package:app/services/signin_service.dart';
+import 'package:app/widgets/navigation.dart';
 import 'package:flutter/material.dart';
 
 class LoginUser extends StatefulWidget {
@@ -11,10 +14,11 @@ class LoginUser extends StatefulWidget {
 
 class _LoginUserState extends State<LoginUser> {
   final GlobalKey<FormState> _formKey = GlobalKey();
-
   final TextEditingController username = TextEditingController();
-
   final TextEditingController password = TextEditingController();
+
+  String _msgSuccess = '';
+  String _msgError = '';
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +27,7 @@ class _LoginUserState extends State<LoginUser> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: Text('Non Stop Pizza'),
       ),
       body: Container(
         decoration: new BoxDecoration(
@@ -69,26 +73,58 @@ class _LoginUserState extends State<LoginUser> {
                       ),
                     ],
                   ),
-                  RaisedButton(
-                    child: Text("Einloggen"),
-                    onPressed: () {
-                      if (_formKey.currentState.validate()) {
-                        SignInEndpoint.instance().signInUser(
-                          new LoginData(
-                            username: username.text,
-                            password: password.text,
-                          ),
-                        );
-                        //Navigator.pop(context);
-                      }
-                    },
+                  _msgError == null
+                      ? Container()
+                      : Text(
+                    _msgError,
+                    style: TextStyle(color: Colors.redAccent),
                   ),
+                  _msgSuccess == null
+                      ? Container()
+                      : Text(
+                          _msgSuccess,
+                          style: TextStyle(color: Colors.green),
+                        ),
+                  _submitLoginData(),
                 ],
               ),
             ),
           ),
         ),
       ),
+    );
+  }
+
+  RaisedButton _submitLoginData() {
+    SignInService signInService = SignInService.instance();
+
+    return RaisedButton(
+      child: Text("Einloggen"),
+      onPressed: () {
+        if (_formKey.currentState.validate()) {
+          try {
+            signInService.signInUser(
+              new LoginData(
+                username: username.text,
+                password: password.text,
+              ),
+            );
+            _msgSuccess = 'Erfolgreich eingeloggt';
+
+            Navigator.pop(context);
+            Navigator.pushReplacementNamed(context, Navigation.routeName);
+
+          } on HttpException catch (error) {
+            setState(() {
+              _msgError = error.message;
+            });
+
+            print('Error login');
+          } catch (error) {
+            throw (error);
+          }
+        }
+      },
     );
   }
 }

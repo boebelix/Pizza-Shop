@@ -3,7 +3,7 @@ import 'package:app/models/login_data.dart';
 import 'package:app/models/user.dart';
 import 'package:app/services/signin_service.dart';
 
-import 'auth/auth.dart';
+import 'security/auth.dart';
 
 // Singleton
 class SignUpService {
@@ -16,7 +16,7 @@ class SignUpService {
 
   SignUpService._private();
 
-  Future<Auth> signUpUser(User user) async {
+  Future<AuthService> signUpUser(User user) async {
      return SignUpEndpoint.instance().signUpUser(user).then((newUser) {
       LoginData loginData = LoginData(username: user.username, password: user.password);
 

@@ -3,45 +3,38 @@ import 'package:app/models/user.dart';
 import 'package:app/services/signup_service.dart';
 import 'package:flutter/material.dart';
 
-class CreateUserScreen extends StatefulWidget {
+class CreateUser extends StatefulWidget {
   static const String routeName = "/createUserScreen";
 
   @override
-  _CreateUserScreenState createState() => _CreateUserScreenState();
+  _CreateUserState createState() => _CreateUserState();
 }
 
-class _CreateUserScreenState extends State<CreateUserScreen> {
+class _CreateUserState extends State<CreateUser> {
   final GlobalKey<FormState> _formKey = GlobalKey();
-
   final TextEditingController firstName = TextEditingController();
-
   final TextEditingController lastName = TextEditingController();
-
   final TextEditingController username = TextEditingController();
-
   final TextEditingController street = TextEditingController();
-
   final TextEditingController number = TextEditingController();
-
   final TextEditingController city = TextEditingController();
-
   final TextEditingController postalCode = TextEditingController();
-
   final TextEditingController email = TextEditingController();
-
   final TextEditingController password = TextEditingController();
-
   final TextEditingController passwordRepeat = TextEditingController();
-
   final TextEditingController country = TextEditingController();
 
   String _errorMsg;
+  String _msg;
 
   @override
   Widget build(BuildContext context) {
     const radius = 8.0;
     const padding = 4.0;
 
+    /*
+    * TODO delete default values after debug
+    * */
     firstName.text = 'Vorname';
     lastName.text = 'Nachname';
     username.text = 'test11';
@@ -55,10 +48,10 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
     country.text = 'Testland';
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
-      ),
-      body: Container(
+        appBar: AppBar(
+        title: Text('Anmelden'),
+    ),
+    body: Container(
         decoration: new BoxDecoration(
           image: new DecorationImage(
             image: new AssetImage("images/Background_Login.jpg"),
@@ -229,6 +222,14 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                       ],
                     ),
                   ),
+                  _msg == null
+                      ? Container()
+                      : Text(
+                          _msg,
+                          style: TextStyle(
+                            color: Colors.green,
+                          ),
+                        ),
                   _errorMsg == null
                       ? Container()
                       : Text(
@@ -238,13 +239,19 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                           ),
                         ),
                   RaisedButton(
-                    child: Text("Registrierung absenden"),
+                    child: Text("absenden"),
                     onPressed: () async {
-                      print('Hello');
+                      setState(() {
+                        _msg = null;
+                        _errorMsg = null;
+                      });
+
+                      print('Benutzer anlegen');
+
                       if (_formKey.currentState.validate()) {
                         try {
-                          final user =
-                              await SignUpService.instance().signUpUser(
+                          await SignUpService.instance()
+                              .signUpUser(
                             new User(
                                 email: email.text,
                                 username: username.text,
@@ -256,14 +263,22 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                                 postalCode: postalCode.text,
                                 city: city.text,
                                 country: country.text),
-                          );
+                          ).then((loginRepsonse) {
+                            setState(() {
+                              _msg = 'Willkommen ${loginRepsonse.user.firstName}';
+                            });
+                          });
                         } on HttpException catch (error) {
                           setState(() {
                             _errorMsg = error.message;
-                            print('Error message setState' + error.message);
+                            print('Error message on signup user: ' +
+                                error.message);
                           });
                         } catch (error) {
-                          print('Unbekannter Fehler');
+                          setState(() {
+                            _errorMsg = error.toString();
+                          });
+                          print('Unbekannter Fehler' + error);
                         }
                         //Navigator.pop(context);
                       }
@@ -274,7 +289,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
             ),
           ),
         ),
-      ),
-    );
+
+    ),);
   }
 }
