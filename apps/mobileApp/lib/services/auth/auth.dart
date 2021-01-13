@@ -10,8 +10,10 @@ class Auth{
 
   Auth._private();
 
+
   User _user;
   String _uuid;
+
 
   User get user => _user;
 
@@ -23,5 +25,14 @@ class Auth{
 
   set uuid(String value) {
     _uuid = value;
+  }
+
+  bool get isSignIn{
+    return _user != null && _uuid != null;
+  } 
+
+  void logoutUser(){
+    _user = null;
+    _uuid = null;
   }
 }
