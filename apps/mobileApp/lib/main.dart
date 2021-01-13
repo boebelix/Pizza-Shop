@@ -1,3 +1,4 @@
+import 'package:app/screens/cart_screen.dart';
 import 'package:app/screens/update_user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +56,8 @@ class App extends StatelessWidget {
           LoginUser.routeName: (_) => LoginUser(),
           CreateUser.routeName: (_) => CreateUser(),
           MealDetailScreen.routeName: (_) => MealDetailScreen(),
-          UpdateUser.routeName: (_) => UpdateUser()
+          UpdateUser.routeName: (_) => UpdateUser(),
+          CartScreen.routeName: (_) => CartScreen(),
         },
       ),
     );
