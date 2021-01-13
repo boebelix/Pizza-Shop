@@ -1,5 +1,6 @@
 import 'package:app/models/user.dart';
 
+
 class AuthService{
   static AuthService _instance;
 
@@ -31,8 +32,9 @@ class AuthService{
     return _user != null && _uuid != null;
   }
 
-  void logoutUser(){
+  bool logoutUser(){
     _user = null;
     _uuid = null;
+    return true;
   }
 }

@@ -13,7 +13,7 @@ class UserButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed(destinationRoute);
+        Navigator.pushNamed(context, destinationRoute);
       },
       child: Card(
         elevation: 8,

@@ -2,7 +2,7 @@
 import 'package:app/endpoints/sign_in_endpoint.dart';
 import 'package:app/models/login_data.dart';
 
-import 'auth/auth.dart';
+import 'security/auth.dart';
 
 class SignInService {
   static SignInService _instance;
@@ -14,13 +14,13 @@ class SignInService {
 
   SignInService._private();
 
-  Future<Auth> signInUser(LoginData loginData) async {
+  Future<AuthService> signInUser(LoginData loginData) async {
     SignInEndpoint.instance().signInUser(loginData).then((value) {
-      Auth.instance().user = value.user;
-      Auth.instance().uuid = value.uuid;
+      AuthService.instance().user = value.user;
+      AuthService.instance().uuid = value.uuid;
     });
 
     print('SignInService: signInUser');
-    return Auth.instance();
+    return AuthService.instance();
   }
 }
