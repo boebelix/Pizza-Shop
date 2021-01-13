@@ -13,7 +13,7 @@ CREATE TABLE `orders`
 CREATE TABLE `toppings`
 (
     `id`   int PRIMARY KEY AUTO_INCREMENT,
-    `name` varchar(255) not null ,
+    `name` varchar(255) not null UNIQUE,
     `base_amount` int not null ,
     `unit` varchar(16) not null
 );
@@ -21,11 +21,11 @@ CREATE TABLE `toppings`
 CREATE TABLE `sizes`
 (
     `id`            int PRIMARY KEY AUTO_INCREMENT,
-    `radius`        int not null ,
-    `base_price`    NUMERIC(2) not null ,
-    `topping_price` NUMERIC(2) not null ,
+    `diameter`        int not null UNIQUE,
+    `base_price`    DECIMAL(6,2) UNSIGNED not null ,
+    `topping_price` DECIMAL(6,2) UNSIGNED not null ,
     `dough_amount` NUMERIC not null ,
-    `topping_factor` NUMERIC(2) not null
+    `topping_factor` DECIMAL(6,2) UNSIGNED not null
 );
 
 CREATE TABLE `pizzas`
@@ -54,3 +54,10 @@ ALTER TABLE `pizza_topping`
 
 ALTER TABLE `pizza_topping`
     ADD FOREIGN KEY (`topping_id`) REFERENCES `toppings` (`id`);
+
+INSERT INTO sizes (diameter, base_price, topping_price, dough_amount, topping_factor) VALUES
+(15, 7.5, 1, 100, 1), (18, 9, 1.3, 140, 1.3), (21, 12, 2, 200, 2), (25, 18, 3, 300, 3);
+
+INSERT INTO toppings (name, base_amount, unit) VALUES
+('Salami', 3, 'stk.'), ('Bacon', 2, 'stk.'), ('Mais', '15', 'g'), ('Oliven', 20, 'g')
+
