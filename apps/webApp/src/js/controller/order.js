@@ -1,7 +1,9 @@
 const initOrder = async() => {
-    document.getElementById("ordered_back_button").addEventListener("click", () => { setState(STATE_MENU);
+    document.getElementById("ordered_back_button").addEventListener("click", () => {
+        setState(STATE_MENU);
         CURRENT_ORDER = [];
-        reset(); });
+        reset();
+    });
     document.getElementById("order_continue_button").addEventListener("click", () => continuePressed());
 
     await fetchIngredients();
@@ -39,8 +41,9 @@ const continuePressed = () => {
             toppingList.push({ "toppingId": getTopping(checkbox.name).id, "amount": 1 });
         }
     }
-    CURRENT_ORDER.push({ "sizeId": getCurrentSizeId(), "toppings": toppingList });
+    CURRENT_ORDER.push({ "sizeId": getCurrentSizeId(), "toppings": toppingList, "price": document.querySelector("#total_price").innerHTML.split("€")[0] });
     reset();
+    updateOverviewPrice();
     setState(STATE_ORDER_OVERVIEW);
 }
 
@@ -111,7 +114,7 @@ const updatePrices = () => {
     let currentSize = getSize(getCurrentSizeId());
     let basePrice = currentSize.basePrice;
     let toppingPrice = currentSize.toppingPrice;
-    document.querySelector("#basic_price").innerHTML = basePrice + "€";
+    document.querySelector("#basic_price").innerHTML = basePrice.toFixed(2) + "€";
     let checkboxList = document.getElementsByClassName("ingredientCheckbox");
     let extraPrice = 0.0;
     for (let i = 0; i < checkboxList.length; i++) {
@@ -119,8 +122,8 @@ const updatePrices = () => {
             extraPrice += toppingPrice;
         }
     }
-    document.querySelector("#extra_price").innerHTML = extraPrice + "€";
-    document.querySelector("#total_price").innerHTML = (basePrice + extraPrice) + "€";
+    document.querySelector("#extra_price").innerHTML = extraPrice.toFixed(2) + "€";
+    document.querySelector("#total_price").innerHTML = (basePrice + extraPrice).toFixed(2) + "€";
 }
 
 const getCurrentSizeId = () => {
