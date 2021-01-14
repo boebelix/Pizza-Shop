@@ -15,6 +15,7 @@ public class PizzaRestEntity {
 	@Validator.Required
 	double toppingFactor;
 
+	@Validator.Valid
 	@Validator.Required
 	List<Topping> toppings;
 
@@ -24,6 +25,7 @@ public class PizzaRestEntity {
 		this.toppingFactor = toppingFactor;
 		this.toppings = toppings;
 	}
+
 	public PizzaRestEntity() {
 	}
 
@@ -59,24 +61,22 @@ public class PizzaRestEntity {
 		this.toppings = toppings;
 	}
 
-	public void addTopping(Topping topping)
-	{
+	public void addTopping(Topping topping) {
 		this.toppings.add(topping);
 	}
 
-	public Topping getTopping(int index)
-	{
+	public Topping getTopping(int index) {
 		return this.toppings.get(index);
 	}
 
 	@Override
 	public String toString() {
-		String data= "PizzaRestEntity{" +
+		String data = "PizzaRestEntity{" +
 			"ID=" + ID +
 			", doughAmount=" + doughAmount +
 			", toppingFactor=" + toppingFactor +
 			", toppings=";
-		for(Topping t : toppings)
+		for (Topping t : toppings)
 			data += t.toString();
 
 		return data + '}';

@@ -18,8 +18,7 @@ import javax.ws.rs.core.Response;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductionEndPointTest {
 
@@ -29,7 +28,6 @@ public class ProductionEndPointTest {
 
 	@BeforeAll
 	public static void setupClass() {
-		System.out.println("setUP");
 		productionClient = TestUtils.setupClient(TestConstants.PRODUCTION_URI, ProductionClient.class);
 		userEndpoint = TestUtils.setupClient(TestConstants.USER_SERVICE_URI, UserEndpoint.class);
 		User toCreate = UserServiceTestUtils.createDefaultUser("productionControllerTest");
@@ -41,22 +39,7 @@ public class ProductionEndPointTest {
 	@Test
 	void sendOrder() throws IOException {
 
-		/*
-		userEndpoint = TestUtils.setupClient(TestConstants.USER_SERVICE_URI, UserEndpoint.class);
-		User testUser = ProductionTestUtils.createUser();
-		Response userResponse = userEndpoint.createUser(testUser);
-
-		assertEquals(Response.Status.OK.getStatusCode(), userResponse.getStatus());
-
-		assertEquals(true, userResponse.hasEntity());
-
-		testUser=userResponse.readEntity(User.class);
-		*/
-
-		System.out.println("sendOrder");
 		ShopProductionItem toCreate = ProductionTestUtils.createDefaultOrder(userId);
-
-		System.out.println("sending"+toCreate.toString());
 
 		Response response = productionClient.produceOrder(toCreate);
 
@@ -65,9 +48,10 @@ public class ProductionEndPointTest {
 
 	@Test
 	void SendEmptyOrderShouldReturnError() throws IOException {
-		ShopProductionItem testItem= ProductionTestUtils.createEmptyOrder();
+		ShopProductionItem testItem = ProductionTestUtils.createEmptyOrder();
 
-		try{
+
+		assertThrows(BadRequestException.class, () -> {
 			Response conflictResponse = productionClient.produceOrder(testItem);
 			ServiceResponse<ShopProductionItem> serviceResponse = ServiceResponse.parse(conflictResponse, ShopProductionItem.class);
 
@@ -76,13 +60,6 @@ public class ProductionEndPointTest {
 			ExceptionResponse exceptionResponse = serviceResponse.getErrorEntity().get();
 			assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), exceptionResponse.getStatus());
 		}
-		catch (BadRequestException e)
-		{
-			assertTrue(true);
-		}
-
-
-
-
+		);
 	}
 }

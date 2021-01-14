@@ -1,11 +1,9 @@
 package ateam.production.endpoint;
 
 import ateam.client.mapper.PizzaProductionExceptionMapper;
-import ateam.exceptionmapper.ShopExceptionMapper;
 import ateam.exceptionmapper.UnknownEntityExceptionMapper;
 import ateam.exceptionmapper.ValidationExceptionMapper;
-import ateam.model.exception.ProductionException;
-import ateam.production.service.OrderProducer;
+import ateam.production.service.ProductionService;
 import ateam.model.entity.ShopProductionItem;
 import ateam.validator.Validator;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
@@ -28,14 +26,13 @@ import javax.ws.rs.core.Response;
 public class ProductionEndpoint {
 
 	@Inject
-	OrderProducer producer;
+	ProductionService producer;
 
 	@POST
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	//public Response produceOrder(@RequestBody(required = true) ShopProductionItem toProduce) {
-	public Response produceOrder(ShopProductionItem toProduce) {
+	public Response produceOrder(@RequestBody(required = true) ShopProductionItem toProduce) {
 		Validator.validate(toProduce);
 		producer.produceOrder(toProduce);
 
