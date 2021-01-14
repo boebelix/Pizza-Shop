@@ -29,7 +29,7 @@ const updateOverviewPrice = () => {
 }
 const submitOrder = async() => {
     if (!LOGGED_IN) {
-        STATE_CALLBACK = stateID;
+        STATE_CALLBACK = STATE_ORDER_OVERVIEW;
         setState(STATE_LOGIN);
         return;
     }
