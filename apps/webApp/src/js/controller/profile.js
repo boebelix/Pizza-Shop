@@ -30,7 +30,7 @@ const changeAddress = async () => {
 			'Content-Type': 'application/json',
 			'Authorization': getCookie("uuid")
 		};
-		let responseAnswer = await response(SERVER_ADDRESS + SERVER_USER + "/" + USER_JSON.userId, data, TYPE_PUT, headerAuth);
+		let responseAnswer = await response(SERVER_ADDRESS_USER + SERVER_USER + "/" + USER_JSON.userId, data, TYPE_PUT, headerAuth);
 
 		if (responseAnswer.status != RESPONSE_OK) {
 			error.innerHTML = decodeUtf(responseAnswer.message);
@@ -55,7 +55,7 @@ const changeEmail = async () => {
 			'Content-Type': 'application/json',
 			'Authorization': getCookie("uuid")
 		};
-		let responseAnswer = await response(SERVER_ADDRESS + SERVER_USER + "/" + USER_JSON.userId, data, TYPE_PUT, headerAuth);
+		let responseAnswer = await response(SERVER_ADDRESS_USER + SERVER_USER + "/" + USER_JSON.userId, data, TYPE_PUT, headerAuth);
 
 		if (responseAnswer.status != RESPONSE_OK) {
 			error.innerHTML = decodeUtf(responseAnswer.message);
@@ -80,7 +80,7 @@ const changePasswd = async () => {
 			'Content-Type': 'application/json',
 			'Authorization': getCookie("uuid")
 		};
-		let responseAnswer = await response(SERVER_ADDRESS + SERVER_USER + "/" + USER_JSON.userId, data, TYPE_PUT, headerAuth);
+		let responseAnswer = await response(SERVER_ADDRESS_USER + SERVER_USER + "/" + USER_JSON.userId, data, TYPE_PUT, headerAuth);
 
 		if (responseAnswer.status != RESPONSE_OK) {
 			error.innerHTML = decodeUtf(responseAnswer.message);

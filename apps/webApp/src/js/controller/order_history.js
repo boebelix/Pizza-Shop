@@ -2,7 +2,6 @@ const entriesPerRow = 4;
 
 const initOrderHistory = () => {
 	document.getElementById("order_back_button").addEventListener("click", () => setState(STATE_MENU));
-	document.getElementById("order_continue_button").addEventListener("click", () => setState(STATE_ORDER_OVERVIEW));
 }
 
 const loadOrderHistory = (orderJson) => {
