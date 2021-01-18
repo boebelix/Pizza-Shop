@@ -1,3 +1,4 @@
+import 'package:app/endpoints/shop_endpoint.dart';
 import 'package:app/models/meal.dart';
 import 'package:app/models/meals.dart';
 import 'package:app/widgets/button_create_pizza.dart';
@@ -10,6 +11,13 @@ class meal_list extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final meals = context.watch<Meals>().meals;
+    var toppings = ShopEndpoint.instance().getToppings().then((value){
+      print("TOPPINGS IN MEALS"+value.toString());
+    });
+
+    var sizes = ShopEndpoint.instance().getSizes().then((value){
+      print("SIZES IN MEALS"+value.toString());
+    });
 
     return Container(
       decoration: new BoxDecoration(
@@ -27,7 +35,7 @@ class meal_list extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 padding:
-                    const EdgeInsets.only(top: 8, left: 4, right: 4, bottom: 72),
+                const EdgeInsets.only(top: 8, left: 4, right: 4, bottom: 72),
                 itemCount: meals.length,
                 itemBuilder: (context, index) => MenuItemCard(
                   meal: meals[index],
@@ -38,5 +46,6 @@ class meal_list extends StatelessWidget {
         ),
       ),
     );
+
   }
 }

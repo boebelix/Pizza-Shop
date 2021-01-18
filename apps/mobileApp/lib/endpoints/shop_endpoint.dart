@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:app/endpoints/properties.dart';
 import 'package:app/models/login_data.dart';
 import 'package:app/models/login_response.dart';
+import 'package:app/models/topping.dart';
 import 'package:app/models/user.dart';
 import 'package:http/http.dart' as http;
 
@@ -19,9 +20,9 @@ class ShopEndpoint {
   ShopEndpoint._private();
 
 
-  Future<LoginResponse> getToppings() async {
+  Future getToppings() async {
     // TODO delete debug Ausgbabe
-    print('sign in user');
+    print('SHOP ENDPOINT');
 
 
     return await http.get(
@@ -30,31 +31,37 @@ class ShopEndpoint {
         HttpHeaders.contentTypeHeader: ContentType.json.value,
       },
     ).then((response) {
-      Map<String, dynamic> responseData = jsonDecode(response.body);
+      var responseData = jsonDecode(response.body);
       if (response.statusCode == HttpStatus.ok) {
-        final loginResponse = LoginResponse.fromJson(responseData);
 
-        print("LoginResponse get topping " + loginResponse.toString());
 
-        return LoginResponse.fromJson(responseData);
+        print("SHOP get topping " + responseData.toString());
+        return responseData;
       }else{
         throw HttpException(responseData['message']);
       }
     });
   }
 
-  /*
-  * Sign out user
-  * */
+  Future getSizes() async {
+    // TODO delete debug Ausgbabe
+    print('SHOP ENDPOINT');
 
-  Future<void> signOutUser(int id) {
-    return http
-        .delete(Uri.http("_url", "/$id"))
-        .then((response) {
-      if (response.statusCode == HttpStatus.created) {
-        return;
-      } else {
-        throw Exception("Failed to sign out user");
+
+    return await http.get(
+      Uri.http(Properties.url_shop, "/size"),
+      headers: {
+        HttpHeaders.contentTypeHeader: ContentType.json.value,
+      },
+    ).then((response) {
+      var responseData = jsonDecode(response.body);
+      if (response.statusCode == HttpStatus.ok) {
+
+
+        print("SHOP get size " + responseData.toString());
+        return responseData;
+      }else{
+        throw HttpException(responseData['message']);
       }
     });
   }
