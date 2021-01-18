@@ -24,7 +24,7 @@ class SignUpEndpoint {
     Map<String, dynamic> responseData;
 
     final response = await http.post(
-      Uri.http(Properties.url, "/user"),
+      Uri.http(Properties.url_user, "/user"),
       body: jsonEncode(user.toJson()),
       headers: {
         HttpHeaders.contentTypeHeader: ContentType.json.value,

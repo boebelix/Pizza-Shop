@@ -8,25 +8,24 @@ import 'package:app/models/user.dart';
 import 'package:http/http.dart' as http;
 
 // Singleton
-class SignInEndpoint {
-  static SignInEndpoint _instance;
+class ShopEndpoint {
+  static ShopEndpoint _instance;
 
-  factory SignInEndpoint.instance() {
-    _instance ??= SignInEndpoint._private();
+  factory ShopEndpoint.instance() {
+    _instance ??= ShopEndpoint._private();
     return _instance;
   }
 
-  SignInEndpoint._private();
+  ShopEndpoint._private();
 
 
-  Future<LoginResponse> signInUser(LoginData loginData) async {
+  Future<LoginResponse> getToppings() async {
     // TODO delete debug Ausgbabe
     print('sign in user');
-    print(loginData.toJson());
 
-    return await http.post(
-      Uri.http(Properties.url_user, "/auth"),
-      body: jsonEncode(loginData.toJson()),
+
+    return await http.get(
+      Uri.http(Properties.url_shop, "/topping"),
       headers: {
         HttpHeaders.contentTypeHeader: ContentType.json.value,
       },
@@ -34,7 +33,8 @@ class SignInEndpoint {
       Map<String, dynamic> responseData = jsonDecode(response.body);
       if (response.statusCode == HttpStatus.ok) {
         final loginResponse = LoginResponse.fromJson(responseData);
-        print("LoginResponse " + loginResponse.toString());
+
+        print("LoginResponse get topping " + loginResponse.toString());
 
         return LoginResponse.fromJson(responseData);
       }else{
