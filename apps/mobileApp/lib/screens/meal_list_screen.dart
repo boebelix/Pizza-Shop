@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+import 'package:app/endpoints/shop_endpoint.dart';
+import 'package:app/models/meal.dart';
+>>>>>>> fc4898b6ff3a2ef2227e458afe0812e4305b94c0
 import 'package:app/models/meals.dart';
 import 'package:app/widgets/button_create_pizza.dart';
 import 'package:app/widgets/meal_item.dart';
@@ -8,6 +13,13 @@ class meal_list extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final meals = context.watch<Meals>().meals;
+    var toppings = ShopEndpoint.instance().getToppings().then((value){
+      print("TOPPINGS IN MEALS"+value.toString());
+    });
+
+    var sizes = ShopEndpoint.instance().getSizes().then((value){
+      print("SIZES IN MEALS"+value.toString());
+    });
 
     return Container(
       decoration: new BoxDecoration(
@@ -33,5 +45,6 @@ class meal_list extends StatelessWidget {
         ),
       ),
     );
+
   }
 }
