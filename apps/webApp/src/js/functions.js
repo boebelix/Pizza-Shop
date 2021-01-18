@@ -41,11 +41,9 @@ const loadUserFromCookies = async () => {
 		return;
 	}
 
-	const header = {
-		'Content-Type': 'application/json',
-		'Authorization': UUID
-	};
-	const output = await response(SERVER_ADDRESS + SERVER_USER, "", TYPE_GET, header);
+	HEADER_UUID.Authorization = UUID;
+
+	const output = await response(SERVER_ADDRESS_USER + SERVER_USER, "", TYPE_GET, HEADER_UUID);
 	if (output.status == RESPONSE_OK) {
 		setUserData(output);
 	}
@@ -54,7 +52,8 @@ const loadUserFromCookies = async () => {
 window.onload = () => {
 	setState(STATE_MENU);
 	// Begin Test Data
-	createIngredientButtons(["Tomate", "Salami", "Mozzarella", "Paprika", "Zwiebel"]);
+	// createIngredientButtons(["Tomate", "Salami", "Mozzarella", "Paprika", "Zwiebel"]);
+
 	loadOrderHistory({
 		"orders": [{"id": 1, "orderDate": "05.05.2020", "pizzaCount": 4}, {
 			"id": 2,

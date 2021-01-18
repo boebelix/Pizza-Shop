@@ -60,3 +60,4 @@ INSERT INTO sizes (diameter, base_price, topping_price, dough_amount, topping_fa
 
 INSERT INTO toppings (name, base_amount, unit) VALUES
 ('Salami', 3, 'stk.'), ('Bacon', 2, 'stk.'), ('Mais', '15', 'g'), ('Oliven', 20, 'g')
+
