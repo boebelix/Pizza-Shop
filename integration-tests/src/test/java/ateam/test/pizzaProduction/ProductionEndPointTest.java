@@ -53,12 +53,6 @@ public class ProductionEndPointTest {
 
 		assertThrows(BadRequestException.class, () -> {
 			Response conflictResponse = productionClient.produceOrder(testItem);
-			ServiceResponse<ShopProductionItem> serviceResponse = ServiceResponse.parse(conflictResponse, ShopProductionItem.class);
-
-			assertTrue(serviceResponse.hasError());
-
-			ExceptionResponse exceptionResponse = serviceResponse.getErrorEntity().get();
-			assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), exceptionResponse.getStatus());
 		}
 		);
 	}

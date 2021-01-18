@@ -25,22 +25,6 @@ public class ProductionTestUtils {
 		return item;
 	}
 
-	public static User createUser()
-	{
-		return UserRequest.builder()
-			.username("PizzaMampfer")
-			.email("pizzamampfer" + "@stud.hs-kl.de")
-			.password("123456789#!TesT")
-			.firstName("Max")
-			.lastName("Mustermann")
-			.street("Amerikastraße")
-			.number("42")
-			.city("Zweibrücken")
-			.postalCode("66482")
-			.country("Deutschland")
-			.build();
-	}
-
 	public static ShopProductionItem createEmptyOrder()
 	{
 		return new ShopProductionItem();

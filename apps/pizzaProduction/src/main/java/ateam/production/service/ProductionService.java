@@ -12,23 +12,25 @@ import javax.inject.Singleton;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.LinkedList;
 import java.util.List;
 
 @Singleton
 public class ProductionService {
 
+	private LogisticsClient logisticsClient;
+	private ProcurementClient procurementClient;
+
+
 	public void produceOrder(ShopProductionItem toProduce) {
-		ProcurementClient procurement;
+
 		ProcurementLog procurementLog = parseProductionItemToProcurementLog(toProduce);
 
 		try {
-			procurement = RestClientBuilder
-				.newBuilder().baseUri(new URI(InitialContext.doLookup("procurementInternURI"))).build(ProcurementClient.class);
-
-			procurement.createProcurementLog(procurementLog);
+			procurementClient.createProcurementLog(procurementLog);
 		} catch (Exception e) {
-			throw new ProductionException("couldn't find procurementLogPath: " + e.getMessage(), e);
+			throw new ProductionException("creating procurement Log failed: " + e.getMessage(), e);
 		}
 
 
@@ -70,14 +72,11 @@ public class ProductionService {
 		LogisticsPostInput logisticInput = new LogisticsPostInput();
 		logisticInput.setOrderId(orderId);
 		logisticInput.setUserId(userId);
-		LogisticsClient logistics;
-		try {
-			logistics = RestClientBuilder
-				.newBuilder().baseUri(new URI(InitialContext.doLookup("LogisticsInternURI"))).build(LogisticsClient.class);
 
-			logistics.createLogisticsLog(logisticInput);
+		try {
+			logisticsClient.createLogisticsLog(logisticInput);
 		} catch (Exception e) {
-			throw new ProductionException("couldn't find LogisticsInternURI: " + e.getMessage(), e);
+			throw new ProductionException("logistics Log failed: " + e.getMessage(), e);
 		}
 	}
 
@@ -100,7 +99,11 @@ public class ProductionService {
 		return used;
 	}
 
-	public ProductionService() {
+	public ProductionService() throws NamingException, URISyntaxException {
+		logisticsClient = RestClientBuilder
+			.newBuilder().baseUri(new URI(InitialContext.doLookup("LogisticsInternURI"))).build(LogisticsClient.class);
+		procurementClient = RestClientBuilder
+			.newBuilder().baseUri(new URI(InitialContext.doLookup("procurementInternURI"))).build(ProcurementClient.class);
 	}
 }
 
