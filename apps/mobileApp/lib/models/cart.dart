@@ -78,4 +78,9 @@ class Cart extends ChangeNotifier {
     _pizzas.removeAt(index);
     notifyListeners();
   }
+
+  void removeAll() {
+    _pizzas = new List();
+    notifyListeners();
+  }
 }
