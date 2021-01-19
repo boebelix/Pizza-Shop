@@ -4,6 +4,8 @@ import 'package:app/models/meal.dart';
 import 'package:app/models/meals.dart';
 import 'dart:math';
 
+import 'meal_detail_screen.dart';
+
 
 class MealCreationScreen extends StatefulWidget {
   static const String routeName = "/createMeal";
@@ -46,7 +48,7 @@ class _MealCreationScreenState extends State<MealCreationScreen> {
             SizedBox(height: 32),
             RaisedButton(
               child: Text("Submit"),
-              onPressed: () => onSubmitPressed(context),
+              onPressed: () => Navigator.pushNamed(context, MealDetailScreen.routeName),
             ),
           ],
         ),

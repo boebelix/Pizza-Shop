@@ -16,11 +16,13 @@ class MealDetailScreen extends StatelessWidget {
         elevation: 0,
       ),
       extendBodyBehindAppBar: true,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Flexible(child: _MealInfo(meal: meal)),
-        ],
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Flexible(child: _MealInfo(meal: meal)),
+          ],
+        ),
       ),
     );
   }

@@ -1,10 +1,12 @@
+import 'package:app/screens/update_user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'models/meals.dart';
-import 'screens/meal_creation_screen.dart';
+import 'screens/create_user.dart';
+import 'screens/login_user.dart';
 import 'screens/meal_detail_screen.dart';
-import 'widgets/nav_bottom.dart';
+import 'widgets/navigation.dart';
 
 void main() => runApp(
       ChangeNotifierProvider(
@@ -43,11 +45,14 @@ class App extends StatelessWidget {
         ),
       ),
 
-      initialRoute: NavBottom.routeName,
+      initialRoute: Navigation.routeName,
+
       routes: {
-        NavBottom.routeName: (_) => NavBottom(),
-        MealCreationScreen.routeName: (_) => MealCreationScreen(),
+        Navigation.routeName: (_) => Navigation(),
+        LoginUser.routeName: (_) => LoginUser(),
+        CreateUser.routeName: (_) => CreateUser(),
         MealDetailScreen.routeName: (_) => MealDetailScreen(),
+        UpdateUser.routeName: (_) => UpdateUser()
       },
     );
   }
