@@ -24,7 +24,7 @@ class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
     final _toppings = context.watch<Toppings>().toppings;
 
     final _sizes = context.watch<Sizes>().sizes;
-    Size _currentChoosen=_sizes.first;
+    int _currentChoosen=-1;
 
     for (Topping t in _toppings) {
       _labelCheckedMap.putIfAbsent(t.name, () => false);
@@ -52,12 +52,12 @@ class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
                       fontWeight: FontWeight.bold,
                     )),
                 for(int i = 0;i<_sizes.length;i++)
-                RadioListTile<Size>(
-                  value: _sizes.elementAt(i),
+                RadioListTile<int>(
+                  value: i,
                    groupValue: _currentChoosen,
-                   onChanged: (Size choosen){
+                   onChanged: (int chosen){
                     setState(() {
-                      _currentChoosen=choosen;
+                      _currentChoosen=chosen;
                     }
                     );
                    },
