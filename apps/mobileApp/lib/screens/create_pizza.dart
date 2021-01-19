@@ -1,4 +1,9 @@
+import 'package:app/models/size.dart';
+import 'package:app/models/sizes.dart';
+import 'package:app/models/topping.dart';
+import 'package:app/models/toppings.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CreatePizzaScreen extends StatefulWidget {
   static const String routeName = "/createPizzaScreen";
@@ -10,23 +15,33 @@ class CreatePizzaScreen extends StatefulWidget {
 class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
   bool _isChecked = true; //Map mit CurrentText als key, value _isChecked
   String _currText = 'Test'; //
-  var _labelCheckedMap = {'Schinken': false, 'Salami': false}; //new Map();
-  /* sizeOne= new Size(id: 1, 15.3, 15, 200,
-     1, 0.50);
+  var _labelCheckedMap = {}; //new Map();
 
-  List<Size> _sizes=List.of({sizeOne,});*/
 
   var _chosenRadio = 1;
 
   List<String> text = ["InduceSmile.com", "Flutter.io", "google.com"];
 
+
   @override
   Widget build(BuildContext context) {
+
+    final _toppings = context.watch<Toppings>().toppings;
+
+    final _sizes = context.watch<Sizes>().sizes;
+
+    for(Topping t in _toppings)
+      {
+        _labelCheckedMap.putIfAbsent(t.name, () => false);
+      }
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Erstelle deine eigene Pizza"),
       ),
       body: Column(
+
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
