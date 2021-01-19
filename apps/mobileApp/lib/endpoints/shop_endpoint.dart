@@ -33,9 +33,6 @@ class ShopEndpoint {
     ).then((response) {
       var responseData = jsonDecode(response.body);
       if (response.statusCode == HttpStatus.ok) {
-
-
-        print("SHOP get topping " + responseData.toString());
         return responseData;
       }else{
         throw HttpException(responseData['message']);
@@ -56,9 +53,6 @@ class ShopEndpoint {
     ).then((response) {
       var responseData = jsonDecode(response.body);
       if (response.statusCode == HttpStatus.ok) {
-
-
-        print("SHOP get size " + responseData.toString());
         return responseData;
       }else{
         throw HttpException(responseData['message']);

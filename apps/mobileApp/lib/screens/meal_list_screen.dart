@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app/endpoints/shop_endpoint.dart';
 import 'package:app/models/meal.dart';
 import 'package:app/models/meals.dart';
@@ -8,16 +10,32 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class meal_list extends StatelessWidget {
+  List toppings;
+  bool toppingsHaveFinished=false;
+  List sizes;
+  bool sizesHaveFinished=false;
+
   @override
   Widget build(BuildContext context) {
     final meals = context.watch<Meals>().meals;
-    var toppings = ShopEndpoint.instance().getToppings().then((value){
-      print("TOPPINGS IN MEALS"+value.toString());
+
+
+    ShopEndpoint.instance().getToppings().then((value){
+      toppings = value;
+      toppingsHaveFinished=true;
     });
 
-    var sizes = ShopEndpoint.instance().getSizes().then((value){
-      print("SIZES IN MEALS"+value.toString());
+
+    ShopEndpoint.instance().getSizes().then((value){
+      sizes = value;
+      sizesHaveFinished=true;
     });
+
+    while(!(toppingsHaveFinished && sizesHaveFinished)){
+      sleep(new Duration(milliseconds: 100));
+    }
+    print("TOPPINGS IN MEALS"+toppings.toString());
+    print("SIZES IN MEALS"+sizes.toString());
 
     return Container(
       decoration: new BoxDecoration(
