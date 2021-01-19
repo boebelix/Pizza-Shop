@@ -48,10 +48,10 @@ class _CreateUserState extends State<CreateUser> {
     country.text = 'Testland';
 
     return Scaffold(
-        appBar: AppBar(
+      appBar: AppBar(
         title: Text('Anmelden'),
-    ),
-    body: Container(
+      ),
+      body: Container(
         decoration: new BoxDecoration(
           image: new DecorationImage(
             image: new AssetImage("images/Background_Login.jpg"),
@@ -263,15 +263,18 @@ class _CreateUserState extends State<CreateUser> {
                                 postalCode: postalCode.text,
                                 city: city.text,
                                 country: country.text),
-                          ).then((loginRepsonse) {
+                          )
+                              .then((loginRepsonse) {
                             setState(() {
-                              _msg = 'Willkommen ${loginRepsonse.user.firstName}';
+                              _msg =
+                                  'Willkommen ${loginRepsonse.user.firstName}';
                             });
                           });
                         } on HttpException catch (error) {
                           setState(() {
                             _errorMsg = error.message;
-                            print('Error message on signup user: ${error.message}');
+                            print(
+                                'Error message on signup user: ${error.message}');
                           });
                         } catch (error) {
                           setState(() {
@@ -279,7 +282,6 @@ class _CreateUserState extends State<CreateUser> {
                           });
                           print('Unbekannter Fehler $error');
                         }
-                        //Navigator.pop(context);
                       }
                     },
                   ),
@@ -288,7 +290,7 @@ class _CreateUserState extends State<CreateUser> {
             ),
           ),
         ),
-
-    ),);
+      ),
+    );
   }
 }
