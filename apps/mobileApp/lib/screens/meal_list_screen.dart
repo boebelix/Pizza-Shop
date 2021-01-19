@@ -1,5 +1,6 @@
 import 'package:app/endpoints/shop_endpoint.dart';
 import 'package:app/models/meals.dart';
+import 'package:app/models/toppings.dart';
 import 'package:app/widgets/button_create_pizza.dart';
 import 'package:app/widgets/meal_item.dart';
 import 'package:flutter/material.dart';
@@ -14,13 +15,12 @@ class _meal_listState extends State<meal_list> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     loadToppings();
   }
 
   void loadToppings() async {
-    await ShopEndpoint.instance().getToppings();
+    context.read<Toppings>().addAll(await ShopEndpoint.instance().getToppings());
   }
 
   @override
