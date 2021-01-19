@@ -1,6 +1,7 @@
+import 'package:app/models/cart.dart';
 import 'package:app/models/meal.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 
 class MealDetailScreen extends StatelessWidget {
   static const String routeName = "/mealDetails";
@@ -16,20 +17,35 @@ class MealDetailScreen extends StatelessWidget {
         elevation: 0,
       ),
       extendBodyBehindAppBar: true,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Flexible(child: _MealInfo(meal: meal)),
-        ],
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Flexible(child: _MealInfo(meal: meal)),
+          ],
+        ),
       ),
     );
   }
 }
 
-class _MealInfo extends StatelessWidget {
+class _MealInfo extends StatefulWidget {
   final Meal meal;
 
   const _MealInfo({Key key, this.meal}) : super(key: key);
+
+  @override
+  __MealInfoState createState() => __MealInfoState();
+}
+
+class __MealInfoState extends State<_MealInfo> {
+  bool _isAddToCart;
+
+  @override
+  void initState() {
+    _isAddToCart = false;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,18 +55,29 @@ class _MealInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SizedBox(height: 16),
-          Text(meal.description),
+          Text(widget.meal.description),
           Spacer(),
           Text(
-            "${meal.price.toStringAsFixed(2)} \€",
+            "${widget.meal.price.toStringAsFixed(2)} \€",
             textAlign: TextAlign.right,
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 8),
+          _isAddToCart
+              ? Text(
+                  'Zum Warenkorb hinzugefügt',
+                  style: TextStyle(color: Colors.green),
+                )
+              : Container(),
           RaisedButton(
-            child: Text("Zum Warenkorb hinzufügen"),
-            onPressed: () => print("${meal.name} zum Warenkorb hinzugefügt"),
-          ),
+              child: Text("Zum Warenkorb hinzufügen"),
+              onPressed: () {
+                print("${widget.meal.name} zum Warenkorb hinzugefügt");
+                context.read<Cart>().add(widget.meal);
+                setState(() {
+                  _isAddToCart = true;
+                });
+              }),
         ],
       ),
     );

@@ -1,0 +1,27 @@
+switch(response.statusCode) {
+        case HttpStatus.ok:{
+          print('Response User from UserService' + User.fromJson(json).toString());
+          return UserRepsponse(User.fromJson(json), null);
+        } break;
+
+        case HttpStatus.badRequest:{
+          print(UserRepsponse(null, ExceptionResponse.fromJson(json)).toString());
+
+          return UserRepsponse(null, ExceptionResponse.fromJson(json));
+        } break;
+
+        case HttpStatus.conflict:{
+          print(UserRepsponse(null, ExceptionResponse.fromJson(json)).toString());
+          return UserRepsponse(null, ExceptionResponse.fromJson(json));
+        } break;
+
+        case HttpStatus.internalServerError:{
+          print(UserRepsponse(null, ExceptionResponse.fromJson(json)).toString());
+          return UserRepsponse(null, ExceptionResponse.fromJson(json));
+        } break;
+
+        default: {
+          throw Exception("Exception: " + response.statusCode.toString());
+        }
+      }
+    });
