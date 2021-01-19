@@ -17,8 +17,9 @@ class Pizza {
     _size = size;
   }
 
-  bool addTopping(Topping topping) {
-    return _toppings.add(topping);
+  Pizza addTopping(Topping topping) {
+    _toppings.add(topping);
+    return this;
   }
 
 }
