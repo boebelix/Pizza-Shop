@@ -1,5 +1,6 @@
 import 'package:app/endpoints/shop_endpoint.dart';
 import 'package:app/models/meals.dart';
+import 'package:app/models/sizes.dart';
 import 'package:app/models/toppings.dart';
 import 'package:app/widgets/button_create_pizza.dart';
 import 'package:app/widgets/meal_item.dart';
@@ -16,11 +17,12 @@ class _meal_listState extends State<meal_list> {
   @override
   void initState() {
     super.initState();
-    loadToppings();
+    loadInitialData();
   }
 
-  void loadToppings() async {
+  void loadInitialData() async {
     context.read<Toppings>().addAll(await ShopEndpoint.instance().getToppings());
+    context.read<Sizes>().addAll(await ShopEndpoint.instance().getSizes());
   }
 
   @override

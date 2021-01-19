@@ -40,7 +40,7 @@ class ShopEndpoint {
     });
   }
 
-  Future getSizes() async {
+  Future<List<Size>> getSizes() async {
     return await http.get(
       Uri.http(Properties.url_shop, "/size"),
       headers: {

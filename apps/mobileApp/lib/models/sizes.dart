@@ -1,16 +1,21 @@
 import 'dart:collection';
+import 'package:app/models/size.dart';
 import 'package:flutter/foundation.dart';
-import 'meal.dart';
 
 
 class Sizes extends ChangeNotifier {
 
-  List<Meal> _toppings;
+  List<Size> _sizes = [];
 
-  UnmodifiableListView<Meal> get meals => UnmodifiableListView(_toppings);
+  UnmodifiableListView<Size> get sizes => UnmodifiableListView(_sizes);
 
-  void add(Meal meal) {
-    _toppings.add(meal);
+  void add(Size size) {
+    _sizes.add(size);
+    notifyListeners();
+  }
+
+  void addAll(List<Size> sizes) {
+    _sizes.addAll(sizes);
     notifyListeners();
   }
 }
