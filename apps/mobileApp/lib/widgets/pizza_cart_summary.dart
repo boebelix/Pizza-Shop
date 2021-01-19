@@ -7,10 +7,6 @@ class PizzaCartSummary extends StatelessWidget {
 
   const PizzaCartSummary({Key key, this.pizza}) : super(key: key);
 
-  double calcPrice() {
-    return pizza.size.basePrice + pizza.toppings.length * pizza.size.toppingPrice;
-  }
-
   String formatPrice(double price) {
     final oCcy = new NumberFormat("#,##0.00", "de_DE");
     return oCcy.format(price);
@@ -40,7 +36,7 @@ class PizzaCartSummary extends StatelessWidget {
                       ),
                       Spacer(),
                       Text(
-                        "${formatPrice(calcPrice())}€",
+                        "${formatPrice(pizza.price)}€",
                         style: TextStyle(
                             fontSize: 24, fontWeight: FontWeight.bold),
                       ),
