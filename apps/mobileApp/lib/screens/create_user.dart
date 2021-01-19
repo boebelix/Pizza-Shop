@@ -271,14 +271,13 @@ class _CreateUserState extends State<CreateUser> {
                         } on HttpException catch (error) {
                           setState(() {
                             _errorMsg = error.message;
-                            print('Error message on signup user: ' +
-                                error.message);
+                            print('Error message on signup user: ${error.message}');
                           });
                         } catch (error) {
                           setState(() {
                             _errorMsg = error.toString();
                           });
-                          print('Unbekannter Fehler' + error);
+                          print('Unbekannter Fehler $error');
                         }
                         //Navigator.pop(context);
                       }
