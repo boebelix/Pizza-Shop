@@ -59,7 +59,7 @@ class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
                     title: Text(_sizes[index].diameter.toString()+' cm'),
                     value: index,
                     groupValue: _currentChoosen,
-                    onChanged: (index)=>setState((){_currentChoosen=index;}),
+                    onChanged: (newValue)=>setState((){_currentChoosen=newValue;}),
                   ),
                   shrinkWrap: true,
                 ),
