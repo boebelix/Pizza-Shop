@@ -1,6 +1,6 @@
-
 import 'package:app/models/Pizza.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class PizzaCartSummary extends StatelessWidget {
   final Pizza pizza;
@@ -8,10 +8,12 @@ class PizzaCartSummary extends StatelessWidget {
   const PizzaCartSummary({Key key, this.pizza}) : super(key: key);
 
   double calcPrice() {
-    double price =
-        pizza.size.basePrice + pizza.toppings.length * pizza.size.toppingPrice;
-    //return (price * 10).round() / 10.0;
-    return price;
+    return pizza.size.basePrice + pizza.toppings.length * pizza.size.toppingPrice;
+  }
+
+  String formatPrice(double price) {
+    final oCcy = new NumberFormat("#,##0.00", "de_DE");
+    return oCcy.format(price);
   }
 
   @override
@@ -38,7 +40,7 @@ class PizzaCartSummary extends StatelessWidget {
                       ),
                       Spacer(),
                       Text(
-                        "${calcPrice()}€",
+                        "${formatPrice(calcPrice())}€",
                         style: TextStyle(
                             fontSize: 24, fontWeight: FontWeight.bold),
                       ),

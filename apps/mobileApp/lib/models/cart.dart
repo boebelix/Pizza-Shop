@@ -18,8 +18,7 @@ class Cart extends ChangeNotifier {
             doughAmount: 200,
             toppingFactor: 1.5,
             toppingPrice: 2.5))
-        .addTopping(Topping(baseAmount: 10, id: 1, name: "Bugs", unit: "g"))
-        .addTopping(Topping(baseAmount: 10, id: 1, name: "Errors", unit: "g")),
+        .addTopping(Topping(baseAmount: 10, id: 1, name: "Bugs", unit: "g")),
     Pizza(Size(
             id: 1,
             basePrice: 30,
@@ -72,6 +71,11 @@ class Cart extends ChangeNotifier {
 
   void add(Pizza pizza) {
     _pizzas.add(pizza);
+    notifyListeners();
+  }
+
+  remove(int index) {
+    _pizzas.removeAt(index);
     notifyListeners();
   }
 }
