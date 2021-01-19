@@ -1,7 +1,5 @@
-import 'package:app/models/cart.dart';
 import 'package:app/models/meal.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class MealDetailScreen extends StatelessWidget {
   static const String routeName = "/mealDetails";
@@ -72,11 +70,11 @@ class __MealInfoState extends State<_MealInfo> {
           RaisedButton(
               child: Text("Zum Warenkorb hinzufügen"),
               onPressed: () {
-                print("${widget.meal.name} zum Warenkorb hinzugefügt");
+                /*print("${widget.meal.name} zum Warenkorb hinzugefügt");
                 context.read<Cart>().add(widget.meal);
                 setState(() {
                   _isAddToCart = true;
-                });
+                });*/
               }),
         ],
       ),
