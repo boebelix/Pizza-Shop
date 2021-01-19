@@ -1,3 +1,4 @@
+import 'package:app/models/size.dart';
 import 'package:app/models/sizes.dart';
 import 'package:app/models/topping.dart';
 import 'package:app/models/toppings.dart';
@@ -12,11 +13,9 @@ class CreatePizzaScreen extends StatefulWidget {
 }
 
 class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
-  bool _isChecked = true; //Map mit CurrentText als key, value _isChecked
-  String _currText = 'Test'; //
-  var _labelCheckedMap = {}; //new Map();
 
-  var _chosenRadio = 1;
+  var _labelCheckedMap = {}; //new Map();
+  //var _chosenRadio = {};
 
   List<String> text = ["InduceSmile.com", "Flutter.io", "google.com"];
 
@@ -25,10 +24,16 @@ class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
     final _toppings = context.watch<Toppings>().toppings;
 
     final _sizes = context.watch<Sizes>().sizes;
+    Size _currentChoosen=_sizes.first;
 
     for (Topping t in _toppings) {
       _labelCheckedMap.putIfAbsent(t.name, () => false);
     }
+
+  //  for (int i=0; i<_sizes.length;i++) {
+    //  _chosenRadio.putIfAbsent(i, () => _sizes.elementAt(i));
+   // }
+
 
     return Scaffold(
       appBar: AppBar(
@@ -46,6 +51,19 @@ class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                     )),
+                for(int i = 0;i<_sizes.length;i++)
+                RadioListTile<Size>(
+                  value: _sizes.elementAt(i),
+                   groupValue: _currentChoosen,
+                   onChanged: (Size choosen){
+                    setState(() {
+                      _currentChoosen=choosen;
+                    }
+                    );
+                   },
+                   title: Text(_sizes.elementAt(i).diameter.toString()+' cm'),
+               ),
+
                 Container(
                   height: 350.0,
                   child: Column(children: [
