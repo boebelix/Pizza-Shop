@@ -2,8 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:app/endpoints/properties.dart';
+import 'package:app/models/exception_response.dart';
 import 'package:app/models/login_data.dart';
 import 'package:app/models/login_response.dart';
+import 'package:app/models/size.dart';
+import 'package:app/models/topping.dart';
 import 'package:app/models/user.dart';
 import 'package:http/http.dart' as http;
 
@@ -19,42 +22,38 @@ class ShopEndpoint {
   ShopEndpoint._private();
 
 
-  Future<LoginResponse> getToppings() async {
-    // TODO delete debug Ausgbabe
-    print('sign in user');
-
-
+  Future<List<Topping>> getToppings() async {
     return await http.get(
       Uri.http(Properties.url_shop, "/topping"),
       headers: {
         HttpHeaders.contentTypeHeader: ContentType.json.value,
       },
     ).then((response) {
-      Map<String, dynamic> responseData = jsonDecode(response.body);
+      List<dynamic> responseList = jsonDecode(response.body);
+      List<Topping> toppings = responseList.map((e) => Topping.fromJson(e)).toList();
       if (response.statusCode == HttpStatus.ok) {
-        final loginResponse = LoginResponse.fromJson(responseData);
-
-        print("LoginResponse get topping " + loginResponse.toString());
-
-        return LoginResponse.fromJson(responseData);
+        return toppings;
       }else{
-        throw HttpException(responseData['message']);
+        ExceptionResponse exceptionResponse = jsonDecode(response.body);
+        throw HttpException(exceptionResponse.message);
       }
     });
   }
 
-  /*
-  * Sign out user
-  * */
-
-  Future<void> signOutUser(int id) {
-    return http
-        .delete(Uri.http("_url", "/$id"))
-        .then((response) {
-      if (response.statusCode == HttpStatus.created) {
-        return;
-      } else {
-        throw Exception("Failed to sign out user");
+  Future<List<Size>> getSizes() async {
+    return await http.get(
+      Uri.http(Properties.url_shop, "/size"),
+      headers: {
+        HttpHeaders.contentTypeHeader: ContentType.json.value,
+      },
+    ).then((response) {
+      List<dynamic> responseList = jsonDecode(response.body);
+      List<Size> sizes = responseList.map((e) => Size.fromJson(e)).toList();
+      if (response.statusCode == HttpStatus.ok) {
+        return sizes;
+      }else{
+        ExceptionResponse exceptionResponse = jsonDecode(response.body);
+        throw HttpException(exceptionResponse.message);
       }
     });
   }

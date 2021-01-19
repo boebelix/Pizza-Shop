@@ -16,9 +16,9 @@ public class ShopProductionItem {
 	@Validator.Required
 	@Validator.Valid
 	@Validator.Min(1)
-	List<Pizza> items;
+	List<PizzaRestEntity> items;
 
-	public ShopProductionItem(int userID, int orderId, List<Pizza> items) {
+	public ShopProductionItem(int userID, int orderId, List<PizzaRestEntity> items) {
 		this.userID = userID;
 		this.orderID = orderId;
 		this.items = items;
@@ -44,20 +44,20 @@ public class ShopProductionItem {
 		this.orderID = orderId;
 	}
 
-	public List<Pizza> getItems() {
+	public List<PizzaRestEntity> getItems() {
 		return items;
 	}
 
-	public void setItems(List<Pizza> items) {
+	public void setItems(List<PizzaRestEntity> items) {
 		this.items = items;
 	}
 
-	public void addPizza(Pizza pizza)
+	public void addPizza(PizzaRestEntity pizza)
 	{
 		items.add(pizza);
 	}
 
-	public Pizza getPizza(int i)
+	public PizzaRestEntity getPizza(int i)
 	{
 		return items.get(i);
 	}
@@ -69,7 +69,7 @@ public class ShopProductionItem {
 
 		data+="userID="+userID;
 		data+="orderID="+orderID;
-		for (Pizza item:items)
+		for (PizzaRestEntity item:items)
 		{
 			data+=item.toString();
 		}

@@ -26,6 +26,7 @@ dependencies:
   provider: ^4.3.2+2
   http: ^0.12.2
   grouped_buttons: ^1.0.4
+  intl: any
 
 
 

@@ -1,54 +1,59 @@
 package ateam.test.pizzaProduction;
 
+import ateam.client.production.ProductionClient;
 import ateam.model.entity.ShopProductionItem;
+import ateam.model.entity.User;
 import ateam.model.exception.ExceptionResponse;
+import ateam.test.userService.UserServiceTestUtils;
 import ateam.test.util.ServiceResponse;
 import ateam.test.util.TestConstants;
 import ateam.test.util.TestUtils;
 import ateam.production.endpoint.ProductionEndpoint;
+import ateam.user.endpoints.UserEndpoint;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.core.Response;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductionEndPointTest {
 
-	private static ProductionEndpoint productionEndpoint;
+	private static ProductionClient productionClient;
+	private static UserEndpoint userEndpoint;
+	private static int userId;
 
 	@BeforeAll
 	public static void setupClass() {
-		System.out.println("setUP");
-		productionEndpoint = TestUtils.setupClient(TestConstants.PRODUCTION_URI, ProductionEndpoint.class);
+		productionClient = TestUtils.setupClient(TestConstants.PRODUCTION_URI, ProductionClient.class);
+		userEndpoint = TestUtils.setupClient(TestConstants.USER_SERVICE_URI, UserEndpoint.class);
+		User toCreate = UserServiceTestUtils.createDefaultUser("productionControllerTest");
+		Response response = userEndpoint.createUser(toCreate);
+		ServiceResponse<User> serviceResponse = ServiceResponse.parse(response, User.class);
+		userId = serviceResponse.getResponseEntity().get().getUserId();
 	}
 
 	@Test
-	void sendOrder() {
-		System.out.println("sendOrder");
-		ShopProductionItem toCreate = ProductionTestUtils.createDefaultOrder();
+	void sendOrder() throws IOException {
 
-		System.out.println("sending"+toCreate.toString());
+		ShopProductionItem toCreate = ProductionTestUtils.createDefaultOrder(userId);
 
-		Response response = productionEndpoint.produceOrder(toCreate);
+		Response response = productionClient.produceOrder(toCreate);
 
 		assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
 	}
 
 	@Test
-	void SendEmptyOrderShouldReturnError() {
-		System.out.println("sendInvalidPackage");
-		ShopProductionItem testItem= ProductionTestUtils.createEmptyOrder();
-		System.out.println("sending"+testItem.toString());
-		Response conflictResponse = productionEndpoint.produceOrder(testItem);
+	void SendEmptyOrderShouldReturnError() throws IOException {
+		ShopProductionItem testItem = ProductionTestUtils.createEmptyOrder();
 
-		System.out.println("sent");
-		ServiceResponse<ShopProductionItem> serviceResponse = ServiceResponse.parse(conflictResponse, ShopProductionItem.class);
-		System.out.println("Response:"+serviceResponse.hasError());
-		assertTrue(serviceResponse.hasError());
-		ExceptionResponse exceptionResponse = serviceResponse.getErrorEntity().get();
-		System.out.println("Response Error:"+exceptionResponse.getStatus());
-		assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), exceptionResponse.getStatus());
+
+		assertThrows(BadRequestException.class, () -> {
+			Response conflictResponse = productionClient.produceOrder(testItem);
+		}
+		);
 	}
 }

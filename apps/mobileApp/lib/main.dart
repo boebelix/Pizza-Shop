@@ -1,11 +1,12 @@
+import 'package:app/models/sizes.dart';
 import 'package:app/screens/cart_screen.dart';
-import 'package:app/screens/create_pizza.dart';
 import 'package:app/screens/update_user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'models/cart.dart';
 import 'models/meals.dart';
+import 'models/toppings.dart';
 import 'screens/create_user.dart';
 import 'screens/login_user.dart';
 import 'screens/meal_detail_screen.dart';
@@ -24,6 +25,12 @@ class App extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: Cart(),
         ),
+        ChangeNotifierProvider.value(
+          value: Toppings(),
+        ),
+        ChangeNotifierProvider.value(
+          value: Sizes(),
+        )
       ],
       child: MaterialApp(
         title: 'Non Stop Pizza',
@@ -59,7 +66,6 @@ class App extends StatelessWidget {
           MealDetailScreen.routeName: (_) => MealDetailScreen(),
           UpdateUser.routeName: (_) => UpdateUser(),
           CartScreen.routeName: (_) => CartScreen(),
-          CreatePizzaScreen.routeName: (_) => CreatePizzaScreen(),
         },
       ),
     );
