@@ -32,9 +32,9 @@ class meal_list extends StatelessWidget {
       sizesHaveFinished=true;
     });
 
-    while(!(toppingsHaveFinished && sizesHaveFinished)){
-      sleep(new Duration(milliseconds: 100));
-    }
+    // while(!(toppingsHaveFinished && sizesHaveFinished)){
+    //   sleep(new Duration(milliseconds: 100));
+    // }
     print("TOPPINGS IN MEALS"+toppings.toString());
     print("SIZES IN MEALS"+sizes.toString());
 

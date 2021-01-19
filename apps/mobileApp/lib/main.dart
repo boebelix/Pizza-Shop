@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import 'models/cart.dart';
 import 'models/meals.dart';
+import 'models/toppings.dart';
 import 'screens/create_user.dart';
 import 'screens/login_user.dart';
 import 'screens/meal_detail_screen.dart';
@@ -24,6 +25,9 @@ class App extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: Cart(),
         ),
+        ChangeNotifierProvider.value(
+          value: Toppings(),
+        )
       ],
       child: MaterialApp(
         title: 'Non Stop Pizza',
