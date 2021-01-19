@@ -58,10 +58,10 @@ class _CartScreenState extends State<CartScreen> {
                     height: 50,
                     width: double.infinity,
                     child: Opacity(
-                      opacity: (pizzas.length != 0)? 1 : 0.7,
+                      opacity: (pizzas.isNotEmpty)? 1 : 0.7,
                       child: RaisedButton(
                         child: Text("Bestellung aufgeben"),
-                        color: (pizzas.length != 0)? Color.fromARGB(255, 0, 255, 0) : null,
+                        color: (pizzas.isNotEmpty)? Color.fromARGB(255, 0, 255, 0) : null,
                         onPressed: () {
                           if(pizzas.length == 0) {
                             return;
