@@ -1,11 +1,12 @@
+
 import 'dart:io';
 
 import 'package:app/endpoints/shop_endpoint.dart';
 import 'package:app/models/meal.dart';
+
 import 'package:app/models/meals.dart';
 import 'package:app/widgets/button_create_pizza.dart';
 import 'package:app/widgets/meal_item.dart';
-import 'package:app/widgets/user_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -49,15 +50,12 @@ class meal_list extends StatelessWidget {
           child: Column(
             children: [
               CreatePizzaButton(),
-              ListView.builder(
+              ListView(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                padding:
-                const EdgeInsets.only(top: 8, left: 4, right: 4, bottom: 72),
-                itemCount: meals.length,
-                itemBuilder: (context, index) => MenuItemCard(
-                  meal: meals[index],
-                ),
+                padding: const EdgeInsets.only(top: 8, left: 4, right: 4, bottom: 72),
+                physics: const NeverScrollableScrollPhysics(),
+                children: meals.map((m) => MenuItemCard(meal: m)).toList(),
               ),
             ],
           ),
