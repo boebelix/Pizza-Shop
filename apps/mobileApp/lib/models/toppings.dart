@@ -13,7 +13,8 @@ class Toppings extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addAll(List<Topping> toppings) {
+  void refresh(List<Topping> toppings) {
+    _toppings.clear();
     _toppings.addAll(toppings);
     notifyListeners();
   }

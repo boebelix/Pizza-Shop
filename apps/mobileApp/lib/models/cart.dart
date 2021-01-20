@@ -7,17 +7,7 @@ import 'package:flutter/foundation.dart';
 
 class Cart extends ChangeNotifier {
 
-  List<Pizza> _pizzas = [
-    Pizza(
-            size: Size(
-                id: 1,
-                basePrice: 30,
-                diameter: 10,
-                doughAmount: 200,
-                toppingFactor: 1.5,
-                toppingPrice: 2.5))
-        .addTopping(Topping(baseAmount: 10, id: 1, name: "Bugs", unit: "g"))
-  ];
+  List<Pizza> _pizzas = [];
 
   UnmodifiableListView<Pizza> get pizzas => UnmodifiableListView(_pizzas);
 

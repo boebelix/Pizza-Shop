@@ -1,10 +1,9 @@
 import 'dart:collection';
+
 import 'package:app/models/size.dart';
 import 'package:flutter/foundation.dart';
 
-
 class Sizes extends ChangeNotifier {
-
   List<Size> _sizes = [];
 
   UnmodifiableListView<Size> get sizes => UnmodifiableListView(_sizes);
@@ -14,7 +13,8 @@ class Sizes extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addAll(List<Size> sizes) {
+  void refresh(List<Size> sizes) {
+    _sizes.clear();
     _sizes.addAll(sizes);
     notifyListeners();
   }
