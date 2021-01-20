@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:app/endpoints/properties.dart';
 import 'package:app/models/login_data.dart';
 import 'package:app/models/login_response.dart';
-import 'package:app/models/user.dart';
 import 'package:http/http.dart' as http;
 
 // Singleton
@@ -22,7 +21,7 @@ class SignInEndpoint {
 
   Future<LoginResponse> signInUser(LoginData loginData) async {
       return await http.post(
-      Uri.http(Properties.USER_SERVICE_URL, AUTH_ENDPOINT),
+      Uri.http(Properties.url_user, AUTH_ENDPOINT),
       body: jsonEncode(loginData.toJson()),
       headers: {
         HttpHeaders.contentTypeHeader: ContentType.json.value,
@@ -43,7 +42,7 @@ class SignInEndpoint {
 
   Future<void> signOutUser(int id) {
     return http
-        .delete(Uri.http(Properties.USER_SERVICE_URL, "$AUTH_ENDPOINT/$id"))
+        .delete(Uri.http(Properties.url_user, "$AUTH_ENDPOINT/$id"))
         .then((response) {
       if (response.statusCode == HttpStatus.created) {
       } else {

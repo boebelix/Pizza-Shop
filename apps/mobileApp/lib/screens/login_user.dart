@@ -1,6 +1,5 @@
 import 'package:app/models/http_exception.dart';
 import 'package:app/models/login_data.dart';
-import 'package:app/services/security/auth.dart';
 import 'package:app/services/signin_service.dart';
 import 'package:app/widgets/navigation.dart';
 import 'package:flutter/material.dart';
