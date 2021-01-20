@@ -84,7 +84,7 @@ class _CartScreenState extends State<CartScreen> {
                               pizzas: new Pizzas(
                                   pizzas: context.read<Cart>().pizzas));
                           ShopEndpoint.instance().sendOrder(order);
-                          context.read<Cart>().removeAll();
+                          //context.read<Cart>().removeAll();
                         });
                       },
                     ),

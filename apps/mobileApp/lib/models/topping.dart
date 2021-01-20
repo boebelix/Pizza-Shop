@@ -17,7 +17,9 @@ class Topping {
 
   Map<String, dynamic> toJson() => {
     "baseAmount": baseAmount,
+    "amount" : baseAmount,
     "id":   id,
+    "toppingId":  id,
     "name":  name,
     "unit":   unit,
   };

@@ -63,8 +63,11 @@ class ShopEndpoint {
 
   Future<Order> sendOrder(Order order) async {
     // TODO delete debug Ausgbabe
-    print('sendOder: ' + order.toString());
+    print(order.toJson());
+  print(ContentType.json.value);
+
     Map<String, dynamic> responseData;
+
     final response = await http.post(
       Uri.http(Properties.url_shop, "/shop"),
       body: jsonEncode(order.toJson()),
@@ -72,6 +75,7 @@ class ShopEndpoint {
         HttpHeaders.contentTypeHeader: ContentType.json.value,
         "Authorization": AuthService.instance().uuid
       },
+
     );
 
     responseData = jsonDecode(response.body);

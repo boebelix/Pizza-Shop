@@ -28,7 +28,7 @@ class Order{
 
   Map<String, dynamic> toJson() => {
     "city": city,
-    "pizzas": pizzas,
+    "pizzas": pizzas.toJson(),
     "country": country,
     "houseNumber": houseNumber,
     "id": id,
@@ -37,4 +37,5 @@ class Order{
     "status": status,
     "orderDate":  orderDate
   };
+
 }
