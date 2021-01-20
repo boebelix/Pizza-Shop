@@ -1,7 +1,12 @@
 package ateam.shop.service;
 
 import ateam.client.production.ProductionClient;
-import ateam.model.entity.*;
+import ateam.model.entity.Order;
+import ateam.model.entity.Pizza;
+import ateam.model.entity.PizzaRestEntity;
+import ateam.model.entity.PizzaTopping;
+import ateam.model.entity.ShopProductionItem;
+import ateam.model.entity.Size;
 import ateam.shop.db.DBManager;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 
@@ -26,7 +31,8 @@ public class ShopService {
 
 	public ShopService() throws NamingException, URISyntaxException {
 		this.productionClient = RestClientBuilder
-			.newBuilder().baseUri(new URI(InitialContext.doLookup("PizzaProductionInternURI"))).build(ProductionClient.class);
+			.newBuilder().baseUri(new URI(InitialContext.doLookup("PizzaProductionInternURI")))
+			.build(ProductionClient.class);
 	}
 
 	public Order placeOrder(Order order, int userId) {
@@ -63,8 +69,9 @@ public class ShopService {
 		pr.setDoughAmount(size.getDoughAmount());
 		pr.setToppingFactor(size.getToppingFactor());
 		List<PizzaTopping> toppings = dbPizza.getToppings();
-		for (PizzaTopping dbTopping : toppings)
+		for (PizzaTopping dbTopping : toppings) {
 			pr.addTopping(dbManager.getToppingById(dbTopping.getToppingId()));
+		}
 		return pr;
 	}
 }
