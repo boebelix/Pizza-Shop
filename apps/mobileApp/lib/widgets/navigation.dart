@@ -1,3 +1,4 @@
+import 'package:app/screens/cart_screen.dart';
 import 'package:app/screens/meal_list_screen.dart';
 import 'package:app/screens/user_screen.dart';
 import 'package:app/services/security/auth.dart';
@@ -23,7 +24,7 @@ class _NavigationState extends State<Navigation> {
 
   final List<Widget> _children = [
     meal_list(),
-    meal_list(),
+    CartScreen(),
     UserScreen(),
   ];
 

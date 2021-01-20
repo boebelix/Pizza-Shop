@@ -263,8 +263,7 @@ class _CreateUserState extends State<CreateUser> {
                                 postalCode: postalCode.text,
                                 city: city.text,
                                 country: country.text),
-                          )
-                              .then((loginRepsonse) {
+                          ).then((loginRepsonse) {
                             setState(() {
                               _msg =
                                   'Willkommen ${loginRepsonse.user.firstName}';

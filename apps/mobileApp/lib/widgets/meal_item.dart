@@ -13,11 +13,8 @@ class MenuItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     const double radius = 8;
     const double itemHeight = 120;
-    return Card(
-      elevation: 8,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(radius),
-      ),
+    return Container(
+      height: itemHeight,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(radius),
         child: GestureDetector(
@@ -28,8 +25,7 @@ class MenuItemCard extends StatelessWidget {
               arguments: meal,
             );
           },
-          child: Container(
-            height: itemHeight,
+          child: Card(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
