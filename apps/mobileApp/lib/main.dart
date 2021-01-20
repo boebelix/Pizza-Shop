@@ -1,5 +1,6 @@
 import 'package:app/models/sizes.dart';
 import 'package:app/screens/cart_screen.dart';
+import 'package:app/screens/create_pizza.dart';
 import 'package:app/screens/update_user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -66,6 +67,7 @@ class App extends StatelessWidget {
           MealDetailScreen.routeName: (_) => MealDetailScreen(),
           UpdateUser.routeName: (_) => UpdateUser(),
           CartScreen.routeName: (_) => CartScreen(),
+          CreatePizzaScreen.routeName: (_) => CreatePizzaScreen()
         },
       ),
     );

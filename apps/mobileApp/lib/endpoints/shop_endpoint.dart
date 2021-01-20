@@ -2,12 +2,15 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:app/endpoints/properties.dart';
+import 'package:app/models/Pizza.dart';
 import 'package:app/models/exception_response.dart';
 import 'package:app/models/login_data.dart';
 import 'package:app/models/login_response.dart';
+import 'package:app/models/order.dart';
 import 'package:app/models/size.dart';
 import 'package:app/models/topping.dart';
 import 'package:app/models/user.dart';
+import 'package:app/services/security/auth.dart';
 import 'package:http/http.dart' as http;
 
 // Singleton
@@ -56,5 +59,32 @@ class ShopEndpoint {
         throw HttpException(exceptionResponse.message);
       }
     });
+  }
+
+  Future<Order> sendOrder(Order order) async {
+    // TODO delete debug Ausgbabe
+    print('sendOder: ' + order.toString());
+    Map<String, dynamic> responseData;
+    final response = await http.post(
+      Uri.http(Properties.url_shop, "/shop"),
+      body: jsonEncode(order.toJson()),
+      headers: {
+        HttpHeaders.contentTypeHeader: ContentType.json.value,
+        "Authorization": AuthService.instance().uuid
+      },
+    );
+
+    responseData = jsonDecode(response.body);
+    print('SignUp Endpoint responseData ' + responseData.toString());
+    print('Status Code 200: ' + response.statusCode.toString());
+
+    if (response.statusCode == 200) {
+      print('Status Code 200: ' + response.statusCode.toString());
+      return Order.fromJson(responseData);
+    } else {
+      print('Status Code: ' + response.statusCode.toString());
+      print('Response Code Error: ' + responseData.toString());
+      throw HttpException(responseData['message']);
+    }
   }
 }

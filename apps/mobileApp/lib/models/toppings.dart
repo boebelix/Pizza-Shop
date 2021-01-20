@@ -17,4 +17,14 @@ class Toppings extends ChangeNotifier {
     _toppings.addAll(toppings);
     notifyListeners();
   }
+
+
+  List toJson(){
+    List jsonList = List();
+    _toppings.map((item)=>
+        jsonList.add(item.toJson())
+    ).toList();
+    return jsonList;
+  }
+
 }

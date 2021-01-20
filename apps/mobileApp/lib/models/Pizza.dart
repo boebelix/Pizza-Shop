@@ -2,14 +2,15 @@ import 'dart:collection';
 
 import 'package:app/models/size.dart';
 import 'package:app/models/topping.dart';
+import 'package:app/models/toppings.dart';
 
 class Pizza {
   Size _size;
-  final Set<Topping> _toppings = new Set();
+  Toppings _toppings = new Toppings();
 
   Pizza(this._size);
 
-  UnmodifiableListView<Topping> get toppings => new UnmodifiableListView(_toppings);
+  UnmodifiableListView<Topping> get toppings => _toppings.toppings;
 
   Size get size => _size;
 
@@ -25,5 +26,10 @@ class Pizza {
   double get price {
     return size.basePrice + toppings.length * size.toppingPrice;
   }
+
+  Map<String, dynamic> toJson() => {
+    "sizeId": _size.id,
+    "toppings":   _toppings.toJson()
+  };
 
 }
