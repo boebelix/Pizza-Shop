@@ -28,12 +28,10 @@ class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
     final _toppings = context.watch<Toppings>().toppings;
 
     final _sizes = context.watch<Sizes>().sizes;
-    String _currentChoosen='1';
 
     for (Topping t in _toppings) {
       _labelCheckedMap.putIfAbsent(t, () => false);
     }
-int test;
 
     return Scaffold(
       appBar: AppBar(
@@ -55,7 +53,8 @@ int test;
 
 
 
-                ListView.builder(
+                new ListView.builder(
+                  scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return RadioListTile(
@@ -67,7 +66,7 @@ int test;
                   },
                   itemCount: _sizes.length,
                 ),
-                
+
                 Container(
                   height: 350.0,
                   child: Column(children: [

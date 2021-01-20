@@ -18,4 +18,9 @@ class Sizes extends ChangeNotifier {
     _sizes.addAll(sizes);
     notifyListeners();
   }
+
+  void deleteAll(){
+    _sizes.clear();
+    notifyListeners();
+  }
 }

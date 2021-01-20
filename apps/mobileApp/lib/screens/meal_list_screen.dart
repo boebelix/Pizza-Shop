@@ -21,6 +21,8 @@ class _meal_listState extends State<meal_list> {
   }
 
   void loadInitialData() async {
+  await context.read<Toppings>().deleteAll();
+  await context.read<Sizes>().deleteAll();
     context.read<Toppings>().addAll(await ShopEndpoint.instance().getToppings());
     context.read<Sizes>().addAll(await ShopEndpoint.instance().getSizes());
   }
