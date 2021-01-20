@@ -82,7 +82,7 @@ class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
             ),
           ),
           SizedBox(
-            height: 25,
+            height: 75,
             child: RaisedButton(
                 child: Text("Zum Warenkorb hinzufügen"),
                 onPressed: () {
