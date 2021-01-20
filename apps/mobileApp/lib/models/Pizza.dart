@@ -22,4 +22,8 @@ class Pizza {
     return this;
   }
 
+  double get price {
+    return size.basePrice + toppings.length * size.toppingPrice;
+  }
+
 }

@@ -1,6 +1,9 @@
+
+import 'package:app/models/Pizza.dart';
 import 'package:app/models/cart.dart';
 import 'package:app/widgets/pizza_cart_summary.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class CartScreen extends StatefulWidget {
@@ -11,6 +14,16 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+
+  String fullPrice() {
+    final oCcy = new NumberFormat("#,##0.00", "de_DE");
+    double price = 0;
+    for(Pizza pizza in context.watch<Cart>().pizzas) {
+      price += pizza.price;
+    }
+    return oCcy.format(price);
+  }
+
   @override
   Widget build(BuildContext context) {
     final pizzas = context
@@ -60,13 +73,14 @@ class _CartScreenState extends State<CartScreen> {
                     child: Opacity(
                       opacity: (pizzas.isNotEmpty)? 1 : 0.7,
                       child: RaisedButton(
-                        child: Text("Bestellung aufgeben"),
+                        child: Text("Bestellung aufgeben (${fullPrice()}€)"),
                         color: (pizzas.isNotEmpty)? Color.fromARGB(255, 0, 255, 0) : null,
                         onPressed: () {
                           if(pizzas.length == 0) {
                             return;
                           }
                           setState(() {
+                            //Todo Nicolas/Robin hier Bestellung absenden :)
                             context.read<Cart>().removeAll();
                           });
                         },
