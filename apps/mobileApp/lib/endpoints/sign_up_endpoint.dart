@@ -10,6 +10,8 @@ import 'package:http/http.dart' as http;
 class SignUpEndpoint {
   static SignUpEndpoint _instance;
 
+  static const USER_ENDPOINT = "/user";
+
   factory SignUpEndpoint.instance() {
     _instance ??= SignUpEndpoint._private();
     return _instance;
@@ -21,7 +23,7 @@ class SignUpEndpoint {
     Map<String, dynamic> responseData;
 
     final response = await http.post(
-      Uri.http(Properties.url_user, "/user"),
+      Uri.http(Properties.USER_SERVICE_URL, USER_ENDPOINT),
       body: jsonEncode(user.toJson()),
       headers: {
         HttpHeaders.contentTypeHeader: ContentType.json.value,

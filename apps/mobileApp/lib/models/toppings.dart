@@ -1,7 +1,7 @@
 import 'dart:collection';
+
 import 'package:app/models/topping.dart';
 import 'package:flutter/foundation.dart';
-
 
 class Toppings extends ChangeNotifier {
   List<Topping> _toppings = [];
@@ -16,5 +16,11 @@ class Toppings extends ChangeNotifier {
   void addAll(List<Topping> toppings) {
     _toppings.addAll(toppings);
     notifyListeners();
+  }
+
+  List toJson() {
+    List jsonList = List();
+    _toppings.map((item) => jsonList.add(item.toJson())).toList();
+    return jsonList;
   }
 }

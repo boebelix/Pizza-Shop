@@ -2,16 +2,24 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:app/endpoints/properties.dart';
+import 'package:app/models/Pizza.dart';
 import 'package:app/models/exception_response.dart';
 import 'package:app/models/login_data.dart';
 import 'package:app/models/login_response.dart';
+import 'package:app/models/order.dart';
 import 'package:app/models/size.dart';
 import 'package:app/models/topping.dart';
 import 'package:app/models/user.dart';
+import 'package:app/services/security/auth.dart';
 import 'package:http/http.dart' as http;
 
 // Singleton
 class ShopEndpoint {
+
+  static const TOPPING_ENDPOINT = "/topping";
+  static const SIZE_ENDPOINT = "/size";
+  static const SHOP_ENDPOINT = "/shop";
+
   static ShopEndpoint _instance;
 
   factory ShopEndpoint.instance() {
@@ -24,7 +32,7 @@ class ShopEndpoint {
 
   Future<List<Topping>> getToppings() async {
     return await http.get(
-      Uri.http(Properties.url_shop, "/topping"),
+      Uri.http(Properties.SHOP_URL, TOPPING_ENDPOINT),
       headers: {
         HttpHeaders.contentTypeHeader: ContentType.json.value,
       },
@@ -42,7 +50,7 @@ class ShopEndpoint {
 
   Future<List<Size>> getSizes() async {
     return await http.get(
-      Uri.http(Properties.url_shop, "/size"),
+      Uri.http(Properties.SHOP_URL, SIZE_ENDPOINT),
       headers: {
         HttpHeaders.contentTypeHeader: ContentType.json.value,
       },
@@ -56,5 +64,35 @@ class ShopEndpoint {
         throw HttpException(exceptionResponse.message);
       }
     });
+  }
+
+  Future<Order> sendOrder(Order order) async {
+    Map<String, dynamic> responseData;
+
+    var headers = {
+      HttpHeaders.contentTypeHeader: ContentType.json.value,
+    };
+
+    if (AuthService.instance().isSignIn) {
+      headers[HttpHeaders.authorizationHeader] = AuthService.instance().uuid;
+    }
+
+    final response = await http.post(
+      Uri.http(Properties.SHOP_URL, SHOP_ENDPOINT),
+      body: jsonEncode(order.toJson()),
+      headers: headers,
+    );
+
+    if (response.statusCode == HttpStatus.created) {
+      responseData = jsonDecode(response.body);
+      return Order.fromJson(responseData);
+    } else {
+      if (response.body.isNotEmpty) {
+        ExceptionResponse exceptionResponse = ExceptionResponse.fromJson(jsonDecode(response.body));
+        throw HttpException(exceptionResponse.message);
+      } else {
+        throw new HttpException("Unbekannter Fehler");
+      }
+    }
   }
 }

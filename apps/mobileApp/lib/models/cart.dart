@@ -1,30 +1,38 @@
 import 'dart:collection';
 
+import 'package:app/models/Pizza.dart';
+import 'package:app/models/size.dart';
+import 'package:app/models/topping.dart';
 import 'package:flutter/foundation.dart';
 
-import 'meal.dart';
-
 class Cart extends ChangeNotifier {
-  /*
-  * Bilder von
-  * https://www.essen-und-trinken.de/pizza/73081-cstr-die-besten-pizza-rezepte
-  * */
-  List<Meal> _meals = [
-    Meal(
-      imagePath:
-          "https://image.essen-und-trinken.de/11915996/t/Gf/v8/w960/r1/-/267910--5613-.jpg",
-      name: "Erstelle dir deine eigene Pizza",
-      description: "Sei dein eigener Koch",
-      price: 10.0,
-      rating: 5.0,
-      numberOfRatings: 0,
-    ),
+
+  List<Pizza> _pizzas = [
+    Pizza(
+            size: Size(
+                id: 1,
+                basePrice: 30,
+                diameter: 10,
+                doughAmount: 200,
+                toppingFactor: 1.5,
+                toppingPrice: 2.5))
+        .addTopping(Topping(baseAmount: 10, id: 1, name: "Bugs", unit: "g"))
   ];
 
-  UnmodifiableListView<Meal> get meals => UnmodifiableListView(_meals);
+  UnmodifiableListView<Pizza> get pizzas => UnmodifiableListView(_pizzas);
 
-  void add(Meal meal) {
-    _meals.add(meal);
+  void add(Pizza pizza) {
+    _pizzas.add(pizza);
+    notifyListeners();
+  }
+
+  remove(int index) {
+    _pizzas.removeAt(index);
+    notifyListeners();
+  }
+
+  void removeAll() {
+    _pizzas = new List();
     notifyListeners();
   }
 }

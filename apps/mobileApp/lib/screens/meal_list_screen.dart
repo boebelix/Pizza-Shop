@@ -29,7 +29,6 @@ class _meal_listState extends State<meal_list> {
   Widget build(BuildContext context) {
     final meals = context.watch<Meals>().meals;
 
-
     return Container(
       decoration: new BoxDecoration(
         image: new DecorationImage(
