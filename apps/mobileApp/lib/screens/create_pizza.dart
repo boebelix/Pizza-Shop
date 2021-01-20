@@ -1,10 +1,8 @@
 import 'package:app/models/Pizza.dart';
 import 'package:app/models/cart.dart';
-import 'package:app/models/size.dart';
 import 'package:app/models/sizes.dart';
 import 'package:app/models/topping.dart';
 import 'package:app/models/toppings.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +14,6 @@ class CreatePizzaScreen extends StatefulWidget {
 }
 
 class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
-
   var _labelCheckedMap = {}; //new Map();
 
   List<String> text = ["InduceSmile.com", "Flutter.io", "google.com"];
@@ -43,16 +40,12 @@ class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
           SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(
-
               children: [
                 Text("Größen",
                     style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                     )),
-
-
-
                 new ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
@@ -66,7 +59,6 @@ class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
                   },
                   itemCount: _sizes.length,
                 ),
-
                 Container(
                   height: 350.0,
                   child: Column(children: [
@@ -96,19 +88,15 @@ class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
             child: RaisedButton(
                 child: Text("Zum Warenkorb hinzufügen"),
                 onPressed: () {
-                  var pizza=Pizza(_sizes[_value]);
-                  for(Topping t in _labelCheckedMap.keys)
-                    {
-                      if (_labelCheckedMap[t])
-                        pizza.addTopping(t);
-                    }
+                  var pizza = Pizza(_sizes[_value]);
+                  for (Topping t in _labelCheckedMap.keys) {
+                    if (_labelCheckedMap[t]) pizza.addTopping(t);
+                  }
                   context.read<Cart>().add(pizza);
-                }
-                ),
+                }),
           ),
         ],
       ),
     );
   }
-
 }
