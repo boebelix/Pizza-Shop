@@ -7,6 +7,7 @@ import ateam.model.entity.PizzaRestEntity;
 import ateam.model.entity.PizzaTopping;
 import ateam.model.entity.ShopProductionItem;
 import ateam.model.entity.Size;
+import ateam.model.exception.ShopException;
 import ateam.shop.db.DBManager;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 
@@ -42,6 +43,7 @@ public class ShopService {
 		try {
 			productionClient.produceOrder(prodItem);
 		} catch (IOException e) {
+			throw new ShopException(e.getMessage());
 		}
 		return created;
 	}
