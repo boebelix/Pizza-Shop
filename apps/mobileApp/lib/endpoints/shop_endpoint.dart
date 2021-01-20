@@ -61,43 +61,33 @@ class ShopEndpoint {
     });
   }
 
-
-
-
   Future<Order> sendOrder(Order order) async {
-    // TODO delete debug Ausgbabe
-    print(order.toJson());
-  print(ContentType.json.value);
-  print(AuthService.instance().uuid);
-
     Map<String, dynamic> responseData;
+
+    var headers = {
+      HttpHeaders.contentTypeHeader: ContentType.json.value,
+    };
+
+    if (AuthService.instance().isSignIn) {
+      headers[HttpHeaders.authorizationHeader] = AuthService.instance().uuid;
+    }
 
     final response = await http.post(
       Uri.http(Properties.SHOP_URL, "/shop"),
       body: jsonEncode(order.toJson()),
-      headers: {
-        HttpHeaders.contentTypeHeader: ContentType.json.value,
-        "Authorization": AuthService.instance().uuid
-      },
-
+      headers: headers,
     );
 
-    print(response);
-    print(response.body);
-    print(response.headers);
-    print(response.statusCode);
-
-    responseData = jsonDecode(response.body);
-    print('SignUp Endpoint responseData ' + responseData.toString());
-    print('Status Code 200: ' + response.statusCode.toString());
-
-    if (response.statusCode == 201) {
-      print('Status Code 200: ' + response.statusCode.toString());
+    if (response.statusCode == HttpStatus.created) {
+      responseData = jsonDecode(response.body);
       return Order.fromJson(responseData);
     } else {
-      print('Status Code: ' + response.statusCode.toString());
-      print('Response Code Error: ' + responseData.toString());
-      throw HttpException(responseData['message']);
+      if (response.body.isNotEmpty) {
+        ExceptionResponse exceptionResponse = ExceptionResponse.fromJson(jsonDecode(response.body));
+        throw HttpException(exceptionResponse.message);
+      } else {
+        throw new HttpException("Unbekannter Fehler");
+      }
     }
   }
 }
