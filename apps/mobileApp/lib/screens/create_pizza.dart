@@ -16,9 +16,7 @@ class CreatePizzaScreen extends StatefulWidget {
 class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
   var _labelCheckedMap = {}; //new Map();
 
-  List<String> text = ["InduceSmile.com", "Flutter.io", "google.com"];
-
-  int _value;
+  int _value=0;
 
   @override
   Widget build(BuildContext context) {
@@ -93,6 +91,7 @@ class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
                     if (_labelCheckedMap[t]) pizza.addTopping(t);
                   }
                   context.read<Cart>().add(pizza);
+                  Navigator.pop(context);
                 }),
           ),
         ],
