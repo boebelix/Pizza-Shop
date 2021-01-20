@@ -1,4 +1,5 @@
 import 'package:app/models/Pizza.dart';
+import 'package:app/models/cart.dart';
 import 'package:app/models/size.dart';
 import 'package:app/models/sizes.dart';
 import 'package:app/models/topping.dart';
@@ -114,7 +115,7 @@ class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
                       if (_labelCheckedMap[t])
                         pizza.addTopping(t);
                     }
-
+                  context.read<Cart>().add(pizza);
                 }
                 ),
           ),
