@@ -10,7 +10,7 @@ class Properties{
   * */
 
   static const String USER_SERVICE_URL = "10.0.2.2:9084";
-  static const String url_shop = "10.0.2.2:9083";
+  static const String SHOP_URL = "10.0.2.2:9083";
 
 
 }

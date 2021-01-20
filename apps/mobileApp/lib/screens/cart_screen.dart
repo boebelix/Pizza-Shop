@@ -2,7 +2,6 @@ import 'package:app/endpoints/shop_endpoint.dart';
 import 'package:app/models/Pizza.dart';
 import 'package:app/models/cart.dart';
 import 'package:app/models/order.dart';
-import 'package:app/models/pizzas.dart';
 import 'package:app/widgets/pizza_cart_summary.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -81,8 +80,8 @@ class _CartScreenState extends State<CartScreen> {
                         }
                         setState(() {
                           Order order = new Order(
-                              pizzas: new Pizzas(
-                                  pizzas: context.read<Cart>().pizzas));
+                              pizzas: context.read<Cart>().pizzas
+                          );
                           ShopEndpoint.instance().sendOrder(order);
                           //context.read<Cart>().removeAll();
                         });

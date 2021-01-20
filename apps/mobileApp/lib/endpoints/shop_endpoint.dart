@@ -27,7 +27,7 @@ class ShopEndpoint {
 
   Future<List<Topping>> getToppings() async {
     return await http.get(
-      Uri.http(Properties.url_shop, "/topping"),
+      Uri.http(Properties.SHOP_URL, "/topping"),
       headers: {
         HttpHeaders.contentTypeHeader: ContentType.json.value,
       },
@@ -45,7 +45,7 @@ class ShopEndpoint {
 
   Future<List<Size>> getSizes() async {
     return await http.get(
-      Uri.http(Properties.url_shop, "/size"),
+      Uri.http(Properties.SHOP_URL, "/size"),
       headers: {
         HttpHeaders.contentTypeHeader: ContentType.json.value,
       },
@@ -73,7 +73,7 @@ class ShopEndpoint {
     Map<String, dynamic> responseData;
 
     final response = await http.post(
-      Uri.http(Properties.url_shop, "/shop"),
+      Uri.http(Properties.SHOP_URL, "/shop"),
       body: jsonEncode(order.toJson()),
       headers: {
         HttpHeaders.contentTypeHeader: ContentType.json.value,

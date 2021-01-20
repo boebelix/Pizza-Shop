@@ -1,8 +1,7 @@
 import 'package:app/models/Pizza.dart';
-import 'package:app/models/pizzas.dart';
 
 class Order{
-  Pizzas pizzas;
+  List<Pizza> pizzas;
   String city;
   String country;
   String houseNumber;
@@ -16,7 +15,7 @@ class Order{
 
   factory Order.fromJson(Map<String, dynamic> json) => Order(
       city: json['city'],
-      pizzas: Pizzas.fromJson(json["pizzas"]),
+      pizzas: json["pizzas"].cast<List>().map((e) => Pizza.fromJson(e)).toList(),
       country: json['country'],
       houseNumber: json['houseNumber'],
       id: json['id'],
@@ -27,7 +26,7 @@ class Order{
   );
 
   Map<String, dynamic> toJson() => {
-    "pizzas": pizzas.toJson()
+    "pizzas": pizzas.map((e) => e.toJson()).toList(),
   };
 
 }
