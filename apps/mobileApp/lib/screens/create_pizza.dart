@@ -88,7 +88,7 @@ class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
             child: RaisedButton(
                 child: Text("Zum Warenkorb hinzufügen"),
                 onPressed: () {
-                  var pizza = Pizza(_sizes[_value]);
+                  var pizza = Pizza(size: _sizes.elementAt(_value));
                   for (Topping t in _labelCheckedMap.keys) {
                     if (_labelCheckedMap[t]) pizza.addTopping(t);
                   }
