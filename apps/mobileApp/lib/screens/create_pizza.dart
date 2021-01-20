@@ -4,6 +4,7 @@ import 'package:app/models/size.dart';
 import 'package:app/models/sizes.dart';
 import 'package:app/models/topping.dart';
 import 'package:app/models/toppings.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,25 +18,22 @@ class CreatePizzaScreen extends StatefulWidget {
 class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
 
   var _labelCheckedMap = {}; //new Map();
-  //var _chosenRadio = {};
 
   List<String> text = ["InduceSmile.com", "Flutter.io", "google.com"];
+
+  int _value;
 
   @override
   Widget build(BuildContext context) {
     final _toppings = context.watch<Toppings>().toppings;
 
     final _sizes = context.watch<Sizes>().sizes;
-    int _currentChoosen=1;
+    String _currentChoosen='1';
 
     for (Topping t in _toppings) {
       _labelCheckedMap.putIfAbsent(t, () => false);
     }
-
-  //  for (int i=0; i<_sizes.length;i++) {
-    //  _chosenRadio.putIfAbsent(i, () => _sizes.elementAt(i));
-   // }
-
+int test;
 
     return Scaffold(
       appBar: AppBar(
@@ -55,31 +53,21 @@ class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
                       fontWeight: FontWeight.bold,
                     )),
 
+
+
                 ListView.builder(
-                  itemCount: _sizes.length,
-                  itemBuilder: (context, index) => RadioListTile<int>(
-                    title: Text(_sizes[index].diameter.toString()+' cm'),
-                    value: index,
-                    groupValue: _currentChoosen,
-                    onChanged: (newValue)=>setState(()=>_currentChoosen=newValue),
-                  ),
                   shrinkWrap: true,
-                ),
-
-
-               /* for(int i = 0;i<_sizes.length;i++)
-                RadioListTile<int>(
-                  value: i,
-                   groupValue: _currentChoosen,
-                   onChanged: (int chosen){
-                    setState(() {
-                      _currentChoosen=chosen;
-                    }
+                  itemBuilder: (context, index) {
+                    return RadioListTile(
+                      value: index,
+                      groupValue: _value,
+                      onChanged: (ind) => setState(() => _value = ind),
+                      title: Text("Größe ${_sizes[index].diameter}cm"),
                     );
-                   },
-                   title: Text(_sizes.elementAt(i).diameter.toString()+' cm'),
-               ),*/
-
+                  },
+                  itemCount: _sizes.length,
+                ),
+                
                 Container(
                   height: 350.0,
                   child: Column(children: [
@@ -109,7 +97,7 @@ class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
             child: RaisedButton(
                 child: Text("Zum Warenkorb hinzufügen"),
                 onPressed: () {
-                  var pizza=Pizza(_sizes[_currentChoosen]);
+                  var pizza=Pizza(_sizes[_value]);
                   for(Topping t in _labelCheckedMap.keys)
                     {
                       if (_labelCheckedMap[t])
@@ -123,4 +111,5 @@ class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
       ),
     );
   }
+
 }
