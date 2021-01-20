@@ -6,6 +6,5 @@
 	</dataSource>
 
 	<jndiEntry id="UserServiceInternURI" jndiName="UserServiceInternURI" value="${env.USER_SERVICE_PATH}"/>
-	<jndiEntry id="PizzaProductionPassword" jndiName="PizzaProductionPassword" value="${env.PIZZA_PRODUCTION_PASSWORD}"/>
 	<jndiEntry id="PizzaProductionInternURI" jndiName="PizzaProductionInternURI" value="${env.PIZZA_PRODUCTION_PATH}"/>
 </server>

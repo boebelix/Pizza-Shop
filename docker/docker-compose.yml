@@ -42,6 +42,7 @@ services:
             - DB_USER=root
             - DB_PW=
             - USER_SERVICE_PATH=http://userService:9080
+            - PIZZA_PRODUCTION_PATH=http://pizzaProduction:9080
             - WAIT_HOSTS=pizzaDB:3306
             - WAIT_HOSTS_TIMEOUT=60
             - WAIT_SLEEP_INTERVAL=5

@@ -2,6 +2,7 @@ package ateam.model.entity;
 
 import ateam.validator.Validator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PizzaRestEntity {
@@ -27,6 +28,7 @@ public class PizzaRestEntity {
 	}
 
 	public PizzaRestEntity() {
+		this.toppings = new ArrayList<>();
 	}
 
 	public int getID() {

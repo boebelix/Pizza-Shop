@@ -1,7 +1,11 @@
 package ateam.shop.db;
 
 import ateam.db.DBConnection;
-import ateam.model.entity.*;
+import ateam.model.entity.Order;
+import ateam.model.entity.Pizza;
+import ateam.model.entity.PizzaTopping;
+import ateam.model.entity.Size;
+import ateam.model.entity.Topping;
 import ateam.model.exception.ShopException;
 
 import javax.inject.Inject;
@@ -71,6 +75,18 @@ public class DBManager {
 		}
 	}
 
+	public Topping getToppingById(int id) {
+		try (Connection connection = connector.getConnection()) {
+			return getToppingById(id, connection);
+		} catch (SQLException e) {
+			throw new ShopException("Error loading orders", e);
+		}
+	}
+
+	private Topping getToppingById(int id, Connection connection) throws SQLException {
+		return toppingsDB.getToppingById(id, connection);
+	}
+
 	public List<Size> getSizes() {
 		try (Connection connection = connector.getConnection()) {
 			return getSizes(connection);
@@ -79,8 +95,20 @@ public class DBManager {
 		}
 	}
 
+	public Size getSizeById(int id) {
+		try (Connection connection = connector.getConnection()) {
+			return getSizeById(id, connection);
+		} catch (SQLException e) {
+			throw new ShopException("Error loading sizes", e);
+		}
+	}
+
 	private List<Size> getSizes(Connection connection) throws SQLException {
 		return sizesDB.getSizes(connection);
+	}
+
+	private Size getSizeById(int id, Connection connection) throws SQLException {
+		return sizesDB.getSizesById(id, connection);
 	}
 
 	private List<Topping> getToppings(Connection connection) throws SQLException {
@@ -95,7 +123,7 @@ public class DBManager {
 			try {
 				pizzaId = pizzasDB.createPizza(pizza, connection);
 			} catch (SQLException e) {
-				if(e.getErrorCode() == ERROR_CODE_NOT_EXISTING_FOREIGN_KEY) {
+				if (e.getErrorCode() == ERROR_CODE_NOT_EXISTING_FOREIGN_KEY) {
 					throw new ShopException("Size with id " + pizza.getSizeId() + " doesn't exist!");
 				}
 				throw e;
@@ -106,7 +134,7 @@ public class DBManager {
 				try {
 					pizzaToppingDB.createPizzaToppingEntry(pizzaTopping, connection);
 				} catch (SQLException e) {
-					if(e.getErrorCode() == ERROR_CODE_NOT_EXISTING_FOREIGN_KEY) {
+					if (e.getErrorCode() == ERROR_CODE_NOT_EXISTING_FOREIGN_KEY) {
 						throw new ShopException("Topping with id " + pizzaTopping.getToppingId() + " doesn't exist!");
 					}
 					throw e;

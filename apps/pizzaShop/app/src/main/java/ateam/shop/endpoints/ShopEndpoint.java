@@ -54,7 +54,7 @@ public class ShopEndpoint {
 		order.setHouseNumber(user.getNumber());
 		order.setPostCode(user.getPostalCode());
 		Validator.validate(order);
-		order = shopService.placeOrder(order);
+		order = shopService.placeOrder(order, user.getUserId());
 		return Response.status(Response.Status.CREATED).entity(order).build();
 	}
 
