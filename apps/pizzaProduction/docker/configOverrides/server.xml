@@ -1,3 +1,5 @@
 <server>
 	<jndiEntry id="PizzaProductionPath" jndiName="PizzaProductionPath" value="" />
+	<jndiEntry id="procurementInternURI" jndiName="procurementInternURI" value="${env.PROCUREMENT_INTERN_URI}" />
+	<jndiEntry id="LogisticsInternURI" jndiName="LogisticsInternURI" value="${env.LOGISTICS_INTERN_URI}" />
 </server>

@@ -48,7 +48,7 @@ task createDockerfile(type: Dockerfile) {
 }
 
 task buildImage(type: DockerBuildImage) {
-	dependsOn createDockerfile
+	dependsOn createDockerfile, build
 	inputDir = project.projectDir
 	dockerFile = createDockerfile.destFile
 	images.add('ateam/procurementservice:latest')

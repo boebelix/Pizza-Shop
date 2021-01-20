@@ -1,8 +1,10 @@
-package ateam.client.procurement;
+package ateam.client.production;
 
 import ateam.client.mapper.LogServiceExceptionResponseMapper;
+import ateam.client.mapper.PizzaProductionExceptionMapper;
 import ateam.client.mapper.ValidationExceptionResponseMapper;
 import ateam.model.entity.ProcurementLog;
+import ateam.model.entity.ShopProductionItem;
 import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
@@ -14,14 +16,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 
-@Path("/procurement")
+@Path("/production")
 @RegisterRestClient
 @RegisterProvider(ValidationExceptionResponseMapper.class)
-@RegisterProvider(LogServiceExceptionResponseMapper.class)
-public interface ProcurementClient {
+@RegisterProvider(PizzaProductionExceptionMapper.class)
+
+public interface ProductionClient {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("")
-	Response createProcurementLog(ProcurementLog log) throws IOException;
+	Response produceOrder(ShopProductionItem toProduce) throws IOException;
 }
