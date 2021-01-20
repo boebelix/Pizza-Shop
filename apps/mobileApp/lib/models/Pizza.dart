@@ -2,28 +2,33 @@ import 'dart:collection';
 
 import 'package:app/models/size.dart';
 import 'package:app/models/topping.dart';
+import 'package:app/models/toppings.dart';
 
 class Pizza {
-  Size _size;
-  final Set<Topping> _toppings = new Set();
+  Size size;
+  List<Topping> toppings = [];
 
-  Pizza(this._size);
+  Pizza({this.size});
+  Pizza.withToppings({this.size, this.toppings});
 
-  UnmodifiableListView<Topping> get toppings => new UnmodifiableListView(_toppings);
-
-  Size get size => _size;
-
-  void set size(Size size) {
-    _size = size;
-  }
 
   Pizza addTopping(Topping topping) {
-    _toppings.add(topping);
+    toppings.add(topping);
     return this;
   }
 
   double get price {
     return size.basePrice + toppings.length * size.toppingPrice;
   }
+
+  factory Pizza.fromJson(Map<String, dynamic> json) => Pizza.withToppings(
+    size: json['size'],
+    toppings: json['toppings'].cast<List>().map((e) => Topping.fromJson(e)).toList(),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "sizeId": size.id,
+    "toppings": toppings.map((e) => e.toJson()).toList(),
+  };
 
 }

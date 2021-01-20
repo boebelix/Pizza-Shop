@@ -265,24 +265,23 @@ class _CreateUserState extends State<CreateUser> {
                                 country: country.text),
                           )
                               .then((loginRepsonse) {
-                            var tmp = loginRepsonse;
                             setState(() {
-                              _msg = 'Willkommen';
+                              _msg =
+                                  'Willkommen ${loginRepsonse.user.firstName}';
                             });
                           });
                         } on HttpException catch (error) {
                           setState(() {
                             _errorMsg = error.message;
-                            print('Error message on signup user: ' +
-                                error.message);
+                            print(
+                                'Error message on signup user: ${error.message}');
                           });
                         } catch (error) {
                           setState(() {
                             _errorMsg = error.toString();
                           });
-                          print('Unbekannter Fehler' + error);
+                          print('Unbekannter Fehler $error');
                         }
-                        //Navigator.pop(context);
                       }
                     },
                   ),
