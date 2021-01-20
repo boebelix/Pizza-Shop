@@ -79,11 +79,25 @@ class _CartScreenState extends State<CartScreen> {
                           return;
                         }
                         setState(() {
-                          Order order = new Order(
-                              pizzas: context.read<Cart>().pizzas
-                          );
-                          ShopEndpoint.instance().sendOrder(order);
-                          //context.read<Cart>().removeAll();
+                          Order order =
+                              new Order(pizzas: context.read<Cart>().pizzas);
+                          ShopEndpoint.instance()
+                              .sendOrder(order)
+                              .then((response) {
+                            context.read<Cart>().removeAll();
+                            Scaffold.of(context).showSnackBar(
+                              SnackBar(
+                                content:
+                                    Text("Ihre Bestellung wurde aufgegeben."),
+                              ),
+                            );
+                          }).catchError((error) {
+                            Scaffold.of(context).showSnackBar(
+                              SnackBar(
+                                  content: Text(
+                                      "Ihre Bestellung konnte nicht verarbeitet werden: ${error.message}")),
+                            );
+                          });
                         });
                       },
                     ),

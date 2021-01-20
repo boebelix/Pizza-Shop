@@ -23,7 +23,7 @@ class Pizza {
 
   factory Pizza.fromJson(Map<String, dynamic> json) => Pizza.withToppings(
     size: json['size'],
-    toppings: json['toppings'].cast<List>().map((e) => Topping.fromJson(e)).toList(),
+    toppings: List<Topping>.from(json['toppings'].map((e) => Topping.fromJson(e))),
   );
 
   Map<String, dynamic> toJson() => {

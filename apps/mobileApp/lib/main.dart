@@ -67,7 +67,7 @@ class App extends StatelessWidget {
           MealDetailScreen.routeName: (_) => MealDetailScreen(),
           UpdateUser.routeName: (_) => UpdateUser(),
           CartScreen.routeName: (_) => CartScreen(),
-          CreatePizzaScreen.routeName: (_) => CreatePizzaScreen()
+          CreatePizzaScreen.routeName: (_) => CreatePizzaScreen(),
         },
       ),
     );
