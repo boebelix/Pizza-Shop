@@ -1,3 +1,4 @@
+import 'package:app/models/Pizza.dart';
 import 'package:app/models/size.dart';
 import 'package:app/models/sizes.dart';
 import 'package:app/models/topping.dart';
@@ -27,7 +28,7 @@ class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
     int _currentChoosen=1;
 
     for (Topping t in _toppings) {
-      _labelCheckedMap.putIfAbsent(t.name, () => false);
+      _labelCheckedMap.putIfAbsent(t, () => false);
     }
 
   //  for (int i=0; i<_sizes.length;i++) {
@@ -59,7 +60,7 @@ class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
                     title: Text(_sizes[index].diameter.toString()+' cm'),
                     value: index,
                     groupValue: _currentChoosen,
-                    onChanged: (newValue)=>setState((){_currentChoosen=newValue;}),
+                    onChanged: (newValue)=>setState(()=>_currentChoosen=newValue),
                   ),
                   shrinkWrap: true,
                 ),
@@ -86,9 +87,9 @@ class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
                         )),
-                    for (String key in _labelCheckedMap.keys)
+                    for (Topping key in _labelCheckedMap.keys)
                       CheckboxListTile(
-                        title: Text(key),
+                        title: Text(key.name),
                         tristate: false,
                         value: _labelCheckedMap[key],
                         onChanged: (newValue) {
@@ -105,7 +106,17 @@ class _CreatePizzaScreenState extends State<CreatePizzaScreen> {
           SizedBox(
             height: 25,
             child: RaisedButton(
-                child: Text("Zum Warenkorb hinzufügen"), onPressed: () {}),
+                child: Text("Zum Warenkorb hinzufügen"),
+                onPressed: () {
+                  var pizza=Pizza(_sizes[_currentChoosen]);
+                  for(Topping t in _labelCheckedMap.keys)
+                    {
+                      if (_labelCheckedMap[t])
+                        pizza.addTopping(t);
+                    }
+
+                }
+                ),
           ),
         ],
       ),
