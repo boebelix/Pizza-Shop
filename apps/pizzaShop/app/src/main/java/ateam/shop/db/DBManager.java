@@ -71,6 +71,17 @@ public class DBManager {
 		}
 	}
 
+	public Topping getToppingById(int id) {
+		try (Connection connection = connector.getConnection()) {
+			return getToppingById(id, connection);
+		} catch (SQLException e) {
+			throw new ShopException("Error loading orders", e);
+		}
+	}
+
+	private Topping getToppingById(int id, Connection connection) throws SQLException {
+		return toppingsDB.getToppingById(id, connection);
+	}
 	public List<Size> getSizes() {
 		try (Connection connection = connector.getConnection()) {
 			return getSizes(connection);
@@ -79,8 +90,20 @@ public class DBManager {
 		}
 	}
 
+	public Size getSizeById(int id) {
+		try (Connection connection = connector.getConnection()) {
+			return getSizeById(id, connection);
+		} catch (SQLException e) {
+			throw new ShopException("Error loading sizes", e);
+		}
+	}
+
 	private List<Size> getSizes(Connection connection) throws SQLException {
 		return sizesDB.getSizes(connection);
+	}
+
+	private Size getSizeById(int id, Connection connection) throws SQLException {
+		return sizesDB.getSizesById(id, connection);
 	}
 
 	private List<Topping> getToppings(Connection connection) throws SQLException {
