@@ -61,10 +61,14 @@ class ShopEndpoint {
     });
   }
 
+
+
+
   Future<Order> sendOrder(Order order) async {
     // TODO delete debug Ausgbabe
     print(order.toJson());
   print(ContentType.json.value);
+  print(AuthService.instance().uuid);
 
     Map<String, dynamic> responseData;
 
@@ -78,11 +82,16 @@ class ShopEndpoint {
 
     );
 
+    print(response);
+    print(response.body);
+    print(response.headers);
+    print(response.statusCode);
+
     responseData = jsonDecode(response.body);
     print('SignUp Endpoint responseData ' + responseData.toString());
     print('Status Code 200: ' + response.statusCode.toString());
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       print('Status Code 200: ' + response.statusCode.toString());
       return Order.fromJson(responseData);
     } else {

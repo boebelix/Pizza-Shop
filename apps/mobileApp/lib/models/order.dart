@@ -27,15 +27,7 @@ class Order{
   );
 
   Map<String, dynamic> toJson() => {
-    "city": city,
-    "pizzas": pizzas.toJson(),
-    "country": country,
-    "houseNumber": houseNumber,
-    "id": id,
-    "postCode": postCode,
-    "street": street,
-    "status": status,
-    "orderDate":  orderDate
+    "pizzas": pizzas.toJson()
   };
 
 }
