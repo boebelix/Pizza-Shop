@@ -9,7 +9,6 @@ import 'package:http/http.dart' as http;
 // Singelton
 class SignUpEndpoint {
   static SignUpEndpoint _instance;
-  static User _user;
 
   factory SignUpEndpoint.instance() {
     _instance ??= SignUpEndpoint._private();
@@ -19,12 +18,10 @@ class SignUpEndpoint {
   SignUpEndpoint._private();
 
   Future<User> signUpUser(User user) async {
-    // TODO delete debug Ausgbabe
-    print('SignUp: Create user from ' + user.toString());
     Map<String, dynamic> responseData;
 
     final response = await http.post(
-      Uri.http(Properties.url_user, "/user"),
+      Uri.http(Properties.USER_SERVICE_URL, "/user"),
       body: jsonEncode(user.toJson()),
       headers: {
         HttpHeaders.contentTypeHeader: ContentType.json.value,
@@ -35,12 +32,9 @@ class SignUpEndpoint {
     print('SignUp Endpoint responseData ' + responseData.toString());
     print('Status Code 200: ' + response.statusCode.toString());
 
-    if (response.statusCode == 200) {
-      print('Status Code 200: ' + response.statusCode.toString());
+    if (response.statusCode == HttpStatus.ok) {
       return User.fromJson(responseData);
     } else {
-      print('Status Code: ' + response.statusCode.toString());
-      print('Response Code Error: ' + responseData.toString());
       throw HttpException(responseData['message']);
     }
   }

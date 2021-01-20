@@ -1,11 +1,11 @@
 import 'package:app/models/exception_response.dart';
 import 'package:app/models/user.dart';
 
-class UserRepsponse{
+class UserResponse{
   User user;
   ExceptionResponse exceptionResponse;
 
-  UserRepsponse(this.user, this.exceptionResponse);
+  UserResponse(this.user, this.exceptionResponse);
 
   @override
   String toString() {
